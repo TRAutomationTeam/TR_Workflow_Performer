@@ -1,0 +1,284 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="WorkBench" this:WorkBench.sLowerPanelOutputFile="\\10.2.3.101\Automation\Harsha\POC - LowerPanel Extraction\Extract_Mandatory_Data\Output\CCH_2021_Data.xlsx" this:WorkBench.sDUExtractedOutputFile="\\10.2.3.101\Automation\Harsha\POC-DU\Read_Demo_Documents\output\2021_CCH_output.xlsx" this:WorkBench.sSelectorConfigFile="\\10.2.3.101\Automation\Harsha\POC - LowerPanel Extraction\Extract_Mandatory_Data\Config\CCH_2021_Automation01_Selectors.xlsx" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="sLowerPanelOutputFile" Type="InArgument(x:String)" />
+    <x:Property Name="sDUExtractedOutputFile" Type="InArgument(x:String)" />
+    <x:Property Name="sSelectorConfigFile" Type="InArgument(x:String)" />
+    <x:Property Name="dsUpperPanelResults" Type="InArgument(sd:DataSet)" />
+    <x:Property Name="dsLowerPanelResults" Type="InArgument(sd:DataSet)" />
+    <x:Property Name="dsSelectorConfig" Type="InArgument(sd:DataSet)" />
+    <x:Property Name="sOutputFolder" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1410.4,2017.6</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>WorkBench_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="WorkBench" sap:VirtualizedContainerService.HintSize="680,1952.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Loop through Config sheet and Lower panel output and compare with Dataset" sap:VirtualizedContainerService.HintSize="617.6,1840.8" sap2010:WorkflowViewState.IdRef="Sequence_12">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dtReport" />
+        <Variable x:TypeArguments="x:Int32" Default="0" Name="intTableIndex" />
+        <Variable x:TypeArguments="x:String" Name="outputFieldValue" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:BuildDataTable DataTable="[dtReport]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="555.2,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;PageNumber&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;FieldName&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Result&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Comments&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;FieldType&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;LowerPanelValue&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;UpperPanelValue&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+      <ui:InterruptibleWhile CurrentIndex="{x:Null}" Condition="[intTableIndex &lt; dsLowerPanelResults.Tables.Count]" DisplayName="While" sap:VirtualizedContainerService.HintSize="555.2,1472.8" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_3">
+        <ui:InterruptibleWhile.Body>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="521.6,1336" sap2010:WorkflowViewState.IdRef="Sequence_27">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="dtLowerPanelData" />
+              <Variable x:TypeArguments="sd:DataTable" Name="dtSelectorConfig" />
+              <Variable x:TypeArguments="sd:DataTable" Name="dtDetails" />
+              <Variable x:TypeArguments="x:String" Name="currentItem" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtLowerPanelData]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dsLowerPanelResults.Tables(intTableIndex)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_11">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[currentItem]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[dtLowerPanelData.TableName]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[dtLowerPanelData.Rows.Count =0]" sap:VirtualizedContainerService.HintSize="478.4,52.8" sap2010:WorkflowViewState.IdRef="If_3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="476.8,236" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_14">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[intTableIndex]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[intTableIndex+1]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:Continue sap:VirtualizedContainerService.HintSize="433.6,24.8" sap2010:WorkflowViewState.IdRef="Continue_2" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_29" />
+              </If.Else>
+            </If>
+            <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSelectorConfig]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dsSelectorConfig.Tables(intTableIndex)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,180" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[dtLowerPanelData.Columns(0).ColumnName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">LP_FieldId</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[dtLowerPanelData.Columns(1).ColumnName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">LP_FieldValue</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[dtSelectorConfig.Columns(0).ColumnName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">FiledName</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:MultipleAssign>
+            <ui:JoinDataTables DataTable1="[dtSelectorConfig]" DataTable2="[dtLowerPanelData]" DisplayName="Join Data Tables" sap:VirtualizedContainerService.HintSize="478.4,60" sap2010:WorkflowViewState.IdRef="JoinDataTables_3" JoinType="Inner" OutputDataTable="[dtDetails]">
+              <ui:JoinDataTables.Arguments>
+                <scg:List x:TypeArguments="ui:JoinOperationArgument" Capacity="4">
+                  <ui:JoinOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EQ">
+                    <ui:JoinOperationArgument.Column1>
+                      <InArgument x:TypeArguments="x:String">["FiledName"]</InArgument>
+                    </ui:JoinOperationArgument.Column1>
+                    <ui:JoinOperationArgument.Column2>
+                      <InArgument x:TypeArguments="x:String">["LP_FieldId"]</InArgument>
+                    </ui:JoinOperationArgument.Column2>
+                  </ui:JoinOperationArgument>
+                </scg:List>
+              </ui:JoinDataTables.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:JoinDataTables>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;&#x9;For Each row As DataRow In dtDetails.Rows&#xA;&#x9;&#x9;Dim sheetName = row(&quot;SheetName&quot;).ToString&#xA;&#x9;&#x9;Dim columnName = row(&quot;Output_FieldName&quot;).ToString&#xA;&#x9;&#x9;Dim FieldType = row(&quot;FieldType&quot;).ToString&#xA;&#x9;&#x9;Dim LP_FieldId = row(&quot;LP_FieldId&quot;).ToString&#xA;&#x9;&#x9;Dim LP_FieldValue = row(&quot;LP_FieldValue&quot;).ToString&#xA;&#x9;&#x9;Dim bFound As Boolean&#x9;= False&#xA;&#x9;&#x9;Dim UP_Value = String.Empty&#xA;&#x9;&#x9;Dim strComments = String.Empty&#xA;&#x9;&#x9;Dim str_tbl_UP_Value = String.Empty&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;If dsData.Tables.Contains(sheetName) = True And dsData.Tables(sheetName).Columns.Contains(columnName)  = True And FieldType=&quot;Simple&quot;  Then&#xA;&#x9;&#x9;&#x9;UP_Value = Convert.ToString(dsData.Tables(sheetName).Rows(0)(columnName))&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;If LP_FieldValue.ToLower.Trim = String.Empty Then&#xA;&#x9;&#x9;&#x9;'outputFieldValue =outputFieldValue + Environment.NewLine + LP_FieldId +&quot;( &quot;+columnName+&quot; )&quot; + &quot; is empty in Lower panel&quot;&#x9;&#xA;&#x9;&#x9;&#x9;strComments = LP_FieldId +&quot;( &quot;+columnName+&quot; )&quot; + &quot; is empty in Lower panel&quot;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;dtReport.Rows.Add({currentPage,LP_FieldId,&quot;Not Matching&quot;,strComments,FieldType,&quot;&quot;,UP_Value})&#xA;&#x9;&#x9;Else If columnName= String.Empty Then&#xA;&#x9;&#x9;&#x9;'outputFieldValue =outputFieldValue + Environment.NewLine + LP_FieldId +&quot; Not found in Upper panel&quot;&#xA;&#x9;&#x9;&#x9;strComments = LP_FieldId +&quot; Not found in Upper panel&quot;&#xA;&#x9;&#x9;&#x9;dtReport.Rows.Add({currentPage,LP_FieldId,&quot;Not Matching&quot;,strComments,FieldType,LP_FieldValue,&quot;&quot;})&#xA;&#x9;&#x9;Else If dsData.Tables.Contains(sheetName) = False Or dsData.Tables(sheetName).Columns.Contains(columnName)  = False Then&#xA;&#x9;&#x9;&#x9;'outputFieldValue =outputFieldValue + Environment.NewLine +&quot; sheetName [&quot;+ sheetName +&quot;] OR columnName [&quot;+columnName+&quot; ] Not found in Upper panel extracted data&quot;&#xA;&#x9;&#x9;&#x9;strComments = &quot; sheetName [&quot;+ sheetName +&quot;] or columnName [&quot;+columnName+&quot; ] Not found in Upper panel extracted data&quot;&#xA;&#x9;&#x9;&#x9;dtReport.Rows.Add({currentPage,LP_FieldId,&quot;Not Matching&quot;,strComments,FieldType,LP_FieldValue,&quot;&quot;})&#xA;&#x9;&#x9;Else&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;bFound = False&#xA;&#x9;&#x9;&#x9;str_tbl_UP_Value=&quot;&quot;&#xA;&#x9;&#x9;&#x9;For Each drValues As DataRow In dsData.Tables(sheetName).Rows&#xA;&#x9;&#x9;&#x9;&#x9;UP_Value =  Convert.ToString(drValues(columnName)).Replace(&quot;&quot;&quot;&quot;,&quot;&quot;).Trim&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;str_tbl_UP_Value = str_tbl_UP_Value+&quot; &quot;+UP_Value&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;If UP_Value = String.Empty Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Continue&#x9;For&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;Else If UP_Value = LP_FieldValue.Trim.ToLower Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;bFound = True&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Exit For&#xA;&#x9;&#x9;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Dim LP_Number As Double&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Dim UP_Number As Double&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Dim is_LP_Number As Boolean = Double.TryParse(LP_FieldValue, LP_Number)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Dim is_UP_Number As Boolean = Double.TryParse(UP_Value, UP_Number)&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;If is_LP_Number = True And is_UP_Number = True&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Dim Rounded_UP_Number As Integer  = If(UP_Number + 0.5 = Math.Floor(UP_Number)+1, CInt(Math.Floor(UP_Number))+1, CInt(Math.Round(UP_Number)))&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If Math.Abs(Math.Round(LP_Number))=Math.Abs(Math.Round(Rounded_UP_Number))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bFound = True&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Exit For&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Else If is_UP_Number &lt;&gt; True&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (UP_Value.ToLower.Contains(LP_FieldValue.ToLower) Or LP_FieldValue.ToLower.Contains(UP_Value.ToLower)) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bFound = True&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Exit For&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;Next&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;If bFound = False Then&#xA;&#x9;&#x9;&#x9;&#x9;'outputFieldValue = outputFieldValue + Environment.NewLine+  columnName +&quot; with value  &quot; + LP_FieldValue + &quot;  not matching with &quot;+sheetName+&quot; upper panel&quot;&#xA;&#x9;&#x9;&#x9;&#x9;strComments = columnName +&quot; with lower panel value  [&quot; + LP_FieldValue + &quot;]  not matching with &quot;+sheetName+&quot; upper panel&quot;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;dtReport.Rows.Add({currentPage,LP_FieldId,&quot;Not Matching&quot;,strComments,FieldType,LP_FieldValue,If(FieldType=&quot;Simple&quot;,UP_Value,str_tbl_UP_Value)})&#xA;&#x9;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;&#x9;strComments = LP_FieldId +&quot; matching with upper panel &quot;+ columnName&#xA;&#x9;&#x9;&#x9;&#x9;dtReport.Rows.Add({currentPage,LP_FieldId,&quot;Matching&quot;,strComments,FieldType,LP_FieldValue,UP_Value})&#xA;&#x9;&#x9;&#x9;End If&#x9;&#x9;&#xA;&#x9;&#x9;End If&#xA;&#x9;Next&#xA;Catch ex As Exception&#xA;&#x9;outputFieldValue =  outputFieldValue+ ex.Message + ex.InnerException.ToString &#xA;End Try" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="478.4,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd:DataSet" x:Key="dsData">[dsUpperPanelResults]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtDetails">[dtDetails]</InArgument>
+                <InOutArgument x:TypeArguments="x:String" x:Key="outputFieldValue">[outputFieldValue]</InOutArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtReport">[dtReport]</InOutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="currentPage">[currentItem]</InArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_13">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[intTableIndex]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[intTableIndex+1]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[currentItem+&quot; report done&quot;]" />
+          </Sequence>
+        </ui:InterruptibleWhile.Body>
+      </ui:InterruptibleWhile>
+      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtReport]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="555.2,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" WorkbookPath="[sOutputFolder+&quot;\Report.xlsx&quot;]" />
+    </Sequence>
+  </Sequence>
+</Activity>

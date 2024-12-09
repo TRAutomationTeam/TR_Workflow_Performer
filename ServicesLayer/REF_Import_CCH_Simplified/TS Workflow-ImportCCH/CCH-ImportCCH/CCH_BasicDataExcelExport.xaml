@@ -1,0 +1,371 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="CCH_ReadForm" this:CCH_ReadForm.in_Category="Income" this:CCH_ReadForm.in_FormName="Interest (1099-INT)" this:CCH_ReadForm.in_SubMenuName="1 - Interest (IRS 1099-INT)" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=System.Private.CoreLib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_ApplicationPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_Category" Type="InArgument(x:String)" />
+    <x:Property Name="in_FormName" Type="InArgument(x:String)" />
+    <x:Property Name="in_SubMenuName" Type="InArgument(x:String)" />
+    <x:Property Name="in_ExcelPath" Type="InArgument(x:String)" />
+    <x:Property Name="dict_cch_selector" Type="InArgument(sc:IEnumerable)" />
+    <x:Property Name="in_dt_edit_input" Type="InArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_ExcelSheetName" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:CCH_ReadForm.dict_cch_selector>
+    <InArgument x:TypeArguments="sc:IEnumerable" />
+  </this:CCH_ReadForm.dict_cch_selector>
+  <this:CCH_ReadForm.in_dt_edit_input>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:CCH_ReadForm.in_dt_edit_input>
+  <this:CCH_ReadForm.in_ExcelSheetName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:CCH_ReadForm.in_ExcelSheetName>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1140,3139.2</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>CCH_ReadForm_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Activities.System.Collections</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.Process</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="CCH_ReadForm" sap:VirtualizedContainerService.HintSize="884.8,3074.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: CCH Tax" sap:VirtualizedContainerService.HintSize="822.4,2962.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="IfNotOpen" ScopeGuid="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence sap:VirtualizedContainerService.HintSize="788.8,2671.2" sap2010:WorkflowViewState.IdRef="Sequence_20">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Worksheets" sap:VirtualizedContainerService.HintSize="726.4,157.6" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Timeout="120" Version="V3">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable CvElementArea="114, 199, 96, 24" CvTextArea="122, 204, 80, 15" CvTextArgument="Worksheets" CvType="Button" DesignTimeRectangle="104, 79, 93, 21" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Worksheets'" FullSelectorArgument="&lt;ctrl name='Worksheets' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Worksheets' role='page tab' /&gt;&lt;ctrl name='Worksheets' role='text' automationid='' check:text='Worksheets' /&gt;" Guid="0822df8a-118d-493d-9a4f-06551ea2e10e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFEAAAAYCAYAAACC2BGSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARoSURBVFhH7ZZbU1tVFMf3mzyZfhGFzijOOH1QSfwK1pJ0xgderBcg7auXCgXfrMoAAR46XgYCwepEBUKDdVTAhnTaYgvasdJiIOR+bYqdWe6127W7zsmhCU1nHGfOw28467/W/q+1V06TilhsHephqx62/s/8/sjYS9RYL6ge7CVqrBdUD/YSNdYLqge1xOt/RCEaCcMvP30L4fkAhGYmIHj2jGLaPwJT48M2D0HgogITPgh9Pw6Xoufh1sY1SCY2IJeNQ7mUgTuVAuzuliW34e7dXRsLxPX1CBTzcbmkkhQqNo+A+Ee+YciJE144etSjnjmoHzzYIt/KfJVuVV8vPyycAyEE5HNpy/xejI2NWM7zXyJ275QAWQiH1KVy2aSKiZddTqVfjF6o0r+anjRo+2GvfrUYG/WpJZaKWcv842C/dxP4nYesr61CU1MTRFeWVcy151qfhemAv0rntfslHJ5TS8xmdizzezE6OqSWWCykLfOPA5dcIr9vLUSlkgfC5WqD/v5eHePAHk87HD/epf6SHg7Pyos0Q6GQ0tqBAw61FCKTiescnce/mAsEJpQHr6OY+mNv8kJWVpa0jr1nZ4M6Z54F4fPw2R+WX1u7ol4O0hHqi7shzdxP3C5ngRjxDUrDIzr2ejuhv68Hzs3PQEtLs/z+Smid6q5dvaQaT02N63Pog83SqW1djzGvQU+qMXvwHMWRyKJ6Jm8+p8PhUHPymPdyOeXLsY88xjzP74sMDJzWu0BEuZSWX9L3mA99pwZMJWMqxmaRCz9XPTudL8HU5Jfq2dv9NnjcR9Qzx1yDH8K9/zZV90Lvvr4PDDlzPeHzDRhmJI3q8dk8D/erlceYz47g/Hw+M6JcTAJHfUr+L6RxUBo/DbnMltKVsdSvrq7It+YJSCU2td536qTBA/F2v6V1fPa4XzXk0R+X0dr6jOV5nAPz2JPrvuFPDXOZNeyF56zAmWvl0Y/uSv40K6/hiFIxIX/pHtCtLv++HOwTcLsPa53i0P3lZjMxpTudL8Kk/3NdR5APPXMvBH1wKFwi9+P8dv8Dw7pk4pbScA5zPdesenFq5ZG97oR9cBbzeVEsxOUv3QOGhz5WAx069Dz4/Z9pPTT3jTLo6HgNTvW+p/XurjfB3X5YxwQOQuetasgvsbOhaq08CDxPPWm+THpT57lmlefUyiN8divwX8mvy+d1LAq5LeCsXl7Wn/7y4oIh53A8WaVTvX/8jNaGBk9DS/NTkE7eVHFX5xvQ3v6KziNzM18rr53tGypGb6rB87yHs+0F6O15V+e4t5WGXlSP4Iwf9p/Uca0874cce71De9N9+Xwin4vJXxojbdKkWQ6VSm4Y9K7OY+ri8e0/DfqVy0t68Yj5LJ7DBfEzszNnDV7kgWeDwUnthfT2vKPPDQ1+VOVv1szzIHzmWnmaDVlaDOt7c41qEZHLbspfJZtGENnMTfmFbNMIIpv+C2waQ2RSN8CmMcSPF/8Gm8YQ2UIFbBqhAv8C/0z0j2TKm8cAAAAASUVORK5CYII=" InformativeScreenshot="9011780e3fa42b873e9f6cbed0acb3a9.png" ScopeSelectorArgument="&lt;html app='cch.commonuiframework.shell.exe' title='WKAxcessTaxWebThinClient' /&gt;" SearchSteps="Selector, FuzzySelector, Image, CV" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Form Category" sap:VirtualizedContainerService.HintSize="726.4,157.6" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Timeout="70" Version="V3">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable CvTextArgument="Basic Data" CvType="Text" DesignTimeRectangle="27, 315, 461, 31" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Basic Data'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='Worksheets' role='page tab' /&gt;&lt;ctrl name='{0}' role='list item' /&gt;&quot;, in_Category)]" FuzzySelectorArgument="&lt;ctrl name='Worksheets' role='page tab' /&gt;&lt;ctrl name='Basic Data' role='list item' automationid='' check:text='Basic Data' /&gt;" Guid="136416c1-bd38-4031-8a1d-493ca9ba801c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAdEAAAAjCAYAAADL7jA9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANlSURBVHhe7d0tTxxRFMbxNTVViCbVraje1PQj1DV8hopqiiCIFVgMBgOm7GfAkQpqKhCEVDRpSMhKEGgQiNs8wJkeztw7w063E3b7P8kvsHNf5oJ5uBfYGXz99j39+Pkr7e3tpfPz80RRFEVR1OOqClGKoiiKoqarKkRXVlbSaDRKGxsbAACggVUVooPBIK2vr6ednR0AAJAxHo/zIaqd6Pb2di1tAQDAHQWpPlpVIeobAQBAXTFEl5eX0+bmZm0AAAC4UwzRpaWltLa2VhsAAADucJwLAEBHhCgAAB0VQ3Q4HNY6AwCAPwhRAAA64jgXAICOCFEAADoqhij/4gIAQLNiiPJmCwAANFuY49z9/Q9a/gNnZ6+zfad1dfU8XV6+yLa10di4Ll3b2vqc7Q8AmB/FEJ23N6BXiMZw0uvj47cP+vVNazg4eP/g2unpG32ra9ebaMysfigAAMxGMUT1KLTV1dXagKcqF6IKnq47yFnJhagcHb2rrbcJIQoAT89C70Rj8Hz58jHd3DzTl3krBuzFxcuqzc+l6zHA1J7rG6mttOOMbaU5/XWx3XU8wiZkAaBfC/U7UR88FjC7u5+qPtr9xdCyQIq71pOTYTFENc6/9n0j9S2FqOb1geiPnuM9cztRXbOvz35AKN0LADB7xRCdt7/Ojbsyaft9qA+mXEgZH2gK4mmOiNtCtHTPeJ+m9RkfygCAf68YovP2f6JxJyoKnhh4uuaD1oLJh7DfvYoPu6bgy3nsTlQUnH5tjwlRzeHHEKIA0J+FPc4VO+K0UFR7WzBZkPl+MUSnCapSiMbjV83r19+2E7Xx/tq0awMA/J3/JkRLO9Xc7k58+PkQ1Zi4u21SClE/Twx7aQvR2C6EKAD0qxii8/YUl1xIKlRiUFmg2fGtBdNk8qoam9slWj9r82E17R8Wab64Vr22Oe0eMUT9a1u/Ba/toAlRAOjPQoWoQsSLOzULGmvzuzt97sf64PMhKhZyfi5rixSOfl7JBZ1fv8YomP28/p423q9Z62MnCgD9WpjjXAAA+kaIAgDQUTFEeRQaAADNiiHKo9AAAGjWeJw7Ho9vOwAAgDrlZDZE9Qb0o9GoSlsAAJBnVYWoHoV2eHh4f5miKIqiqLaqQnQymaTr6+v7yxRFURRFNVdKvwHMTIIrXBY3vQAAAABJRU5ErkJggg==" InformativeScreenshot="cce7f7d3502e35462b92f13f71b0110b.png" ScopeSelectorArgument="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <uix:NClick ActivateBefore="True" ClickType="Double" DelayAfter="2" DelayBefore="2" DisplayName="Click - Form Name" sap:VirtualizedContainerService.HintSize="726.4,157.6" sap2010:WorkflowViewState.IdRef="NClick_3" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable CvTextArgument="Basic Data" CvType="Text" DesignTimeRectangle="27, 315, 461, 31" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Basic Data'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='Worksheets' role='page tab' /&gt;&lt;ctrl name='{0}' role='list item' /&gt;&quot;, in_FormName)]" FuzzySelectorArgument="&lt;ctrl name='Worksheets' role='page tab' /&gt;&lt;ctrl name='Basic Data' role='list item' automationid='' check:text='Basic Data' /&gt;" Guid="136416c1-bd38-4031-8a1d-493ca9ba801c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAdEAAAAjCAYAAADL7jA9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANlSURBVHhe7d0tTxxRFMbxNTVViCbVraje1PQj1DV8hopqiiCIFVgMBgOm7GfAkQpqKhCEVDRpSMhKEGgQiNs8wJkeztw7w063E3b7P8kvsHNf5oJ5uBfYGXz99j39+Pkr7e3tpfPz80RRFEVR1OOqClGKoiiKoqarKkRXVlbSaDRKGxsbAACggVUVooPBIK2vr6ednR0AAJAxHo/zIaqd6Pb2di1tAQDAHQWpPlpVIeobAQBAXTFEl5eX0+bmZm0AAAC4UwzRpaWltLa2VhsAAADucJwLAEBHhCgAAB0VQ3Q4HNY6AwCAPwhRAAA64jgXAICOCFEAADoqhij/4gIAQLNiiPJmCwAANFuY49z9/Q9a/gNnZ6+zfad1dfU8XV6+yLa10di4Ll3b2vqc7Q8AmB/FEJ23N6BXiMZw0uvj47cP+vVNazg4eP/g2unpG32ra9ebaMysfigAAMxGMUT1KLTV1dXagKcqF6IKnq47yFnJhagcHb2rrbcJIQoAT89C70Rj8Hz58jHd3DzTl3krBuzFxcuqzc+l6zHA1J7rG6mttOOMbaU5/XWx3XU8wiZkAaBfC/U7UR88FjC7u5+qPtr9xdCyQIq71pOTYTFENc6/9n0j9S2FqOb1geiPnuM9cztRXbOvz35AKN0LADB7xRCdt7/Ojbsyaft9qA+mXEgZH2gK4mmOiNtCtHTPeJ+m9RkfygCAf68YovP2f6JxJyoKnhh4uuaD1oLJh7DfvYoPu6bgy3nsTlQUnH5tjwlRzeHHEKIA0J+FPc4VO+K0UFR7WzBZkPl+MUSnCapSiMbjV83r19+2E7Xx/tq0awMA/J3/JkRLO9Xc7k58+PkQ1Zi4u21SClE/Twx7aQvR2C6EKAD0qxii8/YUl1xIKlRiUFmg2fGtBdNk8qoam9slWj9r82E17R8Wab64Vr22Oe0eMUT9a1u/Ba/toAlRAOjPQoWoQsSLOzULGmvzuzt97sf64PMhKhZyfi5rixSOfl7JBZ1fv8YomP28/p423q9Z62MnCgD9WpjjXAAA+kaIAgDQUTFEeRQaAADNiiHKo9AAAGjWeJw7Ho9vOwAAgDrlZDZE9Qb0o9GoSlsAAJBnVYWoHoV2eHh4f5miKIqiqLaqQnQymaTr6+v7yxRFURRFNVdKvwHMTIIrXBY3vQAAAABJRU5ErkJggg==" InformativeScreenshot="cce7f7d3502e35462b92f13f71b0110b.png" ScopeSelectorArgument="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <If Condition="[NOT string.IsNullOrWhiteSpace(in_SubMenuName)]" DisplayName="Sub menu check" sap:VirtualizedContainerService.HintSize="726.4,52.8" sap2010:WorkflowViewState.IdRef="If_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="376.8,247.2" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ActivateBefore="True" ClickType="Double" DelayAfter="2" DelayBefore="2" DisplayName="Click - Sub Form Name" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable CvType="Text" DesignTimeRectangle="27, 315, 461, 31" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Basic Data'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl helpText='{0}' role='text' /&gt;&quot;, in_SubMenuName)]" Guid="136416c1-bd38-4031-8a1d-493ca9ba801c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAdEAAAAjCAYAAADL7jA9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANlSURBVHhe7d0tTxxRFMbxNTVViCbVraje1PQj1DV8hopqiiCIFVgMBgOm7GfAkQpqKhCEVDRpSMhKEGgQiNs8wJkeztw7w063E3b7P8kvsHNf5oJ5uBfYGXz99j39+Pkr7e3tpfPz80RRFEVR1OOqClGKoiiKoqarKkRXVlbSaDRKGxsbAACggVUVooPBIK2vr6ednR0AAJAxHo/zIaqd6Pb2di1tAQDAHQWpPlpVIeobAQBAXTFEl5eX0+bmZm0AAAC4UwzRpaWltLa2VhsAAADucJwLAEBHhCgAAB0VQ3Q4HNY6AwCAPwhRAAA64jgXAICOCFEAADoqhij/4gIAQLNiiPJmCwAANFuY49z9/Q9a/gNnZ6+zfad1dfU8XV6+yLa10di4Ll3b2vqc7Q8AmB/FEJ23N6BXiMZw0uvj47cP+vVNazg4eP/g2unpG32ra9ebaMysfigAAMxGMUT1KLTV1dXagKcqF6IKnq47yFnJhagcHb2rrbcJIQoAT89C70Rj8Hz58jHd3DzTl3krBuzFxcuqzc+l6zHA1J7rG6mttOOMbaU5/XWx3XU8wiZkAaBfC/U7UR88FjC7u5+qPtr9xdCyQIq71pOTYTFENc6/9n0j9S2FqOb1geiPnuM9cztRXbOvz35AKN0LADB7xRCdt7/Ojbsyaft9qA+mXEgZH2gK4mmOiNtCtHTPeJ+m9RkfygCAf68YovP2f6JxJyoKnhh4uuaD1oLJh7DfvYoPu6bgy3nsTlQUnH5tjwlRzeHHEKIA0J+FPc4VO+K0UFR7WzBZkPl+MUSnCapSiMbjV83r19+2E7Xx/tq0awMA/J3/JkRLO9Xc7k58+PkQ1Zi4u21SClE/Twx7aQvR2C6EKAD0qxii8/YUl1xIKlRiUFmg2fGtBdNk8qoam9slWj9r82E17R8Wab64Vr22Oe0eMUT9a1u/Ba/toAlRAOjPQoWoQsSLOzULGmvzuzt97sf64PMhKhZyfi5rixSOfl7JBZ1fv8YomP28/p423q9Z62MnCgD9WpjjXAAA+kaIAgDQUTFEeRQaAADNiiHKo9AAAGjWeJw7Ho9vOwAAgDrlZDZE9Qb0o9GoSlsAAJBnVYWoHoV2eHh4f5miKIqiqLaqQnQymaTr6+v7yxRFURRFNVdKvwHMTIIrXBY3vQAAAABJRU5ErkJggg==" InformativeScreenshot="cce7f7d3502e35462b92f13f71b0110b.png" ScopeSelectorArgument="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
+                    </uix:NClick.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, sd:DataTable)" CurrentIndex="{x:Null}" DisplayName="For Each Client Information" sap:VirtualizedContainerService.HintSize="726.4,1870.4" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[dict_cch_selector]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, sd:DataTable)">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, sd:DataTable)" Name="cch_selector" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="692.8,1682.4" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="str_form_name" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="form name" sap:VirtualizedContainerService.HintSize="649.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[str_form_name]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">FORM 1040 (Pg 1)</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <If Condition="[str_form_name = cch_selector.Key]" sap:VirtualizedContainerService.HintSize="649.6,1471.2" sap2010:WorkflowViewState.IdRef="If_2">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence sap:VirtualizedContainerService.HintSize="616,1288" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="572.8,1198.4" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:String" Name="str_range_value" />
+                              <Variable x:TypeArguments="x:Int32" Default="2" Name="int_cell_value" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign DisplayName="range value" sap:VirtualizedContainerService.HintSize="510.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[str_range_value]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[cch_selector.Key]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[cch_selector.Value]" DisplayName="loop through cch selector values" sap:VirtualizedContainerService.HintSize="510.4,964.8" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                              <ui:ForEachRow.Body>
+                                <ActivityAction x:TypeArguments="sd:DataRow">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476.8,776.8" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="x:String" Name="str_cch_value" />
+                                      <Variable x:TypeArguments="x:String" Name="str_cch_selector" />
+                                    </Sequence.Variables>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign DisplayName="assign help text to cch selector" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[str_cch_selector]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[CurrentRow.Item("HelpText").ToString]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <Delay DisplayName="Delay 2s" Duration="00:00:02" sap:VirtualizedContainerService.HintSize="433.6,90.4" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                    <uix:NGetText DisplayName="get cch value" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" TextString="[str_cch_value]" Version="V3">
+                                      <uix:NGetText.Target>
+                                        <uix:TargetAnchorable CvType="AnyWordGroup" DesignTimeRectangle="433, 305, 100, 25" DesignTimeScaleFactor="1.25" ElementType="InputBox" FriendlyName="'31-0841368'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='{0}' /&gt;&quot;, str_cch_selector)]" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl automationid='{0}' role='editable text' /&gt;&quot;, str_cch_selector)]" Guid="0003f22d-b3e1-4803-92e4-1742ec4b70d4" ImageBase64="" InformativeScreenshot="4f80ffefd2b0fdd61a11531f6de0c000.png" ScopeSelectorArgument="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
+                                      </uix:NGetText.Target>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </uix:NGetText>
+                                    <ui:WriteCell Cell="[&quot;B&quot;+int_cell_value.ToString]" DisplayName="cch value write" sap:VirtualizedContainerService.HintSize="433.6,116" sap2010:WorkflowViewState.IdRef="WriteCell_1" SheetName="[in_ExcelSheetName]" Text="[str_cch_value]" WorkbookPath="[in_Config(&quot;CIS_in_str_Dispatcherfilepath&quot;).ToString]" />
+                                    <Assign DisplayName="cell value" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Int32">[int_cell_value]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Int32">[int_cell_value+1]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEachRow.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:ForEachRow>
+                          </Sequence>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEach>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-9, -9, 1938, 1048" FilePath="[in_ApplicationPath]" IconBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPDSURBVGhD7ZlZTxNRGIb5aYIoq+wQb/QHeGm88cbEC68FZDFCEYhEkEWw0CJLQGSVLQbLJmDYEQSCsqt8nrftmUzbr2XanimQ2OQJ03aG731mzplzzjQq+mkzubBSdK74K7jm3o551ko3X3ygpFejlNYwQ9m2FcppXTNMtn3VdKKicxHWqoWWAhwx+XaKt/RRau2kIRmuoGqiEAxn3xUysACQkrg6iRVDlNG0wIYHXEHV+G1C/pD76Ikr6XE1MfEPL1DAjQiEK+EP7/B60F/SG2YjK8Cd5UBwwb2Js/RS5rtvbEHVeAqgM7s7tD+4wCx5Lc67Fzo7V1gVXldANhX9Z544w+mbUoBt7H+juJPSG+fY4iowpQlJtGPE1UiuGmcDhIt5TUjgfSzuVlnNS2yQUDG9CXkTW9hOGY3zbJhQiEgT8gYjelr9NBsoWMRUgi+uAi68JDq3hVJqJthQwcAKJBe1UvXIHH2cW1dC18wqPbKOMBLNdOv1ZzaYUVgBFFTxOjs70/greNAwqFyCFdg7OnFHCO+lFwBvRud9BKRESnVozYkV+HV86o5A1Da5QpWDsyEzt7mnCdSOLbACAH0itW6KDRmIcwXu1w/4fG8UBLM7lgwJgJh8m7jFBjdqXyoBcL2wTQx2i2xYjksnADBic2E5Lkwgq6Rd2/YGxxqdO0VcAJ8XdDtoX9S4V93rE16CTm2kP0RUoE4IFPU4nGMC3u8eHNPdii6f8BJMxc9bT7BzIQjIohDg9jGKXmDj56EWHjjWdiil+D17HMBJSK4aY4NLIiqg54sIjykLd4yemDwbZVr9L08vRGBiddtQeEl8WR8bHpgugMlcOOEBmpK/ZalpAiha0jflEX5qY5eSggwv8Tc2mCKA8Ja+aY/wwOhAxuG8Cm+/RkagrN83PAhHAOB5k6kCOEtl/TMeofW3zXAFMLh5PzBTJoDw5QOe4ceXf1D37Jr2PlwBkFg5rF4AD4YrBj3Djy5tUWKh3WcqwR0fDHgqrlzgiX1M2x+MLG5RQoHd+Z1qAeD8fUKlwODCd23/4cVNineHB2YI4EcWZQKYyxyd/qEdMTGrEWteeeYlZgjguVK2bVmNwJ3yLnrY9Ili81rY780QAHL9rKQJBcIsgYSKoastEFvUcbUFMO5g8X+uwPb+Ma3vHYTM4clvUwQAbqesAArLoip5KUZqrl6o4CcsVuBxyygd6M5cuGA+NLm+S2nP23xqhUNcaS8vADBvv23pVEJOaYdYGroW+SpBR/YrcBXAo8grLQD+C1wsVvoH+m9Wo3rXM98AAAAASUVORK5CYII=" InformativeScreenshot="b8b95ced972f336fe59ce51b1ca32910.png" Selector="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' /&gt;" Title="Open Return" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>
