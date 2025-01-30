@@ -141,15 +141,21 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Extract_Add_Doc_Data" sap:VirtualizedContainerService.HintSize="686.4,4384" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Extract_Add_Doc_Data" sap:VirtualizedContainerService.HintSize="1425,4072" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="624,4272" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="548,4049" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <If Condition="[File.Exists(sDocumentPath) = true]" sap:VirtualizedContainerService.HintSize="587.2,4040.8" sap2010:WorkflowViewState.IdRef="If_1">
+        <If Condition="[File.Exists(sDocumentPath) = true]" sap:VirtualizedContainerService.HintSize="546,3700" sap2010:WorkflowViewState.IdRef="If_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -157,7 +163,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <If.Then>
-            <Sequence sap:VirtualizedContainerService.HintSize="553.6,3495.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="544,3232" sap2010:WorkflowViewState.IdRef="Sequence_2">
               <Sequence.Variables>
                 <Variable x:TypeArguments="p8:DocumentTaxonomy" Name="TaxanomyObj" />
                 <Variable x:TypeArguments="x:String" Name="digitalTextObj" />
@@ -172,8 +178,8 @@
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <p:LoadTaxonomy DisplayName="Load Taxonomy" sap:VirtualizedContainerService.HintSize="510.4,105.6" sap2010:WorkflowViewState.IdRef="LoadTaxonomy_1" Taxonomy="[TaxanomyObj]" />
-              <p:DigitizeDocument ApplyOcrMigrated="True" ApplyOcrOnPdf="Auto" DegreeOfParallelism="-1" DetectCheckboxes="True" DisplayName="Digitize Document" DocumentObjectModel="[DOMObj]" DocumentPath="[sDocumentPath]" DocumentText="[digitalTextObj]" ForceApplyOCR="False" sap:VirtualizedContainerService.HintSize="510.4,300" sap2010:WorkflowViewState.IdRef="DigitizeDocument_1">
+              <p:LoadTaxonomy DisplayName="Load Taxonomy" sap:VirtualizedContainerService.HintSize="510,136" sap2010:WorkflowViewState.IdRef="LoadTaxonomy_1" Taxonomy="[TaxanomyObj]" />
+              <p:DigitizeDocument ApplyOcrMigrated="True" ApplyOcrOnPdf="Auto" DegreeOfParallelism="-1" DetectCheckboxes="True" DisplayName="Digitize Document" DocumentObjectModel="[DOMObj]" DocumentPath="[sDocumentPath]" DocumentText="[digitalTextObj]" ForceApplyOCR="False" sap:VirtualizedContainerService.HintSize="510,329" sap2010:WorkflowViewState.IdRef="DigitizeDocument_1">
                 <p:DigitizeDocument.OCREngine>
                   <ActivityFunc x:TypeArguments="sd1:Image, x:String, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))">
                     <ActivityFunc.Argument1>
@@ -182,11 +188,11 @@
                     <ActivityFunc.Argument2>
                       <DelegateInArgument x:TypeArguments="x:String" Name="PredictionId" />
                     </ActivityFunc.Argument2>
-                    <p1:UiPathDocumentOCR Endpoint="{x:Null}" Output="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ApiKey="[in_Config(&quot;UiPath_OCR_ApiKey&quot;).ToString]" ComputeSkewAngle="False" DisplayName="UiPath Document OCR" ExtractWords="True" sap:VirtualizedContainerService.HintSize="312,24.8" sap2010:WorkflowViewState.IdRef="UiPathDocumentOCR_2" Image="[Image]" Language="auto" NoopExecution="False" PredictionId="[PredictionId]" Profile="None" Scale="1" Timeout="100000" />
+                    <p1:UiPathDocumentOCR Endpoint="{x:Null}" Output="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ApiKey="[in_Config(&quot;UiPath_OCR_ApiKey&quot;).ToString]" ComputeSkewAngle="False" DisplayName="UiPath Document OCR" ExtractWords="True" sap:VirtualizedContainerService.HintSize="312,25" sap2010:WorkflowViewState.IdRef="UiPathDocumentOCR_2" Image="[Image]" Language="auto" NoopExecution="False" PredictionId="[PredictionId]" Profile="None" Scale="1" Timeout="100000" />
                   </ActivityFunc>
                 </p:DigitizeDocument.OCREngine>
               </p:DigitizeDocument>
-              <p2:ClassifyDocumentScope ClassificationResults="[classficationResultsObj]" DisplayName="Classify Document Scope" DocumentObjectModel="[DOMObj]" DocumentPath="[sDocumentPath]" DocumentText="[digitalTextObj]" sap:VirtualizedContainerService.HintSize="510.4,441.6" sap2010:WorkflowViewState.IdRef="ClassifyDocumentScope_1" Taxonomy="[TaxanomyObj]" TaxonomyConfiguration="{}{&quot;TaxonomyMappings&quot;:{&quot;UIf944172ff63249c6adfb5be90dd40eef&quot;:{&quot;DocumentTypeMappings&quot;:{&quot;SurePrep_Binder.GoSystemsTAXRS.1040_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.GoSystemsTAXRS.1040_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.GoSystemsTAXRS.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.GoSystemsTAXRS.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.CCH_Axcess_Tax.2021_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.CCH_Axcess_Tax.2021_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.CCH_Axcess_Tax.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.CCH_Axcess_Tax.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.Lacerte.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.Lacerte.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.UltraTax.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.UltraTax.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;Add_Document.2022.Go&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Add_Document.2022.Go&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:true}}}},&quot;ClassifierMinimumConfidence&quot;:{&quot;UIf944172ff63249c6adfb5be90dd40eef&quot;:&quot;0&quot;},&quot;DocumentTypesByPersistenceId&quot;:{&quot;UIf944172ff63249c6adfb5be90dd40eef&quot;:[]}}">
+              <p2:ClassifyDocumentScope ClassificationResults="[classficationResultsObj]" DisplayName="Classify Document Scope" DocumentObjectModel="[DOMObj]" DocumentPath="[sDocumentPath]" DocumentText="[digitalTextObj]" sap:VirtualizedContainerService.HintSize="510,469" sap2010:WorkflowViewState.IdRef="ClassifyDocumentScope_1" Taxonomy="[TaxanomyObj]" TaxonomyConfiguration="{}{&quot;TaxonomyMappings&quot;:{&quot;UIf944172ff63249c6adfb5be90dd40eef&quot;:{&quot;DocumentTypeMappings&quot;:{&quot;SurePrep_Binder.GoSystemsTAXRS.1040_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.GoSystemsTAXRS.1040_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.GoSystemsTAXRS.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.GoSystemsTAXRS.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.CCH_Axcess_Tax.2021_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.CCH_Axcess_Tax.2021_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.CCH_Axcess_Tax.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.CCH_Axcess_Tax.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.Lacerte.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.Lacerte.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;SurePrep_Binder.UltraTax.2022_1040ScanPro&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;SurePrep_Binder.UltraTax.2022_1040ScanPro&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;Add_Document.2022.Go&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Add_Document.2022.Go&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:true}}}},&quot;ClassifierMinimumConfidence&quot;:{&quot;UIf944172ff63249c6adfb5be90dd40eef&quot;:&quot;0&quot;},&quot;DocumentTypesByPersistenceId&quot;:{&quot;UIf944172ff63249c6adfb5be90dd40eef&quot;:[]}}">
                 <p2:ClassifyDocumentScope.Classifiers>
                   <p2:KeywordBasedClassifier HumanValidatedData="{x:Null}" LearningData="{x:Null}" DisplayName="Keyword Based Classifier" sap:VirtualizedContainerService.HintSize="233.6,115.2" sap2010:WorkflowViewState.IdRef="KeywordBasedClassifier_1" LearningFilePath="DocumentProcessing\\Classifiers.json" PersistenceId="UIf944172ff63249c6adfb5be90dd40eef">
                     <p2:KeywordBasedClassifier.ClassifierResult>
@@ -396,7 +402,7 @@
             </Sequence>
           </If.Then>
           <If.Else>
-            <Sequence sap:VirtualizedContainerService.HintSize="377.6,362.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="377.6,362.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -424,6 +430,9 @@
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_9" />
+      </TryCatch.Finally>
     </TryCatch>
   </Sequence>
 </Activity>

@@ -54,6 +54,7 @@
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -123,6 +124,7 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
       <AssemblyReference>Microsoft.Extensions.DependencyModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -130,7 +132,7 @@
       <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1630.4,10592" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1268,10969" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_binder_id" />
       <Variable x:TypeArguments="ui:UiElement" Name="uie_binder_status" />
@@ -142,6 +144,7 @@
       <Variable x:TypeArguments="x:String" Name="StrLeadsOption" />
       <Variable x:TypeArguments="x:String" Name="StrWithoughtLeadOption" />
       <Variable x:TypeArguments="si:FileInfo" Name="StrPrintDownload" />
+      <Variable x:TypeArguments="x:Int32" Default="22" Name="RetryCount_JobStatus" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -149,9 +152,9 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="1568,242.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="1268,272" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
             <ui:AssignOperation.To>
               <OutArgument x:TypeArguments="x:String">[str_tax_year]</OutArgument>
@@ -184,6 +187,14 @@
               <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("Without Lead Binder").ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[RetryCount_JobStatus]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">[CInt(in_Config("RetryCount_Print-Fileroom"))]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
       <sap:WorkflowViewStateService.ViewState>
@@ -193,7 +204,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ui:RetryScope DisplayName="Retry File room search binder" sap:VirtualizedContainerService.HintSize="1568,56.8" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="3">
+    <ui:RetryScope DisplayName="Retry File room search binder" sap:VirtualizedContainerService.HintSize="1268,57" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="3">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
           <TryCatch DisplayName="File Room Search" sap:VirtualizedContainerService.HintSize="1084.8,4559.2" sap2010:WorkflowViewState.IdRef="TryCatch_3">
@@ -730,18 +741,18 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_28" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Print Functionality Started.&quot;]" />
-    <ui:RetryScope DisplayName="Retry Send to Print" sap:VirtualizedContainerService.HintSize="1568,3508" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="3">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1268,173" sap2010:WorkflowViewState.IdRef="LogMessage_28" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Print Functionality Started.&quot;]" />
+    <ui:RetryScope DisplayName="Retry Send to Print" sap:VirtualizedContainerService.HintSize="1268,3696" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="3">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="724.8,3300" sap2010:WorkflowViewState.IdRef="Sequence_113">
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="558,3489" sap2010:WorkflowViewState.IdRef="Sequence_113">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <TryCatch DisplayName="TryCatch" sap:VirtualizedContainerService.HintSize="662.4,3211.2" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+            <TryCatch DisplayName="TryCatch" sap:VirtualizedContainerService.HintSize="524,3429" sap2010:WorkflowViewState.IdRef="TryCatch_4">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -749,7 +760,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <TryCatch.Try>
-                <If Condition="[StrLeadsOption=&quot;None&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;SPbinder&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;Business Outsource Offshore&quot;]" DisplayName="If Leadsheet type is None" sap:VirtualizedContainerService.HintSize="625.6,2933.6" sap2010:WorkflowViewState.IdRef="If_2">
+                <If Condition="[StrLeadsOption=&quot;None&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;SPbinder&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;Business Outsource Offshore&quot;]" DisplayName="If Leadsheet type is None" sap:VirtualizedContainerService.HintSize="522,3051" sap2010:WorkflowViewState.IdRef="If_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -757,13 +768,13 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="592,1453.6" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="520,1703" sap2010:WorkflowViewState.IdRef="Sequence_29">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NCheckState DisplayName="Check App State Indicator titleThumb Pop-UP" sap:VirtualizedContainerService.HintSize="529.6,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_29" Timeout="25" Version="V3">
+                      <uix:NCheckState DisplayName="Check App State Indicator titleThumb Pop-UP" sap:VirtualizedContainerService.HintSize="486,57" sap2010:WorkflowViewState.IdRef="NCheckState_29" Timeout="25" Version="V3">
                         <uix:NCheckState.IfExists>
                           <Sequence DisplayName="Target appears Indicator titleThumb Pop-UP" sap:VirtualizedContainerService.HintSize="512,679.2" sap2010:WorkflowViewState.IdRef="Sequence_152">
                             <sap:WorkflowViewStateService.ViewState>
@@ -834,28 +845,28 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NCheckState>
-                      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Print Setup" sap:VirtualizedContainerService.HintSize="529.6,1308" sap2010:WorkflowViewState.IdRef="NApplicationCard_29" ScopeGuid="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V2">
+                      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Print Setup" sap:VirtualizedContainerService.HintSize="486,1586" sap2010:WorkflowViewState.IdRef="NApplicationCard_29" ScopeGuid="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V2">
                         <uix:NApplicationCard.Body>
                           <ActivityAction x:TypeArguments="x:Object">
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,993.6" sap2010:WorkflowViewState.IdRef="Sequence_130">
+                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="452,1272" sap2010:WorkflowViewState.IdRef="Sequence_130">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="433.6,122.4" sap2010:WorkflowViewState.IdRef="Delay_3" />
-                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="433.6,219.2" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+                              <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="418,122" sap2010:WorkflowViewState.IdRef="Delay_3" />
+                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="418,528" sap2010:WorkflowViewState.IdRef="TryCatch_7">
                                 <TryCatch.Try>
-                                  <Sequence sap:VirtualizedContainerService.HintSize="416,272.8" sap2010:WorkflowViewState.IdRef="Sequence_183">
+                                  <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="416,240" sap2010:WorkflowViewState.IdRef="Sequence_183">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayBefore="6" DisplayName="Click 'Print on SurePrep server'" sap:VirtualizedContainerService.HintSize="353.6,182.4" sap2010:WorkflowViewState.IdRef="NClick_51" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
+                                    <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayBefore="6" DisplayName="Click 'Print on SurePrep server'" sap:VirtualizedContainerService.HintSize="382,180" sap2010:WorkflowViewState.IdRef="NClick_51" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
                                       <uix:NClick.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="175, 41, 133, 16" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Print on SurePrep server'" FullSelectorArgument="&lt;ctrl name='Print on SurePrep server' role='radio button' /&gt;&lt;ctrl name='Print on SurePrep server' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Print on SurePrep server' role='radio button' /&gt;&lt;ctrl name='Print on SurePrep server' role='text' automationid='' check:text='Print on SurePrep server' /&gt;" Guid="cb919186-bf91-4b82-be04-fba15eaab94b" ImageBase64="" InformativeScreenshot="c20bef6889a3fb5fe21a7abeb66092a3.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete">
                                           <uix:TargetAnchorable.Anchors>
@@ -886,7 +897,7 @@
                                       <ActivityAction.Argument>
                                         <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                       </ActivityAction.Argument>
-                                      <Sequence sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_132">
+                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,25" sap2010:WorkflowViewState.IdRef="Sequence_132">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -914,8 +925,17 @@
                                     </ActivityAction>
                                   </Catch>
                                 </TryCatch.Catches>
+                                <TryCatch.Finally>
+                                  <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_204">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </TryCatch.Finally>
                               </TryCatch>
-                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks with markups'" sap:VirtualizedContainerService.HintSize="433.6,189.6" sap2010:WorkflowViewState.IdRef="NCheck_2" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
+                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks with markups'" sap:VirtualizedContainerService.HintSize="418,189" sap2010:WorkflowViewState.IdRef="NCheck_2" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
                                 <uix:NCheck.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="24, 108, 198, 19" DesignTimeScaleFactor="1.25" ElementType="CheckBox" FriendlyName="'Bookmarks with markups'" FullSelectorArgument="&lt;ctrl automationid='Bookmarkswithmarkups' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='Bookmarkswithmarkups' role='check box' check:fulltext='Bookmarks with markups' /&gt;" Guid="d24d57b4-e0d7-4ca3-b035-6f99d64bc303" InformativeScreenshot="5c61125db3cf37e3768c164e256e600d.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -932,7 +952,7 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uix:NCheck>
-                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks only'" sap:VirtualizedContainerService.HintSize="433.6,189.6" sap2010:WorkflowViewState.IdRef="NCheck_3" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
+                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks only'" sap:VirtualizedContainerService.HintSize="418,189" sap2010:WorkflowViewState.IdRef="NCheck_3" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
                                 <uix:NCheck.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="24, 228, 132, 19" DesignTimeScaleFactor="1.25" ElementType="CheckBox" FriendlyName="'Bookmarks only'" FullSelectorArgument="&lt;ctrl automationid='BookmarksOnly' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='BookmarksOnly' role='check box' check:fulltext='Bookmarks only' /&gt;" Guid="89522da0-7c90-4055-bdef-85659e47d273" ImageBase64="" InformativeScreenshot="fa1cd2ed186811aab5d9b06b8959f6c4.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -949,7 +969,7 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uix:NCheck>
-                              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Print'" sap:VirtualizedContainerService.HintSize="433.6,182.4" sap2010:WorkflowViewState.IdRef="NClick_61" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
+                              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Print'" sap:VirtualizedContainerService.HintSize="418,182" sap2010:WorkflowViewState.IdRef="NClick_61" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="805e312c-6ac3-4ad4-83b4-a08011a6101e" Version="V3">
                                 <uix:NClick.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="311, 396, 100, 32" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Print'" FullSelectorArgument="&lt;ctrl automationid='PrintWithoutLeads' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='PrintWithoutLeads' role='push button' check:text='Print' /&gt;" Guid="e33cf52d-a669-43d3-883b-d8d785772f07" ImageBase64="" InformativeScreenshot="5e055204da35a4e27676397a8aa13278.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -982,13 +1002,13 @@
                     </Sequence>
                   </If.Then>
                   <If.Else>
-                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="512,1341.6" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="520,1242" sap2010:WorkflowViewState.IdRef="Sequence_36">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NCheckState DisplayName="Check App State Indicator titleThumb Pop-UP" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_7" Timeout="40" Version="V3">
+                      <uix:NCheckState DisplayName="Check App State Indicator titleThumb Pop-UP" sap:VirtualizedContainerService.HintSize="486,57" sap2010:WorkflowViewState.IdRef="NCheckState_7" Timeout="40" Version="V3">
                         <uix:NCheckState.IfExists>
                           <Sequence DisplayName="Target appears Indicator titleThumb Pop-UP" sap:VirtualizedContainerService.HintSize="512,679.2" sap2010:WorkflowViewState.IdRef="Sequence_31">
                             <sap:WorkflowViewStateService.ViewState>
@@ -1059,35 +1079,35 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NCheckState>
-                      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Classic Or Simplified Binder" sap:VirtualizedContainerService.HintSize="449.6,1196" sap2010:WorkflowViewState.IdRef="NApplicationCard_9" ScopeGuid="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V2">
+                      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Classic Or Simplified Binder" sap:VirtualizedContainerService.HintSize="486,1125" sap2010:WorkflowViewState.IdRef="NApplicationCard_9" ScopeGuid="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V2">
                         <uix:NApplicationCard.Body>
                           <ActivityAction x:TypeArguments="x:Object">
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="416,841.6" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,811" sap2010:WorkflowViewState.IdRef="Sequence_35">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks with markups'" sap:VirtualizedContainerService.HintSize="353.6,189.6" sap2010:WorkflowViewState.IdRef="NCheck_4" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
+                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks with markups'" sap:VirtualizedContainerService.HintSize="416,189" sap2010:WorkflowViewState.IdRef="NCheck_4" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
                                 <uix:NCheck.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="19, 84, 410, 15" DesignTimeScaleFactor="1" ElementType="CheckBox" FriendlyName="'Bookmarks with markups'" FullSelectorArgument="&lt;ctrl automationid='BookmarksWithMarkupsDWP' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='BookmarksWithMarkupsDWP' role='check box' check:fulltext='Bookmarks with markups' /&gt;" Guid="54e35256-2f84-4389-9301-222d4db76168" ImageBase64="" InformativeScreenshot="548ba550c35cedd25c64d723433099a0.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
                                 </uix:NCheck.Target>
                               </uix:NCheck>
-                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck '2055 Dream Workpaper.xls'" sap:VirtualizedContainerService.HintSize="353.6,189.6" sap2010:WorkflowViewState.IdRef="NCheck_5" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
+                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck '2055 Dream Workpaper.xls'" sap:VirtualizedContainerService.HintSize="416,189" sap2010:WorkflowViewState.IdRef="NCheck_5" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
                                 <uix:NCheck.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="39, 204, 165, 15" DesignTimeScaleFactor="1" ElementType="CheckBox" FriendlyName="'2055 Dream Workpaper.xls'" FullSelectorArgument="&lt;ctrl automationid='DreamWorkpaper' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='DreamWorkpaper' role='check box' check:fulltext='2055 Dream Workpaper.xls' /&gt;" Guid="7dc32c51-601f-4806-ae85-bc7ead0ba70f" ImageBase64="" InformativeScreenshot="b2fbbc7b2c8ba1ca93ede89a9bcda96c.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Visible" />
                                 </uix:NCheck.Target>
                               </uix:NCheck>
-                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks only'" sap:VirtualizedContainerService.HintSize="353.6,189.6" sap2010:WorkflowViewState.IdRef="NCheck_6" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
+                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'Bookmarks only'" sap:VirtualizedContainerService.HintSize="416,189" sap2010:WorkflowViewState.IdRef="NCheck_6" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
                                 <uix:NCheck.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="19, 352, 410, 15" DesignTimeScaleFactor="1" ElementType="CheckBox" FriendlyName="'Bookmarks only'" FullSelectorArgument="&lt;ctrl automationid='BookmarkOnlyDWP' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='BookmarkOnlyDWP' role='check box' check:fulltext='Bookmarks only' /&gt;" Guid="fa207785-82ce-47e3-8e1a-c1d38b46cf14" ImageBase64="" InformativeScreenshot="3bcd831ea6de41dd8948e1c4d5d245a6.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Visible" />
                                 </uix:NCheck.Target>
                               </uix:NCheck>
-                              <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="15" DisplayName="Click 'Print'" sap:VirtualizedContainerService.HintSize="353.6,182.4" sap2010:WorkflowViewState.IdRef="NClick_48" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
+                              <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="15" DisplayName="Click 'Print'" sap:VirtualizedContainerService.HintSize="416,182" sap2010:WorkflowViewState.IdRef="NClick_48" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2ab0df45-31f0-4881-8ff6-911474d70756" Version="V3">
                                 <uix:NClick.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="311, 629, 100, 32" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Print'" FullSelectorArgument="&lt;ctrl automationid='PrintWithLeads' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='PrintWithLeads' role='push button' check:text='Print' /&gt;" Guid="bf1f5563-4edc-4fa3-b437-5430d6c1067b" ImageBase64="" InformativeScreenshot="2aab905a24261c09a340afe67a30b9db.png" ScopeSelectorArgument="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='Print Setup' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -1127,7 +1147,7 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                     </ActivityAction.Argument>
-                    <Sequence sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_115">
+                    <Sequence sap:VirtualizedContainerService.HintSize="522,25" sap2010:WorkflowViewState.IdRef="Sequence_115">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1157,7 +1177,7 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
                     </ActivityAction.Argument>
-                    <Rethrow DisplayName="Rethrow BRE File Room Search" sap:VirtualizedContainerService.HintSize="334.4,24.8" sap2010:WorkflowViewState.IdRef="Rethrow_3" />
+                    <Rethrow DisplayName="Rethrow BRE File Room Search" sap:VirtualizedContainerService.HintSize="522,25" sap2010:WorkflowViewState.IdRef="Rethrow_3" />
                   </ActivityAction>
                 </Catch>
               </TryCatch.Catches>
@@ -1175,16 +1195,16 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
-    <ui:RetryScope DisplayName="Retry Scope Check Job Status" sap:VirtualizedContainerService.HintSize="1568,4566.4" sap2010:WorkflowViewState.IdRef="RetryScope_5">
+    <ui:RetryScope DisplayName="Retry Scope Check Job Status" sap:VirtualizedContainerService.HintSize="1268,4525" sap2010:WorkflowViewState.IdRef="RetryScope_5">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="1526.4,4358.4" sap2010:WorkflowViewState.IdRef="Sequence_117">
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="1226,4318" sap2010:WorkflowViewState.IdRef="Sequence_117">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[StrLeadsOption=&quot;None&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;SPbinder&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;Business Outsource Offshore&quot;]" sap:VirtualizedContainerService.HintSize="1464,4269.6" sap2010:WorkflowViewState.IdRef="If_8">
+            <If Condition="[StrLeadsOption=&quot;None&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;SPbinder&quot; or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;Business Outsource Offshore&quot;]" sap:VirtualizedContainerService.HintSize="1192,4258" sap2010:WorkflowViewState.IdRef="If_8">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1192,23 +1212,23 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,197.6" sap2010:WorkflowViewState.IdRef="Sequence_126">
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="1190,168" sap2010:WorkflowViewState.IdRef="Sequence_126">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:08:00" DisplayName="Message Box - Print Delay" sap:VirtualizedContainerService.HintSize="353.6,108.8" sap2010:WorkflowViewState.IdRef="MessageBox_14" Text="[&quot;Please wait till the print jobs get completed.&quot;]" />
+                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:08:00" DisplayName="Message Box - Print Delay" sap:VirtualizedContainerService.HintSize="1156,108" sap2010:WorkflowViewState.IdRef="MessageBox_14" Text="[&quot;Please wait till the print jobs get completed.&quot;]" />
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="1430.4,3910.4" sap2010:WorkflowViewState.IdRef="Sequence_127">
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="1190,3961" sap2010:WorkflowViewState.IdRef="Sequence_127">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <If Condition="[in_Config(&quot;in_str_JobDetails&quot;).ToString.ToLower.Contains(&quot;prod&quot;) or in_Config(&quot;in_str_JobDetails&quot;).ToString.ToLower.Contains(&quot;qat&quot;)]" DisplayName="If URL Change" sap:VirtualizedContainerService.HintSize="1368,3821.6" sap2010:WorkflowViewState.IdRef="If_14">
+                  <If Condition="[in_Config(&quot;in_str_JobDetails&quot;).ToString.ToLower.Contains(&quot;prod&quot;) or in_Config(&quot;in_str_JobDetails&quot;).ToString.ToLower.Contains(&quot;qat&quot;)]" DisplayName="If URL Change" sap:VirtualizedContainerService.HintSize="1156,3901" sap2010:WorkflowViewState.IdRef="If_14">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1216,13 +1236,13 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="1334.4,3523.2" sap2010:WorkflowViewState.IdRef="Sequence_192">
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="1154,3664" sap2010:WorkflowViewState.IdRef="Sequence_192">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <TryCatch DisplayName="Try Catch - Job Details for Pre-Pod and QAT" sap:VirtualizedContainerService.HintSize="1272,3434.4" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+                        <TryCatch DisplayName="Try Catch - Job Details for Pre-Pod and QAT" sap:VirtualizedContainerService.HintSize="1120,3604" sap2010:WorkflowViewState.IdRef="TryCatch_5">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1230,20 +1250,20 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <TryCatch.Try>
-                            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Job Details for Pre-Pod and QAT" sap:VirtualizedContainerService.HintSize="1235.2,3156.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_17" InteractionMode="DebuggerApi" ScopeGuid="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V2">
+                            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Job Details for Pre-Pod and QAT" sap:VirtualizedContainerService.HintSize="1118,3226" sap2010:WorkflowViewState.IdRef="NApplicationCard_17" InteractionMode="DebuggerApi" ScopeGuid="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V2">
                               <uix:NApplicationCard.Body>
                                 <ActivityAction x:TypeArguments="x:Object">
                                   <ActivityAction.Argument>
                                     <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                                   </ActivityAction.Argument>
-                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1201.6,2940" sap2010:WorkflowViewState.IdRef="Sequence_76">
+                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1084,2969" sap2010:WorkflowViewState.IdRef="Sequence_76">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1139.2,176" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Search Binder ID in Job Search : &quot; + str_binder_id]" />
-                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Binder ID" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="1139.2,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Text="[Str_binder_Id + &quot;[k(enter)]&quot;]" Version="V3">
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1050,175" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Search Binder ID in Job Search : &quot; + str_binder_id]" />
+                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Binder ID" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="1050,250" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Text="[Str_binder_Id + &quot;[k(enter)]&quot;]" Version="V3">
                                       <uix:NTypeInto.Target>
                                         <uix:TargetAnchorable BrowserURL="https://prod-monitoring.sureprep.com/JobDetails/" CVScreenId="636865d4-3b74-4884-a2b2-ba49b3ca900d" CvElementArea="373, 238, 238, 32" CvType="InputBox" DesignTimeRectangle="376, 241, 234, 28" DesignTimeScaleFactor="1.25" ElementType="InputBox" FriendlyName="'INPUT MainContent_txtEn…'" FullSelectorArgument="&lt;webctrl id='MainContent_txtEngagementID' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='MainContent_txtEngagementID' tag='INPUT' type='text' class='fntStyle' aaname='' /&gt;" Guid="d078d02a-23d9-4c1a-b4ad-ce3b56f5c1d6" InformativeScreenshot="928a82e6d55f37ae082bb6fc87928da2.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Home Page - Job Details' /&gt;" SearchSteps="FuzzySelector, CV" Version="V2" Visibility="Interactive" />
                                       </uix:NTypeInto.Target>
@@ -1254,7 +1274,7 @@
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
                                     </uix:NTypeInto>
-                                    <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Show Jobs" sap:VirtualizedContainerService.HintSize="1139.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_77" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
+                                    <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Show Jobs" sap:VirtualizedContainerService.HintSize="1050,189" sap2010:WorkflowViewState.IdRef="NClick_77" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
                                       <uix:NClick.Target>
                                         <uix:TargetAnchorable BrowserURL="https://qat-monitoring.sureprep.com/JobDetails/" CVScreenId="7215f4b2-41d7-496b-9934-3e2e3e4b5a39" CvElementArea="724, 239, 98, 36" CvTextArea="736, 249, 73, 13" CvTextArgument="Show Job" CvType="Button" DesignTimeRectangle="727, 241, 94, 31" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Show Job'" FullSelectorArgument="&lt;webctrl id='MainContent_btnshowjob' tag='INPUT' aaname='Show Job' /&gt;" FuzzySelectorArgument="&lt;webctrl id='MainContent_btnshowjob' tag='INPUT' aaname='Show Job' type='submit' class='buttonstyle' check:text='Show Job' /&gt;" Guid="f533caf6-cf81-441f-8e34-f0db4c242f83" InformativeScreenshot="e8e6c4cab9b1082663a61037f0aa6c4b.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Home Page - Job Details' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
                                       </uix:NClick.Target>
@@ -1265,9 +1285,9 @@
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
                                     </uix:NClick>
-                                    <uix:NCheckState DisplayName="Check App State - Page numbers" sap:VirtualizedContainerService.HintSize="1139.2,2233.6" sap2010:WorkflowViewState.IdRef="NCheckState_35" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Timeout="10" Version="V3">
+                                    <uix:NCheckState DisplayName="Check App State - Page numbers" sap:VirtualizedContainerService.HintSize="1050,2293" sap2010:WorkflowViewState.IdRef="NCheckState_35" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Timeout="10" Version="V3">
                                       <uix:NCheckState.IfExists>
-                                        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="636.8,1990.4" sap2010:WorkflowViewState.IdRef="Sequence_199">
+                                        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="546,2051" sap2010:WorkflowViewState.IdRef="Sequence_199">
                                           <Sequence.Variables>
                                             <Variable x:TypeArguments="x:String" Name="getValue" />
                                           </Sequence.Variables>
@@ -1276,12 +1296,12 @@
                                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
-                                          <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="visibleInnerText" DisplayName="Get Attribute - Page numbers" sap:VirtualizedContainerService.HintSize="574.4,240" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_1" Result="[getValue]" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
+                                          <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="visibleInnerText" DisplayName="Get Attribute - Page numbers" sap:VirtualizedContainerService.HintSize="512,239" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_1" Result="[getValue]" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
                                             <uix:NGetAttributeGeneric.Target>
                                               <uix:TargetAnchorable BrowserURL="https://qat-monitoring.sureprep.com/JobDetails/" CVScreenId="bd54e7b1-ac16-4eb9-9353-45f361f4d98a" CvTextArea="357, 380, 36, 22" CvTextArgument="123" CvType="Text" DesignTimeRectangle="357, 575, 1294, 39" DesignTimeScaleFactor="1.25" FriendlyName="'123'" FullSelectorArgument="&lt;webctrl id='MainContent_grdData' tag='TABLE' /&gt;&lt;webctrl tableRow='22' tag='TD' /&gt;" FuzzySelectorArgument="&lt;webctrl id='MainContent_grdData' tag='TABLE' /&gt;&lt;webctrl type='' tag='TD' class='' aaname='' /&gt;" Guid="c0beadfd-8887-4ef6-bb20-cdf91c8c9c75" InformativeScreenshot="a90973027ece7309e7f5a0a39cdd997d.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Home Page - Job Details' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
                                             </uix:NGetAttributeGeneric.Target>
                                           </uix:NGetAttributeGeneric>
-                                          <Assign sap:VirtualizedContainerService.HintSize="574.4,114.4" sap2010:WorkflowViewState.IdRef="Assign_15">
+                                          <Assign sap:VirtualizedContainerService.HintSize="512,114" sap2010:WorkflowViewState.IdRef="Assign_15">
                                             <Assign.To>
                                               <OutArgument x:TypeArguments="x:String">[getValue]</OutArgument>
                                             </Assign.To>
@@ -1289,14 +1309,13 @@
                                               <InArgument x:TypeArguments="x:String">[Trim(getValue.Substring( getValue.Length - 1))]</InArgument>
                                             </Assign.Value>
                                           </Assign>
-                                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Last Page" sap:VirtualizedContainerService.HintSize="574.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_79" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
+                                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Last Page" sap:VirtualizedContainerService.HintSize="512,189" sap2010:WorkflowViewState.IdRef="NClick_79" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
                                             <uix:NClick.Target>
                                               <uix:TargetAnchorable BrowserURL="https://qat-monitoring.sureprep.com/JobDetails/" CVScreenId="bd54e7b1-ac16-4eb9-9353-45f361f4d98a" CvTextArea="357, 380, 36, 22" CvTextArgument="123" CvType="Text" DesignTimeRectangle="372, 381, 10, 20" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'2'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl tableRow='22' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='A' aaname='{0}' /&gt;&quot;, getValue)]" FuzzySelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='' tag='A' aaname='2' class='' check:text='2' /&gt;" Guid="4e37ed0b-1d9d-4320-9813-2eadc84da0ed" InformativeScreenshot="39cd9d8ea8686fab35b448ba90be2395.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Home Page - Job Details' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                             </uix:NClick.Target>
                                           </uix:NClick>
-                                          <TryCatch DisplayName="Try Catch - Extract Details" sap:VirtualizedContainerService.HintSize="574.4,1356" sap2010:WorkflowViewState.IdRef="TryCatch_16">
+                                          <TryCatch DisplayName="Try Catch - Extract Details" sap:VirtualizedContainerService.HintSize="512,1447" sap2010:WorkflowViewState.IdRef="TryCatch_16">
                                             <TryCatch.Variables>
-                                              <Variable x:TypeArguments="x:Int32" Default="22" Name="RetryCount_JobStatus" />
                                               <Variable x:TypeArguments="x:Boolean" Name="True_Or_False" />
                                             </TryCatch.Variables>
                                             <sap:WorkflowViewStateService.ViewState>
@@ -1306,23 +1325,23 @@
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
                                             <TryCatch.Try>
-                                              <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="537.6,1100" sap2010:WorkflowViewState.IdRef="RetryScope_8" NumberOfRetries="[RetryCount_JobStatus]" RetryInterval="00:00:30">
+                                              <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="510,1066" sap2010:WorkflowViewState.IdRef="RetryScope_8" NumberOfRetries="[RetryCount_JobStatus]" RetryInterval="00:00:30">
                                                 <ui:RetryScope.ActivityBody>
                                                   <ActivityAction>
-                                                    <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="496,808.8" sap2010:WorkflowViewState.IdRef="Sequence_200">
+                                                    <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="468,777" sap2010:WorkflowViewState.IdRef="Sequence_200">
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                         </scg:Dictionary>
                                                       </sap:WorkflowViewStateService.ViewState>
-                                                      <Delay DisplayName="Delay - Page load" Duration="00:00:03" sap:VirtualizedContainerService.HintSize="433.6,122.4" sap2010:WorkflowViewState.IdRef="Delay_7" />
-                                                      <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[dt_ExtractTable]" DisplayName="Agent details" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Table' AddCvHeader='false' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Queued Date' ReferenceIdx='0' Name='Job Queued Date'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Picked Date' ReferenceIdx='1' Name='Job Picked Date'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Completed Date' ReferenceIdx='2' Name='Job Completed Date'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Type' ReferenceIdx='3' Name='Job Type'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Status' ReferenceIdx='4' Name='Job Status'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Agent Comments' ReferenceIdx='5' Name='Agent Comments'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' columns_name_source='Longest'&gt;&lt;column name='Job Queued Date' attr='fulltext' /&gt;&lt;column name='Job Picked Date' attr='fulltext' /&gt;&lt;column name='Job Completed Date' attr='fulltext' /&gt;&lt;column name='Job Type' attr='fulltext' /&gt;&lt;column name='Job Status' attr='fulltext' /&gt;&lt;column name='Agent Comments' attr='fulltext' /&gt;&lt;/extract-table&gt;" sap:VirtualizedContainerService.HintSize="433.6,189.6" sap2010:WorkflowViewState.IdRef="NExtractData_7" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
+                                                      <Delay DisplayName="Delay - Page load" Duration="00:00:03" sap:VirtualizedContainerService.HintSize="434,122" sap2010:WorkflowViewState.IdRef="Delay_7" />
+                                                      <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[dt_ExtractTable]" DisplayName="Agent details" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Table' AddCvHeader='false' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Queued Date' ReferenceIdx='0' Name='Job Queued Date'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Picked Date' ReferenceIdx='1' Name='Job Picked Date'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Completed Date' ReferenceIdx='2' Name='Job Completed Date'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Type' ReferenceIdx='3' Name='Job Type'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Job Status' ReferenceIdx='4' Name='Job Status'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Agent Comments' ReferenceIdx='5' Name='Agent Comments'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' columns_name_source='Longest'&gt;&lt;column name='Job Queued Date' attr='fulltext' /&gt;&lt;column name='Job Picked Date' attr='fulltext' /&gt;&lt;column name='Job Completed Date' attr='fulltext' /&gt;&lt;column name='Job Type' attr='fulltext' /&gt;&lt;column name='Job Status' attr='fulltext' /&gt;&lt;column name='Agent Comments' attr='fulltext' /&gt;&lt;/extract-table&gt;" sap:VirtualizedContainerService.HintSize="434,189" sap2010:WorkflowViewState.IdRef="NExtractData_7" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
                                                         <uix:NExtractData.Target>
                                                           <uix:TargetAnchorable DesignTimeRectangle="375, 433, 1140, 462" DesignTimeScaleFactor="1" FriendlyName="'Job Queued'" FullSelectorArgument="&lt;webctrl id='MainContent_grdData' tag='TABLE' /&gt;" Guid="432df1f2-5714-4cf8-942a-17bf18d32401" InformativeScreenshot="5403ec8c84da9a3396f1fbee8098a8a5.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Home Page - Job Details' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                                                         </uix:NExtractData.Target>
                                                       </uix:NExtractData>
-                                                      <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_16">
+                                                      <Assign sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="Assign_16">
                                                         <Assign.To>
                                                           <OutArgument x:TypeArguments="sd:DataRow">[LastRow]</OutArgument>
                                                         </Assign.To>
@@ -1330,7 +1349,7 @@
                                                           <InArgument x:TypeArguments="sd:DataRow">[dt_ExtractTable.Rows(dt_ExtractTable.RowCount - 2 )]</InArgument>
                                                         </Assign.Value>
                                                       </Assign>
-                                                      <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_17">
+                                                      <Assign sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="Assign_17">
                                                         <Assign.To>
                                                           <OutArgument x:TypeArguments="x:String">[LastValue]</OutArgument>
                                                         </Assign.To>
@@ -1338,7 +1357,7 @@
                                                           <InArgument x:TypeArguments="x:String">[LastRow("Job Status").ToString]</InArgument>
                                                         </Assign.Value>
                                                       </Assign>
-                                                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Show Jobs" sap:VirtualizedContainerService.HintSize="433.6,180.8" sap2010:WorkflowViewState.IdRef="NClick_82" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
+                                                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Show Jobs" sap:VirtualizedContainerService.HintSize="434,180" sap2010:WorkflowViewState.IdRef="NClick_82" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="44e434d7-4086-4d33-998a-92dbe4f08640" Version="V3">
                                                         <uix:NClick.Target>
                                                           <uix:TargetAnchorable BrowserURL="https://qat-monitoring.sureprep.com/JobDetails/" CVScreenId="7215f4b2-41d7-496b-9934-3e2e3e4b5a39" CvElementArea="724, 239, 98, 36" CvTextArea="736, 249, 73, 13" CvTextArgument="Show Job" CvType="Button" DesignTimeRectangle="727, 241, 94, 31" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Show Job'" FullSelectorArgument="&lt;webctrl id='MainContent_btnshowjob' tag='INPUT' aaname='Show Job' /&gt;" FuzzySelectorArgument="&lt;webctrl id='MainContent_btnshowjob' tag='INPUT' aaname='Show Job' type='submit' class='buttonstyle' check:text='Show Job' /&gt;" Guid="f533caf6-cf81-441f-8e34-f0db4c242f83" InformativeScreenshot="e8e6c4cab9b1082663a61037f0aa6c4b.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Home Page - Job Details' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
                                                         </uix:NClick.Target>
@@ -1354,7 +1373,7 @@
                                                 </ui:RetryScope.ActivityBody>
                                                 <ui:RetryScope.Condition>
                                                   <ActivityFunc x:TypeArguments="x:Boolean">
-                                                    <ui:CheckTrue ErrorMessage="{x:Null}" DisplayName="Check True" Expression="[LastValue = &quot;Completed&quot;]" sap:VirtualizedContainerService.HintSize="333.6,131.2" sap2010:WorkflowViewState.IdRef="CheckTrue_4" Result="[True_Or_False]" />
+                                                    <ui:CheckTrue ErrorMessage="{x:Null}" DisplayName="Check True" Expression="[LastValue = &quot;Completed&quot;]" sap:VirtualizedContainerService.HintSize="468,129" sap2010:WorkflowViewState.IdRef="CheckTrue_4" Result="[True_Or_False]" />
                                                   </ActivityFunc>
                                                 </ui:RetryScope.Condition>
                                                 <sap:WorkflowViewStateService.ViewState>
@@ -1377,7 +1396,7 @@
                                                   <ActivityAction.Argument>
                                                     <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                                   </ActivityAction.Argument>
-                                                  <Throw Exception="[new Exception(&quot;Print Error, Status Inprogress&quot;)]" sap:VirtualizedContainerService.HintSize="334.4,90.4" sap2010:WorkflowViewState.IdRef="Throw_16" />
+                                                  <Throw Exception="[new Exception(&quot;Print Error, Status Inprogress&quot;)]" sap:VirtualizedContainerService.HintSize="510,90" sap2010:WorkflowViewState.IdRef="Throw_16" />
                                                 </ActivityAction>
                                               </Catch>
                                             </TryCatch.Catches>
@@ -1385,13 +1404,13 @@
                                         </Sequence>
                                       </uix:NCheckState.IfExists>
                                       <uix:NCheckState.IfNotExists>
-                                        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="449.6,140" sap2010:WorkflowViewState.IdRef="Sequence_203">
+                                        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,112" sap2010:WorkflowViewState.IdRef="Sequence_203">
                                           <sap:WorkflowViewStateService.ViewState>
                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
-                                          <TryCatch DisplayName="Try Catch - Extract Details" sap:VirtualizedContainerService.HintSize="387.2,49.6" sap2010:WorkflowViewState.IdRef="TryCatch_17">
+                                          <TryCatch DisplayName="Try Catch - Extract Details" sap:VirtualizedContainerService.HintSize="416,50" sap2010:WorkflowViewState.IdRef="TryCatch_17">
                                             <TryCatch.Variables>
                                               <Variable x:TypeArguments="x:Int32" Default="22" Name="RetryCount_JobStatus" />
                                               <Variable x:TypeArguments="x:Boolean" Name="True_Or_False" />
@@ -1516,7 +1535,7 @@
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                 </ActivityAction.Argument>
-                                <Sequence sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_116">
+                                <Sequence sap:VirtualizedContainerService.HintSize="1118,25" sap2010:WorkflowViewState.IdRef="Sequence_116">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1546,7 +1565,7 @@
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
                                 </ActivityAction.Argument>
-                                <Rethrow DisplayName="Rethrow BRE File Room Search" sap:VirtualizedContainerService.HintSize="334.4,24.8" sap2010:WorkflowViewState.IdRef="Rethrow_6" />
+                                <Rethrow DisplayName="Rethrow BRE File Room Search" sap:VirtualizedContainerService.HintSize="1118,25" sap2010:WorkflowViewState.IdRef="Rethrow_6" />
                               </ActivityAction>
                             </Catch>
                           </TryCatch.Catches>
@@ -1554,14 +1573,14 @@
                       </Sequence>
                     </If.Then>
                     <If.Else>
-                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,136.8" sap2010:WorkflowViewState.IdRef="Sequence_193">
+                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="1154,108" sap2010:WorkflowViewState.IdRef="Sequence_193">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <TryCatch DisplayName="Try Catch - Job Details for LIVE &amp; Stage" sap:VirtualizedContainerService.HintSize="353.6,48" sap2010:WorkflowViewState.IdRef="TryCatch_15">
+                        <TryCatch DisplayName="Try Catch - Job Details for LIVE &amp; Stage" sap:VirtualizedContainerService.HintSize="1120,48" sap2010:WorkflowViewState.IdRef="TryCatch_15">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1770,17 +1789,17 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
-    <ui:RetryScope DisplayName="Retry Scope Download Print Option" sap:VirtualizedContainerService.HintSize="1568,1789.6" sap2010:WorkflowViewState.IdRef="RetryScope_6">
+    <ui:RetryScope DisplayName="Retry Scope Download Print Option" sap:VirtualizedContainerService.HintSize="1268,2059" sap2010:WorkflowViewState.IdRef="RetryScope_6">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="644.8,1581.6" sap2010:WorkflowViewState.IdRef="Sequence_119">
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="588,1852" sap2010:WorkflowViewState.IdRef="Sequence_119">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <TryCatch DisplayName="TryCatch" sap:VirtualizedContainerService.HintSize="582.4,1492.8" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+            <TryCatch DisplayName="TryCatch" sap:VirtualizedContainerService.HintSize="554,1792" sap2010:WorkflowViewState.IdRef="TryCatch_6">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1788,20 +1807,20 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <TryCatch.Try>
-                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: FileRoom" sap:VirtualizedContainerService.HintSize="545.6,1215.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_14" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Version="V2" WindowResize="Maximize">
+                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: FileRoom" sap:VirtualizedContainerService.HintSize="552,1158" sap2010:WorkflowViewState.IdRef="NApplicationCard_14" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Version="V2" WindowResize="Maximize">
                   <uix:NApplicationCard.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="512,998.4" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="518,941" sap2010:WorkflowViewState.IdRef="Sequence_57">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="Log Message - Binder Id" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Searching binder with the following binder id : &quot;+ str_binder_id]">
+                        <ui:LogMessage DisplayName="Log Message - Binder Id" sap:VirtualizedContainerService.HintSize="484,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Searching binder with the following binder id : &quot;+ str_binder_id]">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1809,19 +1828,19 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:LogMessage>
-                        <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" ContinueOnError="True" DisplayName="Attach Browser 'chrome.exe  FileRoom'" sap:VirtualizedContainerService.HintSize="449.6,398.4" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f40ecb939aa4f43ccb5f616e5a048351" Selector="&lt;html app='chrome.exe' title='FileRoom' /&gt;">
+                        <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" ContinueOnError="True" DisplayName="Attach Browser 'chrome.exe  FileRoom'" sap:VirtualizedContainerService.HintSize="484,369" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f40ecb939aa4f43ccb5f616e5a048351" Selector="&lt;html app='chrome.exe' title='FileRoom' /&gt;">
                           <ui:BrowserScope.Body>
                             <ActivityAction x:TypeArguments="x:Object">
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                               </ActivityAction.Argument>
-                              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="416,219.2" sap2010:WorkflowViewState.IdRef="Sequence_160">
+                              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,190" sap2010:WorkflowViewState.IdRef="Sequence_160">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <ui:Activate DelayBefore="{x:Null}" DelayMS="{x:Null}" ContinueOnError="True" DisplayName="Activate 'TD'" sap:VirtualizedContainerService.HintSize="353.6,130.4" sap2010:WorkflowViewState.IdRef="Activate_1">
+                                <ui:Activate DelayBefore="{x:Null}" DelayMS="{x:Null}" ContinueOnError="True" DisplayName="Activate 'TD'" sap:VirtualizedContainerService.HintSize="416,130" sap2010:WorkflowViewState.IdRef="Activate_1">
                                   <ui:Activate.Target>
                                     <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="91165314-d20f-4a4f-ab52-3897f1ec9d60" InformativeScreenshot="bc054120d0e8636f3cdf34891b5ee0c1" Selector="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl class='logo-image-cell' tableRow='1' tag='TD' /&gt;">
                                       <ui:Target.TimeoutMS>
@@ -1837,7 +1856,7 @@
                             </ActivityAction>
                           </ui:BrowserScope.Body>
                         </ui:BrowserScope>
-                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tax Year Dropdown" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="NClick_18" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tax Year Dropdown" sap:VirtualizedContainerService.HintSize="484,57" sap2010:WorkflowViewState.IdRef="NClick_18" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable BrowserURL="https://production.sureprep.com/Fileroom/Fileroom/Listing#" CvElementArea="810, 169, 74, 33" CvTextArea="815, 180, 33, 13" CvTextArgument="2022" CvType="InputBox" DesignTimeRectangle="814, 172, 68, 26" DesignTimeScaleFactor="1.25" ElementType="DropDown" FriendlyName="'20222022'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl innertext='{0}' /&gt;&quot;, str_tax_year)]" FuzzySelectorArgument="&lt;webctrl innertext='2022' tag='SPAN' type='' class='k-picker k-dropdownlist k-picker-solid k-picker-md k-rounded-md' aaname='' /&gt;" Guid="ad5cbff5-1142-43eb-bc18-f83f28f9d085" InformativeScreenshot="64fda85c1a8073063de03dca16977cd4.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='FileRoom' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
                           </uix:NClick.Target>
@@ -1848,7 +1867,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NClick>
-                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tax Year" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="NClick_19" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tax Year" sap:VirtualizedContainerService.HintSize="484,57" sap2010:WorkflowViewState.IdRef="NClick_19" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable BrowserURL="https://production.sureprep.com/Fileroom/Fileroom/Listing#" DesignTimeRectangle="656, 180, 61, 24" DesignTimeScaleFactor="1" ElementType="ListItem" FriendlyName="'2021'" FullSelectorArgument="&lt;webctrl aria-role='option' idx='2' tag='LI' /&gt;" FuzzySelectorArgument="[string.Format(&quot;&lt;webctrl aria-role='option' type='' tag='LI' class='k-item k-state-selected k-state-focused' aaname='{0}' check:innerText='{0}' /&gt;&quot;, str_tax_year)]" Guid="02695e51-fcc6-445c-b614-5aa0f2a4ed46" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEEAAAAcCAYAAAA+59JsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH1SURBVFhH7ZXvS5NRFMf3L+zP0F4o9EvYyqkV6nqnjV7odJbvEiEkNTM35xoR5dhac0q9iH6ASBIiir8QRDEURW0wWU6nm25o5H/w7d4Dz2WCWK+Mp50PnBfPvedunM9z7nkMYMASBEpC5ug450KDJQhYgoAlCFiCgCUIWIKAJQhYgoAlCM6U4PE+h6WkFNeLLcjLv4AXL3uRSh9R9PW/pT0ZBQWF6Ojsws7eASamZk+s19jrEIn+oDNDX76ipLQMd2x3sbWzd+p/nmdo/HUnbEQ2UVFpxfjkDMYmplFpvY3l1XXaiydSVGwgGDpxRhbe1t4Bp6sH3e5n8PmD+Ph5UL8Stnf3UWuvp7cpC3J7vNjP/FT77z98gr3OQd2QfU6KedjySOWOjI7rU0L68BdC4QGSEI1to7XtMV2N7JzTiptb+IbyCitdkbPy/lVo/FHCbiqDV74AqqptWFn7TmuyE6SI7LzBoWHVCVKavDY3bt6izpHPWp7uJMi33nCvEU+eOhGLJ9S6nAlyWK6uR+hZzgRHw30EQ2EkDw7hf/2GCp1fXFJntNCVhEQyTYUZjUaYzdfUxJdfBe3rcOVqEe2ZTGa4uj0kKjzwDgaDARcvXVZnHjQ1kyj5u7qdCf9raLAEAUsQsAQBSxCwBAFLECgJuQxLAPAbJOmNLNerlqsAAAAASUVORK5CYII=" InformativeScreenshot="aed4893bab933f8b76a0ab3113d585d3.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='FileRoom' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
@@ -1865,7 +1884,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NClick>
-                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Search Binder Id" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Text="[str_binder_id + &quot;[k(enter)]&quot;]" Version="V3">
+                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Search Binder Id" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="484,57" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Text="[str_binder_id + &quot;[k(enter)]&quot;]" Version="V3">
                           <uix:NTypeInto.Target>
                             <uix:TargetAnchorable BrowserURL="https://production.sureprep.com/Fileroom/Fileroom/Listing" DesignTimeRectangle="1277, 136, 144, 20" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'Search'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;table' tag='TABLE' /&gt;&lt;webctrl id='txtSearch' tableRow='1' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl id='txtSearch' type='text' tag='INPUT' class='fr-searchbox' aaname='' /&gt;" Guid="172d0aa0-50b3-495b-9647-329e40ade7f3" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJQAAAAYCAYAAAAcTtR3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI0SURBVGhD7Zghk6swFEb3p2cmIiICEYFAIBAViApEBRJRgUAgnqhAIBAIBAJR8e0lQMu80m5F5r2yc88MIoQEcc/cL/AFhnEIC8U4hYVinMJCMU5hoRinsFCMU1goxiksFOOUJ0J1KGMDKSWUUvaSJkU7z/4LqixClFXziNkLm0J1mQ+hDiiH+cZ/oAgFRJjPI2YvbAr1CcVkofbJplBN4lGHilD2842/aPMI3hKFUsFPLlgebVN/jkkJITSC1RxZAiE9GDOtPZTAtUoRaGn3sev8FI19lIRSen7PuJeHqOimfZiP5ckZqsbJjEVUMFGCol5lX3WEFgGypbZ9jpDOWhHJ8UCXIRDSimMZhRrX9tdpPJztfHjuMN+5YYUKMiyP9ueA1obgnvXZPBFqYmgvyGKfBBJQYWE7TZ1oCJ8KPT1iyan4Kr7MozUNEk9AJ/U0tEKtpMhprGJsrXyIvCaBRx1v2Yr5TF4KdaO+F9MWmrrKFGury7ahHpckgF5/HZKMz4Sy0aoT6oePsFD75D2hUCAkMcb6Vkf10KFu2Dj073H4Q4caxhjjDvWreEuonqJJCoN0/BH15wBFB+RjtTr1XPvprENzkuZOtx9WP0Rem8JQtwvoDLUw9NN5jYXaJ5tC2WIuX10UX1L7OJb3otfnEJ4UkEvc0fzJtpkGWaBtzEn6QtOeD6NfCEX0ZQxDey3vM1Fhf6CyUPvkzchjmPdgoRinsFCMU1goxiksFOMUFopxCPAN0hWUNrWuhM4AAAAASUVORK5CYII=" InformativeScreenshot="399ff0c9a84a670fef1dff26cca07574.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='FileRoom' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive" WaitForReadyArgument="Complete">
                               <uix:TargetAnchorable.Anchors>
@@ -1882,7 +1901,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NTypeInto>
-                        <uix:NCheckState DelayBefore="3" DisplayName="Check App State - Search Binder ID and Verify Status" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_30" OutUiElement="[uie_binder_id]" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Timeout="180" Version="V3">
+                        <uix:NCheckState DelayBefore="3" DisplayName="Check App State - Search Binder ID and Verify Status" sap:VirtualizedContainerService.HintSize="484,57" sap2010:WorkflowViewState.IdRef="NCheckState_30" OutUiElement="[uie_binder_id]" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Timeout="180" Version="V3">
                           <uix:NCheckState.IfExists>
                             <Sequence DisplayName="Target appears Binder ID" sap:VirtualizedContainerService.HintSize="449.6,259.2" sap2010:WorkflowViewState.IdRef="Sequence_157">
                               <sap:WorkflowViewStateService.ViewState>
@@ -1921,7 +1940,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NCheckState>
-                        <uix:NCheckState DisplayName="Check App State - Verify Blank status " sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_13" OutUiElement="[uie_binder_status]" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Timeout="30" Version="V3">
+                        <uix:NCheckState DisplayName="Check App State - Verify Blank status " sap:VirtualizedContainerService.HintSize="484,57" sap2010:WorkflowViewState.IdRef="NCheckState_13" OutUiElement="[uie_binder_status]" ScopeIdentifier="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Timeout="30" Version="V3">
                           <uix:NCheckState.IfExists>
                             <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="449.6,462.4" sap2010:WorkflowViewState.IdRef="Sequence_48">
                               <sap:WorkflowViewStateService.ViewState>
@@ -1988,7 +2007,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NCheckState>
-                        <If Condition="[StrLeadsOption=&quot;None&quot; or (in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;SPbinder&quot; AND (in_TransactionItem.SpecificContent(&quot;EngagementType&quot;).ToString=&quot;1065&quot; OR in_TransactionItem.SpecificContent(&quot;EngagementType&quot;).ToString=&quot;1120&quot; OR in_TransactionItem.SpecificContent(&quot;EngagementType&quot;).ToString=&quot;1120s&quot; )) or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;Business Outsource Offshore&quot;]" DisplayName="If For Leadsheet Option" sap:VirtualizedContainerService.HintSize="449.6,49.6" sap2010:WorkflowViewState.IdRef="If_3">
+                        <If Condition="[StrLeadsOption=&quot;None&quot; or (in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;SPbinder&quot; AND (in_TransactionItem.SpecificContent(&quot;EngagementType&quot;).ToString=&quot;1065&quot; OR in_TransactionItem.SpecificContent(&quot;EngagementType&quot;).ToString=&quot;1120&quot; OR in_TransactionItem.SpecificContent(&quot;EngagementType&quot;).ToString=&quot;1120s&quot; )) or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString=&quot;Business Outsource Offshore&quot;]" DisplayName="If For Leadsheet Option" sap:VirtualizedContainerService.HintSize="484,50" sap2010:WorkflowViewState.IdRef="If_3">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -2332,14 +2351,14 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                     </ActivityAction.Argument>
-                    <Sequence sap:VirtualizedContainerService.HintSize="416,311.2" sap2010:WorkflowViewState.IdRef="Sequence_118">
+                    <Sequence sap:VirtualizedContainerService.HintSize="552,281" sap2010:WorkflowViewState.IdRef="Sequence_118">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:LogMessage DisplayName="Log Message - System Exception" sap:VirtualizedContainerService.HintSize="353.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_34" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[exception.Message]">
+                      <ui:LogMessage DisplayName="Log Message - System Exception" sap:VirtualizedContainerService.HintSize="518,173" sap2010:WorkflowViewState.IdRef="LogMessage_34" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[exception.Message]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2347,7 +2366,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:LogMessage>
-                      <Rethrow DisplayName="Rethrow Binder Retrieval Exception" sap:VirtualizedContainerService.HintSize="353.6,48" sap2010:WorkflowViewState.IdRef="Rethrow_7" />
+                      <Rethrow DisplayName="Rethrow Binder Retrieval Exception" sap:VirtualizedContainerService.HintSize="518,48" sap2010:WorkflowViewState.IdRef="Rethrow_7" />
                     </Sequence>
                   </ActivityAction>
                 </Catch>
@@ -2362,7 +2381,7 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
                     </ActivityAction.Argument>
-                    <Rethrow DisplayName="Rethrow BRE File Room Search" sap:VirtualizedContainerService.HintSize="334.4,24.8" sap2010:WorkflowViewState.IdRef="Rethrow_8" />
+                    <Rethrow DisplayName="Rethrow BRE File Room Search" sap:VirtualizedContainerService.HintSize="552,25" sap2010:WorkflowViewState.IdRef="Rethrow_8" />
                   </ActivityAction>
                 </Catch>
               </TryCatch.Catches>
@@ -2380,6 +2399,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1568,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_44" Message="[&quot;TC_07&#x9;Verify whether user is able to print withlead binders when the binder is in completed status&#x9;Passed&#xA;TC_08&#x9;Verify whether user is able to print withlead binders when the binder is in blank status&#x9;Passed&#xA;TC_09&#x9;Verify when both options are selected, ' Bookmark with markups' and ' Bookmarks only' and printed, both the copies of DWP  printed simultaneously.&#x9;Passed&#xA;TC_10&#x9;Verify that, when user Print DWP PDF on server with Bookmarks with markups and bookmark only option. &#x9;Passed&#xA;TC_11&#x9;Verify that when open the Print Setup window for first time, it populates the domain level print option and sub options that are set in Admin &gt; Print Options tab.&#x9;Passed&#xA;TC_12&#x9;Verify that if  made any changes in options on the Print Setup window and Print, then those options are saved on binder level. Subsequently, when you open the Print Setup window, the last saved options are populated.&#x9;Passed&#xA;TC_13&#x9;Verify whether user is able to download the DWP workpapers from fileroom&#x9;Passed&#xA;TC_20&#x9;Verify whether user is able to print withoutlead binders when the binder is in completed status&#x9;Passed&#xA;TC_21&#x9;Verify whether user is able to print withoutlead binders when the binder is in blank status&#x9;Passed&#xA;TC_22&#x9;Verify  printing functionality when clicked on Print On my pc option for withoutlead binders&#x9;Passed&#xA;TC_23&#x9;Verify  printing functionality when clicked on Print On Sureprep server option for withoutlead binders&#x9;Passed&#xA;TC_24&#x9;Verify that when open the Print Setup window for first time, it populates the domain level print option and sub options that are set in Admin &gt; Print Options tab.&#x9;Passed&#xA;TC_25&#x9;Verify that if  made any changes in options on the Print Setup window and Print, then those options are saved on binder level. Subsequently, when you open the Print Setup window, the last saved options are populated.&#x9;Passed&#xA;TC_26&#x9;Verify whether user is able to download the SPBinder  workpapers from fileroom&#x9;Passed&#xA;&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1268,164" sap2010:WorkflowViewState.IdRef="LogMessage_44" Message="[&quot;TC_07&#x9;Verify whether user is able to print withlead binders when the binder is in completed status&#x9;Passed&#xA;TC_08&#x9;Verify whether user is able to print withlead binders when the binder is in blank status&#x9;Passed&#xA;TC_09&#x9;Verify when both options are selected, ' Bookmark with markups' and ' Bookmarks only' and printed, both the copies of DWP  printed simultaneously.&#x9;Passed&#xA;TC_10&#x9;Verify that, when user Print DWP PDF on server with Bookmarks with markups and bookmark only option. &#x9;Passed&#xA;TC_11&#x9;Verify that when open the Print Setup window for first time, it populates the domain level print option and sub options that are set in Admin &gt; Print Options tab.&#x9;Passed&#xA;TC_12&#x9;Verify that if  made any changes in options on the Print Setup window and Print, then those options are saved on binder level. Subsequently, when you open the Print Setup window, the last saved options are populated.&#x9;Passed&#xA;TC_13&#x9;Verify whether user is able to download the DWP workpapers from fileroom&#x9;Passed&#xA;TC_20&#x9;Verify whether user is able to print withoutlead binders when the binder is in completed status&#x9;Passed&#xA;TC_21&#x9;Verify whether user is able to print withoutlead binders when the binder is in blank status&#x9;Passed&#xA;TC_22&#x9;Verify  printing functionality when clicked on Print On my pc option for withoutlead binders&#x9;Passed&#xA;TC_23&#x9;Verify  printing functionality when clicked on Print On Sureprep server option for withoutlead binders&#x9;Passed&#xA;TC_24&#x9;Verify that when open the Print Setup window for first time, it populates the domain level print option and sub options that are set in Admin &gt; Print Options tab.&#x9;Passed&#xA;TC_25&#x9;Verify that if  made any changes in options on the Print Setup window and Print, then those options are saved on binder level. Subsequently, when you open the Print Setup window, the last saved options are populated.&#x9;Passed&#xA;TC_26&#x9;Verify whether user is able to download the SPBinder  workpapers from fileroom&#x9;Passed&#xA;&quot;]" />
   </Sequence>
 </Activity>
