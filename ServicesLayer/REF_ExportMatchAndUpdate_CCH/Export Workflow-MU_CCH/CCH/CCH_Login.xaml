@@ -50,6 +50,8 @@
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>System.Net</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>LacerteLogin</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -137,16 +139,27 @@
       <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>LacerteLogin</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>Microsoft.Extensions.DependencyModel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CCH_Login" sap:VirtualizedContainerService.HintSize="838.4,2753.6" sap2010:WorkflowViewState.IdRef="Sequence_17">
+  <Sequence DisplayName="CCH_Login" sap:VirtualizedContainerService.HintSize="1452.0000000000002,3135.2" sap2010:WorkflowViewState.IdRef="Sequence_17">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strCCHUsername" />
+      <Variable x:TypeArguments="ss:SecureString" Name="ssCCHPassword" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Launch GoSystem Tax Software Lines" sap:VirtualizedContainerService.HintSize="776,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;--------------------------------------------------------------------------------------------------------------------&quot;]">
+    <ui:LogMessage DisplayName="Log Message - Launch GoSystem Tax Software Lines" sap:VirtualizedContainerService.HintSize="635.2,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;--------------------------------------------------------------------------------------------------------------------&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -154,7 +167,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:LogMessage DisplayName="Log Message - Launch CCH Tax Software" sap:VirtualizedContainerService.HintSize="776,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Initiating CCH tax software application&quot;]">
+    <ui:LogMessage DisplayName="Log Message - Launch CCH Tax Software" sap:VirtualizedContainerService.HintSize="635.2,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Initiating CCH tax software application&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -162,7 +175,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <TryCatch DisplayName="Try Catch - CCH_Login" sap:VirtualizedContainerService.HintSize="776,2316" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="CCH_Login" CacheStrategy="None" DisplayName="Get Credential - CCH_Login" FolderPath="[in_Config(&quot;OrchestratorQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="635.2,175.2" sap2010:WorkflowViewState.IdRef="GetRobotCredential_2" Password="[ssCCHPassword]" Username="[strCCHUsername]" />
+    <TryCatch DisplayName="Try Catch - CCH_Login" sap:VirtualizedContainerService.HintSize="635.2,2588" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -170,13 +184,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: CCH Axcess Login" sap:VirtualizedContainerService.HintSize="737.6,2040" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="IfNotOpen" ScopeGuid="d8d5a473-73d1-4672-93a2-1e502824d0ba" Timeout="60" Version="V2">
+        <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: CCH Axcess Login" sap:VirtualizedContainerService.HintSize="633.6,1964.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="IfNotOpen" ScopeGuid="d8d5a473-73d1-4672-93a2-1e502824d0ba" Timeout="60" Version="V2">
           <uix:NApplicationCard.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Do - Use Application: CCH Axcess Login" sap:VirtualizedContainerService.HintSize="704,1708.8" sap2010:WorkflowViewState.IdRef="Sequence_20">
+              <Sequence DisplayName="Do - Use Application: CCH Axcess Login" sap:VirtualizedContainerService.HintSize="600,1673.6" sap2010:WorkflowViewState.IdRef="Sequence_20">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:String" Name="strCaptchaInput" />
                 </Sequence.Variables>
@@ -185,20 +199,20 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:RetryScope DisplayName="Retry - CCHLogin" sap:VirtualizedContainerService.HintSize="641.6,1224" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="[CInt(in_Config(&quot;FieldRetryCount&quot;))]">
+                <ui:RetryScope DisplayName="Retry - CCHLogin" sap:VirtualizedContainerService.HintSize="566.4,1246.4" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="[CInt(in_Config(&quot;FieldRetryCount&quot;))]">
                   <ui:RetryScope.ActivityBody>
                     <ActivityAction>
-                      <Sequence DisplayName="CCHLogin" sap:VirtualizedContainerService.HintSize="600,1016" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                      <Sequence DisplayName="CCHLogin" sap:VirtualizedContainerService.HintSize="524.8,1038.4" sap2010:WorkflowViewState.IdRef="Sequence_30">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:RetryScope DisplayName="Retry Scope - Login Screen" sap:VirtualizedContainerService.HintSize="537.6,879.2" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3">
+                        <ui:RetryScope DisplayName="Retry Scope - Login Screen" sap:VirtualizedContainerService.HintSize="491.2,930.4" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3">
                           <ui:RetryScope.ActivityBody>
                             <ActivityAction>
-                              <Sequence DisplayName="Action - Login Screen" sap:VirtualizedContainerService.HintSize="496,671.2" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                              <Sequence DisplayName="Action - Login Screen" sap:VirtualizedContainerService.HintSize="449.6,722.4" sap2010:WorkflowViewState.IdRef="Sequence_26">
                                 <Sequence.Variables>
                                   <Variable x:TypeArguments="ss:SecureString" Name="SecureLogin_CCH" />
                                 </Sequence.Variables>
@@ -208,7 +222,7 @@
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - User ID" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="433.6,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Text="[in_Config(&quot;CCHUsername&quot;).ToString]" Version="V3">
+                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - User ID" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="416,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Text="[strCCHUsername]" Version="V3">
                                   <uix:NTypeInto.Target>
                                     <uix:TargetAnchorable DesignTimeRectangle="89, 238, 561, 48" DesignTimeScaleFactor="1.1299999952316284" ElementType="InputBox" FriendlyName="'INPUT usernametxt'" FullSelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl id='usernametxt' tableRow='1' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl id='usernametxt' type='text' tag='INPUT' class='form-control loginInput ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required' aaname='' /&gt;" Guid="50e236fa-2f23-44ad-bfb9-c8e734511ce3" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAjUAAAA0CAYAAABy1skUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVHhe7dZBDYAwEABB/DuozRooPz6AgNvMJOthr733kSRJmp6pkSRJiZ6pWWtJkiSN63NqAAAmMTUAQIKpAQASTA0AkGBqAIAEUwMAJJgaACDB1AAACaYGAEgwNQBAgqkBABJMDQCQYGoAgARTAwAkmBoAIMHUAAAJpgYASDA1AECCqQEAEkwNAJBgagCABFMDACSYGgAgwdQAAAmmBgBIMDUAQIKpAQASTA0AkGBqAIAEUwMAJJgaACDB1AAACaYGAEgwNQBAgqkBABJMDQCQYGoAgARTAwAkmBoAIMHUAAAJpgYASDA1AECCqQEAEkwNAJBgagCABFMDACT8To0kSdK0XlMjSZI0OVMjSZIC7XMDqPk+pxMzeaoAAAAASUVORK5CYII=" InformativeScreenshot="aa36fdbb9a517a2355ec72db3698f8a8.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='cch.commonuiframework.shell.exe' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete">
                                       <uix:TargetAnchorable.Anchors>
@@ -225,15 +239,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </uix:NTypeInto>
-                                <Assign DisplayName="Assign - Create Secure Password" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_4">
-                                  <Assign.To>
-                                    <OutArgument x:TypeArguments="ss:SecureString">[SecureLogin_CCH]</OutArgument>
-                                  </Assign.To>
-                                  <Assign.Value>
-                                    <InArgument x:TypeArguments="ss:SecureString">[new System.Net.NetworkCredential(" ",in_Config("CCHPassword").ToString).SecurePassword]</InArgument>
-                                  </Assign.Value>
-                                </Assign>
-                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Password" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_3" IsPassword="True" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" SecureText="[SecureLogin_CCH]" Version="V3">
+                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Password" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="416,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_3" IsPassword="True" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" SecureText="[ssCCHPassword]" Version="V3">
                                   <uix:NTypeInto.Target>
                                     <uix:TargetAnchorable DesignTimeRectangle="89, 319, 561, 48" DesignTimeScaleFactor="1.1299999952316284" ElementType="InputBoxPassword" FriendlyName="'INPUT password'" FullSelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl id='password' tableRow='1' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl id='password' type='password' tag='INPUT' class='form-control loginInput ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required' aaname='' /&gt;" Guid="32843afa-e716-4e94-84bc-9a901b9b3dc0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAjUAAAA0CAYAAABy1skUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKsSURBVHhe7d2hc9pwGMfh/U+oKBxqClcVV4XCoaZwUXVVUXUoFK4Kh0LFVaFwUbh3BGjXHmObgvHe89x9rzTQ6s/9kl6/tW0bZmZmZvc+UWNmZmYp9hE1z8/PZmZmZne330YNAMA9ETUAQAqiBgBIQdQAACmIGgAgBVEDAKQgagCAFEQNAJCCqAEAUhA1AEAKogYASEHUAAApiBoAIAVRAwCkIGoAgBREDQDwH9jGev4Uk3IQRa8XvV4Rg3IST/P1/p1/I2oAgJvarup47Hchc2H9x6hXf08bUQMA3Mgumro8ncxcXlEU+69FlHWz/4nLRA0AcAO7WFfDY7Q8TGM67sLlQtSMq6jK4/vDan0xbEQNAHB1m/noeEIzrGK9W8dTsX/dH8dsNj0/uSmeDp+pht33RYzmm9Nv+UrUAADX1dQxPMTKKI590kXNY8wOr3exqr6fR0331mYeoy5+esOom+7CV6IGALiiXazr422n3uQ12tO11bQ7gXl/GHgTi/HgI2qK6ep0y6mN18nx2rA+vw0lagCA69o1UR+ekfl0K2m7iFG/jLrZ7d+uozycyOxXjGJxaJ1Pz+CUdew/dkbUAADX9/GMzDB+zJvjic12FS+TMgaHoOlHOXmJ419yb2NZPXx6Bqe7dk7UAAC38XFi0/0F1CRelm+xbX8Vy67dRLOoYzQ4febCCc07UQMA3FAbzWwc/e4U5uL6MZ6dTnP+QNQAALfXvsVyNo3xw6d/k/AwjulsGW9/q5kTUQMApCBqAIAURA0AkIKoAQBSEDUAQAqiBgBIQdQAACmIGgAgBVEDAKQgagCAFEQNAJCCqAEAUhA1AEAKogYASEHUAAApiBoAIAVRAwCkIGoAgBREDQCQwsWoMTMzM7u3nUWNmZmZ2T1P1JiZmVmCtfETjCJIlFD2AHoAAAAASUVORK5CYII=" InformativeScreenshot="abfd2c697f603b1e5fd21270d69cbb75.png" ScopeSelectorArgument="&lt;html app='cch.commonuiframework.shell.exe' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive">
                                       <uix:TargetAnchorable.Anchors>
@@ -245,12 +251,12 @@
                                   </uix:NTypeInto.Target>
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </uix:NTypeInto>
-                                <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="CAPTCHA Input Dialog" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Please enter the captcha." Title="CAPTCHA">
+                                <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="CAPTCHA Input Dialog" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Please enter the captcha." Title="CAPTCHA">
                                   <ui:InputDialog.Result>
                                     <OutArgument x:TypeArguments="x:String">[strCaptchaInput]</OutArgument>
                                   </ui:InputDialog.Result>
@@ -261,7 +267,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </ui:InputDialog>
-                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - INPUT captchaText" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_4" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Text="[strCaptchaInput]" Version="V3">
+                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - INPUT captchaText" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_4" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Text="[strCaptchaInput]" Version="V3">
                                   <uix:NTypeInto.Target>
                                     <uix:TargetAnchorable DesignTimeRectangle="92, 556, 555, 38" DesignTimeScaleFactor="1.1299999952316284" ElementType="InputBox" FriendlyName="'INPUT captchaText'" FullSelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl id='captchaText' tableRow='1' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl id='captchaText' type='text' tag='INPUT' class='form-control inptCaptcha ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required' aaname='' /&gt;" Guid="3bf13ccd-f6ae-4ac6-905f-8af5399aed6f" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAi8AAAAqCAYAAAB7hrveAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVKSURBVHhe7dpNTiMxEIbhuf8NcoBcIEfImlXIIkIskViAsmCDQICnyz9tu9pOG0igjd5HKs0kcbttN1J9k+Hf9fW1oSiKoiiK6qUILxRFURRFdVWT8LLf78c/r66uKIqiKIqifrx0LkkrCy+73c7c3NyYu7s7czweKYqiKIqifq0kj0gukXyS5pUxvEiykQFPT0/m+fnZvLy8mNfXV4qiKIqiqB8vySGSRySXSD5Jv4HJvnm5v783b29v5uPjwwAAAPwmySOSSySfpHklCy+SdAAAAJZE8kmaV8bwIr8c8/7+7ocBAAAsg3z7kv4SL+EFAAAsmuQTwgsAAOgG4QUAAHSF8AIAALpCeAEAAF0hvAAAgK5cJrw8bM16tTKram3MwQ9tIvNtPnVFs4ft2px76u/N+WC265VZbx/8654dzGZ43n9jLwCApbhoeDlPKHDNfHWJ8HLWdXrfnpPwAgDAKYQXwssFEV4AAOf3y+ElNOqDCyjDNbbW2+ET4Zpf6b+b5L9m4vv6XnLd2my3G//58HfdPw/hM1/JBIdN8n52rV/PuD7hw5Ws7cScuXBNrDh07kyifJ3JHHYdas+F9+z19qL2e2p6Dfk1Ibxss+dYCjPVvdR+luz7yX78uHGOyQUAgL9iEeGl1Kxig/NjkslccJk2rnhNCD0zv1tTWKdrosl1PpDo9YXXtbWkc+am+3H3CHN84kyq63T7z2+h5vRzuDlb7jll5yyElbi38By+sxf/eVy4Zc893Ls2Z0P4AgD056LhRRpQsWInKzamvCnqMeFf83lbciEiNMDymAm/zrgc9drTTXq816RpDipzRHNraziTwrcoIo4pndnarIf3xvvadarAdOqeE24fp8/KjdHzZs9qdi9qvOXWG/ZSXOfscwAA9GoR37zoRp43I9VYK80ub8blxjqh1jltkp69Z/q+b8pSX2iadn+la635Mzm9TncGdkyYX9Y0/P2QvJd93nDP05LzyPZVeQ7Js2rZixufzJP9DLh76LXX9gQA6F+n4SVplFmdI7yU5pXKG2wYO7lH494n9xovaAwvpVAxafgxINj57HtuHzJfvMfXwov9PKzfj8uvaQwvc3vx6wtnVLpHdpZJ6T0BAPr3d755yXwnvBS+BdD8da5BqvHNe49CkHHn0Bheqt9WhPfjGci1bj3hPX0+XwgvlX2WgsXkLJJn2LaXdJybM65VvwYA/HX9hZfa3JXGfZKeqxKMbOPU67Gv3X3ityaDL4QXYfdsL2o4k8o6ddhwc26GNYZz8XOvdWBoeQ6KCheOP4/xmnKwyAJL417Gcx32k49XPx+jxp8BAEB3+gsvA9f80gamm2Rj4yqs0947bcpzAce+Tj6f3XuhoWfXfOJM0nXqdQj/XhoC3Nnl59l2T8WvOb3GnV26LrfX0vnE6xr3Mo4bSq+ptpba2gEAXbtoeHGNrFztjXoQmnASGsYm7Cufo/1f3WPDTe4Xm7Ar3Xj1v/Ld+Li20py52NRD6WY+eyaDfJ1pmPMKTX24yI4vBYOWe2bG5+JrmDQPluE55PstPZfZvQzCM9frtPTP3Kl1AwC6dpnwAgAAcCGEFwAA0BXCCwAA6ArhBQAAdIXwAgAAukJ4AQAAXSG8AACArhBeAABAVwgvAACgK9XwIkV4AQAASyP5JM0rWXh5fHz0wwAAAJZB8kmaV8bwst/vze3trR8GAACwDJJPJKdMwovUbrezA47Hox8OAADwOySPSC6RfJLmlSy8SKXJRn45hqIoiqIo6qcr5JE0l4SahBeKoiiKoqglF+GFoiiKoqiO6tr8Bw66nQZxeu6wAAAAAElFTkSuQmCC" InformativeScreenshot="fc2b34c4826a3b02fef6dd5dda9042fc.png" ScopeSelectorArgument="&lt;html app='cch.commonuiframework.shell.exe' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive">
                                       <uix:TargetAnchorable.Anchors>
@@ -278,7 +284,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </uix:NTypeInto>
-                                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Login" sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
+                                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Login" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
                                   <uix:NClick.Target>
                                     <uix:TargetAnchorable DesignTimeRectangle="89, 635, 567, 46" DesignTimeScaleFactor="1.1299999952316284" ElementType="Button" FriendlyName="'Login'" FullSelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='Login' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='Login' tag='BUTTON' type='' class='btn btn-primary loginButton' check:text='Login' /&gt;" Guid="c6943ec6-ca0e-43b2-817d-53b8aa7fa929" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAjsAAAAyCAYAAAC6Rhq6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPfSURBVHhe7d2xSxxZHMBx/xP/hFRXp/RPSJnyypSBFNcG0gi2KVJaXJEUgtccBhJIELzjDMciIkExKiJqVnRxRX6Z2X07u+qYuKvB+Pw8+IA7b9665Zc3s7NjzWYzAAByJXYAgKxVsfPbH38DAGSjNnbGnr0DALjzxA4AkDWxAwBkTewAAFm7EDv7+/tiBwDIRtk1Zd+IHQAgS2IHAMia2AEAsiZ2AICsiR0AIGtiBwDImtgBALImdoBkJeaOojP2VlZq5n8F/c/YWKibB7hI7ACJ2AHyJHaAROwAeRI7QHIXYgdgeGIHSMQOkCexAyTXi53x6bV4vXEce+3ue3RG+yQaK1vx+1T9mrFn8/Ho/W40jk7TgmKUa5bWY+LZVjQ6Bw7jVXX+JZexFg67B7e3YmxqOabPfY7W0WHMvm/EePU+wH0idoBk9NiZ+HgQe92lndFqnxbSi3K0j2N2Zv7cuvl4snKSTihHuaaQXrV2W7HZ+WuI2GkeRqP3fzufYSCiivdvLHzqrwHuDbEDJCPGzsx+FTqt3Z0zuzjj0+vxIb1ntA9i8kV/7mERKN2wOY3P/y/Hg3R87EUjJlcHI2iI2ClHGVZvF/u7OFOfY67Zm/saT3vHgXtD7ADJKLEzH6+2u2uiuRuP684pTvicTtlcWkrHl2I2BUhrda3m8tKnmN7tzg8bO/9+PL+DVKiC7CTm3pybA7IndoBklNjp3VdTxkdNZCTPV9PlpCKIHpXHipLpXqI6jtk/L57f8fZr2vkZJnYGzx3U+5xF7MzUzQM5EztAMkLsvBnYMfleRFQxchCTZ15fFieFF70doSFi52g/nlTnDhI7cJ+JHSAZIXYGLw9dKXZSuPwwTkojfBtL7AA1xA6Q2NkB8iR2gGSE2KkiYsh7dqpIuuF7dsQOUEPsAMkosfOzvo01H5MbvWfkiB3gesQOkIwSO4WZ3i7Nj56zU0TLy/7cd5+zs3JcPVxQ7ADXJXaApB8SVxmDsfFTnqB8dOIyFnAjxA6QjB47pXIXZ3b7hn4b67/leFDtGIkd4HrEDvBrqm5QTt/gAhiR2AFuwVp8aJeXu45j7q+6+XfxtPcNrt2deFgzD3BVYge4BYv937462o/nLwfv5/knHi/07wFqLCwOzAEMT+wAt2NmJzbP3N9z9gblcuytrsdE3VqAIYgd4PZMLcf0auvsTc1xGnvNg3j9tlHz/B2A4YkdACBrYgcAyJrYAQCyJnYAgKyJHQAga2IHAMia2AEAsiZ2AICsiR0AIGuXxg4AQC4uxM7W1lZ8+fKlsrGxAQBw55QdU3aN2AEAsnQ2dprxDQTMkr+0gEFCAAAAAElFTkSuQmCC" InformativeScreenshot="d27a3f57dd285ddb26f6a27d05d00478.png" ScopeSelectorArgument="&lt;html app='cch.commonuiframework.shell.exe' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                   </uix:NClick.Target>
@@ -302,7 +308,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:RetryScope>
-                        <ui:LogMessage DisplayName="Log Message - Logged Into CCH" sap:VirtualizedContainerService.HintSize="537.6,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Logged in successfully to CCH tax software&quot;]">
+                        <ui:LogMessage DisplayName="Log Message - Logged Into CCH" sap:VirtualizedContainerService.HintSize="491.2,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Logged in successfully to CCH tax software&quot;]">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -323,16 +329,16 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:RetryScope>
-                <ui:RetryScope DisplayName="Retry - Return Manager" sap:VirtualizedContainerService.HintSize="641.6,394.4" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="[CInt(in_Config(&quot;FieldRetryCount&quot;))]">
+                <ui:RetryScope DisplayName="Retry - Return Manager" sap:VirtualizedContainerService.HintSize="566.4,365.6" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="[CInt(in_Config(&quot;FieldRetryCount&quot;))]">
                   <ui:RetryScope.ActivityBody>
                     <ActivityAction>
-                      <Sequence DisplayName="Return Manager" sap:VirtualizedContainerService.HintSize="416,193.6" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                      <Sequence DisplayName="Return Manager" sap:VirtualizedContainerService.HintSize="449.6,164.8" sap2010:WorkflowViewState.IdRef="Sequence_32">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click - Application Links" sap:VirtualizedContainerService.HintSize="354,57" sap2010:WorkflowViewState.IdRef="NClick_12" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click - Application Links" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="NClick_12" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable CvElementArea="11, 86, 172, 27" CvTextArea="12, 92, 93, 15" CvTextArgument="Application Links" CvType="Button" DesignTimeRectangle="12, 88, 170, 23" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Application Links'" FullSelectorArgument="&lt;ctrl name='Application Links' role='outline item' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Application Links' role='outline item' automationid='' check:text='Application Links' /&gt;" Guid="4e6667eb-0040-4a80-ba4b-11dacea46449" ImageBase64="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" InformativeScreenshot="3e8eff55fb6ff86d44a8961c089d4c59.png" ScopeSelectorArgument="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                           </uix:NClick.Target>
@@ -343,7 +349,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NClick>
-                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Return Manager" sap:VirtualizedContainerService.HintSize="354,48" sap2010:WorkflowViewState.IdRef="NClick_13" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Return Manager" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="NClick_13" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d8d5a473-73d1-4672-93a2-1e502824d0ba" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable CvTextArea="111, 70, 117, 20" CvTextArgument="Return Manager" CvType="Text" DesignTimeRectangle="113, 70, 114, 19" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Return Manager'" FullSelectorArgument="&lt;webctrl aaname='Return Manager' tag='A' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Return Manager' tag='A' type='' class='cch-db-applnk-lnk ng-binding' check:text='Return Manager' /&gt;" Guid="60a4f485-2754-422d-91df-52d662f9eab8" InformativeScreenshot="641d0ebfd993c7a7e58a7b7ba72d3296.png" ScopeSelectorArgument="&lt;html app='cch.commonuiframework.shell.exe' title='CCH Axcess' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                           </uix:NClick.Target>
@@ -371,7 +377,7 @@
             </ActivityAction>
           </uix:NApplicationCard.Body>
           <uix:NApplicationCard.TargetApp>
-            <uix:TargetApp Area="420, 80, 600, 700" FilePath="C:\Program Files (x86)\WK\ProSystem fx Suite\Smart Client\SaaS\cch.commonuiframework.shell.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH1SURBVFhHpZUxS8NAGIaj/0T/h5u/QKFuzoJ2tCAKguAiOFVw00looArtJEq7tIVOVRDBIjqICYiI/oPPvKlfveS+XO6uwwOB477nyV0gQfNxi4qp0tPbkOI49qL3HNPadUwVAyUBwC/CRg4sAoBbhK0cWAYAuwgXOXAIAOYIVzlwDAByhI8ceASAbISvHCQBVUFgwyRiFjn2BRjiG9FtrNJ+vSkOLwNyxAc4Qp+ITrhC34tzCfO0W78SJUWwHO40wDWC5T8LQYpLhCrPBNhG5OUuEXk5yAQAU8TN+Ig+15c1eUoS9X55QTs9eznQAoAUAXkcRxRHEX1VljT5RytM90YJ+YgiORADgBoxlfO6GqHIGTXCJAeFAQARt+Pj5FmRM38ReTmDiL2+WQ6MAdiMIRgmrbdPRvQwfBHXEI14vIS8PqEwAHIcH44Rx5mPaNdHdL49SNEjovTaJt+P+QcmBqhyRo1Q5XqEKmeKI7QASa5GtE7vNDlzPxgLcnNEJsAkZzYar3RWEwJqfQq7B4JYRY+YBtjIGS3CSs5kI9IAFzkzjXCSM/8RgY+c2Uwiws6hILBhEhH4yrEP8RiCYbKkjCoF0vAyWM73OEuEc0BePmuEU0CRnPGJsA4okzOuEVYBtnLGJaI0wFXO2EYYA3zlTHnEFv0CVXSdWfRMO4wAAAAASUVORK5CYII=" InformativeScreenshot="3a9f81687243e1c000435839832435a7.png" Selector="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' title='CCH Axcess Login' /&gt;" Title="Open Return" />
+            <uix:TargetApp Area="420, 80, 600, 700" FilePath="[in_Config(&quot;CCH_FilePath&quot;).ToString]" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH1SURBVFhHpZUxS8NAGIaj/0T/h5u/QKFuzoJ2tCAKguAiOFVw00looArtJEq7tIVOVRDBIjqICYiI/oPPvKlfveS+XO6uwwOB477nyV0gQfNxi4qp0tPbkOI49qL3HNPadUwVAyUBwC/CRg4sAoBbhK0cWAYAuwgXOXAIAOYIVzlwDAByhI8ceASAbISvHCQBVUFgwyRiFjn2BRjiG9FtrNJ+vSkOLwNyxAc4Qp+ITrhC34tzCfO0W78SJUWwHO40wDWC5T8LQYpLhCrPBNhG5OUuEXk5yAQAU8TN+Ig+15c1eUoS9X55QTs9eznQAoAUAXkcRxRHEX1VljT5RytM90YJ+YgiORADgBoxlfO6GqHIGTXCJAeFAQARt+Pj5FmRM38ReTmDiL2+WQ6MAdiMIRgmrbdPRvQwfBHXEI14vIS8PqEwAHIcH44Rx5mPaNdHdL49SNEjovTaJt+P+QcmBqhyRo1Q5XqEKmeKI7QASa5GtE7vNDlzPxgLcnNEJsAkZzYar3RWEwJqfQq7B4JYRY+YBtjIGS3CSs5kI9IAFzkzjXCSM/8RgY+c2Uwiws6hILBhEhH4yrEP8RiCYbKkjCoF0vAyWM73OEuEc0BePmuEU0CRnPGJsA4okzOuEVYBtnLGJaI0wFXO2EYYA3zlTHnEFv0CVXSdWfRMO4wAAAAASUVORK5CYII=" InformativeScreenshot="3a9f81687243e1c000435839832435a7.png" Selector="&lt;wnd app='cch.commonuiframework.shell.exe' cls='HwndWrapper*' title='CCH Axcess Login' /&gt;" Title="Open Return" />
           </uix:NApplicationCard.TargetApp>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -393,14 +399,14 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Catch ProSystem_Fx Login" sap:VirtualizedContainerService.HintSize="416,309" sap2010:WorkflowViewState.IdRef="Sequence_18">
+            <Sequence DisplayName="Catch ProSystem_Fx Login" sap:VirtualizedContainerService.HintSize="633.6,282.4" sap2010:WorkflowViewState.IdRef="Sequence_18">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Error Message - Login &amp; SearchReturn" sap:VirtualizedContainerService.HintSize="354,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Could not login and search return to CCH tax software. Exception message: &quot;+exception.Message]" />
-              <Rethrow DisplayName="Rethrow - Login &amp; SearchReturn" sap:VirtualizedContainerService.HintSize="354,48" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+              <ui:LogMessage DisplayName="Error Message - Login &amp; SearchReturn" sap:VirtualizedContainerService.HintSize="600,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Could not login and search return to CCH tax software. Exception message: &quot;+exception.Message]" />
+              <Rethrow DisplayName="Rethrow - Login &amp; SearchReturn" sap:VirtualizedContainerService.HintSize="600,48" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
             </Sequence>
           </ActivityAction>
         </Catch>
@@ -415,10 +421,19 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
             </ActivityAction.Argument>
-            <Rethrow DisplayName="Rethrow - Login &amp; SearchReturn" sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
+            <Rethrow DisplayName="Rethrow - Login &amp; SearchReturn" sap:VirtualizedContainerService.HintSize="633.6,24.8" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="633.6,89.6" sap2010:WorkflowViewState.IdRef="Sequence_33">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
     </TryCatch>
   </Sequence>
 </Activity>

@@ -120,13 +120,9 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow - Query Binder in FileRoom, launch .pbfx file" DisplayName="Search_Binder" sap:VirtualizedContainerService.HintSize="1188.8,7108.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow - Query Binder in FileRoom, launch .pbfx file" DisplayName="Search_Binder" sap:VirtualizedContainerService.HintSize="1452.0000000000002,7120.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="str_TaxYear">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">2023</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="2023" Name="str_TaxYear" />
       <Variable x:TypeArguments="x:String" Name="str_BinderId" />
       <Variable x:TypeArguments="ui:UiElement" Name="uie_BinderId" />
       <Variable x:TypeArguments="ui:UiElement" Name="str_Title" />
@@ -143,7 +139,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" sap2010:Annotation.AnnotationText="Killing prior SP Binder related application." DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="1126.4,197.6" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="C:\SurePrepLocalFiles\SPbinder\sureprep.commonapplauncher.exe">
+    <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" sap2010:Annotation.AnnotationText="Killing prior SP Binder related application." DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="1126.4,197.6" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="[in_Config(&quot;CommonLauncher_FilePath&quot;).ToString]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -244,10 +240,10 @@
         </Sequence>
       </If.Else>
     </If>
-    <ui:RetryScope DisplayName="Retry File room search binder" sap:VirtualizedContainerService.HintSize="1126.4,5716" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3">
+    <ui:RetryScope DisplayName="Retry File room search binder" sap:VirtualizedContainerService.HintSize="1126.4,5793.6" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <TryCatch DisplayName="File Room Search" sap:VirtualizedContainerService.HintSize="1084.8,5428" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <TryCatch DisplayName="File Room Search" sap:VirtualizedContainerService.HintSize="1020.8,5585.6" sap2010:WorkflowViewState.IdRef="TryCatch_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -255,13 +251,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <TryCatch.Try>
-              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" ContinueOnError="True" DisplayName="Use Browser Chrome: FileRoom" sap:VirtualizedContainerService.HintSize="1048,5173.6" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Timeout="5" Version="V2" WindowResize="Maximize">
+              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" ContinueOnError="True" DisplayName="Use Browser Chrome: FileRoom" sap:VirtualizedContainerService.HintSize="1019.2,5055.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="c46c958a-d6e8-4848-a3b1-a095ead71ff8" Timeout="5" Version="V2" WindowResize="Maximize">
                 <uix:NApplicationCard.Body>
                   <ActivityAction x:TypeArguments="x:Object">
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                     </ActivityAction.Argument>
-                    <Sequence DisplayName="File Room Search Binder" sap:VirtualizedContainerService.HintSize="1014.4,4956.8" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                    <Sequence DisplayName="File Room Search Binder" sap:VirtualizedContainerService.HintSize="985.6,4838.4" sap2010:WorkflowViewState.IdRef="Sequence_60">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="strStatus" />
                         <Variable x:TypeArguments="ui:UiElement" Name="ui_BinderStatus" />
@@ -472,7 +468,7 @@
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NGetAttributeGeneric>
                       <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="952,176" sap2010:WorkflowViewState.IdRef="LogMessage_33" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;Current binder status : &quot; + strStatus]" />
-                      <If Condition="[Split(in_BinderStatus.ToLower,&quot;,&quot;).Contains(strStatus.ToLower.Trim) = true]" DisplayName="If Invalid Status, Throw exception" sap:VirtualizedContainerService.HintSize="952,944" sap2010:WorkflowViewState.IdRef="If_3">
+                      <If Condition="[Split(in_BinderStatus.ToLower,&quot;,&quot;).Contains(strStatus.ToLower.Trim) = true]" DisplayName="If Invalid Status, Throw exception" sap:VirtualizedContainerService.HintSize="952,854.4" sap2010:WorkflowViewState.IdRef="If_3">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -480,7 +476,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                         <If.Then>
-                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="512,571.2" sap2010:WorkflowViewState.IdRef="Sequence_67">
+                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="483.2,542.4" sap2010:WorkflowViewState.IdRef="Sequence_67">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -531,13 +527,13 @@
                           </Sequence>
                         </If.Then>
                         <If.Else>
-                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,202.4" sap2010:WorkflowViewState.IdRef="Sequence_68">
+                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="483.2,173.6" sap2010:WorkflowViewState.IdRef="Sequence_68">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <Throw DisplayName="Throw - Binder Status Error" Exception="[new BusinessRuleException(&quot;The Binder status is not &quot; + in_BinderStatus)]" sap:VirtualizedContainerService.HintSize="353.6,113.6" sap2010:WorkflowViewState.IdRef="Throw_17">
+                            <Throw DisplayName="Throw - Binder Status Error" Exception="[new BusinessRuleException(&quot;The Binder status is not &quot; + in_BinderStatus)]" sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="Throw_17">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -562,22 +558,22 @@
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1014.4,1072" sap2010:WorkflowViewState.IdRef="Sequence_140">
+                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="985.5999999999999,930.4" sap2010:WorkflowViewState.IdRef="Sequence_140">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <uix:NCheckState DisplayName="Binder Error Reference Server" sap:VirtualizedContainerService.HintSize="952,956.8" sap2010:WorkflowViewState.IdRef="NCheckState_41" ScopeIdentifier="9fcebe45-6fcf-412a-b8a4-5e0448cddfad" Timeout="20" Version="V3">
+                              <uix:NCheckState DisplayName="Binder Error Reference Server" sap:VirtualizedContainerService.HintSize="952,870.4" sap2010:WorkflowViewState.IdRef="NCheckState_41" ScopeIdentifier="9fcebe45-6fcf-412a-b8a4-5e0448cddfad" Timeout="20" Version="V3">
                                 <uix:NCheckState.IfExists>
-                                  <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="449.6,738.4" sap2010:WorkflowViewState.IdRef="Sequence_138">
+                                  <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="449.6,628.8" sap2010:WorkflowViewState.IdRef="Sequence_138">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_67" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;Binder error reference traced - relaunching binder open!&quot;]" />
-                                    <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="387.2,134.4" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="C:\SurePrepLocalFiles\SPbinder\sureprep.commonapplauncher.exe" />
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_67" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;Binder error reference traced - relaunching binder open!&quot;]" />
+                                    <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="416,166.4" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="[in_Config(&quot;CommonLauncher_FilePath&quot;).ToString]" />
                                     <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill SPReviewWizard" sap:VirtualizedContainerService.HintSize="387.2,134.4" sap2010:WorkflowViewState.IdRef="KillProcess_3" ProcessName="SPbinder">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -589,13 +585,13 @@
                                   </Sequence>
                                 </uix:NCheckState.IfExists>
                                 <uix:NCheckState.IfNotExists>
-                                  <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="449.6,259.2" sap2010:WorkflowViewState.IdRef="Sequence_139">
+                                  <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="449.6,230.4" sap2010:WorkflowViewState.IdRef="Sequence_139">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_68" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;Binder error reference not traced - smooth landing!&quot;]" />
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,168.8" sap2010:WorkflowViewState.IdRef="LogMessage_68" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;Binder error reference not traced - smooth landing!&quot;]" />
                                   </Sequence>
                                 </uix:NCheckState.IfNotExists>
                                 <uix:NCheckState.Target>
@@ -653,7 +649,7 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                   </ActivityAction.Argument>
-                  <Sequence sap:VirtualizedContainerService.HintSize="416,311.2" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1019.2,282.4" sap2010:WorkflowViewState.IdRef="Sequence_49">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -686,6 +682,9 @@
                 </ActivityAction>
               </Catch>
             </TryCatch.Catches>
+            <TryCatch.Finally>
+              <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_175" />
+            </TryCatch.Finally>
           </TryCatch>
         </ActivityAction>
       </ui:RetryScope.ActivityBody>
@@ -952,7 +951,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Flowchart DisplayName="NFR or Finalize Wizards" sap:VirtualizedContainerService.HintSize="353.6,48" sap2010:WorkflowViewState.IdRef="Flowchart_2">
+          <Flowchart DisplayName="NFR or Finalize Wizards" sap:VirtualizedContainerService.HintSize="1468.8000000000002,563.2" sap2010:WorkflowViewState.IdRef="Flowchart_2">
             <Flowchart.Variables>
               <Variable x:TypeArguments="ui:UiElement" Name="uie_infinity_wizard" />
               <Variable x:TypeArguments="x:String" Name="str_wizard" />
@@ -1347,7 +1346,7 @@
                         <av:PointCollection x:Key="ConnectorLocation">295.2,359.5 295.2,144.00000000000006 175.2,144.00000000000006 175.2,174</av:PointCollection>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence DisplayName="Finalize appears" sap:VirtualizedContainerService.HintSize="110.4,70.4" sap2010:WorkflowViewState.IdRef="Sequence_147">
+                    <Sequence DisplayName="Finalize appears" sap:VirtualizedContainerService.HintSize="2223.2,2565.6" sap2010:WorkflowViewState.IdRef="Sequence_147">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="strLeadSheetOption" />
                         <Variable x:TypeArguments="x:String" Name="strTaxSoftware" />
@@ -1359,7 +1358,7 @@
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:MultipleAssign DisplayName="Multiple Assign - Input values" sap:VirtualizedContainerService.HintSize="2247.2,56.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                      <ui:MultipleAssign DisplayName="Multiple Assign - Input values" sap:VirtualizedContainerService.HintSize="2189.6,56.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
                         <ui:MultipleAssign.AssignOperations>
                           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
                             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
@@ -1395,7 +1394,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:MultipleAssign>
-                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application - Finalize Wizard" sap:VirtualizedContainerService.HintSize="2247.2,56.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_26" OpenMode="Never" ScopeGuid="84f14d7d-ef9e-4f66-9e0b-c0a2621c7e04" Version="V2">
+                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application - Finalize Wizard" sap:VirtualizedContainerService.HintSize="2189.6,56.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_26" OpenMode="Never" ScopeGuid="84f14d7d-ef9e-4f66-9e0b-c0a2621c7e04" Version="V2">
                         <uix:NApplicationCard.Body>
                           <ActivityAction x:TypeArguments="x:Object">
                             <ActivityAction.Argument>
@@ -1501,7 +1500,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NApplicationCard>
-                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Finish'" sap:VirtualizedContainerService.HintSize="2247.2,139.2" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT">
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Finish'" sap:VirtualizedContainerService.HintSize="2189.6,139.2" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT">
                         <ui:Click.CursorPosition>
                           <ui:CursorPosition Position="Center">
                             <ui:CursorPosition.OffsetX>
@@ -1520,22 +1519,22 @@
                           </ui:Target>
                         </ui:Click.Target>
                       </ui:Click>
-                      <uix:NCheckState DisplayName="Check App State 'SPbinder -'" sap:VirtualizedContainerService.HintSize="2247.2,2310.4" sap2010:WorkflowViewState.IdRef="NCheckState_59" Timeout="30" Version="V3">
+                      <uix:NCheckState DisplayName="Check App State 'SPbinder -'" sap:VirtualizedContainerService.HintSize="2189.6,2252.8" sap2010:WorkflowViewState.IdRef="NCheckState_59" Timeout="30" Version="V3">
                         <uix:NCheckState.IfExists>
-                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="1744.8,2068.8" sap2010:WorkflowViewState.IdRef="Sequence_167">
+                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="1687.2,2011.2" sap2010:WorkflowViewState.IdRef="Sequence_167">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1682.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_85" Message="[&quot;Export window appeared&quot;]" />
-                            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder - Export" sap:VirtualizedContainerService.HintSize="1682.4,1802.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_27" ScopeGuid="e3a879cd-6349-4ee7-9675-f5c3fb5bb466" Version="V2">
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1653.6,176" sap2010:WorkflowViewState.IdRef="LogMessage_85" Message="[&quot;Export window appeared&quot;]" />
+                            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder - Export" sap:VirtualizedContainerService.HintSize="1653.6,1773.6" sap2010:WorkflowViewState.IdRef="NApplicationCard_27" ScopeGuid="e3a879cd-6349-4ee7-9675-f5c3fb5bb466" Version="V2">
                               <uix:NApplicationCard.Body>
                                 <ActivityAction x:TypeArguments="x:Object">
                                   <ActivityAction.Argument>
                                     <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                                   </ActivityAction.Argument>
-                                  <Sequence DisplayName="Export Window Appeared" sap:VirtualizedContainerService.HintSize="1648.8,1486.4" sap2010:WorkflowViewState.IdRef="Sequence_166">
+                                  <Sequence DisplayName="Export Window Appeared" sap:VirtualizedContainerService.HintSize="1620,1457.6" sap2010:WorkflowViewState.IdRef="Sequence_166">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1854,7 +1853,7 @@
                                 </ActivityAction>
                               </uix:NApplicationCard.Body>
                               <uix:NApplicationCard.TargetApp>
-                                <uix:TargetApp Area="1036, 397, 488, 247" FilePath="C:\SurePrepLocalFiles\SPbinder\sureprep.commonapplauncher.exe" IconBase64="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" InformativeScreenshot="8aa3733ff5e09f2189accc09a3ff8003.png" Selector="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='SPbinder*' /&gt;" Title="SPbinder - Export to CCH Axcess" />
+                                <uix:TargetApp Area="1036, 397, 488, 247" FilePath="[in_Config(&quot;CommonLauncher_FilePath&quot;).ToString]" IconBase64="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" InformativeScreenshot="8aa3733ff5e09f2189accc09a3ff8003.png" Selector="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='SPbinder*' /&gt;" Title="SPbinder - Export to CCH Axcess" />
                               </uix:NApplicationCard.TargetApp>
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -1961,7 +1960,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Flowchart DisplayName="NFR or Finalize Wizards" sap:VirtualizedContainerService.HintSize="600,648" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+          <Flowchart DisplayName="NFR or Finalize Wizards" sap:VirtualizedContainerService.HintSize="1468.8000000000002,307.2" sap2010:WorkflowViewState.IdRef="Flowchart_1">
             <Flowchart.Variables>
               <Variable x:TypeArguments="ui:UiElement" Name="uie_infinity_wizard" />
               <Variable x:TypeArguments="x:String" Name="str_wizard" />
@@ -2356,7 +2355,7 @@
                         <av:PointCollection x:Key="ConnectorLocation">295.2,359.5 295.2,144.00000000000006 175.2,144.00000000000006 175.2,174</av:PointCollection>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence DisplayName="Finalize appears" sap:VirtualizedContainerService.HintSize="110.4,70.4" sap2010:WorkflowViewState.IdRef="Sequence_132">
+                    <Sequence DisplayName="Finalize appears" sap:VirtualizedContainerService.HintSize="2223.2,2565.6" sap2010:WorkflowViewState.IdRef="Sequence_132">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="strLeadSheetOption" />
                         <Variable x:TypeArguments="x:String" Name="strTaxSoftware" />
@@ -2368,7 +2367,7 @@
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:MultipleAssign DisplayName="Multiple Assign - Input values" sap:VirtualizedContainerService.HintSize="2247.2,56.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                      <ui:MultipleAssign DisplayName="Multiple Assign - Input values" sap:VirtualizedContainerService.HintSize="2189.6,56.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                         <ui:MultipleAssign.AssignOperations>
                           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
                             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -2404,7 +2403,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:MultipleAssign>
-                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application - Finalize Wizard" sap:VirtualizedContainerService.HintSize="2247.2,56.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_22" OpenMode="Never" ScopeGuid="84f14d7d-ef9e-4f66-9e0b-c0a2621c7e04" Version="V2">
+                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application - Finalize Wizard" sap:VirtualizedContainerService.HintSize="2189.6,56.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_22" OpenMode="Never" ScopeGuid="84f14d7d-ef9e-4f66-9e0b-c0a2621c7e04" Version="V2">
                         <uix:NApplicationCard.Body>
                           <ActivityAction x:TypeArguments="x:Object">
                             <ActivityAction.Argument>
@@ -2510,7 +2509,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NApplicationCard>
-                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Finish'" sap:VirtualizedContainerService.HintSize="2247.2,139.2" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Finish'" sap:VirtualizedContainerService.HintSize="2189.6,139.2" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
                         <ui:Click.CursorPosition>
                           <ui:CursorPosition Position="Center">
                             <ui:CursorPosition.OffsetX>
@@ -2529,22 +2528,22 @@
                           </ui:Target>
                         </ui:Click.Target>
                       </ui:Click>
-                      <uix:NCheckState DisplayName="Check App State 'SPbinder -'" sap:VirtualizedContainerService.HintSize="2247.2,2310.4" sap2010:WorkflowViewState.IdRef="NCheckState_40" Timeout="30" Version="V3">
+                      <uix:NCheckState DisplayName="Check App State 'SPbinder -'" sap:VirtualizedContainerService.HintSize="2189.6,2252.8" sap2010:WorkflowViewState.IdRef="NCheckState_40" Timeout="30" Version="V3">
                         <uix:NCheckState.IfExists>
-                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="1744.8,2068.8" sap2010:WorkflowViewState.IdRef="Sequence_130">
+                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="1687.2,2011.2" sap2010:WorkflowViewState.IdRef="Sequence_130">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1682.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_62" Message="[&quot;Export window appeared&quot;]" />
-                            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder - Export" sap:VirtualizedContainerService.HintSize="1682.4,1802.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_19" ScopeGuid="e3a879cd-6349-4ee7-9675-f5c3fb5bb466" Version="V2">
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1653.6,176" sap2010:WorkflowViewState.IdRef="LogMessage_62" Message="[&quot;Export window appeared&quot;]" />
+                            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder - Export" sap:VirtualizedContainerService.HintSize="1653.6,1773.6" sap2010:WorkflowViewState.IdRef="NApplicationCard_19" ScopeGuid="e3a879cd-6349-4ee7-9675-f5c3fb5bb466" Version="V2">
                               <uix:NApplicationCard.Body>
                                 <ActivityAction x:TypeArguments="x:Object">
                                   <ActivityAction.Argument>
                                     <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                                   </ActivityAction.Argument>
-                                  <Sequence DisplayName="Export Window Appeared" sap:VirtualizedContainerService.HintSize="1648.8,1486.4" sap2010:WorkflowViewState.IdRef="Sequence_129">
+                                  <Sequence DisplayName="Export Window Appeared" sap:VirtualizedContainerService.HintSize="1620,1457.6" sap2010:WorkflowViewState.IdRef="Sequence_129">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2863,7 +2862,7 @@
                                 </ActivityAction>
                               </uix:NApplicationCard.Body>
                               <uix:NApplicationCard.TargetApp>
-                                <uix:TargetApp Area="1036, 397, 488, 247" FilePath="C:\SurePrepLocalFiles\SPbinder\sureprep.commonapplauncher.exe" IconBase64="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" InformativeScreenshot="8aa3733ff5e09f2189accc09a3ff8003.png" Selector="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='SPbinder*' /&gt;" Title="SPbinder - Export to CCH Axcess" />
+                                <uix:TargetApp Area="1036, 397, 488, 247" FilePath="[in_Config(&quot;CommonLauncher_FilePath&quot;).ToString]" IconBase64="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" InformativeScreenshot="8aa3733ff5e09f2189accc09a3ff8003.png" Selector="&lt;wnd app='sureprep.commonapplauncher.exe' cls='HwndWrapper*' title='SPbinder*' /&gt;" Title="SPbinder - Export to CCH Axcess" />
                               </uix:NApplicationCard.TargetApp>
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
