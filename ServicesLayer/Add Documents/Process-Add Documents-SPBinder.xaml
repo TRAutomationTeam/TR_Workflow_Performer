@@ -2,6 +2,7 @@
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="inDictTestSummaryReport" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -2261,7 +2262,7 @@
               </Sequence>
             </If.Else>
           </If>
-          <If Condition="[in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString.Contains(&quot;1040SCAN PRO&quot;) OR in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString.Contains(&quot;1040SCAN ORGANIZE&quot;) OR in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString.Contains(&quot;SPbinder&quot;)]" DisplayName="If  ServiceType = ScanPro, Scan Verify" sap:VirtualizedContainerService.HintSize="417.6,843.2" sap2010:WorkflowViewState.IdRef="If_4">
+          <If Condition="[in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString.Contains(&quot;1040SCAN PRO&quot;) OR in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString.Contains(&quot;1040SCAN ORGANIZE&quot;) OR in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString.Contains(&quot;SPbinder&quot;)]" DisplayName="If  ServiceType = ScanPro, Scan Verify" sap:VirtualizedContainerService.HintSize="417.6,846.4" sap2010:WorkflowViewState.IdRef="If_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -2269,7 +2270,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="635.2,1040.8" sap2010:WorkflowViewState.IdRef="Sequence_123">
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_123">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3579,10 +3580,11 @@
                                       <av:PointCollection x:Key="ConnectorLocation">70,279.2 45.19999999999999,279.2 45.19999999999999,124.39999999999995 165.2,124.39999999999995 165.2,94.4</av:PointCollection>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Superseded.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="110.4,70.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\Superseded.xaml">
+                                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Superseded.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334.4,174.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\Superseded.xaml">
                                     <ui:InvokeWorkflowFile.Arguments>
                                       <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
                                       <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                                      <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InArgument>
                                     </ui:InvokeWorkflowFile.Arguments>
                                   </ui:InvokeWorkflowFile>
                                   <FlowStep.Next>
@@ -3871,7 +3873,7 @@
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence DisplayName="Else SCD Flow" sap:VirtualizedContainerService.HintSize="416,712" sap2010:WorkflowViewState.IdRef="Sequence_124">
+              <Sequence DisplayName="Else SCD Flow" sap:VirtualizedContainerService.HintSize="416,715.2" sap2010:WorkflowViewState.IdRef="Sequence_124">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3879,15 +3881,15 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress" FolderPath="[in_Config(&quot;OrchestratorQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="382.4,226.4" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_1" Progress="AddDocument-SPBinder Completed" TransactionItem="[in_TransactionItem]" />
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Close-BinderApp - Invoke Workflow File (ServicesLayer\Common\Close-BinderApp.xaml)" sap:VirtualizedContainerService.HintSize="382,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="ServicesLayer\Common\Close-BinderApp.xaml">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Close-BinderApp - Invoke Workflow File (ServicesLayer\Common\Close-BinderApp.xaml)" sap:VirtualizedContainerService.HintSize="382.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="ServicesLayer\Common\Close-BinderApp.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <scg:Dictionary x:TypeArguments="x:String, Argument" />
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
-                <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="382,57" sap2010:WorkflowViewState.IdRef="RetryScope_6" NumberOfRetries="2">
+                <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="RetryScope_6" NumberOfRetries="2">
                   <ui:RetryScope.ActivityBody>
                     <ActivityAction>
-                      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="452.8,812" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="417.6,1124.8" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3895,14 +3897,14 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                         <TryCatch.Try>
-                          <Sequence sap:VirtualizedContainerService.HintSize="416,580.8" sap2010:WorkflowViewState.IdRef="Sequence_163">
+                          <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="416,552" sap2010:WorkflowViewState.IdRef="Sequence_163">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to login to the SCD applicaiton with the provided credentials" DisplayName="Seq_LoginToMarvelApplication.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="353.6,250.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_LoginToMarvelApplication.xaml">
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to login to the SCD applicaiton with the provided credentials" DisplayName="Seq_LoginToMarvelApplication.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382.4,250.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_LoginToMarvelApplication.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
                                 <InArgument x:TypeArguments="x:String" x:Key="in_str_UserId">[in_Config("SCD_UserID").ToString]</InArgument>
                                 <InArgument x:TypeArguments="x:String" x:Key="in_str_URL">[in_Config("SCD_URL").ToString]</InArgument>
@@ -3917,7 +3919,7 @@
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
                             </ui:InvokeWorkflowFile>
-                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to perform functions to process the binders from SCD" DisplayName="Seq_OutsourceOffshorMain.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="353.6,241.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\OutsourceWorkflow-SCD\Seq_OutsourceOffshorMain.xaml">
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to perform functions to process the binders from SCD" DisplayName="Seq_OutsourceOffshorMain.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382.4,241.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\OutsourceWorkflow-SCD\Seq_OutsourceOffshorMain.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
                                 <InArgument x:TypeArguments="x:String" x:Key="in_ServiceType">[in_TransactionItem.SpecificContent("ServiceType").ToString]</InArgument>
                                 <InArgument x:TypeArguments="x:String" x:Key="in_BinderID">[in_TransactionItem.SpecificContent("ExpectedBinderID").ToString]</InArgument>
@@ -3935,6 +3937,7 @@
                                 <OutArgument x:TypeArguments="x:Boolean" x:Key="out_isBusinessException" />
                                 <OutArgument x:TypeArguments="x:Boolean" x:Key="out_isSystemException" />
                                 <OutArgument x:TypeArguments="x:String" x:Key="out_FlowName" />
+                                <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -3958,7 +3961,7 @@
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                               </ActivityAction.Argument>
-                              <Sequence sap:VirtualizedContainerService.HintSize="416,440" sap2010:WorkflowViewState.IdRef="Sequence_193">
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,411.2" sap2010:WorkflowViewState.IdRef="Sequence_193">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3981,6 +3984,9 @@
                             </ActivityAction>
                           </Catch>
                         </TryCatch.Catches>
+                        <TryCatch.Finally>
+                          <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_292" />
+                        </TryCatch.Finally>
                       </TryCatch>
                     </ActivityAction>
                   </ui:RetryScope.ActivityBody>
@@ -3994,7 +4000,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:RetryScope>
-                <ui:RetryScope ContinueOnError="True" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="382,57" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="4" RetryInterval="00:02:00">
+                <ui:RetryScope ContinueOnError="True" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="4" RetryInterval="00:02:00">
                   <ui:RetryScope.ActivityBody>
                     <ActivityAction>
                       <Sequence DisplayName="Verify Binder &amp; Agent Status" sap:VirtualizedContainerService.HintSize="449.6,83.2" sap2010:WorkflowViewState.IdRef="Sequence_155">
@@ -4116,7 +4122,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:RetryScope>
-                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:10" DisplayName="Message Box_SCDCompleted" sap:VirtualizedContainerService.HintSize="382,108" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Binder processed through SCD after Add Documents.&quot;]" />
+                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:10" DisplayName="Message Box_SCDCompleted" sap:VirtualizedContainerService.HintSize="382.4,108.8" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Binder processed through SCD after Add Documents.&quot;]" />
               </Sequence>
             </If.Else>
           </If>

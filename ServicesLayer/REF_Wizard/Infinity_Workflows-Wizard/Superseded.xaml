@@ -2,6 +2,7 @@
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="inDictTestSummaryReport" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -154,7 +155,7 @@
       <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Superseded Wizard" sap:VirtualizedContainerService.HintSize="1153,11286" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Superseded Wizard" sap:VirtualizedContainerService.HintSize="1452.0000000000002,15479.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="[string.Empty]" Name="strDocumentName" />
       <Variable x:TypeArguments="x:String" Name="strDocumentStatus" />
@@ -176,14 +177,7 @@
       <Variable x:TypeArguments="scg:List(x:String)" Name="listIVReferenceNew" />
       <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="uieDocumentReference" />
       <Variable x:TypeArguments="x:String" Name="strBannerInfo" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_TestSummaryReport">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:String x:Key="SourceIdRef">InvokeWorkflowFile_1</x:String>
-            <x:String x:Key="SourcePropertyName">dt_Output</x:String>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </Variable>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTestSummaryReport" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -191,7 +185,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Assign - Superseded Button " sap:VirtualizedContainerService.HintSize="664,114" sap2010:WorkflowViewState.IdRef="Assign_74">
+    <Assign DisplayName="Assign - Superseded Button " sap:VirtualizedContainerService.HintSize="664,113.6" sap2010:WorkflowViewState.IdRef="Assign_74">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[strButtonOption]</OutArgument>
       </Assign.To>
@@ -199,21 +193,7 @@
         <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("Next Action").ToString]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummaryReport - Invoke Workflow File (ServicesLayer\Common\TestSummaryReport.xaml)" sap:VirtualizedContainerService.HintSize="664,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummaryReport.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_OutputReportFile">C:\Automation Team\REF_Integration\RPA-Folder\2024\Output\Test Summary Report\TC_Report_Template.xlsx</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_OutputClearRange">D2:E100</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ComponentTab">Wizards</InArgument>
-        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtTestSummaryReport">[dt_TestSummaryReport]</OutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:InvokeWorkflowFile>
-    <TryCatch DisplayName="Try Catch - Superseded Wizard" sap:VirtualizedContainerService.HintSize="664,10945" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch - Superseded Wizard" sap:VirtualizedContainerService.HintSize="664,15342.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
@@ -221,24 +201,24 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application - Superseded Wizard" sap:VirtualizedContainerService.HintSize="662,10414" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" OutUiElement="[uieSupersededWizard]" ScopeGuid="a4d82a8f-1e71-41b8-bee3-d8c43da66e13" Timeout="180" Version="V2">
+        <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application - Superseded Wizard" sap:VirtualizedContainerService.HintSize="662.4,15041.6" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" OutUiElement="[uieSupersededWizard]" ScopeGuid="a4d82a8f-1e71-41b8-bee3-d8c43da66e13" Timeout="180" Version="V2">
           <uix:NApplicationCard.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Main Body - Superseded Wizard" sap:VirtualizedContainerService.HintSize="628,10123" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence DisplayName="Main Body - Superseded Wizard" sap:VirtualizedContainerService.HintSize="627.2,14750.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <TryCatch sap2010:Annotation.AnnotationText="TC_01 TC_SUPERSEDED WIZARD TRIPPED&#xA;TC_14 TC_SUPERSEDED WIZARD BAR&#xA;TC_16 TC_INFORMATIONAL BANER" DisplayName="Try Catch - TC-01,TC_14,TC_16" sap:VirtualizedContainerService.HintSize="594,159" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                <TryCatch sap2010:Annotation.AnnotationText="TC_01 TC_SUPERSEDED WIZARD TRIPPED&#xA;TC_14 TC_SUPERSEDED WIZARD BAR&#xA;TC_16 TC_INFORMATIONAL BANER" DisplayName="Try Catch - TC-01,TC_14,TC_16" sap:VirtualizedContainerService.HintSize="593.6,2054.4" sap2010:WorkflowViewState.IdRef="TryCatch_6">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
@@ -322,12 +302,12 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </ui:LogMessage>
-                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestLibrarySequence" sap:VirtualizedContainerService.HintSize="416,197" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="416,197" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["PASS"]</InArgument>
                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
                               <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                               <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_01","TC_14","TC_16"}]</InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
@@ -374,12 +354,12 @@
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestLibrarySequence" sap:VirtualizedContainerService.HintSize="460,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="460,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["FAIL"]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[exception.Message]</InArgument>
                               <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                               <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_01","TC_14","TC_16"}]</InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
@@ -509,20 +489,20 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NCheckState>
-                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each in Document Panel Data" sap:VirtualizedContainerService.HintSize="594,9492" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[arrNode]">
+                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each in Document Panel Data" sap:VirtualizedContainerService.HintSize="594,10603" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[arrNode]">
                   <ui:ForEach.Body>
                     <ActivityAction x:TypeArguments="x:String">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:String" Name="node" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Body: array of category" sap:VirtualizedContainerService.HintSize="592,9362" sap2010:WorkflowViewState.IdRef="Sequence_308">
+                      <Sequence DisplayName="Body: array of category" sap:VirtualizedContainerService.HintSize="592,10473" sap2010:WorkflowViewState.IdRef="Sequence_308">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <If sap2010:Annotation.AnnotationText="If condition to obsulate the Document Panel values containing &quot;_Page&quot;" Condition="[Not node.Contains(in_Config(&quot;search_format&quot;).ToString)]" DisplayName="If Node == Parent Node from Tree" sap:VirtualizedContainerService.HintSize="558,9302" sap2010:WorkflowViewState.IdRef="If_40">
+                        <If sap2010:Annotation.AnnotationText="If condition to obsulate the Document Panel values containing &quot;_Page&quot;" Condition="[Not node.Contains(in_Config(&quot;search_format&quot;).ToString)]" DisplayName="If Node == Parent Node from Tree" sap:VirtualizedContainerService.HintSize="558,10413" sap2010:WorkflowViewState.IdRef="If_40">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
@@ -531,7 +511,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
-                            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="556,9053" sap2010:WorkflowViewState.IdRef="Sequence_326">
+                            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="556,10164" sap2010:WorkflowViewState.IdRef="Sequence_326">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -762,12 +742,12 @@
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
                                           </ui:LogMessage>
-                                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestLibrarySequence - Invoke Workflow File (ServicesLayer\Common\TestLibrarySequence.xaml)" sap:VirtualizedContainerService.HintSize="416,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="416,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                                             <ui:InvokeWorkflowFile.Arguments>
                                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["PASS"]</InArgument>
                                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
                                               <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                               <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_06"}]</InArgument>
                                             </ui:InvokeWorkflowFile.Arguments>
                                             <sap:WorkflowViewStateService.ViewState>
@@ -1095,12 +1075,12 @@
                                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestLibrarySequence - Invoke Workflow File (ServicesLayer\Common\TestLibrarySequence.xaml)" sap:VirtualizedContainerService.HintSize="450,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="450,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                                           <ui:InvokeWorkflowFile.Arguments>
                                             <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["FAIL"]</InArgument>
-                                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[exception.Message]</InArgument>
                                             <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                             <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_06"}]</InArgument>
                                           </ui:InvokeWorkflowFile.Arguments>
                                           <sap:WorkflowViewStateService.ViewState>
@@ -1642,12 +1622,12 @@
                                                   </sap:WorkflowViewStateService.ViewState>
                                                 </uix:NClick>
                                                 <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_67" Message="[&quot;TC_11&quot;+&quot; TC_CLOSE BUTTON IN IMAGE VIEWER&quot;+&quot;Passed.&quot;]" />
-                                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestLibrarySequence - Invoke Workflow File (ServicesLayer\Common\TestLibrarySequence.xaml)" sap:VirtualizedContainerService.HintSize="416,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="416,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                                                   <ui:InvokeWorkflowFile.Arguments>
                                                     <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["PASS"]</InArgument>
                                                     <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
                                                     <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                                     <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_10","TC_11","TC_12","TC_13","TC_15","TC_18"}]</InArgument>
                                                   </ui:InvokeWorkflowFile.Arguments>
                                                 </ui:InvokeWorkflowFile>
@@ -1786,7 +1766,7 @@
                                                           <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["PASS"]</InArgument>
                                                           <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
                                                           <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                                           <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_09"}]</InArgument>
                                                         </ui:InvokeWorkflowFile.Arguments>
                                                       </ui:InvokeWorkflowFile>
@@ -1809,7 +1789,7 @@
                                                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["FAIL"]</InArgument>
                                                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
                                                               <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                                               <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_09"}]</InArgument>
                                                             </ui:InvokeWorkflowFile.Arguments>
                                                           </ui:InvokeWorkflowFile>
@@ -1860,12 +1840,12 @@
                                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                 </scg:Dictionary>
                                               </sap:WorkflowViewStateService.ViewState>
-                                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestLibrarySequence - Invoke Workflow File (ServicesLayer\Common\TestLibrarySequence.xaml)" sap:VirtualizedContainerService.HintSize="450,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="450,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                                                 <ui:InvokeWorkflowFile.Arguments>
                                                   <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["FAIL"]</InArgument>
-                                                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                                                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[exception.Message]</InArgument>
                                                   <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                                   <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_10","TC_11","TC_12","TC_13","TC_15","TC_18"}]</InArgument>
                                                 </ui:InvokeWorkflowFile.Arguments>
                                               </ui:InvokeWorkflowFile>
@@ -2047,10 +2027,10 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:InterruptibleWhile>
-                              <TryCatch sap2010:Annotation.AnnotationText="TC_17 TC_EXPAND/COLLAPSE TREE VIEW" DisplayName="Try Catch - TC-17" sap:VirtualizedContainerService.HintSize="522,90" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+                              <TryCatch sap2010:Annotation.AnnotationText="TC_17 TC_EXPAND/COLLAPSE TREE VIEW" DisplayName="Try Catch - TC-17" sap:VirtualizedContainerService.HintSize="522,1201" sap2010:WorkflowViewState.IdRef="TryCatch_5">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                   </scg:Dictionary>
@@ -2081,12 +2061,12 @@
                                       </sap:WorkflowViewStateService.ViewState>
                                     </uix:NClick>
                                     <ui:LogMessage DisplayName="Log Message - TC_17" sap:VirtualizedContainerService.HintSize="382,175" sap2010:WorkflowViewState.IdRef="LogMessage_66" Message="[&quot;TC_17&quot;+&quot; TC_EXPAND/COLLAPSE TREE VIEW&quot;+&quot;Passed.&quot;]" />
-                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestLibrarySequence" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                                       <ui:InvokeWorkflowFile.Arguments>
                                         <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["PASS"]</InArgument>
                                         <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
                                         <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                         <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_17"}]</InArgument>
                                       </ui:InvokeWorkflowFile.Arguments>
                                     </ui:InvokeWorkflowFile>
@@ -2104,12 +2084,12 @@
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestLibrarySequence" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                                           <ui:InvokeWorkflowFile.Arguments>
                                             <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["FAIL"]</InArgument>
-                                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[exception.Message]</InArgument>
                                             <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                                            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                                            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                                             <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_17"}]</InArgument>
                                           </ui:InvokeWorkflowFile.Arguments>
                                         </ui:InvokeWorkflowFile>
@@ -2150,51 +2130,40 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:ForEach>
-                <TryCatch sap2010:Annotation.AnnotationText="TC_02 TC_CANCEL BUTTON&#xA;TC_03 TC_FINISH BUTTON&#xA;TC_04 TC_NEXT BUTTON&#xA;TC_08 TC_SHORTCUT KEY 'ALT + N'" DisplayName="Try Catch - Next,Cancel,Finish Later TC's" sap:VirtualizedContainerService.HintSize="594,137" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+                <TryCatch sap2010:Annotation.AnnotationText="TC_02 TC_CANCEL BUTTON&#xA;TC_03 TC_FINISH BUTTON&#xA;TC_04 TC_NEXT BUTTON&#xA;TC_08 TC_SHORTCUT KEY 'ALT + N'" DisplayName="Try Catch - Next,Cancel,Finish Later TC's" sap:VirtualizedContainerService.HintSize="594,1758" sap2010:WorkflowViewState.IdRef="TryCatch_7">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <TryCatch.Try>
-                    <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="520,1337" sap2010:WorkflowViewState.IdRef="Sequence_417">
+                    <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="416,1175" sap2010:WorkflowViewState.IdRef="Sequence_417">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,382" sap2010:WorkflowViewState.IdRef="CommentOut_5">
-                        <ui:CommentOut.Body>
-                          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,271" sap2010:WorkflowViewState.IdRef="Sequence_423">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <uix:NClick ActivateBefore="True" sap2010:Annotation.AnnotationText="Click on Next button" ClickType="Single" DisplayName="Click - Next Button" sap:VirtualizedContainerService.HintSize="416,211" sap2010:WorkflowViewState.IdRef="NClick_278" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="a4d82a8f-1e71-41b8-bee3-d8c43da66e13" Version="V3">
-                              <uix:NClick.Target>
-                                <uix:TargetAnchorable DesignTimeRectangle="-12, 103, 600, 288" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'&amp;Finish Later'" FullSelectorArgument="[string.Format(&quot;&lt;wnd aaname='{0}*' /&gt;&quot;, strButtonOption)]" FuzzySelectorArgument="&lt;wnd ctrlname='btnfinlater' check:text='&amp;amp;Finish Later' /&gt;" Guid="9ca5eae8-8d1e-4410-8858-f3e2a43f1d6c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFQAAAAcCAYAAAD/YJjAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFzSURBVGhD7ZTZjcQgDEDpjWryQTNUkCLohEbSgTc2RwwDu8nEGc1KjvQkAtjA4zDbtoEihwoVpgrV7/1vWZax0FJWzrOuqwqVRIUKo0KFUaHCqFBhBIQGcMaAabDg494WHBjrIQ7jMlJ9aB4OwrDtcwgJfXghTwiNHuyfOa+jQkdtN3hWKBdBZQfO5mehqS8Lw1zH0+ECzzOIbZjMA2NZzhQbwXe5orddnxxrLVisc6HNO+GZN7QMzmXRwvLbuv8Hl4WxPrgo62OK5SdoFottlXMntMb2+ZmwOg8a99rt+/AJzeWdkdC0gLQpjbBZbGkn5vPA/nzDe6F9O4GCu3HP8F1CK+VK5rw3hNJVZqevxnZC683g/Heh7cJY3ptCj5xpo3qhlJ/F1k3oxj3Dl51QzHVcuypiFpv/E20sQTGv9Sm21Ke5k8TSZzLnMwgIVTgqVBgVKowKFUaFCqNChflVKDYq1xkKxUrlfV6EKjKoUFE2+AFN+pVpuQzOsAAAAABJRU5ErkJggg==" InformativeScreenshot="175ccc363d81cca8c72df65a0193860c.png" ScopeSelectorArgument="&lt;wnd app='spreviewwizard.exe' ctrlname='FrmSuperceded' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
-                                  <uix:TargetAnchorable.Anchors>
-                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                                      <uix:Target DesignTimeRectangle="16, 39, 168, 16" ElementType="Text" FriendlyName="'Superseded Documents'" FullSelectorArgument="&lt;wnd ctrlname='Label6' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='Label6' check:text='Superseded Documents :' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAKwAAAAUCAYAAAAQqNbAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALDSURBVGhD7ZkLcoQwCIY9ngfyON7Fq3iTNFGIBIIYrTublm8mM6sI4fHruu0QHKcjXLBOV7hgna5wwTpd4YJ1ukIX7DqHcRjCgGucwwqmflnDPKZ6prDAmetYvkuYaL/+VN++B0Ww0Hxs9jLtzZ/ax/xdfECwhUBRxHf2+3ZibZ++GZMO4WMJPl27Fyjn04KNwM0+zn/pOavU+jbLYghWFS1PmA8T7VO8CyHOMIZiZuyV49iG++5+6zzma9MqBKDGiuC3Q1rTLEX3xLdAGyKcz4HhGJd2vbDz+Kzn+caYiX/s3ULrY7mbM4g1T9yO++K6MJ+CJw+Nk3fYhSSaVjFIq3lozyJldmwUBN2LxWu5bwSuxybsuYH9SizMMwuwIQ/NV8B7gtDz/Bqlb2gv8jN8MT+083zxGAfZNAO+dz3P6nwELwk2od81RvOE/YiV+kM/g5EULH3RvuVBz0dOY8GQjrzLPJ/4Sip5b5DzEDPvl6DnxJ4Uo+fgqwmSH7fNwJgvxi583uFUsMjxtNUEaQuWDgObJdY+Nekb4U983OsslhgKy/OJr6Sedz5fjRmp9KWwZ4yec7FfFKxYm93YS9jT9uCfl9anZ1wSrJ2wXRAdRttgOGBPKwY4jSWeWGWeT3wlSt40Dnwu9qPnxJ4Uo+fc96Jgq7Vbe2m1bpTz+W2qgsVijsYZBeSvBFZQXHvOyvXV5lWaoQxjO26JBXFu5cF9BZW8ed3iGssOx1tCRs8bBdtUu8gTjllvqvMR8FhtqE9YLCCvYhCRPMC4xC/oo+DjVyZ7Cc8N39dRHG8WQPdLCxufUGNFqO3CXwmafAsgb754Hfy6FvtZz1sFm1Br5zOQIqP62EKezafgJcE+QxGd4zzEBet0hQvW6YqXBOs471AR7P50VN+Zz9he4u+9TN8n5av9V+Wfwn5M0XVrrp/gknZC+AFYlY3gFWhkIAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
-                                    </scg:List>
-                                  </uix:TargetAnchorable.Anchors>
-                                </uix:TargetAnchorable>
-                              </uix:NClick.Target>
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                            </uix:NClick>
-                          </Sequence>
-                        </ui:CommentOut.Body>
-                      </ui:CommentOut>
-                      <ui:LogMessage DisplayName="Log Message - TC_02" sap:VirtualizedContainerService.HintSize="486,175" sap2010:WorkflowViewState.IdRef="LogMessage_87" Message="[&quot;TC_02&quot;+&quot; TC_CANCEL BUTTON&quot;+&quot;Passed.&quot;]">
+                      <uix:NClick ActivateBefore="True" sap2010:Annotation.AnnotationText="Click on Next button" ClickType="Single" DisplayName="Click - Next Button" sap:VirtualizedContainerService.HintSize="382,220" sap2010:WorkflowViewState.IdRef="NClick_279" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="a4d82a8f-1e71-41b8-bee3-d8c43da66e13" Version="V3">
+                        <uix:NClick.Target>
+                          <uix:TargetAnchorable DesignTimeRectangle="-12, 103, 600, 288" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'&amp;Finish Later'" FullSelectorArgument="[string.Format(&quot;&lt;wnd aaname='{0}*' /&gt;&quot;, strButtonOption)]" FuzzySelectorArgument="&lt;wnd ctrlname='btnfinlater' check:text='&amp;amp;Finish Later' /&gt;" Guid="9ca5eae8-8d1e-4410-8858-f3e2a43f1d6c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFQAAAAcCAYAAAD/YJjAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFzSURBVGhD7ZTZjcQgDEDpjWryQTNUkCLohEbSgTc2RwwDu8nEGc1KjvQkAtjA4zDbtoEihwoVpgrV7/1vWZax0FJWzrOuqwqVRIUKo0KFUaHCqFBhBIQGcMaAabDg494WHBjrIQ7jMlJ9aB4OwrDtcwgJfXghTwiNHuyfOa+jQkdtN3hWKBdBZQfO5mehqS8Lw1zH0+ECzzOIbZjMA2NZzhQbwXe5orddnxxrLVisc6HNO+GZN7QMzmXRwvLbuv8Hl4WxPrgo62OK5SdoFottlXMntMb2+ZmwOg8a99rt+/AJzeWdkdC0gLQpjbBZbGkn5vPA/nzDe6F9O4GCu3HP8F1CK+VK5rw3hNJVZqevxnZC683g/Heh7cJY3ptCj5xpo3qhlJ/F1k3oxj3Dl51QzHVcuypiFpv/E20sQTGv9Sm21Ke5k8TSZzLnMwgIVTgqVBgVKowKFUaFCqNChflVKDYq1xkKxUrlfV6EKjKoUFE2+AFN+pVpuQzOsAAAAABJRU5ErkJggg==" InformativeScreenshot="175ccc363d81cca8c72df65a0193860c.png" ScopeSelectorArgument="&lt;wnd app='spreviewwizard.exe' ctrlname='FrmSuperceded' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
+                            <uix:TargetAnchorable.Anchors>
+                              <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                <uix:Target DesignTimeRectangle="16, 39, 168, 16" ElementType="Text" FriendlyName="'Superseded Documents'" FullSelectorArgument="&lt;wnd ctrlname='Label6' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='Label6' check:text='Superseded Documents :' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAKwAAAAUCAYAAAAQqNbAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALDSURBVGhD7ZkLcoQwCIY9ngfyON7Fq3iTNFGIBIIYrTublm8mM6sI4fHruu0QHKcjXLBOV7hgna5wwTpd4YJ1ukIX7DqHcRjCgGucwwqmflnDPKZ6prDAmetYvkuYaL/+VN++B0Ww0Hxs9jLtzZ/ax/xdfECwhUBRxHf2+3ZibZ++GZMO4WMJPl27Fyjn04KNwM0+zn/pOavU+jbLYghWFS1PmA8T7VO8CyHOMIZiZuyV49iG++5+6zzma9MqBKDGiuC3Q1rTLEX3xLdAGyKcz4HhGJd2vbDz+Kzn+caYiX/s3ULrY7mbM4g1T9yO++K6MJ+CJw+Nk3fYhSSaVjFIq3lozyJldmwUBN2LxWu5bwSuxybsuYH9SizMMwuwIQ/NV8B7gtDz/Bqlb2gv8jN8MT+083zxGAfZNAO+dz3P6nwELwk2od81RvOE/YiV+kM/g5EULH3RvuVBz0dOY8GQjrzLPJ/4Sip5b5DzEDPvl6DnxJ4Uo+fgqwmSH7fNwJgvxi583uFUsMjxtNUEaQuWDgObJdY+Nekb4U983OsslhgKy/OJr6Sedz5fjRmp9KWwZ4yec7FfFKxYm93YS9jT9uCfl9anZ1wSrJ2wXRAdRttgOGBPKwY4jSWeWGWeT3wlSt40Dnwu9qPnxJ4Uo+fc96Jgq7Vbe2m1bpTz+W2qgsVijsYZBeSvBFZQXHvOyvXV5lWaoQxjO26JBXFu5cF9BZW8ed3iGssOx1tCRs8bBdtUu8gTjllvqvMR8FhtqE9YLCCvYhCRPMC4xC/oo+DjVyZ7Cc8N39dRHG8WQPdLCxufUGNFqO3CXwmafAsgb754Hfy6FvtZz1sFm1Br5zOQIqP62EKezafgJcE+QxGd4zzEBet0hQvW6YqXBOs471AR7P50VN+Zz9he4u+9TN8n5av9V+Wfwn5M0XVrrp/gknZC+AFYlY3gFWhkIAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                              </scg:List>
+                            </uix:TargetAnchorable.Anchors>
+                          </uix:TargetAnchorable>
+                        </uix:NClick.Target>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </uix:NClick>
+                      <ui:LogMessage DisplayName="Log Message - TC_02" sap:VirtualizedContainerService.HintSize="382,175" sap2010:WorkflowViewState.IdRef="LogMessage_87" Message="[&quot;TC_02&quot;+&quot; TC_CANCEL BUTTON&quot;+&quot;Passed.&quot;]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2202,7 +2171,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:LogMessage>
-                      <ui:LogMessage DisplayName="Log Message - TC_03" sap:VirtualizedContainerService.HintSize="486,175" sap2010:WorkflowViewState.IdRef="LogMessage_88" Message="[&quot;TC_03&quot; +&quot; TC_FINISH BUTTON&quot;+&quot;Passed.&quot;]">
+                      <ui:LogMessage DisplayName="Log Message - TC_03" sap:VirtualizedContainerService.HintSize="382,175" sap2010:WorkflowViewState.IdRef="LogMessage_88" Message="[&quot;TC_03&quot; +&quot; TC_FINISH BUTTON&quot;+&quot;Passed.&quot;]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2210,7 +2179,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:LogMessage>
-                      <ui:LogMessage DisplayName="Log Message - TC_04" sap:VirtualizedContainerService.HintSize="486,175" sap2010:WorkflowViewState.IdRef="LogMessage_59" Message="[&quot;TC_04&quot;+&quot; TC_NEXT BUTTON &quot;+&quot;Passed.&quot;]">
+                      <ui:LogMessage DisplayName="Log Message - TC_04" sap:VirtualizedContainerService.HintSize="382,175" sap2010:WorkflowViewState.IdRef="LogMessage_59" Message="[&quot;TC_04&quot;+&quot; TC_NEXT BUTTON &quot;+&quot;Passed.&quot;]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2218,7 +2187,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:LogMessage>
-                      <ui:LogMessage DisplayName="Log Message - TC_08" sap:VirtualizedContainerService.HintSize="486,175" sap2010:WorkflowViewState.IdRef="LogMessage_89" Message="[&quot;TC_08&quot;+&quot; TC_SHORTCUT KEY 'ALT + N' &quot;+&quot;Passed.&quot;]">
+                      <ui:LogMessage DisplayName="Log Message - TC_08" sap:VirtualizedContainerService.HintSize="382,175" sap2010:WorkflowViewState.IdRef="LogMessage_89" Message="[&quot;TC_08&quot;+&quot; TC_SHORTCUT KEY 'ALT + N' &quot;+&quot;Passed.&quot;]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2226,12 +2195,12 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:LogMessage>
-                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestLibrarySequence" sap:VirtualizedContainerService.HintSize="486,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
                           <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["PASS"]</InArgument>
                           <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
                           <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                           <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_02","TC_03","TC_04","TC_08"}]</InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                         <sap:WorkflowViewStateService.ViewState>
@@ -2249,18 +2218,18 @@
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="520,255" sap2010:WorkflowViewState.IdRef="Sequence_418">
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,255" sap2010:WorkflowViewState.IdRef="Sequence_418">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestLibrarySequence" sap:VirtualizedContainerService.HintSize="486,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
                               <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["FAIL"]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[exception.Message]</InArgument>
                               <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Superseded</InArgument>
-                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dt_TestSummaryReport]</InOutArgument>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
                               <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_02","TC_03","TC_04","TC_08"}]</InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                             <sap:WorkflowViewStateService.ViewState>
@@ -2275,7 +2244,7 @@
                     </Catch>
                   </TryCatch.Catches>
                   <TryCatch.Finally>
-                    <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="520,89" sap2010:WorkflowViewState.IdRef="Sequence_419">
+                    <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_419">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2311,7 +2280,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Catch - Superseded Wizard" sap:VirtualizedContainerService.HintSize="662,25" sap2010:WorkflowViewState.IdRef="Sequence_344">
+            <Sequence DisplayName="Catch - Superseded Wizard" sap:VirtualizedContainerService.HintSize="416,25" sap2010:WorkflowViewState.IdRef="Sequence_344">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -2406,17 +2375,18 @@
         </Catch>
       </TryCatch.Catches>
       <TryCatch.Finally>
-        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="662,255" sap2010:WorkflowViewState.IdRef="Sequence_408">
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="662,25" sap2010:WorkflowViewState.IdRef="Sequence_408">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Output - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Output.xaml)" sap:VirtualizedContainerService.HintSize="628,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Output.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Output - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Output.xaml)" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Output.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TestSummaryReport">[dt_TestSummaryReport]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TestSummaryReport">[dtTestSummaryReport]</InArgument>
               <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config" />
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>
