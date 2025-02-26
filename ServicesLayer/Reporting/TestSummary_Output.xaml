@@ -3,7 +3,9 @@
     <x:Property Name="dt_TestSummaryReport" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_Component" Type="InArgument(x:String)" />
   </x:Members>
+  <sap:VirtualizedContainerService.HintSize>1070.4,1781.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -265,7 +267,7 @@
       <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="1540,1838" sap2010:WorkflowViewState.IdRef="Sequence_430">
+  <Sequence sap:VirtualizedContainerService.HintSize="758.4,1716.8" sap2010:WorkflowViewState.IdRef="Sequence_430">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strBinderID" />
     </Sequence.Variables>
@@ -274,7 +276,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Assign - Binder ID" sap:VirtualizedContainerService.HintSize="574,114" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="Assign - Binder ID" sap:VirtualizedContainerService.HintSize="696,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[strBinderID]</OutArgument>
       </Assign.To>
@@ -282,21 +284,21 @@
         <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("ExpectedBinderID").ToString]</InArgument>
       </Assign.Value>
     </Assign>
-    <TryCatch DisplayName="Try Catch - Test Summary Output" sap:VirtualizedContainerService.HintSize="574,1701" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch - Test Summary Output" sap:VirtualizedContainerService.HintSize="696,1514.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="572,1151" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_3" ShowExcelWindow="False">
+        <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="659.2,1260" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_3" ShowExcelWindow="False">
           <ueab:ExcelProcessScopeX.Body>
             <ActivityAction x:TypeArguments="ui:IExcelProcess">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
               </ActivityAction.Argument>
-              <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="538,1064" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_3" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="[in_Config(&quot;ReporterPath&quot;).ToString+strBinderID+&quot;.xlsx&quot;]">
+              <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="625.6,1173.6" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_3" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="[in_Config(&quot;ReportTemplatePath&quot;).ToString.Split(&quot;.xlsx&quot;)(0)+&quot;_&quot;+strBinderID+&quot;.xlsx&quot;]">
                 <ueab:ExcelApplicationCard.Body>
                   <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
                     </ActivityAction.Argument>
-                    <Sequence sap:VirtualizedContainerService.HintSize="504,795" sap2010:WorkflowViewState.IdRef="Sequence_429">
+                    <Sequence sap:VirtualizedContainerService.HintSize="592,904" sap2010:WorkflowViewState.IdRef="Sequence_429">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="scg:List(x:String)" Name="listReporterSheets" />
                       </Sequence.Variables>
@@ -305,21 +307,21 @@
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:ExcelGetWorkbookSheets DisplayName="Get Workbook Sheets" sap:VirtualizedContainerService.HintSize="470,57" sap2010:WorkflowViewState.IdRef="ExcelGetWorkbookSheets_1" Sheets="[listReporterSheets]" />
-                      <If Condition="[Not listReporterSheets.Contains(strBinderID)]" DisplayName="If Not Excel sheets contains binder Id sheet" sap:VirtualizedContainerService.HintSize="470,678" sap2010:WorkflowViewState.IdRef="If_2">
+                      <ui:ExcelGetWorkbookSheets DisplayName="Get Workbook Sheets" sap:VirtualizedContainerService.HintSize="529.6,56.8" sap2010:WorkflowViewState.IdRef="ExcelGetWorkbookSheets_1" Sheets="[listReporterSheets]" />
+                      <If Condition="[Not listReporterSheets.Contains(strBinderID)]" DisplayName="If Not Excel sheets contains binder Id sheet" sap:VirtualizedContainerService.HintSize="529.6,758.4" sap2010:WorkflowViewState.IdRef="If_2">
                         <If.Then>
-                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,460" sap2010:WorkflowViewState.IdRef="Sequence_435">
+                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,492" sap2010:WorkflowViewState.IdRef="Sequence_435">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ueab:InsertSheetX DisplayName="Insert Sheet" sap:VirtualizedContainerService.HintSize="434,218" sap2010:WorkflowViewState.IdRef="InsertSheetX_2" Name="[strBinderID]" Workbook="[Excel]" />
-                            <ueab:WriteRangeX Destination="[Excel.Sheet(strBinderID)]" DisplayName="Write DataTable to Excel" sap:VirtualizedContainerService.HintSize="434,182" sap2010:WorkflowViewState.IdRef="WriteRangeX_3" IgnoreEmptySource="False" Source="[dt_TestSummaryReport]" />
+                            <ueab:InsertSheetX DisplayName="Insert Sheet" sap:VirtualizedContainerService.HintSize="433.6,220" sap2010:WorkflowViewState.IdRef="InsertSheetX_2" Name="[in_Component]" Workbook="[Excel]" />
+                            <ueab:WriteRangeX Destination="[Excel.Sheet(in_Component)]" DisplayName="Write DataTable to Excel" sap:VirtualizedContainerService.HintSize="433.6,183.2" sap2010:WorkflowViewState.IdRef="WriteRangeX_3" IgnoreEmptySource="False" Source="[dt_TestSummaryReport]" />
                           </Sequence>
                         </If.Then>
                         <If.Else>
-                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="468,89" sap2010:WorkflowViewState.IdRef="Sequence_436">
+                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_436">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -343,12 +345,17 @@
         </ueab:ExcelProcessScopeX>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="662.4,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
           <ActivityAction x:TypeArguments="s:Exception">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence sap2010:Annotation.AnnotationText="Generate exception for the excel error" DisplayName="Body" sap:VirtualizedContainerService.HintSize="572,255" sap2010:WorkflowViewState.IdRef="Sequence_432">
+            <Sequence sap2010:Annotation.AnnotationText="Generate exception for the excel error" DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,285.6" sap2010:WorkflowViewState.IdRef="Sequence_432">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -356,7 +363,7 @@
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="538,164" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Failed to generate report. Exception: &quot;+exception.Message]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="353.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Failed to generate report. Exception: &quot;+exception.Message]" />
             </Sequence>
           </ActivityAction>
         </Catch>
