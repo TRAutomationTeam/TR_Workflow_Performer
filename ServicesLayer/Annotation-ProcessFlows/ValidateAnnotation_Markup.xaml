@@ -10,11 +10,12 @@
     <x:Property Name="in_ImageParamMarkup" Type="InArgument(x:String)" />
     <x:Property Name="in_TemplateObjMarkup" Type="InArgument(x:String)" />
     <x:Property Name="in_ErrorFlag" Type="InArgument(x:Boolean)" />
+    <x:Property Name="dict_TCSummaryReport" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1074.4,4670.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1070.4,5695.2</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ValidateAnnotation_Stamps_All_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -51,6 +52,7 @@
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -110,9 +112,11 @@
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ValidateAnnotation_Markup_All" sap:VirtualizedContainerService.HintSize="694.4,4605.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ValidateAnnotation_Markup_All" sap:VirtualizedContainerService.HintSize="732.8,5630.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="resultantOutput" />
       <Variable x:TypeArguments="p:PythonObject" Name="objectPython" />
@@ -123,17 +127,24 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Validate All Markup Tool Annotation flow started" sap:VirtualizedContainerService.HintSize="632,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Validate All Markup Tools Annotation flow started!&quot;]" />
-    <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="632,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
-    <If Condition="[in_ErrorFlag]" DisplayName="Check error flag prior to Markup validation" sap:VirtualizedContainerService.HintSize="632,4128.8" sap2010:WorkflowViewState.IdRef="If_2">
+    <ui:LogMessage DisplayName="Log Message - Validate All Markup Tool Annotation flow started" sap:VirtualizedContainerService.HintSize="670.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Validate All Markup Tools Annotation flow started!&quot;]" />
+    <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="670.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
+    <If Condition="[in_ErrorFlag]" DisplayName="Check error flag prior to Markup validation" sap:VirtualizedContainerService.HintSize="670.4,5192.8" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="521.6,1199.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:MultipleAssign DisplayName="TC Report execution update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,304.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+          <ui:MultipleAssign DisplayName="TC Report execution update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_41">
@@ -201,7 +212,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:MultipleAssign>
-          <ui:MultipleAssign DisplayName="TC Report comments update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,304.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+          <ui:MultipleAssign DisplayName="TC Report comments update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_48">
@@ -269,7 +280,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:MultipleAssign>
-          <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_3">
             <Assign.To>
               <OutArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport]</OutArgument>
             </Assign.To>
@@ -277,18 +288,27 @@
               <InArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport.DefaultView.ToTable(false,{"Execution","Comments"})]</InArgument>
             </Assign.Value>
           </Assign>
-          <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
-          <ui:LogMessage DisplayName="Log Message - Markup level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Markup level TC results written to excel&quot;]" />
+          <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
+          <ui:LogMessage DisplayName="Log Message - Markup level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Markup level TC results written to excel&quot;]" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">["Automation Script Error - Drawing Markup Component"]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_08","TC_09","TC_10","TC_11","TC_12","TC_13","TC_14"}]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="598.4,2746.4" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="636.8,5006.4" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <p:PythonScope OperationTimeout="{x:Null}" DisplayName="Python Scope - Validate Markup level components" sap:VirtualizedContainerService.HintSize="555.2,52.8" sap2010:WorkflowViewState.IdRef="PythonScope_1" LibraryPath="[in_PythonLibPath]" Path="[in_PythonExePath]" TargetPlatform="x64" Version="Python &gt;=3.10">
+          <p:PythonScope OperationTimeout="{x:Null}" DisplayName="Python Scope - Validate Markup level components" sap:VirtualizedContainerService.HintSize="574.4,56.8" sap2010:WorkflowViewState.IdRef="PythonScope_1" LibraryPath="[in_PythonLibPath]" Path="[in_PythonExePath]" TargetPlatform="x64" Version="Python &gt;=3.10">
             <p:PythonScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -315,7 +335,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </p:PythonScope>
-          <If Condition="[String.IsNullOrEmpty(resultantOutput) = true OR resultantOutput.Trim.Contains(&quot;Error&quot;)]" DisplayName="Verify Python Results" sap:VirtualizedContainerService.HintSize="555.2,2564" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[String.IsNullOrEmpty(resultantOutput) = true OR resultantOutput.Trim.Contains(&quot;Error&quot;)]" DisplayName="Verify Python Results" sap:VirtualizedContainerService.HintSize="574.4,4860.8" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -323,13 +343,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="521.6,1199.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="540.8,1396" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="TC Report execution update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,304.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+                <ui:MultipleAssign DisplayName="TC Report execution update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_55">
@@ -397,7 +417,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <ui:MultipleAssign DisplayName="TC Report comments update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,304.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+                <ui:MultipleAssign DisplayName="TC Report comments update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_62">
@@ -465,7 +485,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_4">
                   <Assign.To>
                     <OutArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport]</OutArgument>
                   </Assign.To>
@@ -473,18 +493,27 @@
                     <InArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport.DefaultView.ToTable(false,{"Execution","Comments"})]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,116" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
-                <ui:LogMessage DisplayName="Log Message - Markup level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Markup level TC results written to excel&quot;]" />
+                <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
+                <ui:LogMessage DisplayName="Log Message - Markup level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Markup level TC results written to excel&quot;]" />
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">["Python Script Error - Validating Markup Component"]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_08","TC_09","TC_10","TC_11","TC_12","TC_13","TC_14"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="476.8,1181.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="540.8,3303.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Assign DisplayName="resultant output" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign DisplayName="resultant output" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[resultantOutput]</OutArgument>
                   </Assign.To>
@@ -492,7 +521,7 @@
                     <InArgument x:TypeArguments="x:String">[resultantOutput.Replace("{","").Replace("}","").Replace("'","")]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:MultipleAssign DisplayName="TC Report execution update - Markup level" sap:VirtualizedContainerService.HintSize="433.6,52.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                <ui:MultipleAssign DisplayName="TC Report execution update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -555,12 +584,12 @@
                   </ui:MultipleAssign.AssignOperations>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <ui:MultipleAssign DisplayName="TC Report comments update - Markup level" sap:VirtualizedContainerService.HintSize="433.6,52.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                <ui:MultipleAssign DisplayName="TC Report comments update - Markup level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
@@ -623,14 +652,86 @@
                   </ui:MultipleAssign.AssignOperations>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <ui:LogMessage DisplayName="Log Message - Validate All Markup Annotation flow started" sap:VirtualizedContainerService.HintSize="433.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Validation Success - Markup Components - TC results updated&quot;]" />
-                <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="433.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
-                <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status" />
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent" />
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport" />
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID" />
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC_08_TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(0).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(7).Item("Execution").Equals("Pass"),"Verified functionality of TextBox in Annotation bar of Binder.","Error - Textbox Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_08"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC_09_TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(1).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(8).Item("Execution").Equals("Pass"),"Verified functionality of Arrow in Annotation bar of Binder.","Error - Arrow Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_09"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC_10_TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(2).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(9).Item("Execution").Equals("Pass"),"Verified functionality of Line in Annotation bar of Binder.","Error - Line Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_10"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC_11_TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(3).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(10).Item("Execution").Equals("Pass"),"Verified functionality of Rectangle in Annotation bar of Binder.","Error - Rectangle Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_11"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC_12_TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(4).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(11).Item("Execution").Equals("Pass"),"Verified functionality of Oval in Annotation bar of Binder.","Error - Oval Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_12"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC_13_TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(5).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(12).Item("Execution").Equals("Pass"),"Verified functionality of Pencil in Annotation bar of Binder.","Error - Pencil Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_13"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC_14_TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(6).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(13).Item("Execution").Equals("Pass"),"Verified functionality of Typewriter in Annotation bar of Binder.","Error - Typewriter Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_14"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:LogMessage DisplayName="Log Message - Validate All Markup Annotation flow started" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Validation Success - Markup Components - TC results updated&quot;]" />
+                <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
+                <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
                   <Assign.To>
                     <OutArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport]</OutArgument>
                   </Assign.To>
@@ -638,8 +739,8 @@
                     <InArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport.DefaultView.ToTable(false,{"Execution","Comments"})]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="433.6,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
-                <ui:LogMessage DisplayName="Log Message - Markup level TC results written to excel" sap:VirtualizedContainerService.HintSize="433.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Markup level TC results written to excel&quot;]" />
+                <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
+                <ui:LogMessage DisplayName="Log Message - Markup level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Markup level TC results written to excel&quot;]" />
               </Sequence>
             </If.Else>
           </If>

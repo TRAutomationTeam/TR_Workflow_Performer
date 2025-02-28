@@ -9,11 +9,12 @@
     <x:Property Name="in_ExcelReport" Type="InArgument(x:String)" />
     <x:Property Name="in_Worksheet" Type="InArgument(x:String)" />
     <x:Property Name="in_ErrorFlag" Type="InArgument(x:Boolean)" />
+    <x:Property Name="dict_TCSummaryReport" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1074.4,5144</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1062.4,8137.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ValidateAnnotation_Highlight_All_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -52,6 +53,7 @@
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -113,9 +115,10 @@
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ValidateAnnotation_Highlight_All" sap:VirtualizedContainerService.HintSize="756.8,5079.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ValidateAnnotation_Highlight_All" sap:VirtualizedContainerService.HintSize="795.2,8072.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="resultantOutput" />
       <Variable x:TypeArguments="p:PythonObject" Name="pyScriptHighlightObject" />
@@ -128,9 +131,9 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Validate All Highlight Annotation flow started" sap:VirtualizedContainerService.HintSize="694.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Validate All Highlight Annotation flow started!&quot;]" />
-    <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="694.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
-    <If Condition="[in_ErrorFlag]" DisplayName="Check error flag prior to Highlight validation" sap:VirtualizedContainerService.HintSize="694.4,3988.8" sap2010:WorkflowViewState.IdRef="If_2">
+    <ui:LogMessage DisplayName="Log Message - Validate All Highlight Annotation flow started" sap:VirtualizedContainerService.HintSize="732.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Validate All Highlight Annotation flow started!&quot;]" />
+    <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="732.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
+    <If Condition="[in_ErrorFlag]" DisplayName="Check error flag prior to Highlight validation" sap:VirtualizedContainerService.HintSize="732.8,7181.6" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -138,13 +141,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="521.6,947.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="540.8,1396" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:MultipleAssign DisplayName="TC Report execution update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,52.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+          <ui:MultipleAssign DisplayName="TC Report execution update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
@@ -207,12 +210,12 @@
             </ui:MultipleAssign.AssignOperations>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:MultipleAssign>
-          <ui:MultipleAssign DisplayName="TC Report comments update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,304.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+          <ui:MultipleAssign DisplayName="TC Report comments update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
@@ -280,7 +283,16 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:MultipleAssign>
-          <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 1-7 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">["Automation Script Error - Drawing Highlighter Component"]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_01","TC_02","TC_03","TC_04","TC_05","TC_06","TC_07"}]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_3">
             <Assign.To>
               <OutArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport]</OutArgument>
             </Assign.To>
@@ -288,45 +300,45 @@
               <InArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport.DefaultView.ToTable(false,{"Execution","Comments"})]</InArgument>
             </Assign.Value>
           </Assign>
-          <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
-          <ui:LogMessage DisplayName="Log Message - Highlight level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Highlight level TC results written to excel&quot;]" />
+          <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
+          <ui:LogMessage DisplayName="Log Message - Highlight level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Highlight level TC results written to excel&quot;]" />
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="660.8,2858.4" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="699.2,5615.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <p:PythonScope OperationTimeout="{x:Null}" DisplayName="Python Scope - Validate Highlight level components" sap:VirtualizedContainerService.HintSize="617.6,52.8" sap2010:WorkflowViewState.IdRef="PythonScope_1" LibraryPath="[in_PythonLibPath]" Path="[in_PythonExePath]" TargetPlatform="x64" Version="Python &gt;=3.10">
+          <p:PythonScope OperationTimeout="{x:Null}" DisplayName="Python Scope - Validate Highlight level components" sap:VirtualizedContainerService.HintSize="636.8,815.2" sap2010:WorkflowViewState.IdRef="PythonScope_1" LibraryPath="[in_PythonLibPath]" Path="[in_PythonExePath]" TargetPlatform="x64" Version="Python &gt;=3.10">
             <p:PythonScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="PythonEngineSessionProperty" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="449.6,778.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="416,746.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <p:LoadScript Code="{x:Null}" DisplayName="Load Highlight Component Python Script" sap:VirtualizedContainerService.HintSize="387.2,60" sap2010:WorkflowViewState.IdRef="LoadScript_2" Result="[pyScriptHighlightObject]" ScriptFile="[in_HighlightPythonScriptPath]" />
-                  <ui:LogMessage DisplayName="Log Message - Python script loaded" sap:VirtualizedContainerService.HintSize="387.2,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Python script loaded for validation&quot;]" />
-                  <p:InvokeMethod DisplayName="Invoke Main Python Method with Param's" sap:VirtualizedContainerService.HintSize="387.2,80.8" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" Instance="[pyScriptHighlightObject]" Name="[in_PythonMethod]" Parameters="[{in_ImageParamHighlight}]" Result="[objectPython]" />
-                  <p:GetObject x:TypeArguments="x:String" DisplayName="Get Python Object -&gt;.NET type" sap:VirtualizedContainerService.HintSize="387.2,80.8" sap2010:WorkflowViewState.IdRef="GetObject`1_3" PythonObject="[objectPython]" Result="[resultantOutput]" />
-                  <ui:LogMessage DisplayName="Log Message - Python Output" sap:VirtualizedContainerService.HintSize="387.2,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Python output | Highlight Comp -&quot; +resultantOutput]" />
+                  <p:LoadScript Code="{x:Null}" DisplayName="Load Highlight Component Python Script" sap:VirtualizedContainerService.HintSize="353.6,92" sap2010:WorkflowViewState.IdRef="LoadScript_2" Result="[pyScriptHighlightObject]" ScriptFile="[in_HighlightPythonScriptPath]" />
+                  <ui:LogMessage DisplayName="Log Message - Python script loaded" sap:VirtualizedContainerService.HintSize="353.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Python script loaded for validation&quot;]" />
+                  <p:InvokeMethod DisplayName="Invoke Main Python Method with Param's" sap:VirtualizedContainerService.HintSize="353.6,112.8" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" Instance="[pyScriptHighlightObject]" Name="[in_PythonMethod]" Parameters="[{in_ImageParamHighlight}]" Result="[objectPython]" />
+                  <p:GetObject x:TypeArguments="x:String" DisplayName="Get Python Object -&gt;.NET type" sap:VirtualizedContainerService.HintSize="353.6,112.8" sap2010:WorkflowViewState.IdRef="GetObject`1_3" PythonObject="[objectPython]" Result="[resultantOutput]" />
+                  <ui:LogMessage DisplayName="Log Message - Python Output" sap:VirtualizedContainerService.HintSize="353.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Python output | Highlight Comp -&quot; +resultantOutput]" />
                 </Sequence>
               </ActivityAction>
             </p:PythonScope.Body>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </p:PythonScope>
-          <If Condition="[String.IsNullOrEmpty(resultantOutput) OR resultantOutput.Trim.Contains(&quot;Error&quot;)]" DisplayName="Verify Python Results" sap:VirtualizedContainerService.HintSize="617.6,2676" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[String.IsNullOrEmpty(resultantOutput) OR resultantOutput.Trim.Contains(&quot;Error&quot;)]" DisplayName="Verify Python Results" sap:VirtualizedContainerService.HintSize="636.8,4711.2" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -334,19 +346,19 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="584,1311.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="603.2,1508" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Sequence sap:VirtualizedContainerService.HintSize="540.8,1221.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <Sequence sap:VirtualizedContainerService.HintSize="540.8,1419.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:MultipleAssign DisplayName="TC Report execution update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,304.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+                  <ui:MultipleAssign DisplayName="TC Report execution update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
                     <ui:MultipleAssign.AssignOperations>
                       <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                         <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_29">
@@ -414,7 +426,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:MultipleAssign>
-                  <ui:MultipleAssign DisplayName="TC Report comments update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,304.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+                  <ui:MultipleAssign DisplayName="TC Report comments update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
                     <ui:MultipleAssign.AssignOperations>
                       <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                         <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_36">
@@ -482,7 +494,16 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:MultipleAssign>
-                  <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 1-7 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+                      <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">["Python Script Error"]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                      <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_01","TC_02","TC_03","TC_04","TC_05","TC_06","TC_07"}]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_4">
                     <Assign.To>
                       <OutArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport]</OutArgument>
                     </Assign.To>
@@ -490,19 +511,19 @@
                       <InArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport.DefaultView.ToTable(false,{"Execution","Comments"})]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,116" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
-                  <ui:LogMessage DisplayName="Log Message - Highlight level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Highlight level TC results written to excel&quot;]" />
+                  <ui:WriteRange AddHeaders="False" DataTable="[in_dt_TCReport]" DisplayName="write execution results to output" sap:VirtualizedContainerService.HintSize="478.4,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[in_Worksheet]" StartingCell="C2" WorkbookPath="[in_ExcelReport]" />
+                  <ui:LogMessage DisplayName="Log Message - Highlight level TC results written to excel" sap:VirtualizedContainerService.HintSize="478.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Highlight level TC results written to excel&quot;]" />
                 </Sequence>
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="476.8,1181.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="540.8,3041.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Assign DisplayName="resultant output" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign DisplayName="resultant output" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[resultantOutput]</OutArgument>
                   </Assign.To>
@@ -510,7 +531,7 @@
                     <InArgument x:TypeArguments="x:String">[resultantOutput.Replace("{","").Replace("}","").Replace("'","")]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:MultipleAssign DisplayName="TC Report execution update - highlight level" sap:VirtualizedContainerService.HintSize="433.6,52.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                <ui:MultipleAssign DisplayName="TC Report execution update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -573,12 +594,12 @@
                   </ui:MultipleAssign.AssignOperations>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <ui:MultipleAssign DisplayName="TC Report comments update - highlight level" sap:VirtualizedContainerService.HintSize="433.6,52.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                <ui:MultipleAssign DisplayName="TC Report comments update - highlight level" sap:VirtualizedContainerService.HintSize="478.4,336.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
@@ -641,14 +662,77 @@
                   </ui:MultipleAssign.AssignOperations>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <ui:LogMessage DisplayName="Log Message - Validate All Highlight Annotation flow started" sap:VirtualizedContainerService.HintSize="433.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Validation Success - Highlight Components - TC results updated&quot;]" />
-                <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="433.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
-                <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 01 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[if(in_dt_TCReport.Rows(0).Item("Execution").Equals("Pass"),"Verified different icons in Annotation Bar of Binder","Error - Verification of different icons")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_01"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 02 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(1).Item("Execution").Equals("Pass"),"Verified tooltip on different icons in Annotation Bar of Binder","Error - Tooltip verification on icons")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_02"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 03 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(1).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(2).Item("Execution").Equals("Pass"),"Verified functionality of Highlighter in Annotation bar of Binder","Error - Highlighter Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_03"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 04 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(0).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(3).Item("Execution").Equals("Pass"),"Verified functionality of Freehand Highlighter in Annotation bar of Binder","Error - Freehand Highlighter Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_04"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 05 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(2).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(4).Item("Execution").Equals("Pass"),"Verified functionality of Highlight Text in Annotation bar of Binder","Error - Highlight Text Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_05"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 06 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(4).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(5).Item("Execution").Equals("Pass"),"Verified functionality of Underline Text in Annotation bar of Binder","Error - Underline Text Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_06"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TC 07 TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="478.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">[If(resultantOutput.Split(","c)(3).Trim.Contains("True"),"Pass","Fail")]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">[If(in_dt_TCReport.Rows(6).Item("Execution").Equals("Pass"),"Verified functionality of Crossout Text in Annotation bar of Binder","Error - Crossout Text Annotation Verification")]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Annotation</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Annotation")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List (Of String) From {"TC_07"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:LogMessage DisplayName="Log Message - Validate All Highlight Annotation flow started" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Validation Success - Highlight Components - TC results updated&quot;]" />
+                <ui:LogMessage DisplayName="********************" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;*******************************************************************&quot;]" />
+                <Assign DisplayName="restructure TC Report datatable (execution/comments)" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
                   <Assign.To>
                     <OutArgument x:TypeArguments="sd:DataTable">[in_dt_TCReport]</OutArgument>
                   </Assign.To>
