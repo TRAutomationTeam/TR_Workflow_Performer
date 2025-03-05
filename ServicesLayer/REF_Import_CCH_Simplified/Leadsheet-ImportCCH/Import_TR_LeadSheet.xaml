@@ -1,11 +1,12 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Import_TR" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_str_ApplicationPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1004.8,983.2</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1792.8,2988.8</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Import_TR_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -44,6 +45,8 @@
       <x:String>UiPath.Platform.ObjectLibrary</x:String>
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -101,52 +104,56 @@
       <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Leadsheet Import TR Operation&#xA;" DisplayName="Import_TR" sap:VirtualizedContainerService.HintSize="560,918.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Leadsheet Import TR Operation&#xA;" DisplayName="Import_TR" sap:VirtualizedContainerService.HintSize="1803.2,2924" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Import_LeadSheet_Start" sap:VirtualizedContainerService.HintSize="497.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Performing Import Operation&quot;]" />
-    <ui:RetryScope DisplayName="Leadsheet Import TR Operation" sap:VirtualizedContainerService.HintSize="497.6,611.2" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="1">
+    <ui:LogMessage DisplayName="Import_LeadSheet_Start" sap:VirtualizedContainerService.HintSize="1740.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Performing Import Operation&quot;]" />
+    <ui:RetryScope DisplayName="Leadsheet Import TR Operation" sap:VirtualizedContainerService.HintSize="1740.8,2616.8" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="1">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="456,412" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1699.2,2417.6" sap2010:WorkflowViewState.IdRef="TryCatch_2">
             <TryCatch.Try>
-              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Leadsheet Import TR Operation" sap:VirtualizedContainerService.HintSize="1662.4,2132.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" ScopeGuid="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V2">
+              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Leadsheet Import TR Operation" sap:VirtualizedContainerService.HintSize="1662.4,2186.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" ScopeGuid="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V2">
                 <uix:NApplicationCard.Body>
                   <ActivityAction x:TypeArguments="x:Object">
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                     </ActivityAction.Argument>
-                    <Sequence sap:VirtualizedContainerService.HintSize="1628.8,1841.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <Sequence sap:VirtualizedContainerService.HintSize="1628.8,1895.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="2" DelayBefore="1" DisplayName="Import TR" sap:VirtualizedContainerService.HintSize="1566.4,157.6" sap2010:WorkflowViewState.IdRef="NClick_14" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DisplayName="Import TR" sap:VirtualizedContainerService.HintSize="1566.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_14" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable CvElementArea="489, 65, 29, 28" CvType="Icon" DesignTimeRectangle="494, 70, 20, 20" DesignTimeScaleFactor="1.25" ElementType="Icon" FriendlyName="'graphic'" FullSelectorArgument="&lt;ctrl role='push button' helpText='Import TR' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='' role='graphic' /&gt;" Guid="215cc25c-5706-40b5-9b75-c3f5e56922a2" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPjSURBVEhLvZVdTFtlGMdpqAkqN94oGq/crfHrxltvJTRbSACXLkCVuRkztBNaOxyw0rXAZguOtaVQkBJYx7rKuhWKtYwWwlgGdLhJSvkQW1y38lE++kVg/Xveg5C1pwpezItfzvs+53mf33me9+KkrK8v43ny/wp8Pg+kUglEIiGEwlIIRCUoqy1D7S8KXHTUH4jv9OdgGjYxBbOzLnR2tiM3NxccDgeco4fBKTyCw0ePIL/yMxQ0n0CB/uS+cGpy0dTbwhQMDw/i+PEiujifz8f5yzJItTUoLy9HXl4eRE1nqU7q9iVPXojGnqZ4gd//JywWM44d4yIrKwtWqxUrKyvY2NhAIBAAj8eD3W5HMBhEOBLB9tNter21tYXNzU06jxCLxVDWJob6liZeQEaTk5NDF8/MzKTHxOVyIZfL6UL19fWoq6ujn4afrmNh6RFUKhVmZmYwNDQEmUwGhUJBS860noP6ZoLA5XoIjUZFF99FLK3C6IMxBEJrmJ2bhdvtxtTUFDxeL8LRCKanp+mCi4uLmJycpGq46I5E2kqobjTGC3YlSmUDsrOzUV1djR9tbej9ow+roXWM3B2Bw+HAwMAAnBP3sRpcg91hp0brp7uwWCyw2WyIRqP4trkCymQCgmdhDtyv8nFnfAT9C7fR4b6CCDVzs9kMg8EAvV4P2+1++FeX0HWtCx6PB06nE1qtFh0dHQiHwxA2lUPZrY4XrCx78cTnxvTcKIo0PAz+Rl3yqhdLgXmENvz/wmOE1n00QcKaD8LLfKiNDfGCO/1yaGvfRXPNO1CID6Gx+m1oL7xP8R5aqOc/InsLLZI30CTOgKoyA5fKMiAuTkfPdVG8YLBPArXkdejqXvlvKNKhk7+Itu/T0HoxjZKmQVKcCvNVAVOgkb0GvTp9j37Tx3g4Kt2jR/9B0tizZwhVxWyYrhxAMGwtxNKTe9jejuKR52dYjR/RRcMhH70n8UHLJ3FnCBWn2OjuTBRYqijBq4xkUiASeoxu3SF6TwSkuKXrQ0TD/qSCcqoDY2IHQ71n0Hz+JUZyMgH5clI8FnuaVCDis3GNcQdmITTiFxjJyQRkbCROcD9Q0aN89ozwNBtXEwUDNwRQnmXHJRKSCRZ+v7n3nqxJbHdPKKUE+kSBzShAvYgpIBc752qHsfVNek++duJuxd57sk7sIKmgzyDAhZJUtP/w8oHQ/U3bpR10FO0NO+tvvk5lCm7pBRDkp6Akn7U/BSycLmSBz2PhiyIW9ZNi4cuTLJSeYuHE5ywUfprCFHjnnfh11ISJewfjPpVLGB8zYYxifJyKO3fWhHmqXpzg+bGMvwDv1ct8arqRBwAAAABJRU5ErkJggg==" InformativeScreenshot="44777f0d0df34b6af75e08bb53978b7d.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='*' /&gt;" SearchSteps="Selector, FuzzySelector, Image, CV" Version="V2" Visibility="Interactive" />
                         </uix:NClick.Target>
                       </uix:NClick>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayAfter="7" DelayBefore="1" DisplayName="Click 'Proceed'" sap:VirtualizedContainerService.HintSize="1566.4,157.6" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayAfter="[CInt(in_Config(&quot;Delay_5s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DisplayName="Click 'Proceed'" sap:VirtualizedContainerService.HintSize="1566.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable CvElementArea="499, 119, 97, 35" CvTextArea="518, 128, 57, 15" CvTextArgument="Proceed" CvType="Button" DesignTimeRectangle="501, 121, 94, 31" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Proceed'" FullSelectorArgument="&lt;ctrl role='push button' text='Proceed' /&gt;" FuzzySelectorArgument="&lt;ctrl role='push button' check:text='Proceed' /&gt;" Guid="7f835523-1342-40d2-99de-3a0d6f7daeb3" InformativeScreenshot="e02c86d14ed2c791b12944263d06e3d9.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Import TR' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
                         </uix:NClick.Target>
                       </uix:NClick>
-                      <uix:NCheckState DisplayName="Check App State 'Retry'" sap:VirtualizedContainerService.HintSize="1566.4,1436" sap2010:WorkflowViewState.IdRef="NCheckState_2" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="40" Version="V3">
+                      <uix:NCheckState DisplayName="Check App State 'Retry'" sap:VirtualizedContainerService.HintSize="1566.4,1425.6" sap2010:WorkflowViewState.IdRef="NCheckState_2" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="40" Version="V3">
                         <uix:NCheckState.IfExists>
-                          <Sequence sap:VirtualizedContainerService.HintSize="449.6,403.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                          <Sequence sap:VirtualizedContainerService.HintSize="449.6,395.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="2" DelayBefore="2" DisplayName="Click 'Close'" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_15" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
+                            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Click 'Close'" sap:VirtualizedContainerService.HintSize="387.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_15" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
                               <uix:NClick.Target>
                                 <uix:TargetAnchorable CvElementArea="606, 157, 96, 35" CvTextArea="633, 168, 41, 15" CvTextArgument="Close" CvType="Button" DesignTimeRectangle="608, 160, 93, 32" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;ctrl automationid='btnClose' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='btnClose' role='push button' check:text='Close' /&gt;" Guid="ac4b587d-3942-4886-8558-0a9ad073efed" InformativeScreenshot="1796d3491afc602c0b994dadaddcd24f.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Import TR' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive">
                                   <uix:TargetAnchorable.Anchors>
@@ -157,28 +164,28 @@
                                 </uix:TargetAnchorable>
                               </uix:NClick.Target>
                             </uix:NClick>
-                            <Throw DisplayName="Throw- Import TR failure" Exception="[new exception(&quot;Import TR failed with Operational failure!&quot;)]" sap:VirtualizedContainerService.HintSize="387.2,90.4" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                            <Throw DisplayName="Throw- Import TR failure" Exception="[new exception(&quot;Import TR failed with Operational failure!&quot;)]" sap:VirtualizedContainerService.HintSize="387.2,115.2" sap2010:WorkflowViewState.IdRef="Throw_2" />
                           </Sequence>
                         </uix:NCheckState.IfExists>
                         <uix:NCheckState.IfNotExists>
-                          <Sequence DisplayName="Process Complete import wizard" sap:VirtualizedContainerService.HintSize="1064,1217.6" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                          <Sequence DisplayName="Process Complete import wizard" sap:VirtualizedContainerService.HintSize="1064,1182.4" sap2010:WorkflowViewState.IdRef="Sequence_6">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <uix:NCheckState DisplayName="Process Completed ! " sap:VirtualizedContainerService.HintSize="1001.6,1104" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="520" Version="V3">
+                            <uix:NCheckState DisplayName="Process Completed ! " sap:VirtualizedContainerService.HintSize="1001.6,1092" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="520" Version="V3">
                               <uix:NCheckState.IfExists>
-                                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="499.2,885.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="499.2,848.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="436.8,388.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="436.8,424.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                                     <TryCatch.Try>
-                                      <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="4" DelayBefore="4" DisplayName="Close" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
+                                      <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_5s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_5s&quot;).ToString)]" DisplayName="Close" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Version="V3">
                                         <uix:NClick.Target>
                                           <uix:TargetAnchorable CvElementArea="530, 144, 97, 35" CvTextArea="558, 153, 41, 16" CvTextArgument="Close" CvType="Button" DesignTimeRectangle="533, 146, 93, 31" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;ctrl automationid='btnClose' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='btnClose' role='push button' check:text='Close' /&gt;" Guid="2ef93732-bdd2-44b3-b4ad-e2f06fd6cae8" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGEAAAAjCAYAAACElmTEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAMCSURBVGhD7ZjLTxNRFIf9X0yMC1zpxo0uXBgTdyZuXOiKIJGoJCZKMD5iDBhfmGATjFGwSYNWbUoqilqFCJYCAkoEGgGRR8uzhVJaWuhxfifecVrGGBfMXOK9yZfQOefODOebe+60W0gN24eSIMFgCbe93bS18KHCYgIDYSXBbpQECVASJEBJkAAlQQKUBAlQEiRASZAAJUEClAQJkEZCseMdDUVilEyv8g1hrK5lqal7lOPtgxGKJ9N08l7zurmbHSkkXH/exQUHwVCErj3tpGNVTVTt66UKdyfn9I7McLzsUdu6+Zsd2yUUnHDSVDTBBUbRzXKAkrCBFFa/5RuIaCLM4oJ8CTtKnNyiRPvKZonm4ym6+qSD49uKaikwGKaVzO/2hrg433nnR4oupX5FiBKpjD7XamyX8PhDiG8ABTOLC/IlQAAK39I3QXvL3FR6v4UWEiucU3TXTzWvvvB50d52lbpYyuHKFzx395l63l+mF5bpuMNPBy97eW5KE1qgyTVe1wpsl9DY9Z1voLV/0jQuMEoQRZxdTOYU7cGbr/q5GoLD/LevYyTnPMY8r5Yjjr3u+cHHEDPmWsGmXAkHLnp4zrfJWE6O8fj+Cx5uMRh4yvGWhRWBvOa+8ZxVBW56PnEuZIhjVmG7hLO1rXwDYzNx07jgXyXg887TLnI0fuZXX7Qu7B9oXTjXn8bfVuRGYLsEFAobJAp8ydVumgPM2hEw5oinGfuE8TjA04+BdiP2k0rtVTg/zw5slwBES0KRsUfgO0Kdv58Gxue5+MgxSsBnFBKjZ3iG28zRW000p+0R6cwandK+0O0556ZDFT7O3Vf+jEITUZ5f7myjkpr3+tvUkRsvaXtxHV+zSvv/sVLEfVmFFBLAlfogrwgUBwOtIzyfYEGI50vIf0VFbCq2zO0HcbHhi7GkrRpPYEi/3p2GHv16APvH6PQiv1mJHKuQRsL/jJIgAUqCBCgJEqAkSICSIAFKggQoCRKgJEhAjoSx2Tj/mqmwFvzKq0tQw85B9BNqsBe/VCaBBQAAAABJRU5ErkJggg==" InformativeScreenshot="a6406f06bf3ed45b5d199f3a5a8ae6fb.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Import TR' /&gt;" SearchSteps="Selector, FuzzySelector, Image, CV" Version="V2" Visibility="Interactive">
                                             <uix:TargetAnchorable.Anchors>
@@ -191,10 +198,10 @@
                                       </uix:NClick>
                                     </TryCatch.Try>
                                     <TryCatch.Catches>
-                                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,228.8" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
@@ -202,7 +209,7 @@
                                           <ActivityAction.Argument>
                                             <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                           </ActivityAction.Argument>
-                                          <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayAfter="2" DelayBefore="2" DisplayName="Close" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="5" Version="V3">
+                                          <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Close" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="[CInt(in_Config(&quot;Timeout_XS&quot;).ToString)]" Version="V3">
                                             <uix:NClick.Target>
                                               <uix:TargetAnchorable CvElementArea="530, 144, 97, 35" CvTextArea="558, 153, 41, 16" CvTextArgument="Close" CvType="Button" DesignTimeRectangle="533, 146, 93, 31" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;ctrl automationid='btnClose' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='btnClose' role='push button' check:text='Close' /&gt;" Guid="2ef93732-bdd2-44b3-b4ad-e2f06fd6cae8" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGEAAAAjCAYAAACElmTEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAMCSURBVGhD7ZjLTxNRFIf9X0yMC1zpxo0uXBgTdyZuXOiKIJGoJCZKMD5iDBhfmGATjFGwSYNWbUoqilqFCJYCAkoEGgGRR8uzhVJaWuhxfifecVrGGBfMXOK9yZfQOefODOebe+60W0gN24eSIMFgCbe93bS18KHCYgIDYSXBbpQECVASJEBJkAAlQQKUBAlQEiRASZAAJUEClAQJkEZCseMdDUVilEyv8g1hrK5lqal7lOPtgxGKJ9N08l7zurmbHSkkXH/exQUHwVCErj3tpGNVTVTt66UKdyfn9I7McLzsUdu6+Zsd2yUUnHDSVDTBBUbRzXKAkrCBFFa/5RuIaCLM4oJ8CTtKnNyiRPvKZonm4ym6+qSD49uKaikwGKaVzO/2hrg433nnR4oupX5FiBKpjD7XamyX8PhDiG8ABTOLC/IlQAAK39I3QXvL3FR6v4UWEiucU3TXTzWvvvB50d52lbpYyuHKFzx395l63l+mF5bpuMNPBy97eW5KE1qgyTVe1wpsl9DY9Z1voLV/0jQuMEoQRZxdTOYU7cGbr/q5GoLD/LevYyTnPMY8r5Yjjr3u+cHHEDPmWsGmXAkHLnp4zrfJWE6O8fj+Cx5uMRh4yvGWhRWBvOa+8ZxVBW56PnEuZIhjVmG7hLO1rXwDYzNx07jgXyXg887TLnI0fuZXX7Qu7B9oXTjXn8bfVuRGYLsEFAobJAp8ydVumgPM2hEw5oinGfuE8TjA04+BdiP2k0rtVTg/zw5slwBES0KRsUfgO0Kdv58Gxue5+MgxSsBnFBKjZ3iG28zRW000p+0R6cwandK+0O0556ZDFT7O3Vf+jEITUZ5f7myjkpr3+tvUkRsvaXtxHV+zSvv/sVLEfVmFFBLAlfogrwgUBwOtIzyfYEGI50vIf0VFbCq2zO0HcbHhi7GkrRpPYEi/3p2GHv16APvH6PQiv1mJHKuQRsL/jJIgAUqCBCgJEqAkSICSIAFKggQoCRKgJEhAjoSx2Tj/mqmwFvzKq0tQw85B9BNqsBe/VCaBBQAAAABJRU5ErkJggg==" InformativeScreenshot="a6406f06bf3ed45b5d199f3a5a8ae6fb.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Import TR' /&gt;" SearchSteps="Selector, FuzzySelector, Image, CV" Version="V2" Visibility="Visible">
                                                 <uix:TargetAnchorable.Anchors>
@@ -217,7 +224,7 @@
                                       </Catch>
                                     </TryCatch.Catches>
                                   </TryCatch>
-                                  <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayAfter="2" DelayBefore="2" DisplayName="Close" sap:VirtualizedContainerService.HintSize="436.8,157.6" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="5" Version="V3">
+                                  <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Close" sap:VirtualizedContainerService.HintSize="436.8,189.6" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1d471fb1-a38c-4d88-99e9-4bfe182ee4e2" Timeout="[CInt(in_Config(&quot;Timeout_XS&quot;).ToString)]" Version="V3">
                                     <uix:NClick.Target>
                                       <uix:TargetAnchorable CvElementArea="530, 144, 97, 35" CvTextArea="558, 153, 41, 16" CvTextArgument="Close" CvType="Button" DesignTimeRectangle="533, 146, 93, 31" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;ctrl automationid='btnClose' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='btnClose' role='push button' check:text='Close' /&gt;" Guid="2ef93732-bdd2-44b3-b4ad-e2f06fd6cae8" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGEAAAAjCAYAAACElmTEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAMCSURBVGhD7ZjLTxNRFIf9X0yMC1zpxo0uXBgTdyZuXOiKIJGoJCZKMD5iDBhfmGATjFGwSYNWbUoqilqFCJYCAkoEGgGRR8uzhVJaWuhxfifecVrGGBfMXOK9yZfQOefODOebe+60W0gN24eSIMFgCbe93bS18KHCYgIDYSXBbpQECVASJEBJkAAlQQKUBAlQEiRASZAAJUEClAQJkEZCseMdDUVilEyv8g1hrK5lqal7lOPtgxGKJ9N08l7zurmbHSkkXH/exQUHwVCErj3tpGNVTVTt66UKdyfn9I7McLzsUdu6+Zsd2yUUnHDSVDTBBUbRzXKAkrCBFFa/5RuIaCLM4oJ8CTtKnNyiRPvKZonm4ym6+qSD49uKaikwGKaVzO/2hrg433nnR4oupX5FiBKpjD7XamyX8PhDiG8ABTOLC/IlQAAK39I3QXvL3FR6v4UWEiucU3TXTzWvvvB50d52lbpYyuHKFzx395l63l+mF5bpuMNPBy97eW5KE1qgyTVe1wpsl9DY9Z1voLV/0jQuMEoQRZxdTOYU7cGbr/q5GoLD/LevYyTnPMY8r5Yjjr3u+cHHEDPmWsGmXAkHLnp4zrfJWE6O8fj+Cx5uMRh4yvGWhRWBvOa+8ZxVBW56PnEuZIhjVmG7hLO1rXwDYzNx07jgXyXg887TLnI0fuZXX7Qu7B9oXTjXn8bfVuRGYLsEFAobJAp8ydVumgPM2hEw5oinGfuE8TjA04+BdiP2k0rtVTg/zw5slwBES0KRsUfgO0Kdv58Gxue5+MgxSsBnFBKjZ3iG28zRW000p+0R6cwandK+0O0556ZDFT7O3Vf+jEITUZ5f7myjkpr3+tvUkRsvaXtxHV+zSvv/sVLEfVmFFBLAlfogrwgUBwOtIzyfYEGI50vIf0VFbCq2zO0HcbHhi7GkrRpPYEi/3p2GHv16APvH6PQiv1mJHKuQRsL/jJIgAUqCBCgJEqAkSICSIAFKggQoCRKgJEhAjoSx2Tj/mqmwFvzKq0tQw85B9BNqsBe/VCaBBQAAAABJRU5ErkJggg==" InformativeScreenshot="a6406f06bf3ed45b5d199f3a5a8ae6fb.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Import TR' /&gt;" SearchSteps="FuzzySelector, Image, CV" Version="V2" Visibility="Visible">
                                         <uix:TargetAnchorable.Anchors>
@@ -284,10 +291,10 @@
               </uix:NApplicationCard>
             </TryCatch.Try>
             <TryCatch.Catches>
-              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="422.4,248" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1665.6,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
