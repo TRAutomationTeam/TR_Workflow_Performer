@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Activity mc:Ignorable="sap sap2010" x:Class="Delete_Entity" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:uasa="clr-namespace:UiPath.Activities.System.Arrays;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_DtGOFormSelection" Type="InArgument(sd:DataTable)" />
@@ -13,7 +12,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>916,3302.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>872.8,3355.2</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Delete_Entity_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -56,6 +55,8 @@
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>UiPath.Activities.System.Arrays</x:String>
       <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -123,6 +124,8 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
       <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -131,7 +134,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Delete_Entity" sap:VirtualizedContainerService.HintSize="699.2,3237.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Delete_Entity" sap:VirtualizedContainerService.HintSize="883.2,3290.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="Source Documents (W-2, 1099s, 1098)" Name="strTsCategory" />
       <Variable x:TypeArguments="x:String" Default="INT 11" Name="str_entity_name" />
@@ -142,7 +145,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="636.8,81.6" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <Assign sap:VirtualizedContainerService.HintSize="820.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_7">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:List(x:String)">[out_listOfDeletedEntity]</OutArgument>
       </Assign.To>
@@ -150,19 +153,19 @@
         <InArgument x:TypeArguments="scg:List(x:String)">[new list (of string)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ServicesLayer\REF_Import_Go_Simplified\LSGO-ImportGo\GoSystem_Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="636.8,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Import_Go_Simplified\TaxSoftware-ImportGO\GoSystem_Login.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ServicesLayer\REF_Import_Go_Simplified\LSGO-ImportGo\GoSystem_Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="820.8,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Import_Go_Simplified\TaxSoftware-ImportGO\GoSystem_Login.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_DtGOFormSelection]" DisplayName="For Each Row - From Mapping" sap:VirtualizedContainerService.HintSize="636.8,2757.6" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_DtGOFormSelection]" DisplayName="For Each Row - From Mapping" sap:VirtualizedContainerService.HintSize="820.8,2833.6" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="GO_Form_Selection" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="603.2,2569.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="787.2,2636" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="strTsFormName" />
               <Variable x:TypeArguments="x:String" Name="strLeadsheetFormName" />
@@ -178,7 +181,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:MultipleAssign DisplayName="Multiple Assign - GO_SystemExcelHeader" sap:VirtualizedContainerService.HintSize="560,335.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign DisplayName="Multiple Assign - GO_SystemExcelHeader" sap:VirtualizedContainerService.HintSize="724.8,367.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
               <ui:MultipleAssign.AssignOperations>
                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -254,7 +257,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:MultipleAssign>
-            <If Condition="[strTsAddFlag.trim.ToUpper.Equals(&quot;YES&quot;) = true AND strExecFlag.Trim.ToUpper.Equals(&quot;YES&quot;) = true]" sap:VirtualizedContainerService.HintSize="560,2104.8" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[strTsAddFlag.trim.ToUpper.Equals(&quot;YES&quot;) = true AND strExecFlag.Trim.ToUpper.Equals(&quot;YES&quot;) = true]" sap:VirtualizedContainerService.HintSize="724.8,2180" sap2010:WorkflowViewState.IdRef="If_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
@@ -262,7 +265,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="526.4,1921.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="691.2,1913.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:Char" Name="intChar" />
                   </Sequence.Variables>
@@ -271,7 +274,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Assign sap:VirtualizedContainerService.HintSize="483.2,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <Assign sap:VirtualizedContainerService.HintSize="628.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:Char">[intChar]</OutArgument>
                     </Assign.To>
@@ -279,13 +282,13 @@
                       <InArgument x:TypeArguments="x:Char">B</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: GO Tax" sap:VirtualizedContainerService.HintSize="483.2,1710.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="ed91399b-284e-4372-a69e-db41338b9006" Version="V2">
+                  <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: GO Tax" sap:VirtualizedContainerService.HintSize="628.8,1711.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="ed91399b-284e-4372-a69e-db41338b9006" Version="V2">
                     <uix:NApplicationCard.Body>
                       <ActivityAction x:TypeArguments="x:Object">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="449.6000000000001,1676" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="595.2,1471.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:Boolean" Name="isEntityVisible" />
                             <Variable x:TypeArguments="x:String" Default="1099-DIV" Name="str_TS_form_name" />
@@ -357,7 +360,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </ui:ForEach>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="1" DelayBefore="1" DisplayName="Click - Collapse All Sections" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DisplayName="Click - Collapse All Sections" sap:VirtualizedContainerService.HintSize="387.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/909021a3-af3f-47ac-a393-cdbb76ecc32a/600M/600M#!/22/5/0/0,0,0,0,0" CvElementArea="458, 312, 23, 21" CvTextArea="355, 314, 100, 21" CvTextArgument="Collapse All" CvType="Button" DesignTimeRectangle="357, 296, 134, 43" DesignTimeScaleFactor="1.25" FriendlyName="'Collapse All'" FullSelectorArgument="&lt;webctrl id='collapseNavTree' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl id='collapseNavTree' tag='DIV' type='' class='pull-right-collapse-all text-bold ng-scope' aaname='Collapse All ' check:innerText='Collapse All' /&gt;" Guid="8e80a565-3d85-4dfc-9d09-7585f45787e2" InformativeScreenshot="009a1a6fbab9fda363d5bc4f007fa94c.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 5758US | Anderson, Robin &amp;amp; Rachel' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                             </uix:NClick.Target>
@@ -368,7 +371,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </uix:NClick>
-                          <uix:NMouseScroll KeyModifiers="{x:Null}" DelayAfter="1" DelayBefore="1" Direction="Up" DisplayName="MouseScroll_GO_System_AddEditForm" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NMouseScroll_1" InteractionMode="HardwareEvents" MovementUnits="5" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                          <uix:NMouseScroll KeyModifiers="{x:Null}" DelayAfter="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" Direction="Up" DisplayName="MouseScroll_GO_System_AddEditForm" sap:VirtualizedContainerService.HintSize="532.8,189.6" sap2010:WorkflowViewState.IdRef="NMouseScroll_1" InteractionMode="HardwareEvents" MovementUnits="5" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                             <uix:NMouseScroll.Target>
                               <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/cf23560b-4979-4063-915a-a70480a8948f/600M/600M#!/0/0/0/0,0,0,0,0" DesignTimeRectangle="9, 389, 483, 649" DesignTimeScaleFactor="1.25" FriendlyName="'New Features'" FullSelectorArgument="&lt;webctrl class='org-navtree' parentid='org-navtree-container' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl class='org-navtree' parentid='org-navtree-container' tag='DIV' type='' aaname='                                                                                                      ' check:innerText='New Features&amp;#xD;&amp;#xA;QuickTrack&amp;#xD;&amp;#xA;QuickForm&amp;#xD;&amp;#xA; General Information&amp;#xD;&amp;#xA; E-file&amp;#xD;&amp;#xA; Source Documents (W-2, 1099s, 1098)' /&gt;" Guid="2a06ca2c-833f-4a32-8257-e2dccd29d3f6" InformativeScreenshot="6ded788585a7037925dff79b02af0b8b.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
                             </uix:NMouseScroll.Target>
@@ -379,15 +382,15 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </uix:NMouseScroll>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="1" DelayBefore="1" DisplayName="Click 'Source Documents'" sap:VirtualizedContainerService.HintSize="387.2,193.6" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DisplayName="Click 'Source Documents'" sap:VirtualizedContainerService.HintSize="532.8,225.6" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                             <uix:NClick.Target>
-                              <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/cb74df02-eb72-44e4-929e-438db098cfe5/600M/600M#!/0/0/0/0,0,0,0,0" CvTextArea="62, 407, 292, 17" CvTextArgument="Source Documents (W-2, 1099s, 1098)" CvType="Text" DesignTimeRectangle="63, 397, 373, 38" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Source Documents'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl id='-label' tag='SPAN' aaname='{0}' /&gt;&quot;, strTsCategory)]" FuzzySelectorArgument="&lt;webctrl aria-label='Source Documents (W-2, 1099s, 1098)' id='-label' tag='SPAN' type='' class='bento-tree-item-cta ng-binding navtree-has-data' aaname='Source Documents (W-2, 1099s, 1098)' check:innerText='Source Documents (W-2, 1099s, 1098)' /&gt;" Guid="67c77b45-c924-4818-8e4d-2dfbd2166e73" InformativeScreenshot="0a72ec4f543ac91bc60be112857c9769.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 5177VS | Anderson, Jack' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Interactive" />
+                              <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/cb74df02-eb72-44e4-929e-438db098cfe5/600M/600M#!/0/0/0/0,0,0,0,0" CvTextArea="62, 407, 292, 17" CvTextArgument="Source Documents (W-2, 1099s, 1098)" CvType="Text" DesignTimeRectangle="63, 397, 373, 38" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Source Documents'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl id='-label' tag='SPAN' aaname='{0}' /&gt;&quot;, strTsCategory)]" Guid="67c77b45-c924-4818-8e4d-2dfbd2166e73" InformativeScreenshot="0a72ec4f543ac91bc60be112857c9769.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 5177VS | Anderson, Jack' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Interactive" />
                             </uix:NClick.Target>
                             <uix:NClick.VerifyOptions>
-                              <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears" Retry="True" Timeout="40" />
+                              <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears" Retry="True" Timeout="[Cint(in_Config(&quot;Timeout_L&quot;).ToString)]" />
                             </uix:NClick.VerifyOptions>
                           </uix:NClick>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="1" DelayBefore="1" DisplayName="Click -  Form Name" sap:VirtualizedContainerService.HintSize="387.2,193.6" sap2010:WorkflowViewState.IdRef="NClick_14" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DisplayName="Click -  Form Name" sap:VirtualizedContainerService.HintSize="532.8,225.6" sap2010:WorkflowViewState.IdRef="NClick_14" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/b17c9e7e-230d-4da1-bc0d-a52dd5975aa1/600M/600M#!/0/0/0/0,0,0,0,0" DesignTimeRectangle="90, 774, 350, 38" DesignTimeScaleFactor="1.25" FriendlyName="'Kid-tax Income'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl aria-label='{0}' id='-label' tag='SPAN' /&gt;&quot;, strTsFormName)]" FuzzySelectorArgument="&lt;webctrl aria-label='Kid-tax Income' id='-label' tag='SPAN' type='' class='bento-tree-item-cta ng-binding navtree-has-data navtree-remove-node' aaname='Kid-tax Income' check:innerText='Kid-tax Income' /&gt;" Guid="58b84fbb-6af6-4dc3-ae7f-6a9c6c0afe5f" InformativeScreenshot="09c882c2ef90c5540d8add05101c1451.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                             </uix:NClick.Target>
@@ -405,7 +408,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </uix:NClick>
-                          <TryCatch DisplayName="Entity delete" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                          <TryCatch DisplayName="Entity delete" sap:VirtualizedContainerService.HintSize="532.8,56.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -413,22 +416,22 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                             <TryCatch.Try>
-                              <Sequence sap:VirtualizedContainerService.HintSize="449.6,305.6" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                              <Sequence sap:VirtualizedContainerService.HintSize="416,305.6" sap2010:WorkflowViewState.IdRef="Sequence_34">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="2" DelayBefore="2" DisplayName="Click - Entity Name" sap:VirtualizedContainerService.HintSize="387.2,193.6" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Click - Entity Name" sap:VirtualizedContainerService.HintSize="353.6,216.8" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                                   <uix:NClick.Target>
                                     <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/b17c9e7e-230d-4da1-bc0d-a52dd5975aa1/600M/600M#!/0/0/0/0,0,0,0,0" CvTextArgument="Sagar" CvType="Text" DesignTimeRectangle="92, 607, 326, 38" DesignTimeScaleFactor="1.25" FriendlyName="'Sagar'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl aria-label='{0}' id='-label' tag='SPAN' /&gt;&quot;, str_entity_name)]" FuzzySelectorArgument="&lt;webctrl aria-label='Sagar' id='-label' tag='SPAN' type='' class='bento-tree-item-cta ng-binding navtree-has-data navtree-remove-node' aaname='Sagar' check:innerText='Sagar' /&gt;" Guid="6f4b7558-0d65-4ec5-bc0e-34063b597e01" ImageBase64="" InformativeScreenshot="30711aa596754b7b72c505de863e7b54.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete">
                                       <uix:TargetAnchorable.PointOffset>
-                                        <uix:PointOffset Position="BottomLeft" X="8" Y="-16" />
+                                        <uix:PointOffset Position="BottomLeft" X="[Cint(in_Config(&quot;GIS_Offset_X_GoDelEntity&quot;).ToString)]" Y="[Cint(in_Config(&quot;GIS_Offset_Y_GoDelEntity&quot;).ToString)]" />
                                       </uix:TargetAnchorable.PointOffset>
                                     </uix:TargetAnchorable>
                                   </uix:NClick.Target>
                                   <uix:NClick.VerifyOptions>
-                                    <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears" Retry="True" Timeout="30" />
+                                    <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears" Retry="True" Timeout="[Cint(in_Config(&quot;Timeout_L&quot;).ToString)]" />
                                   </uix:NClick.VerifyOptions>
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -456,15 +459,15 @@
                               </Catch>
                             </TryCatch.Catches>
                           </TryCatch>
-                          <uix:NCheckState DisplayName="Check App State 'Message'" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="NCheckState_4" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Timeout="5" Version="V3">
+                          <uix:NCheckState DisplayName="Check App State 'Message'" sap:VirtualizedContainerService.HintSize="532.8,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_4" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Timeout="5" Version="V3">
                             <uix:NCheckState.IfExists>
-                              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="449.6,456.8" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="449.6,444" sap2010:WorkflowViewState.IdRef="Sequence_24">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="4" DelayBefore="2" DisplayName="Click 'OK'" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_15" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_5s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Click 'OK'" sap:VirtualizedContainerService.HintSize="387.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_15" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                                   <uix:NClick.Target>
                                     <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/cb74df02-eb72-44e4-929e-438db098cfe5/600M/600M#!/97/334/0/0,0,0,0,24" CvElementArea="679, 660, 88, 44" CvTextArea="711, 676, 22, 12" CvTextArgument="OK" CvType="Button" DesignTimeRectangle="682, 663, 82, 38" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'OK'" FullSelectorArgument="&lt;webctrl tag='BUTTON' aaname='OK' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='BUTTON' aaname='OK' type='' class='ng-binding ng-scope ng-isolate-scope btn btn-primary' check:text='OK' /&gt;" Guid="759552c3-d16b-4bce-b616-d0dc6612ff0a" InformativeScreenshot="85731ec464b663db42bdfcd792f1beb6.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 5177VS | Anderson, Jack' /&gt;" SearchSteps="Selector, CV" Version="V2" Visibility="Interactive">
                                       <uix:TargetAnchorable.Anchors>
@@ -475,7 +478,7 @@
                                     </uix:TargetAnchorable>
                                   </uix:NClick.Target>
                                 </uix:NClick>
-                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Deletion of entity success for &quot;+&quot;Form - &quot;+strLeadsheetFormName+&quot; &amp; Entity - &quot;+str_entity_name]" />
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Deletion of entity success for &quot;+&quot;Form - &quot;+strLeadsheetFormName+&quot; &amp; Entity - &quot;+str_entity_name]" />
                               </Sequence>
                             </uix:NCheckState.IfExists>
                             <uix:NCheckState.IfNotExists>
@@ -497,7 +500,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </uix:NCheckState>
-                          <TryCatch DisplayName="Delete Ref Entity" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                          <TryCatch DisplayName="Delete Ref Entity" sap:VirtualizedContainerService.HintSize="532.8,1118.4" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -505,14 +508,14 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                             <TryCatch.Try>
-                              <Sequence sap:VirtualizedContainerService.HintSize="496,609.6" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                              <Sequence sap:VirtualizedContainerService.HintSize="496,593.6" sap2010:WorkflowViewState.IdRef="Sequence_36">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_9">
                                   <Assign.To>
                                     <OutArgument x:TypeArguments="x:String">[str_entity_name]</OutArgument>
                                   </Assign.To>
@@ -520,16 +523,16 @@
                                     <InArgument x:TypeArguments="x:String">["DeleteEntity_"+Now.ToString("dd/MM").Replace("/","_")]</InArgument>
                                   </Assign.Value>
                                 </Assign>
-                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="2" DelayBefore="2" DisplayName="Click - Entity Name" sap:VirtualizedContainerService.HintSize="433.6,193.6" sap2010:WorkflowViewState.IdRef="NClick_21" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Click - Entity Name" sap:VirtualizedContainerService.HintSize="433.6,225.6" sap2010:WorkflowViewState.IdRef="NClick_21" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                                   <uix:NClick.Target>
                                     <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/b17c9e7e-230d-4da1-bc0d-a52dd5975aa1/600M/600M#!/0/0/0/0,0,0,0,0" CvTextArgument="Sagar" CvType="Text" DesignTimeRectangle="92, 607, 326, 38" DesignTimeScaleFactor="1.25" FriendlyName="'Sagar'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl aria-label='{0}' id='-label' tag='SPAN' /&gt;&quot;, str_entity_name)]" FuzzySelectorArgument="&lt;webctrl aria-label='Sagar' id='-label' tag='SPAN' type='' class='bento-tree-item-cta ng-binding navtree-has-data navtree-remove-node' aaname='Sagar' check:innerText='Sagar' /&gt;" Guid="6f4b7558-0d65-4ec5-bc0e-34063b597e01" ImageBase64="" InformativeScreenshot="30711aa596754b7b72c505de863e7b54.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete">
                                       <uix:TargetAnchorable.PointOffset>
-                                        <uix:PointOffset Position="BottomLeft" X="8" Y="-16" />
+                                        <uix:PointOffset Position="BottomLeft" X="[Cint(in_Config(&quot;GIS_Offset_X_GoDelEntity&quot;).ToString)]" Y="[Cint(in_Config(&quot;GIS_Offset_Y_GoDelEntity&quot;).ToString)]" />
                                       </uix:TargetAnchorable.PointOffset>
                                     </uix:TargetAnchorable>
                                   </uix:NClick.Target>
                                   <uix:NClick.VerifyOptions>
-                                    <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears" Retry="True" Timeout="30" />
+                                    <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears" Retry="True" Timeout="[Cint(in_Config(&quot;Timeout_L&quot;).ToString)]" />
                                   </uix:NClick.VerifyOptions>
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -538,7 +541,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </uix:NClick>
-                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Delete Ref Entity - &quot;+str_entity_name +&quot; deleted&quot;]" />
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Delete Ref Entity - &quot;+str_entity_name +&quot; deleted&quot;]" />
                               </Sequence>
                             </TryCatch.Try>
                             <TryCatch.Catches>
@@ -558,15 +561,15 @@
                               </Catch>
                             </TryCatch.Catches>
                           </TryCatch>
-                          <uix:NCheckState DisplayName="Check App State 'Message'" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="NCheckState_8" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Timeout="5" Version="V3">
+                          <uix:NCheckState DisplayName="Check App State 'Message'" sap:VirtualizedContainerService.HintSize="532.8,49.6" sap2010:WorkflowViewState.IdRef="NCheckState_8" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Timeout="5" Version="V3">
                             <uix:NCheckState.IfExists>
-                              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="449.6,456.8" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="449.6,444" sap2010:WorkflowViewState.IdRef="Sequence_37">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="4" DelayBefore="2" DisplayName="Click 'OK'" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_22" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
+                                <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_5s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Click 'OK'" sap:VirtualizedContainerService.HintSize="387.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_22" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ed91399b-284e-4372-a69e-db41338b9006" Version="V3">
                                   <uix:NClick.Target>
                                     <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/cb74df02-eb72-44e4-929e-438db098cfe5/600M/600M#!/97/334/0/0,0,0,0,24" CvElementArea="679, 660, 88, 44" CvTextArea="711, 676, 22, 12" CvTextArgument="OK" CvType="Button" DesignTimeRectangle="682, 663, 82, 38" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'OK'" FullSelectorArgument="&lt;webctrl tag='BUTTON' aaname='OK' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='BUTTON' aaname='OK' type='' class='ng-binding ng-scope ng-isolate-scope btn btn-primary' check:text='OK' /&gt;" Guid="759552c3-d16b-4bce-b616-d0dc6612ff0a" InformativeScreenshot="85731ec464b663db42bdfcd792f1beb6.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 5177VS | Anderson, Jack' /&gt;" SearchSteps="Selector, CV" Version="V2" Visibility="Interactive">
                                       <uix:TargetAnchorable.Anchors>
@@ -577,7 +580,7 @@
                                     </uix:TargetAnchorable>
                                   </uix:NClick.Target>
                                 </uix:NClick>
-                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Deletion of entity success for &quot;+&quot;Form - &quot;+strLeadsheetFormName+&quot; &amp; Entity - &quot;+str_entity_name]" />
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Deletion of entity success for &quot;+&quot;Form - &quot;+strLeadsheetFormName+&quot; &amp; Entity - &quot;+str_entity_name]" />
                               </Sequence>
                             </uix:NCheckState.IfExists>
                             <uix:NCheckState.IfNotExists>
@@ -615,7 +618,7 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -634,25 +637,25 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: GO Tax Software" sap:VirtualizedContainerService.HintSize="636.8,52.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="66c24ed8-4356-4b17-bf81-eae8f140b10c" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: GO Tax Software" sap:VirtualizedContainerService.HintSize="820.8,48" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="66c24ed8-4356-4b17-bf81-eae8f140b10c" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="545,1479" sap2010:WorkflowViewState.IdRef="Sequence_15">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="545.6,1344" sap2010:WorkflowViewState.IdRef="Sequence_15">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="2" DelayBefore="2" DisplayName="Click 'Compute'" sap:VirtualizedContainerService.HintSize="483,157" sap2010:WorkflowViewState.IdRef="NClick_11" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="66c24ed8-4356-4b17-bf81-eae8f140b10c" Version="V3">
+            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_1s&quot;).ToString)]" DisplayName="Click 'Compute'" sap:VirtualizedContainerService.HintSize="483.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_11" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="66c24ed8-4356-4b17-bf81-eae8f140b10c" Version="V3">
               <uix:NClick.Target>
                 <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/63f0f064-659e-4535-adf3-8e432e5ab5c1/600M/600M#!/97/334/0/0,0,0,0,22" CvTextArea="71, 281, 73, 18" CvTextArgument="Compute" CvType="Text" DesignTimeRectangle="44, 269, 146, 44" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Compute'" FullSelectorArgument="&lt;webctrl id='organizertoolbar_computeButton' tag='A' idx='1' /&gt;" FuzzySelectorArgument="&lt;webctrl id='organizertoolbar_computeButton' tag='A' type='' class='dropdown-toggle ng-binding' aaname='                                                     Compute             ' check:text='Compute' /&gt;" Guid="7d467c3d-47e8-4ec9-81b3-750f1637b79f" InformativeScreenshot="2fd78ddc3dd1852de6180d2951d4de51.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 5177VS | Anderson, Jack' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
               </uix:NClick.Target>
             </uix:NClick>
-            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="13" DelayBefore="2" DisplayName="Click 'Full Recompute'" sap:VirtualizedContainerService.HintSize="483.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_12" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="66c24ed8-4356-4b17-bf81-eae8f140b10c" Version="V3">
+            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_15s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Click 'Full Recompute'" sap:VirtualizedContainerService.HintSize="483.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_12" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="66c24ed8-4356-4b17-bf81-eae8f140b10c" Version="V3">
               <uix:NClick.Target>
                 <uix:TargetAnchorable Accuracy="0.75" BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/63f0f064-659e-4535-adf3-8e432e5ab5c1/600M/600M#!/97/334/0/0,0,0,0,22" CvTextArea="70, 342, 122, 20" CvTextArgument="Full Recompute" CvType="Text" DesignTimeRectangle="17, 330, 199, 45" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Full Recompute'" FullSelectorArgument="&lt;webctrl id='organizertoolbar_fullcomputebutton' tag='A' /&gt;" FuzzySelectorArgument="&lt;webctrl id='organizertoolbar_fullcomputebutton' tag='A' type='' class='ng-binding' aaname='                                                         Full Recompute                     ' check:innerText='Full Recompute' /&gt;" Guid="1c88aad1-404a-4bc1-ab2d-8408b2c06582" ImageBase64="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" InformativeScreenshot="2d8cab37159f77740cf81154d844ae35.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 5177VS | Anderson, Jack' /&gt;" SearchSteps="Selector, Image, CV" Version="V2" Visibility="Interactive" />
               </uix:NClick.Target>
@@ -662,21 +665,21 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </uix:NClick>
-            <uix:NCheckState DisplayName="Check App State 'Computing... Close'" sap:VirtualizedContainerService.HintSize="483.2,52.8" sap2010:WorkflowViewState.IdRef="NCheckState_7" Mode="WaitDisappear" ScopeIdentifier="66c24ed8-4356-4b17-bf81-eae8f140b10c" Timeout="30" Version="V3">
+            <uix:NCheckState DisplayName="Check App State 'Computing... Close'" sap:VirtualizedContainerService.HintSize="483.2,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_7" Mode="WaitDisappear" ScopeIdentifier="66c24ed8-4356-4b17-bf81-eae8f140b10c" Timeout="30" Version="V3">
               <uix:NCheckState.IfExists>
-                <Sequence DisplayName="Target disappears" sap:VirtualizedContainerService.HintSize="545.6,1017.6" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                <Sequence DisplayName="Target disappears" sap:VirtualizedContainerService.HintSize="545.6,973.6" sap2010:WorkflowViewState.IdRef="Sequence_29">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NApplicationCard sap2010:Annotation.AnnotationText="Run this workflow parallel with the GoSystem Add/Edit input workflow execution." AttachMode="ByInstance" ContinueOnError="True" DisplayName="Exit the locator" sap:VirtualizedContainerService.HintSize="483.2,902.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="83512e9f-f9d3-4a7c-a2d2-bdc87c89c282" Version="V2">
+                  <uix:NApplicationCard sap2010:Annotation.AnnotationText="Run this workflow parallel with the GoSystem Add/Edit input workflow execution." AttachMode="ByInstance" ContinueOnError="True" DisplayName="Exit the locator" sap:VirtualizedContainerService.HintSize="483.2,884.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="83512e9f-f9d3-4a7c-a2d2-bdc87c89c282" Version="V2">
                     <uix:NApplicationCard.Body>
                       <ActivityAction x:TypeArguments="x:Object">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="LeadSheet_GoSystem_Process" sap:VirtualizedContainerService.HintSize="449.6,654.4" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                        <Sequence DisplayName="LeadSheet_GoSystem_Process" sap:VirtualizedContainerService.HintSize="449.6,613.6" sap2010:WorkflowViewState.IdRef="Sequence_32">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="sd:DataTable" Name="dt_Leadsheet" />
                             <Variable x:TypeArguments="x:Char" sap2010:Annotation.AnnotationText="Character variable created to map the column position of the GoSystem Entity name in spreadsheet" Name="inputChar" />
@@ -687,12 +690,12 @@
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="2" DelayBefore="2" DisplayName="Close locator" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_17" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="83512e9f-f9d3-4a7c-a2d2-bdc87c89c282" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DelayBefore="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Close locator" sap:VirtualizedContainerService.HintSize="387.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_17" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="83512e9f-f9d3-4a7c-a2d2-bdc87c89c282" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/4dcbbf0d-c793-4f0d-b8d3-2e4e8c499fc3/600M/600M#!/0/0/0/0,0,0,0,0" CvElementArea="1858, 140, 31, 30" CvType="CloseButton" DesignTimeRectangle="1864, 144, 21, 21" DesignTimeScaleFactor="1.25" FriendlyName="'I'" FullSelectorArgument="&lt;webctrl tag='I' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='I' type='' class='bento-icon-close-x' aaname='' /&gt;" Guid="9e92cfaf-a0cf-4708-b408-edffaa94fe06" InformativeScreenshot="2bb8c18abebb75be9452fc38287c1e79.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='*' /&gt;" SearchSteps="FuzzySelector, CV" Version="V2" Visibility="Interactive" />
                             </uix:NClick.Target>
                           </uix:NClick>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="2" DisplayName="Click 'OK'" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_18" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="83512e9f-f9d3-4a7c-a2d2-bdc87c89c282" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="[CInt(in_Config(&quot;Delay_2s&quot;).ToString)]" DisplayName="Click 'OK'" sap:VirtualizedContainerService.HintSize="387.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_18" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="83512e9f-f9d3-4a7c-a2d2-bdc87c89c282" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable BrowserURL="https://dc-organizertoweb.fasttax.com/Home/Locator/4dcbbf0d-c793-4f0d-b8d3-2e4e8c499fc3/600M/600M#!/0/0/0/0,0,0,0,0" CvElementArea="679, 601, 88, 43" CvTextArea="711, 616, 21, 13" CvTextArgument="OK" CvType="Button" DesignTimeRectangle="682, 604, 82, 38" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'OK'" FullSelectorArgument="&lt;webctrl tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='BUTTON' type='' class='ng-binding ng-scope ng-isolate-scope btn btn-primary' aaname='OK' check:innerText='OK' /&gt;" Guid="7062fbdd-0705-44fc-b4d4-6226e3510edd" InformativeScreenshot="81fdb7745cd7e0b971722ee56c3f67a9.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='organizer' title='2022 | 1040 | 0735VJ | Andrew, Alokh &amp;amp; Jully' /&gt;" SearchSteps="FuzzySelector, CV" Version="V2" Visibility="Interactive" />
                             </uix:NClick.Target>
@@ -733,7 +736,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </uix:NCheckState>
-            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: GoSystem Tax Log off" sap:VirtualizedContainerService.HintSize="483.2,876" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="DebuggerApi" ScopeGuid="1938eef3-8c98-4ff6-b76e-32ebc1130875" Version="V2">
+            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: GoSystem Tax Log off" sap:VirtualizedContainerService.HintSize="483.2,819.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="DebuggerApi" ScopeGuid="1938eef3-8c98-4ff6-b76e-32ebc1130875" Version="V2">
               <uix:NApplicationCard.Body>
                 <ActivityAction x:TypeArguments="x:Object">
                   <ActivityAction.Argument>
