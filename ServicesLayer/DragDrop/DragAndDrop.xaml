@@ -1,6 +1,9 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Sequence_DragAndDrop" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Sequence_DragAndDrop" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="dict_TCSummaryReport" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -50,6 +53,9 @@
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>System.Security</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -118,6 +124,10 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
       <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
       <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -125,14 +135,14 @@
       <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Sequence_DragAndDrop" sap:VirtualizedContainerService.HintSize="1100,6333.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Sequence_DragAndDrop" sap:VirtualizedContainerService.HintSize="1146.4,5437.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch- Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="989.6,6310.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch- Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="989.6,5414.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -140,26 +150,30 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence DisplayName="Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="988,6031.2" sap2010:WorkflowViewState.IdRef="Sequence_22">
+        <Sequence sap2010:Annotation.AnnotationText="Drag and Drop perform the functionality to drag and drop the non-OCR file in the workflow." DisplayName="Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="988,4328.8" sap2010:WorkflowViewState.IdRef="Sequence_22">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="sd:DataTable" Name="dt_TestSummaryReport" />
+          </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder" sap:VirtualizedContainerService.HintSize="954.4,3150.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" OpenMode="Never" ScopeGuid="81ee866c-0823-4a1c-8b9a-63731be10819" Version="V2">
+          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder" sap:VirtualizedContainerService.HintSize="954.4,928.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" OpenMode="Never" ScopeGuid="81ee866c-0823-4a1c-8b9a-63731be10819" Version="V2">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do - Dissociate Thumbnail Documents" sap:VirtualizedContainerService.HintSize="904,2787.2" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                <Sequence DisplayName="Do - Dissociate Thumbnail Documents" sap:VirtualizedContainerService.HintSize="451.2,565.6" sap2010:WorkflowViewState.IdRef="Sequence_20">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <TryCatch DisplayName="Try Catch - Reset " sap:VirtualizedContainerService.HintSize="870.4,922.4" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                  <TryCatch DisplayName="Try Catch - Reset " sap:VirtualizedContainerService.HintSize="417.6,454.4" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -167,10 +181,10 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <TryCatch.Try>
-                      <ui:RetryScope DisplayName="Retry Reset View" sap:VirtualizedContainerService.HintSize="416,492.8" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="2">
+                      <ui:RetryScope DisplayName="Retry Reset View" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="[CInt(in_Config(&quot;retry_Count&quot;))]">
                         <ui:RetryScope.ActivityBody>
                           <ActivityAction>
-                            <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Reset View" sap:VirtualizedContainerService.HintSize="333.6,154.4" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_3" Shortcuts="[d(hk)][d(alt)]v[u(alt)][u(hk)][d(hk)]r[u(hk)]" Timeout="60" Version="V3" />
+                            <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Reset View" sap:VirtualizedContainerService.HintSize="333.6,154.4" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_3" Shortcuts="[d(hk)][d(alt)]v[u(alt)][u(hk)][d(hk)]r[u(hk)]" Timeout="[CDbl(in_Config(&quot;Timeout_AddDoc&quot;))]" Version="V3" />
                           </ActivityAction>
                         </ui:RetryScope.ActivityBody>
                         <ui:RetryScope.Condition>
@@ -184,7 +198,7 @@
                         </ui:RetryScope.Condition>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
@@ -216,15 +230,15 @@
                       </Sequence>
                     </TryCatch.Finally>
                   </TryCatch>
-                  <uix:NCheckState DelayBefore="15" DisplayName="Check App State - Thumbnail Document" sap:VirtualizedContainerService.HintSize="870.4,1803.2" sap2010:WorkflowViewState.IdRef="NCheckState_3" ScopeIdentifier="81ee866c-0823-4a1c-8b9a-63731be10819" Timeout="8" Version="V3">
+                  <uix:NCheckState DisplayName="Check App State - Thumbnail Document" sap:VirtualizedContainerService.HintSize="417.6,49.6" sap2010:WorkflowViewState.IdRef="NCheckState_3" ScopeIdentifier="81ee866c-0823-4a1c-8b9a-63731be10819" Timeout="[CDbl(in_Config(&quot;Wait_Print_Fileroom&quot;))]" Version="V3">
                     <uix:NCheckState.IfExists>
-                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="483.2,1520" sap2010:WorkflowViewState.IdRef="NApplicationCard_7" OpenMode="Never" ScopeGuid="f7d57b5e-3136-4104-baac-79f01f1e2245" Timeout="180" Version="V2" WindowResize="Maximize">
+                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="483.2,1850.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_7" OpenMode="Never" ScopeGuid="f7d57b5e-3136-4104-baac-79f01f1e2245" Timeout="[CInt(in_Config(&quot;Print_wait_time&quot;))]" Version="V2" WindowResize="Maximize">
                         <uix:NApplicationCard.Body>
                           <ActivityAction x:TypeArguments="x:Object">
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Do - Disassociate available document in Thumbnail" sap:VirtualizedContainerService.HintSize="449.6,1228.8" sap2010:WorkflowViewState.IdRef="Sequence_48">
+                            <Sequence DisplayName="Do - Disassociate available document in Thumbnail" sap:VirtualizedContainerService.HintSize="449.6,1559.2" sap2010:WorkflowViewState.IdRef="Sequence_48">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -241,12 +255,12 @@
                                   <uix:TargetAnchorable CvElementArea="420, 354, 72, 92" CvType="Icon" DesignTimeRectangle="333, 283, 58, 76" DesignTimeScaleFactor="1" ElementType="Icon" FriendlyName="'graphic TheImage'" FullSelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl idx='2' name='SPbinderLibrary.Page' role='list item' /&gt;&lt;ctrl automationid='TheImage' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl name='SPbinderLibrary.Page' role='list item' /&gt;&lt;ctrl automationid='TheImage' role='graphic' /&gt;" Guid="4be6d702-085d-41da-8732-a694378f1ec7" InformativeScreenshot="6284c183fba3a1eba4e5e25b0cb8c572.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                                 </uix:NClick.Target>
                               </uix:NClick>
-                              <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts - Select all thumbnail docs" sap:VirtualizedContainerService.HintSize="388,199" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_4" ScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" Shortcuts="[d(hk)][d(ctrl)]a[u(ctrl)][u(hk)]" Version="V3">
+                              <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts - Select all thumbnail docs" sap:VirtualizedContainerService.HintSize="416,231.2" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_4" ScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" Shortcuts="[d(hk)][d(ctrl)]a[u(ctrl)][u(hk)]" Version="V3">
                                 <uix:NKeyboardShortcuts.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="310, 152, 109, 590" DesignTimeScaleFactor="1" ElementType="List" FriendlyName="'list Thumbnail'" FullSelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl automationid='Thumbnail' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl automationid='Thumbnail' role='list' /&gt;" Guid="c141ec03-7453-4ebf-be13-7607576836eb" ImageBase64="" InformativeScreenshot="da708ccda5453d98d6bbd3a37d63726d.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
                                 </uix:NKeyboardShortcuts.Target>
                               </uix:NKeyboardShortcuts>
-                              <uix:NDragAndDrop CursorMotionType="Smooth" DelayBetweenActions="0.3" DestinationScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" DisplayName="Drag and Drop - Disassociate Document" sap:VirtualizedContainerService.HintSize="388,228" sap2010:WorkflowViewState.IdRef="NDragAndDrop_3" ScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" Version="V3">
+                              <uix:NDragAndDrop CursorMotionType="Smooth" DelayBetweenActions="0.3" DestinationScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" DisplayName="Drag and Drop - Disassociate Document" sap:VirtualizedContainerService.HintSize="416,261.6" sap2010:WorkflowViewState.IdRef="NDragAndDrop_3" ScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" Version="V3">
                                 <uix:NDragAndDrop.DestinationTarget>
                                   <uix:TargetAnchorable DesignTimeRectangle="119, 235, 146, 19" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Taxes'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl idx='1' name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='NodeDisplay' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='NodeDisplay' role='text' check:text='Taxes' /&gt;" Guid="539691d5-315d-4395-8610-c2eef349d7be" ImageBase64="" InformativeScreenshot="b278e3fc100411104138f2fe10f38f28.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                 </uix:NDragAndDrop.DestinationTarget>
@@ -254,7 +268,7 @@
                                   <uix:TargetAnchorable DesignTimeRectangle="415, 354, 75, 95" DesignTimeScaleFactor="1.25" ElementType="Icon" FriendlyName="'graphic TheImage'" FullSelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl idx='2' name='SPbinderLibrary.Page' role='list item' /&gt;&lt;ctrl automationid='TheImage' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl name='SPbinderLibrary.Page' role='list item' /&gt;&lt;ctrl automationid='TheImage' role='graphic' /&gt;" Guid="3344a000-0e12-487a-9a69-2479a724c6b6" ImageBase64="" InformativeScreenshot="f09cabe6839363ac2adbca573601cff2.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
                                 </uix:NDragAndDrop.Target>
                               </uix:NDragAndDrop>
-                              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Save" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_6" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" Version="V3">
+                              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Save" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_6" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="f7d57b5e-3136-4104-baac-79f01f1e2245" Version="V3">
                                 <uix:NClick.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="424, 509, 94, 31" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'Save'" FullSelectorArgument="&lt;ctrl name='Save' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Save' role='push button' automationid='' check:text='Save' /&gt;" Guid="59485563-5d20-492d-89e1-45b79b5d63df" InformativeScreenshot="33355a6ee76d89cb2ab44d352d3817a4.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -265,7 +279,16 @@
                                   </uix:TargetAnchorable>
                                 </uix:NClick.Target>
                               </uix:NClick>
-                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,143" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Disassociate available documents from thumbnail.&quot;]" />
+                              <ui:LogMessage DisplayName="Log document association status message" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;VC_01&quot;+&quot; Associate the documents from thumbnail if any previous documents are available:Pass&quot;]" />
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Drag&amp;Drop</InArgument>
+                                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Drag&amp;Drop")]</InOutArgument>
+                                  <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"VC_01"}]</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
                             </Sequence>
                           </ActivityAction>
                         </uix:NApplicationCard.Body>
@@ -281,14 +304,31 @@
                       </uix:NApplicationCard>
                     </uix:NCheckState.IfExists>
                     <uix:NCheckState.IfNotExists>
-                      <ui:LogMessage DisplayName="Log Message - Document not available" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;Previous documents are not available in thumbnail&quot;]" />
+                      <Sequence sap:VirtualizedContainerService.HintSize="449.6,24.8" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log error for unavailable documents" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Trace" Message="[&quot;VC_01&quot;+&quot; Associate the documents from thumbnail if any previous documents are available:Pass&quot;]" />
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                            <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Drag&amp;Drop</InArgument>
+                            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Drag&amp;Drop")]</InOutArgument>
+                            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"VC_01"}]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
                     </uix:NCheckState.IfNotExists>
                     <uix:NCheckState.Target>
                       <uix:TargetAnchorable DesignTimeRectangle="327, 154, 120, 124" DesignTimeScaleFactor="1" ElementType="ListItem" FriendlyName="'SPbinderLibrary.Page'" FullSelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl name='SPbinderLibrary.Page' role='list item' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl name='SPbinderLibrary.Page' role='list item' automationid='' check:text='SPbinderLibrary.Page' /&gt;" Guid="a4fa1ad8-aa66-4469-9c80-9aaee04d6dca" InformativeScreenshot="8d578c7105a97087eaaf13a9aac67621.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                     </uix:NCheckState.Target>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
@@ -306,26 +346,25 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </uix:NApplicationCard>
-          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Application: DragDrop" sap:VirtualizedContainerService.HintSize="954.4,2435.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" OpenMode="Always" ScopeGuid="36286038-15c5-4bab-89c8-d034b66a8f27" Version="V2" WindowResize="Restore">
+          <uix:NApplicationCard sap2010:Annotation.AnnotationText="Allows the user select file from the given location" AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Application: DragDrop" sap:VirtualizedContainerService.HintSize="954.4,2590.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" OpenMode="Always" ScopeGuid="36286038-15c5-4bab-89c8-d034b66a8f27" Version="V2" WindowResize="Restore">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                 </ActivityAction.Argument>
-                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="920.8,2112" sap2010:WorkflowViewState.IdRef="NApplicationCard_9" OpenMode="Never" ScopeGuid="a71ae469-cba6-466f-9812-016c6054f82e" Version="V2" WindowResize="Maximize">
+                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="920.8,2236" sap2010:WorkflowViewState.IdRef="NApplicationCard_9" OpenMode="Never" ScopeGuid="a71ae469-cba6-466f-9812-016c6054f82e" Version="V2" WindowResize="Maximize">
                   <uix:NApplicationCard.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do - Perform Drag&amp;Drop" sap:VirtualizedContainerService.HintSize="887.2,1820.8" sap2010:WorkflowViewState.IdRef="Sequence_55">
+                      <Sequence DisplayName="Do - Perform Drag&amp;Drop" sap:VirtualizedContainerService.HintSize="887.2,1904.8" sap2010:WorkflowViewState.IdRef="Sequence_55">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Delay DisplayName=" Delay 1 second" Duration="00:00:02" sap:VirtualizedContainerService.HintSize="853.6,122.4" sap2010:WorkflowViewState.IdRef="Delay_2" />
-                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Documents in Folder" sap:VirtualizedContainerService.HintSize="853.6,189.6" sap2010:WorkflowViewState.IdRef="NClick_9" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="36286038-15c5-4bab-89c8-d034b66a8f27" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayBefore="[CDbl(in_Config(&quot;retry_Count&quot;))]" DisplayName="Click - Documents in Folder" sap:VirtualizedContainerService.HintSize="853.6,189.6" sap2010:WorkflowViewState.IdRef="NClick_9" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="36286038-15c5-4bab-89c8-d034b66a8f27" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable CVScreenId="55e36294-6271-4fb9-a1e0-efdfcf83f052" CvTextArea="330, 264, 70, 12" CvTextArgument="D&amp;D-Tiff2.tif" CvType="Text" DesignTimeRectangle="307, 174, 598, 24" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'D&amp;D-EML2.eml'" FullSelectorArgument="&lt;wnd aaname='Shell Folder View' cls='SHELLDLL_DefView' title='ShellView' /&gt;&lt;wnd aaname='Items View' cls='DirectUIHWND' /&gt;&lt;ctrl name='Items View' role='list' /&gt;&lt;ctrl automationid='0' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Shell Folder View' cls='SHELLDLL_DefView' title='ShellView' /&gt;&lt;wnd aaname='Items View' cls='DirectUIHWND' /&gt;&lt;ctrl name='Items View' role='list' /&gt;&lt;ctrl automationid='0' role='list item' check:text='D&amp;amp;D-EML2.eml' /&gt;" Guid="7f80ee1c-0c61-492c-bb18-bf5b03f80e0b" InformativeScreenshot="7f741d33c1c7db2334bc275ce5406b2b.png" ScopeSelectorArgument="&lt;wnd app='explorer.exe' cls='CabinetWClass' title='DragDrop' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                           </uix:NClick.Target>
@@ -349,9 +388,9 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NDragAndDrop>
-                        <uix:NCheckState DisplayName="Check App State - File already exists in the binder.*" sap:VirtualizedContainerService.HintSize="853.6,954.4" sap2010:WorkflowViewState.IdRef="NCheckState_12" Version="V3">
+                        <uix:NCheckState DisplayName="Check App State - File already exists in the binder.*" sap:VirtualizedContainerService.HintSize="853.6,1160.8" sap2010:WorkflowViewState.IdRef="NCheckState_12" Version="V3">
                           <uix:NCheckState.IfExists>
-                            <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="467.2,711.2" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                            <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="467.2,917.6" sap2010:WorkflowViewState.IdRef="Sequence_50">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -393,11 +432,20 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uix:NApplicationCard>
-                              <ui:LogMessage DisplayName="Log Message - File Already Exist In the Binder" sap:VirtualizedContainerService.HintSize="433.6,168.8" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;File Already Exist In the Binder.&quot;]" />
+                              <ui:LogMessage DisplayName="Log Message - File Already Exist In the Binder" sap:VirtualizedContainerService.HintSize="433.6,176" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Warn" Message="[&quot;VC_03&quot;+&quot;Validate File Already Exist In the Binder:Pass&quot;]" />
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="433.6,199.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Drag&amp;Drop</InArgument>
+                                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Drag&amp;Drop")]</InOutArgument>
+                                  <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"VC_03"}]</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
                             </Sequence>
                           </uix:NCheckState.IfExists>
                           <uix:NCheckState.IfNotExists>
-                            <uix:NCheckState DisplayName="Check App State - Jobs in Queue" EnableIfExists="False" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="333.6,178.4" sap2010:WorkflowViewState.IdRef="NCheckState_13" Mode="WaitDisappear" ScopeIdentifier="a71ae469-cba6-466f-9812-016c6054f82e" Timeout="120" Version="V3">
+                            <uix:NCheckState DisplayName="Check App State - Jobs in Queue" EnableIfExists="False" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="333.6,178.4" sap2010:WorkflowViewState.IdRef="NCheckState_13" Mode="WaitDisappear" ScopeIdentifier="a71ae469-cba6-466f-9812-016c6054f82e" Timeout="[CDbl(in_Config(&quot;Print_wait_time&quot;))]" Version="V3">
                               <uix:NCheckState.Target>
                                 <uix:TargetAnchorable DesignTimeRectangle="16, 67, 67, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'In Process'" FullSelectorArgument="&lt;ctrl name='In Process   ' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='In Process   ' role='text' automationid='' check:text='In Process' /&gt;" Guid="1d4c51ed-f86d-4ca2-9729-72220a3c6886" InformativeScreenshot="38c94a57f65c9c9b350b417b4dfe5aa4.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Jobs in Queue' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
                               </uix:NCheckState.Target>
@@ -441,22 +489,55 @@
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </uix:NApplicationCard>
-          <uix:NCheckState DelayBefore="15" DisplayName="Check App State - Thumbnail Documents" sap:VirtualizedContainerService.HintSize="954.4,385.6" sap2010:WorkflowViewState.IdRef="NCheckState_8" Timeout="60" Version="V3">
+          <uix:NCheckState DelayBefore="[CDbl(in_Config(&quot;Wait_Print_Fileroom&quot;))]" DisplayName="Check App State - Thumbnail Documents" sap:VirtualizedContainerService.HintSize="954.4,718.4" sap2010:WorkflowViewState.IdRef="NCheckState_8" Timeout="[CDbl(in_Config(&quot;Timeout_AddDoc&quot;))]" Version="V3">
             <uix:NCheckState.IfExists>
-              <ui:LogMessage DisplayName="Log Message - Successful Drag&amp;Drop" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Successfully Drag and Dropped Documents in the Binder&quot;]">
+              <Sequence sap:VirtualizedContainerService.HintSize="449.6,436.8" sap2010:WorkflowViewState.IdRef="Sequence_58">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-              </ui:LogMessage>
+                <ui:LogMessage DisplayName="Log Message - Successful Drag&amp;Drop" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;VC_02&quot;+&quot;Verify that non-OCR documents (.xlsx, .tif, .eml) dragged and dropped into the binder are successful: Pass&quot;]">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:LogMessage>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Drag&amp;Drop</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Drag&amp;Drop")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"VC_02"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
             </uix:NCheckState.IfExists>
             <uix:NCheckState.IfNotExists>
-              <ui:LogMessage DisplayName="Log Message - Failed Drag&amp;Drop" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Documents are not Dragged in thumbnail&quot;]" />
+              <Sequence sap:VirtualizedContainerService.HintSize="449.6,436.8" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:LogMessage DisplayName="Log Message - Failed Drag&amp;Drop" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Trace" Message="[&quot;VC_02&quot;+&quot;Verify that non-OCR documents (.xlsx, .tif, .eml) dragged and dropped into the binder are successful:Fail&quot;]" />
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">["Drag and drop failed due to the wait time for the job in the queue exceeding the expected time."]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Drag&amp;Drop</InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Drag&amp;Drop")]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"VC_02"}]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
             </uix:NCheckState.IfNotExists>
             <uix:NCheckState.Target>
               <uix:TargetAnchorable DesignTimeRectangle="327, 154, 120, 124" DesignTimeScaleFactor="1" ElementType="ListItem" FriendlyName="'SPbinderLibrary.Page'" FullSelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl name='SPbinderLibrary.Page' role='list item' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='SourceDoc' /&gt;&lt;ctrl automationid='rpSourceDoc' /&gt;&lt;ctrl name='SPbinderLibrary.Page' role='list item' automationid='' check:text='SPbinderLibrary.Page' /&gt;" Guid="a4fa1ad8-aa66-4469-9c80-9aaee04d6dca" InformativeScreenshot="8d578c7105a97087eaaf13a9aac67621.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
@@ -482,14 +563,14 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Catch - Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="988,24.8" sap2010:WorkflowViewState.IdRef="Sequence_32">
+            <Sequence DisplayName="Catch - Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="988,663.2" sap2010:WorkflowViewState.IdRef="Sequence_32">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message - Failed Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="986,173" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Drag And Drop Failed with &quot; +exception.Message]">
+              <ui:LogMessage DisplayName="Log Message - Failed Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="954.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Drag And Drop Failed with &quot; +exception.Message]">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -497,18 +578,36 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:LogMessage>
-              <Rethrow DisplayName="Rethrow - Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="986,48" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
+              <ui:LogMessage DisplayName="Log error for unavailable documents" sap:VirtualizedContainerService.HintSize="954.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Trace" Message="[&quot;VC_01&quot;+&quot; Associate the documents from thumbnail if any previous documents are available:Pass&quot;]" />
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="954.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+                  <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments">["Drag And Drop Failed with " +exception.Message]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Drag&amp;Drop</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dict_TCSummaryReport("Drag&amp;Drop")]</InOutArgument>
+                  <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"VC_01"}]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <Rethrow DisplayName="Rethrow - Drag &amp; Drop" sap:VirtualizedContainerService.HintSize="954.4,48" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
             </Sequence>
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
       <TryCatch.Finally>
-        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="988,89.6" sap2010:WorkflowViewState.IdRef="Sequence_57">
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="988,257.6" sap2010:WorkflowViewState.IdRef="Sequence_57">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Output - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Output.xaml)" sap:VirtualizedContainerService.HintSize="954.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Output.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TestSummaryReport">[dict_TCSummaryReport("Drag&amp;Drop")]</InArgument>
+              <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Component">Drag&amp;Drop</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
         </Sequence>
       </TryCatch.Finally>
     </TryCatch>
