@@ -47,6 +47,8 @@
       <x:String>System.Net.Mail</x:String>
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -135,6 +137,11 @@
       <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -142,13 +149,13 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="LS_Navigation" sap:VirtualizedContainerService.HintSize="512,360" sap2010:WorkflowViewState.IdRef="Sequence_611">
+  <Sequence DisplayName="LS_Navigation" sap:VirtualizedContainerService.HintSize="1146.4,6698.4" sap2010:WorkflowViewState.IdRef="Sequence_611">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Cleanup Leadsheet Files" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="Sequence_651">
+    <Sequence DisplayName="Cleanup Leadsheet Files" sap:VirtualizedContainerService.HintSize="721.6,56.8" sap2010:WorkflowViewState.IdRef="Sequence_651">
       <Sequence.Variables>
         <Variable x:TypeArguments="s:String[]" Name="fileArray" />
       </Sequence.Variables>
@@ -158,7 +165,7 @@
           <x:Boolean x:Key="IsPinned">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign DisplayName="Assign - Get Leadsheet Files" sap:VirtualizedContainerService.HintSize="487.2,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign DisplayName="Assign - Get Leadsheet Files" sap:VirtualizedContainerService.HintSize="452.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="s:String[]">[fileArray]</OutArgument>
         </Assign.To>
@@ -166,7 +173,7 @@
           <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(in_Config("LS_Cleanup").ToString)]</InArgument>
         </Assign.Value>
       </Assign>
-      <If Condition="[fileArray.Count&lt;&gt;0]" DisplayName="If Any Files available" sap:VirtualizedContainerService.HintSize="487.2,631.2" sap2010:WorkflowViewState.IdRef="If_1">
+      <If Condition="[fileArray.Count&lt;&gt;0]" DisplayName="If Any Files available" sap:VirtualizedContainerService.HintSize="452.8,557.6" sap2010:WorkflowViewState.IdRef="If_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -174,25 +181,25 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <Sequence sap:VirtualizedContainerService.HintSize="453.6,448" sap2010:WorkflowViewState.IdRef="Sequence_653">
+          <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="451.2,345.6" sap2010:WorkflowViewState.IdRef="Sequence_653">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Files in Local Repos Leadsheet" sap:VirtualizedContainerService.HintSize="410.4,358.4" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[fileArray]">
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Files in Local Repos Leadsheet" sap:VirtualizedContainerService.HintSize="417.6,285.6" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[fileArray]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="currentItem" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376.8,170.4" sap2010:WorkflowViewState.IdRef="Sequence_652">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,164" sap2010:WorkflowViewState.IdRef="Sequence_652">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:DeleteFileX DisplayName="Delete File - Leadsheet Excel" sap:VirtualizedContainerService.HintSize="333.6,80.8" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[currentItem]" />
+                    <ui:DeleteFileX DisplayName="Delete File - Leadsheet Excel" sap:VirtualizedContainerService.HintSize="382.4,104" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[currentItem]" />
                   </Sequence>
                 </ActivityAction>
               </ui:ForEach.Body>
@@ -200,7 +207,7 @@
           </Sequence>
         </If.Then>
         <If.Else>
-          <Sequence sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_654">
+          <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_654">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -210,19 +217,19 @@
         </If.Else>
       </If>
     </Sequence>
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" ScopeGuid="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder" sap:VirtualizedContainerService.HintSize="721.6,6618.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" ScopeGuid="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="774.4,7217.6" sap2010:WorkflowViewState.IdRef="Sequence_624">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="688,6304" sap2010:WorkflowViewState.IdRef="Sequence_624">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message - Navigate LEADS Lines" sap:VirtualizedContainerService.HintSize="712,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;--------------------------------------------------------------------------------------------------------------------&quot;]">
+            <ui:LogMessage DisplayName="Log Message - Navigate LEADS Lines" sap:VirtualizedContainerService.HintSize="654.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;--------------------------------------------------------------------------------------------------------------------&quot;]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -230,7 +237,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:LogMessage>
-            <ui:LogMessage DisplayName="Log Message - Navigate LEADS" sap:VirtualizedContainerService.HintSize="712,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Navigating to the LEADS tab.&quot;]">
+            <ui:LogMessage DisplayName="Log Message - Navigate LEADS" sap:VirtualizedContainerService.HintSize="654.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Navigating to the LEADS tab.&quot;]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -238,7 +245,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:LogMessage>
-            <uix:NCheckState sap2010:Annotation.AnnotationText="Click Leads tab." DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="712,407.2" sap2010:WorkflowViewState.IdRef="NCheckState_11" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="30" Version="V3">
+            <uix:NCheckState sap2010:Annotation.AnnotationText="Click Leads tab." DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="654.4,439.2" sap2010:WorkflowViewState.IdRef="NCheckState_11" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="30" Version="V3">
               <uix:NCheckState.IfExists>
                 <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - LEADS" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_29" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                   <uix:NClick.Target>
@@ -272,7 +279,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </uix:NCheckState>
-            <TryCatch DisplayName="Try Catch - Force Calculate" sap:VirtualizedContainerService.HintSize="712,1826.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <TryCatch DisplayName="Try Catch - Force Calculate" sap:VirtualizedContainerService.HintSize="654.4,1668" sap2010:WorkflowViewState.IdRef="TryCatch_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -280,15 +287,15 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <TryCatch.Try>
-                <uix:NCheckState sap2010:Annotation.AnnotationText="Perform Force Calculate Operation." DisplayName="Check App State - Cell A" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="492.8,1299.2" sap2010:WorkflowViewState.IdRef="NCheckState_12" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="60" Version="V3">
+                <uix:NCheckState sap2010:Annotation.AnnotationText="Perform Force Calculate Operation." DisplayName="Check App State - Cell A" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="492.8,1238.4" sap2010:WorkflowViewState.IdRef="NCheckState_12" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="60" Version="V3">
                   <uix:NCheckState.IfExists>
-                    <Sequence DisplayName="Target appears - Cell A" sap:VirtualizedContainerService.HintSize="449.6,1049.6" sap2010:WorkflowViewState.IdRef="Sequence_643">
+                    <Sequence DisplayName="Target appears - Cell A" sap:VirtualizedContainerService.HintSize="449.6,988.8" sap2010:WorkflowViewState.IdRef="Sequence_643">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - LEADS" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_30" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - LEADS" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_30" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable CvTextArea="222, 958, 48, 15" CvTextArgument="LEADS" CvType="Text" DesignTimeRectangle="223, 957, 48, 19" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'LEADS'" FullSelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl name='LEADS' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl name='LEADS' role='text' automationid='' check:text='LEADS' /&gt;" Guid="2bef5f8f-3f37-452d-8cfc-870324704f6a" InformativeScreenshot="36d977090662dc052f0df9b7cee3f893.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
                         </uix:NClick.Target>
@@ -299,7 +306,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NClick>
-                      <ui:LogMessage DisplayName="Log Message - Force Calculate" sap:VirtualizedContainerService.HintSize="387.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Performing Force Calculate operation.&quot;]">
+                      <ui:LogMessage DisplayName="Log Message - Force Calculate" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Performing Force Calculate operation.&quot;]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -307,9 +314,13 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:LogMessage>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Process Track" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_31" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Right" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Process Track" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_31" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Right" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                         <uix:NClick.Target>
-                          <uix:TargetAnchorable DesignTimeRectangle="13, 410, 1894, 539" DesignTimeScaleFactor="1.25" FriendlyName="'Process Track'" FullSelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' role='client' check:fulltext='Process Track Change completed&amp;#xD;&amp;#xA;3&amp;#xD;&amp;#xA;2&amp;#xD;&amp;#xA;1&amp;#xD;&amp;#xA;B&amp;#xD;&amp;#xA;A&amp;#xD;&amp;#xA;6&amp;#xD;&amp;#xA;5&amp;#xD;&amp;#xA;4&amp;#xD;&amp;#xA;18&amp;#xD;&amp;#xA;17&amp;#xD;&amp;#xA;16&amp;#xD;&amp;#xA;15&amp;#xD;&amp;#xA;14&amp;#xD;&amp;#xA;13&amp;#xD;&amp;#xA;12&amp;#xD;&amp;#xA;11&amp;#xD;&amp;#xA;10&amp;#xD;&amp;#xA;9&amp;#xD;&amp;#xA;8&amp;#xD;&amp;#xA;7' /&gt;" Guid="ee627625-742c-4d68-91d5-2e385b2cf037" InformativeScreenshot="29332bcbae06dd2573be20590257e9f7.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
+                          <uix:TargetAnchorable DesignTimeRectangle="13, 410, 1894, 539" DesignTimeScaleFactor="1.25" FriendlyName="'Process Track'" FullSelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' role='client' check:fulltext='Process Track Change completed&amp;#xD;&amp;#xA;3&amp;#xD;&amp;#xA;2&amp;#xD;&amp;#xA;1&amp;#xD;&amp;#xA;B&amp;#xD;&amp;#xA;A&amp;#xD;&amp;#xA;6&amp;#xD;&amp;#xA;5&amp;#xD;&amp;#xA;4&amp;#xD;&amp;#xA;18&amp;#xD;&amp;#xA;17&amp;#xD;&amp;#xA;16&amp;#xD;&amp;#xA;15&amp;#xD;&amp;#xA;14&amp;#xD;&amp;#xA;13&amp;#xD;&amp;#xA;12&amp;#xD;&amp;#xA;11&amp;#xD;&amp;#xA;10&amp;#xD;&amp;#xA;9&amp;#xD;&amp;#xA;8&amp;#xD;&amp;#xA;7' /&gt;" Guid="ee627625-742c-4d68-91d5-2e385b2cf037" InformativeScreenshot="29332bcbae06dd2573be20590257e9f7.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete">
+                            <uix:TargetAnchorable.PointOffset>
+                              <uix:PointOffset X="30" Y="30" />
+                            </uix:TargetAnchorable.PointOffset>
+                          </uix:TargetAnchorable>
                         </uix:NClick.Target>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -318,7 +329,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NClick>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tools" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_32" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tools" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_39" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable CvElementArea="329, 10, 15, 17" CvTextArea="40, 11, 36, 13" CvTextArgument="Tools" CvType="ArrowButton" DesignTimeRectangle="5, 4, 345, 30" DesignTimeScaleFactor="1.25" FriendlyName="'Tools'" FullSelectorArgument="&lt;ctrl name='Tools' role='menu item' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Tools' role='menu item' automationid='' check:text='Tools' /&gt;" Guid="feb763bd-4a6e-4493-9882-21fc901de606" InformativeScreenshot="c1246832426f52a18287e8e701e682dd.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' idx='*' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
                         </uix:NClick.Target>
@@ -329,7 +340,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NClick>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Force Calculate" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_33" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Force Calculate" sap:VirtualizedContainerService.HintSize="416,182.4" sap2010:WorkflowViewState.IdRef="NClick_33" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable CvTextArea="43, 40, 101, 15" CvTextArgument="Force Calculate" CvType="Text" DesignTimeRectangle="43, 40, 101, 15" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Force Calculate'" FullSelectorArgument="&lt;ctrl name='Tools' role='menu item' /&gt;&lt;ctrl name='Force Calculate' role='menu item' /&gt;&lt;ctrl name='Force Calculate' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Tools' role='menu item' /&gt;&lt;ctrl name='Force Calculate' role='menu item' /&gt;&lt;ctrl name='Force Calculate' role='text' automationid='' check:text='Force Calculate' /&gt;" Guid="9cf5bf26-b007-4c7c-8290-f35f42d8b982" InformativeScreenshot="f782960da00f7c4dd198d1001250c30e.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' idx='*' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                         </uix:NClick.Target>
@@ -375,12 +386,21 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                     </ActivityAction.Argument>
-                    <ui:LogMessage DisplayName="Error Message - Force Calculate" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Failed to perform force calculate. Exception: &quot;+exception.Message]" />
+                    <ui:LogMessage DisplayName="Error Message - Force Calculate" sap:VirtualizedContainerService.HintSize="492.8,144" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Failed to perform force calculate. Exception: &quot;+exception.Message]" />
                   </ActivityAction>
                 </Catch>
               </TryCatch.Catches>
+              <TryCatch.Finally>
+                <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="492.8,89.6" sap2010:WorkflowViewState.IdRef="Sequence_655">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </TryCatch.Finally>
             </TryCatch>
-            <Delay DisplayName="Delay - PageLoad " Duration="00:00:10" sap:VirtualizedContainerService.HintSize="712,122.4" sap2010:WorkflowViewState.IdRef="Delay_1">
+            <Delay DisplayName="Delay - PageLoad " Duration="00:00:10" sap:VirtualizedContainerService.HintSize="654.4,122.4" sap2010:WorkflowViewState.IdRef="Delay_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -388,51 +408,55 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </Delay>
-            <uix:NCheckState sap2010:Annotation.AnnotationText="Click Leads tab." DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="712,4424" sap2010:WorkflowViewState.IdRef="NCheckState_17" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="120" Version="V3">
+            <uix:NCheckState sap2010:Annotation.AnnotationText="Click Leads tab." DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="654.4,3660.8" sap2010:WorkflowViewState.IdRef="NCheckState_17" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="120" Version="V3">
               <uix:NCheckState.IfExists>
-                <uix:NCheckState sap2010:Annotation.AnnotationText="Perform Save Leadsheet Excel File in Local Directory." DisplayName="Check App State - Review All Sheets" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="668.8,4151.2" sap2010:WorkflowViewState.IdRef="NCheckState_16" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="120" Version="V3">
+                <uix:NCheckState sap2010:Annotation.AnnotationText="Perform Save Leadsheet Excel File in Local Directory." DisplayName="Check App State - Review All Sheets" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="611.2,3386.4" sap2010:WorkflowViewState.IdRef="NCheckState_16" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="120" Version="V3">
                   <uix:NCheckState.IfExists>
-                    <Sequence DisplayName="Target appears - LS Horizontal Scroll" sap:VirtualizedContainerService.HintSize="625.6,3901.6" sap2010:WorkflowViewState.IdRef="Sequence_641">
+                    <Sequence DisplayName="Target appears - LS Horizontal Scroll" sap:VirtualizedContainerService.HintSize="568,3136.8" sap2010:WorkflowViewState.IdRef="Sequence_641">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:RetryScope DisplayName="Retry Scope - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="563.2,1318.4" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="2">
+                      <ui:RetryScope DisplayName="Retry Scope - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="534.4,1225.6" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="2">
                         <ui:RetryScope.ActivityBody>
                           <ActivityAction>
-                            <uix:NCheckState DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="492.8,1110.4" sap2010:WorkflowViewState.IdRef="NCheckState_13" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="30" Version="V3">
+                            <uix:NCheckState DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="492.8,1017.6" sap2010:WorkflowViewState.IdRef="NCheckState_13" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="30" Version="V3">
                               <uix:NCheckState.IfExists>
-                                <Sequence DisplayName="Do - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="449.6,852" sap2010:WorkflowViewState.IdRef="Sequence_645">
+                                <Sequence DisplayName="Do - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="449.6,799.2" sap2010:WorkflowViewState.IdRef="Sequence_645">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Process Track" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_34" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Right" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
+                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Process Track" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_41" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Right" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                                     <uix:NClick.Target>
-                                      <uix:TargetAnchorable DesignTimeRectangle="13, 410, 1894, 539" DesignTimeScaleFactor="1.25" FriendlyName="'Process Track'" FullSelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' role='client' check:fulltext='Process Track Change completed&amp;#xD;&amp;#xA;3&amp;#xD;&amp;#xA;2&amp;#xD;&amp;#xA;1&amp;#xD;&amp;#xA;B&amp;#xD;&amp;#xA;A&amp;#xD;&amp;#xA;6&amp;#xD;&amp;#xA;5&amp;#xD;&amp;#xA;4&amp;#xD;&amp;#xA;18&amp;#xD;&amp;#xA;17&amp;#xD;&amp;#xA;16&amp;#xD;&amp;#xA;15&amp;#xD;&amp;#xA;14&amp;#xD;&amp;#xA;13&amp;#xD;&amp;#xA;12&amp;#xD;&amp;#xA;11&amp;#xD;&amp;#xA;10&amp;#xD;&amp;#xA;9&amp;#xD;&amp;#xA;8&amp;#xD;&amp;#xA;7' /&gt;" Guid="ee627625-742c-4d68-91d5-2e385b2cf037" InformativeScreenshot="5b40de2363cce7b7de0ca4d532471f7e.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
+                                      <uix:TargetAnchorable DesignTimeRectangle="13, 410, 1894, 539" DesignTimeScaleFactor="1.25" FriendlyName="'Process Track'" FullSelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='LeadsTabItem' /&gt;&lt;ctrl automationid='lssheet' role='client' check:fulltext='Process Track Change completed&amp;#xD;&amp;#xA;3&amp;#xD;&amp;#xA;2&amp;#xD;&amp;#xA;1&amp;#xD;&amp;#xA;B&amp;#xD;&amp;#xA;A&amp;#xD;&amp;#xA;6&amp;#xD;&amp;#xA;5&amp;#xD;&amp;#xA;4&amp;#xD;&amp;#xA;18&amp;#xD;&amp;#xA;17&amp;#xD;&amp;#xA;16&amp;#xD;&amp;#xA;15&amp;#xD;&amp;#xA;14&amp;#xD;&amp;#xA;13&amp;#xD;&amp;#xA;12&amp;#xD;&amp;#xA;11&amp;#xD;&amp;#xA;10&amp;#xD;&amp;#xA;9&amp;#xD;&amp;#xA;8&amp;#xD;&amp;#xA;7' /&gt;" Guid="ee627625-742c-4d68-91d5-2e385b2cf037" InformativeScreenshot="29332bcbae06dd2573be20590257e9f7.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete">
+                                        <uix:TargetAnchorable.PointOffset>
+                                          <uix:PointOffset X="30" Y="30" />
+                                        </uix:TargetAnchorable.PointOffset>
+                                      </uix:TargetAnchorable>
                                     </uix:NClick.Target>
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
                                   </uix:NClick>
-                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tools" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_35" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
+                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Tools" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_40" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                                     <uix:NClick.Target>
                                       <uix:TargetAnchorable CvElementArea="329, 10, 15, 17" CvTextArea="40, 11, 36, 13" CvTextArgument="Tools" CvType="ArrowButton" DesignTimeRectangle="5, 4, 345, 30" DesignTimeScaleFactor="1.25" FriendlyName="'Tools'" FullSelectorArgument="&lt;ctrl name='Tools' role='menu item' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Tools' role='menu item' automationid='' check:text='Tools' /&gt;" Guid="feb763bd-4a6e-4493-9882-21fc901de606" InformativeScreenshot="c1246832426f52a18287e8e701e682dd.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' idx='*' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Visible" WaitForReadyArgument="Complete" />
                                     </uix:NClick.Target>
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
                                   </uix:NClick>
-                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Save To Excel" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_36" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
+                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Save To Excel" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_36" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                                     <uix:NClick.Target>
                                       <uix:TargetAnchorable CvTextArea="42, 70, 101, 15" CvTextArgument="Save To Excel..." CvType="Text" DesignTimeRectangle="42, 70, 101, 15" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'Save To Excel...'" FullSelectorArgument="&lt;ctrl name='Tools' role='menu item' /&gt;&lt;ctrl name='Save To Excel...' role='menu item' /&gt;&lt;ctrl name='Save To Excel...' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Tools' role='menu item' /&gt;&lt;ctrl name='Save To Excel...' role='menu item' /&gt;&lt;ctrl name='Save To Excel...' role='text' automationid='' check:text='Save To Excel...' /&gt;" Guid="eee05276-5448-466f-9745-583cbc5261f1" InformativeScreenshot="22ccf127a67b20fae127d08c885ac8e3.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' idx='*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                                     </uix:NClick.Target>
@@ -443,7 +467,7 @@
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
                                   </uix:NClick>
-                                  <ui:LogMessage DisplayName="Log Message - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="387.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Saving Leadsheet excel file.&quot;]">
+                                  <ui:LogMessage DisplayName="Log Message - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="416,168.8" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Saving Leadsheet excel file.&quot;]">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -484,8 +508,8 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:RetryScope>
-                      <Delay DisplayName="Delay - PageLoad " Duration="00:00:05" sap:VirtualizedContainerService.HintSize="563.2,90.4" sap2010:WorkflowViewState.IdRef="Delay_3" />
-                      <TryCatch DisplayName="Try Catch - Save Leadsheet Excel File." sap:VirtualizedContainerService.HintSize="563.2,2055.2" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                      <Delay DisplayName="Delay - PageLoad " Duration="00:00:05" sap:VirtualizedContainerService.HintSize="534.4,122.4" sap2010:WorkflowViewState.IdRef="Delay_3" />
+                      <TryCatch DisplayName="Try Catch - Save Leadsheet Excel File." sap:VirtualizedContainerService.HintSize="534.4,786.4" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -493,22 +517,22 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                         <TryCatch.Try>
-                          <uix:NCheckState sap2010:Annotation.AnnotationText="Save Leadsheet Excel File." DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="526.4,1528" sap2010:WorkflowViewState.IdRef="NCheckState_15" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="30" Version="V3">
+                          <uix:NCheckState sap2010:Annotation.AnnotationText="Save Leadsheet Excel File." DisplayName="Check App State - All changes saved." EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="467.2,56" sap2010:WorkflowViewState.IdRef="NCheckState_15" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="30" Version="V3">
                             <uix:NCheckState.IfExists>
-                              <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Save As" sap:VirtualizedContainerService.HintSize="483.2,1238.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" ScopeGuid="0ada44bf-116e-4849-9208-61a6fc172017" Version="V2">
+                              <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Save As" sap:VirtualizedContainerService.HintSize="483.2,1193.6" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" ScopeGuid="0ada44bf-116e-4849-9208-61a6fc172017" Version="V2">
                                 <uix:NApplicationCard.Body>
                                   <ActivityAction x:TypeArguments="x:Object">
                                     <ActivityAction.Argument>
                                       <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                                     </ActivityAction.Argument>
-                                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="449.6,947.2" sap2010:WorkflowViewState.IdRef="Sequence_648">
+                                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="449.6,902.4" sap2010:WorkflowViewState.IdRef="Sequence_648">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                      <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Leadsheet File Name" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="387.2,218.4" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="0ada44bf-116e-4849-9208-61a6fc172017" Text="[in_strExportedExcelPath]" Version="V3">
+                                      <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - Leadsheet File Name" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="416,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="0ada44bf-116e-4849-9208-61a6fc172017" Text="[in_strExportedExcelPath]" Version="V3">
                                         <uix:NTypeInto.Target>
                                           <uix:TargetAnchorable CvElementArea="167, 450, 676, 29" CvType="InputBox" DesignTimeRectangle="166, 452, 673, 28" DesignTimeScaleFactor="1.25" ElementType="InputBox" FriendlyName="'Leadsheets-NP_GO_0664VA…'" FullSelectorArgument="&lt;wnd aaname='Explorer Pane' cls='DirectUIHWND' /&gt;&lt;wnd aaname='File name:' cls='ComboBox' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Explorer Pane' cls='DirectUIHWND' /&gt;&lt;wnd aaname='File name:' cls='ComboBox' /&gt;" Guid="3cd8fd82-f88f-4b1a-b1ca-c87aef8de266" InformativeScreenshot="55f7b66d544fe5f7933970620614b6ad.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='#32770' title='Save As' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                         </uix:NTypeInto.Target>
@@ -519,7 +543,7 @@
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
                                       </uix:NTypeInto>
-                                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Save" sap:VirtualizedContainerService.HintSize="387.2,157.6" sap2010:WorkflowViewState.IdRef="NClick_37" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="0ada44bf-116e-4849-9208-61a6fc172017" Version="V3">
+                                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Save" sap:VirtualizedContainerService.HintSize="416,189.6" sap2010:WorkflowViewState.IdRef="NClick_37" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="0ada44bf-116e-4849-9208-61a6fc172017" Version="V3">
                                         <uix:NClick.Target>
                                           <uix:TargetAnchorable CvElementArea="589, 542, 110, 33" CvTextArea="626, 551, 33, 13" CvTextArgument="Save" CvType="Button" DesignTimeRectangle="590, 543, 110, 33" DesignTimeScaleFactor="1.25" ElementType="Button" FriendlyName="'&amp;Save'" FullSelectorArgument="&lt;wnd title='&amp;amp;Save' aaname='Save' /&gt;" FuzzySelectorArgument="&lt;wnd title='&amp;amp;Save' aaname='Save' check:text='&amp;amp;Save' /&gt;" Guid="3088d435-b73b-438d-a126-3d302f4baef0" InformativeScreenshot="240c4d37955e7c90a4ae7956b46dbfa5.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='#32770' title='Save As' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                         </uix:NClick.Target>
@@ -530,7 +554,7 @@
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
                                       </uix:NClick>
-                                      <uix:NCheckState DisplayName="Check App State - Save or Replcae" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="387.2,376" sap2010:WorkflowViewState.IdRef="NCheckState_14" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="3" Version="V3">
+                                      <uix:NCheckState DisplayName="Check App State - Save or Replcae" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="416,400.8" sap2010:WorkflowViewState.IdRef="NCheckState_14" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Timeout="3" Version="V3">
                                         <uix:NCheckState.IfExists>
                                           <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Yes" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_38" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3443bef0-b5a0-4125-9bb7-dc90323da079" Version="V3">
                                             <uix:NClick.Target>
@@ -598,7 +622,7 @@
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">True</x:Boolean>
                                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
@@ -616,29 +640,87 @@
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                               </ActivityAction.Argument>
-                              <ui:LogMessage DisplayName="Error Message - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Failed to save Leadsheet excel file at location: &quot;+in_strExportedExcelPath]" />
+                              <ui:LogMessage DisplayName="Error Message - Save Leadsheet Excel File" sap:VirtualizedContainerService.HintSize="467.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Failed to save Leadsheet excel file at location: &quot;+in_strExportedExcelPath]" />
                             </ActivityAction>
                           </Catch>
                         </TryCatch.Catches>
+                        <TryCatch.Finally>
+                          <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="467.2,390.4" sap2010:WorkflowViewState.IdRef="Sequence_656">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" ContinueOnError="True" DisplayName="Use Application: Save As" sap:VirtualizedContainerService.HintSize="433.6,330.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" ScopeGuid="0ada44bf-116e-4849-9208-61a6fc172017" Timeout="5" Version="V2">
+                              <uix:NApplicationCard.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                                  </ActivityAction.Argument>
+                                </ActivityAction>
+                              </uix:NApplicationCard.Body>
+                              <uix:NApplicationCard.TargetApp>
+                                <uix:TargetApp Area="0, 0, 854, 600" FilePath="C:\SurePrepLocalFiles\SPbinder\spbinder.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAKcSURBVDhPjZPbS1RBHMenLCyEoAvsHDXds1ezB+utoHzooRf/g0ALKkkj7erxllpraiRUrKx43bOetY0gpDNn1gx8MH3M8NGiB83IbkgQZubq9J31KNlDeODDHA7z/fzmzMyPrD1eq474rNptHqvhiMtqfKBaLeNO697H/db9GYUFRx0sVKewDr+r1FCA18ZD/LwCVIOqvT5e2wjBLAQCAgGBgEBAIBxWKJFhdMUQGgXvwRRoRfCGZJ+PV8Z8vGYZArEqaP4BwZS9gkXHs9BbZ2VkzFViCAQFxpcYVXKQl2/P4ddb/VxbgUB4rPrvbivQBkE+BNkQuGg8WJDV1NuLwHwyfNH4nB0wio6RHkIO8Csnc/i1bxAkIJj28roideh2inuwgeSRFwSViLs4motx0q48n3XXGKIsOqyYj1QILvdDIPyW9s59p60Dk2SlbqCBnSANPAYyvOKs7BtRBiJvqBlNpJuxMpLLy2eSgnjFB09z8KyrJDqdnFxq/ASFoAQsJr9dMEYzwnoZZZFf1OwXEAxIwVJSwLUJ73NtD6qcs8NSMgNm7fdZV7GRT+PhPGpG5rACKRjfKBjUdquFT1Ixud0OrSFXUO4YDhPKwof/Faz+Ate++HjVIW9nC8HkTDBmhyU6SEuP6VJwCoLE+i+sbyLXhI9Xt3jiga2uq2EpyQefwCugZgd0orCuXZT1cggEVrAEwaW1Y/y6KqiZ81r1p9XBQIpKJuURFmLjTjhvysrtaQrrbKKs57ctmMAxOv93kY7Li5QpLxILFjhY+1MIFiFAODJPTeMMNXWy2au8gGZCT3QKCBYQvAVBKjX7pGCTzcRCy+jGSYV1n6dM34HNtPvYfv5q56MQPITgNQQb2pminRWmb6Gsy04R8gc1WNuxxvoAowAAAABJRU5ErkJggg==" InformativeScreenshot="b6b9d459ae7cc8f1b5a30f0a8083170a.png" Selector="&lt;wnd app='spbinder.exe' cls='#32770' title='Save As' /&gt;" Title="Save As" />
+                              </uix:NApplicationCard.TargetApp>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NApplicationCard>
+                          </Sequence>
+                        </TryCatch.Finally>
                       </TryCatch>
-                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Application: Leadsheet Excel" sap:VirtualizedContainerService.HintSize="563.2,347.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" OpenMode="Never" ScopeGuid="af009627-af84-4527-a89a-e047de9e1bf4" Timeout="60" Version="V2">
-                        <uix:NApplicationCard.Body>
-                          <ActivityAction x:TypeArguments="x:Object">
-                            <ActivityAction.Argument>
-                              <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
-                            </ActivityAction.Argument>
-                          </ActivityAction>
-                        </uix:NApplicationCard.Body>
-                        <uix:NApplicationCard.TargetApp>
-                          <uix:TargetApp Area="-8, -8, 1456, 876" FilePath="C:\Program Files\Microsoft Office\root\Office16\excel.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGvSURBVFhH7Zc9SEJRGIZdo9B+pRoShwhChIoQhCBbgsgpGgJpKyKIaAmClqDBoSmyLQikrbaCppaksdvUGDQ1FjQ0fvlezpGjfefcn86FkF548Hr4vvO+nh/U2L+8lK6uO3XIL1O1gyA4wkYvzsQEY2JE2OjFmZjgTEwIG704ExOciQlhoxdnYoIzMSFs9Bo5LpEXqcpq+ADd+wWnDoWhZ3eWBjYKbojfBGAn90vH/CjFt/ON9zKIX/5WgNRhke5fnlz2bk4a4zOVtcY4ntUe6ytw+nBJ0MfXpxsIYzCG8Npabz0ATGEOle/OafFsx32GskcrTbUgkjOweVV2DRFEfnqE4WojO4TSGHp9f2NrQGQBrp9rwp7fe0l8OkXJpQkaLOVcuBoTbAC579gCeR6wLVyt9QA4hFhyCPsOIPVWqFgPwF1DGeji8bapFlgNoF45dcnlrYBQo/ZEcgaC0BYBQn8dJ7byPwIERfzs0KtzfIh0dGWGKZFLRxugd26MvEguT7KT+0HY6NW3kCET/cUsO7FfhI1eXJNNhI1eXJNNhI1e9SKntcki3n/N2lyx2De7iUsgzKBEqQAAAABJRU5ErkJggg==" InformativeScreenshot="2d26dfb7ea3b37e20a7a2589368b9ee5.png" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' title='Leadsheets-*' /&gt;" Title="Leadsheets-25710737.xlsx  -  Protected View - Excel" />
-                        </uix:NApplicationCard.TargetApp>
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                      </uix:NApplicationCard>
+                      <TryCatch DisplayName="Try Catch - Close Leadsheet excel" sap:VirtualizedContainerService.HintSize="534.4,940.8" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+                        <TryCatch.Try>
+                          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Application: Leadsheet Excel" sap:VirtualizedContainerService.HintSize="433.6,307.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" OpenMode="Never" ScopeGuid="af009627-af84-4527-a89a-e047de9e1bf4" Timeout="60" Version="V2">
+                            <uix:NApplicationCard.Body>
+                              <ActivityAction x:TypeArguments="x:Object">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                                </ActivityAction.Argument>
+                              </ActivityAction>
+                            </uix:NApplicationCard.Body>
+                            <uix:NApplicationCard.TargetApp>
+                              <uix:TargetApp Area="-8, -8, 1456, 876" FilePath="C:\Program Files\Microsoft Office\root\Office16\excel.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGvSURBVFhH7Zc9SEJRGIZdo9B+pRoShwhChIoQhCBbgsgpGgJpKyKIaAmClqDBoSmyLQikrbaCppaksdvUGDQ1FjQ0fvlezpGjfefcn86FkF548Hr4vvO+nh/U2L+8lK6uO3XIL1O1gyA4wkYvzsQEY2JE2OjFmZjgTEwIG704ExOciQlhoxdnYoIzMSFs9Bo5LpEXqcpq+ADd+wWnDoWhZ3eWBjYKbojfBGAn90vH/CjFt/ON9zKIX/5WgNRhke5fnlz2bk4a4zOVtcY4ntUe6ytw+nBJ0MfXpxsIYzCG8Npabz0ATGEOle/OafFsx32GskcrTbUgkjOweVV2DRFEfnqE4WojO4TSGHp9f2NrQGQBrp9rwp7fe0l8OkXJpQkaLOVcuBoTbAC579gCeR6wLVyt9QA4hFhyCPsOIPVWqFgPwF1DGeji8bapFlgNoF45dcnlrYBQo/ZEcgaC0BYBQn8dJ7byPwIERfzs0KtzfIh0dGWGKZFLRxugd26MvEguT7KT+0HY6NW3kCET/cUsO7FfhI1eXJNNhI1eXJNNhI1e9SKntcki3n/N2lyx2De7iUsgzKBEqQAAAABJRU5ErkJggg==" InformativeScreenshot="2d26dfb7ea3b37e20a7a2589368b9ee5.png" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' title='Leadsheets-*' /&gt;" Title="Leadsheets-25710737.xlsx  -  Protected View - Excel" />
+                            </uix:NApplicationCard.TargetApp>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NApplicationCard>
+                        </TryCatch.Try>
+                        <TryCatch.Catches>
+                          <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+                            <ActivityAction x:TypeArguments="s:Exception">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="433.6,227.2" sap2010:WorkflowViewState.IdRef="Sequence_661">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="400,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_14" Message="[&quot;Failed to smoothly close leadsheet excel file.&quot;]" />
+                              </Sequence>
+                            </ActivityAction>
+                          </Catch>
+                        </TryCatch.Catches>
+                        <TryCatch.Finally>
+                          <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="433.6,217.6" sap2010:WorkflowViewState.IdRef="Sequence_662">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process - Excel" sap:VirtualizedContainerService.HintSize="400,157.6" sap2010:WorkflowViewState.IdRef="KillProcess_3" ProcessName="excel" />
+                          </Sequence>
+                        </TryCatch.Finally>
+                      </TryCatch>
                     </Sequence>
                   </uix:NCheckState.IfExists>
                   <uix:NCheckState.Target>
@@ -687,11 +769,10 @@
       </uix:NApplicationCard.TargetApp>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </uix:NApplicationCard>
-    <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process - Excel" sap:VirtualizedContainerService.HintSize="449.6,157.6" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="excel" />
   </Sequence>
 </Activity>
