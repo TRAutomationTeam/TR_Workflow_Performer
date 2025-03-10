@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PaperShortcut" this:PaperShortcut.in_strSPBinderWorkpaperName="Jhon" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PaperShortcut" this:PaperShortcut.in_strSPBinderWorkpaperName="Jhon" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_WorkpaperName" Type="InArgument(x:String)" />
@@ -6,6 +6,7 @@
     <x:Property Name="in_strSPBinderWorkpaperName" Type="InArgument(x:String)" />
     <x:Property Name="in_strServiceType" Type="InArgument(x:String)" />
     <x:Property Name="in_strBinderType" Type="InArgument(x:String)" />
+    <x:Property Name="inDictTestSummaryReport" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <this:PaperShortcut.in_TransactionItem>
     <InArgument x:TypeArguments="ui:QueueItem" />
@@ -56,6 +57,7 @@
       <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -113,9 +115,12 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Python</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PaperShortcut" sap:VirtualizedContainerService.HintSize="673.6,1330.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PaperShortcut" sap:VirtualizedContainerService.HintSize="840.8000000000001,3776" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="A - CPA Instructions" Name="strFolderToCreateShortcutName" />
     </Sequence.Variables>
@@ -124,15 +129,15 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="611.2,1241.6" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="547.2,3752.8" sap2010:WorkflowViewState.IdRef="TryCatch_5">
       <TryCatch.Try>
-        <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder -" sap:VirtualizedContainerService.HintSize="574.4,987.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V2">
+        <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder -" sap:VirtualizedContainerService.HintSize="545.6,3333.6" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V2">
           <uix:NApplicationCard.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="540.8,696" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="512,3042.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:Boolean" Name="isShortcutVisibility" />
                   <Variable x:TypeArguments="x:String" Name="strWorkpaperName" />
@@ -143,7 +148,7 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign sap2010:Annotation.AnnotationText="1. WorkPaper Name from Queue&#xD;&#xA;2. Folder Name to create shortcut&#xD;&#xA;3. Folder To Associate" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,272" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                <ui:MultipleAssign sap2010:Annotation.AnnotationText="1. WorkPaper Name from Queue&#xA;2. Folder Name to create shortcut&#xA;3. Folder To Associate" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,272" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -178,29 +183,44 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <If Condition="[in_strServiceType =&quot;SPbinder&quot;]" DisplayName="If ServiceType =&quot;SPbinder&quot; OrElse All Other" sap:VirtualizedContainerService.HintSize="478.4,56.8" sap2010:WorkflowViewState.IdRef="If_2">
+                <If Condition="[in_strServiceType =&quot;SPbinder&quot;]" DisplayName="If ServiceType =&quot;SPbinder&quot; OrElse All Other" sap:VirtualizedContainerService.HintSize="478.4,1483.2" sap2010:WorkflowViewState.IdRef="If_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="559.2,345.6" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="451.2,108" sap2010:WorkflowViewState.IdRef="Sequence_18">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_strBinderType]" sap:VirtualizedContainerService.HintSize="496.8,256.8" sap2010:WorkflowViewState.IdRef="Switch`1_1">
-                        <Sequence x:Key="1065" DisplayName="1065 - SpBinder" sap:VirtualizedContainerService.HintSize="500.8,462.4" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                      <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_strBinderType]" sap:VirtualizedContainerService.HintSize="417.6,48" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                        <Switch.Default>
+                          <Sequence DisplayName="Default" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </Switch.Default>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Sequence x:Key="1065" DisplayName="1065 - SpBinder" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_22">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="438.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_15" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="518.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_15" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable DesignTimeRectangle="115, 212, 93, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'W-2G Gambling Winning'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='*{0}*' /&gt;&quot;, in_strSPBinderWorkpaperName)]" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0} *' role='text' /&gt;&quot;, strWorkpaperName)]" Guid="c4c450ae-d6bf-4829-ab9d-21cc16913b00" ImageBase64="" InformativeScreenshot="b33f0fae88aa75b64840ea6849bd4ac9.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                                 <uix:TargetAnchorable.Anchors>
@@ -211,9 +231,9 @@
                               </uix:TargetAnchorable>
                             </uix:NClick.Target>
                           </uix:NClick>
-                          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.4,184" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="518.4,592" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                             <TryCatch.Try>
-                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NCheck_9" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                              <uix:NCheck Action="Check" DisplayName="Check/Uncheck Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="416,157.6" sap2010:WorkflowViewState.IdRef="NCheck_9" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                                 <uix:NCheck.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="75, 212, 18, 14" DesignTimeScaleFactor="1" ElementType="CheckBox" FriendlyName="'Checkbox'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl idx='2' name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl idx='20' name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='Check' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='Check' role='check box' /&gt;" Guid="35aba65e-3f13-47e2-bd76-9f593eb4d068" ImageBase64="" InformativeScreenshot="92d47af3227439af2325270e41180acc.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="FuzzySelector" Version="V1" Visibility="Interactive" WaitForReadyArgument="Complete">
                                     <uix:TargetAnchorable.Anchors>
@@ -237,7 +257,7 @@
                                   <ActivityAction.Argument>
                                     <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                   </ActivityAction.Argument>
-                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click '0 Jhon Pg. 1 (2)'" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_31" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click '0 Jhon Pg. 1 (2)'" sap:VirtualizedContainerService.HintSize="416,157.6" sap2010:WorkflowViewState.IdRef="NClick_31" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                                     <uix:NClick.Target>
                                       <uix:TargetAnchorable CvTextArea="114, 214, 95, 14" CvTextArgument="O Jhon I Pg. (2)" CvType="Text" DesignTimeRectangle="115, 212, 93, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'0 Jhon Pg. 1 (2)'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='*{0}*' /&gt;&quot;, in_strSPBinderWorkpaperName)]" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='0 Jhon  | Pg. 1 (2)' role='text' check:text='0 Jhon  | Pg. 1 (2)' /&gt;" Guid="f6840902-2c3a-4685-a644-9d1f27dce951" InformativeScreenshot="4a20c8ea55852110e24b776940c88da6.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - SANJAY (SC106501) | 1120 | 2023 | Binder ID: 32403984*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive">
                                         <uix:TargetAnchorable.PointOffset>
@@ -249,20 +269,29 @@
                                 </ActivityAction>
                               </Catch>
                             </TryCatch.Catches>
+                            <TryCatch.Finally>
+                              <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </Sequence>
+                            </TryCatch.Finally>
                           </TryCatch>
                         </Sequence>
-                        <Sequence x:Key="1041" DisplayName="1041 - SpBinder" sap:VirtualizedContainerService.HintSize="496,753.6" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                        <Sequence x:Key="1041" DisplayName="1041 - SpBinder" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_23">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:String" Default="  | Pg. 1 (3)" Name="strSuffix" />
                             <Variable x:TypeArguments="x:String" Name="strPgNo" />
                           </Sequence.Variables>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign sap:VirtualizedContainerService.HintSize="518.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_4">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:String">[strSuffix]</OutArgument>
                             </Assign.To>
@@ -270,7 +299,7 @@
                               <InArgument x:TypeArguments="x:String">[in_Config("in_suffix").ToString]</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+                          <Assign sap:VirtualizedContainerService.HintSize="518.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:String">[strPgNo]</OutArgument>
                             </Assign.To>
@@ -278,7 +307,7 @@
                               <InArgument x:TypeArguments="x:String">[in_Config("in_PgNo").ToString]</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="433.6,156.8" sap2010:WorkflowViewState.IdRef="NClick_17" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="518.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_17" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable DesignTimeRectangle="135, 236, 84, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'W-2G Gambling Winning'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0}{1}' /&gt;&quot;, in_strSPBinderWorkpaperName, strSuffix)]" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0} *' role='text' /&gt;&quot;, strWorkpaperName)]" Guid="c4c450ae-d6bf-4829-ab9d-21cc16913b00" ImageBase64="" InformativeScreenshot="5388d6bf5a21bc73143c852a9812b88d.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                                 <uix:TargetAnchorable.Anchors>
@@ -461,13 +490,14 @@
                             </uix:NClick.Target>
                           </uix:NClick>
                         </Sequence>
-                        <Sequence x:Key="1120S" DisplayName="1120s - SpBinder" sap:VirtualizedContainerService.HintSize="552,787.2" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                        <Sequence x:Key="1120S" DisplayName="1120s - SpBinder" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_26">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="489.6,156.8" sap2010:WorkflowViewState.IdRef="NClick_23" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="489.6,189.6" sap2010:WorkflowViewState.IdRef="NClick_23" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable DesignTimeRectangle="115, 212, 93, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'W-2G Gambling Winning'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='*{0}*' /&gt;&quot;, in_strSPBinderWorkpaperName)]" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0} *' role='text' /&gt;&quot;, strWorkpaperName)]" Guid="c4c450ae-d6bf-4829-ab9d-21cc16913b00" ImageBase64="" InformativeScreenshot="b33f0fae88aa75b64840ea6849bd4ac9.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                                 <uix:TargetAnchorable.Anchors>
@@ -478,7 +508,7 @@
                               </uix:TargetAnchorable>
                             </uix:NClick.Target>
                           </uix:NClick>
-                          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="489.6,384.8" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="489.6,771.2" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                             <TryCatch.Try>
                               <uix:NCheck Action="Check" DisplayName="Check/Uncheck Click - On SpBinder WorkPaper to Create shortcut" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NCheck_8" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                                 <uix:NCheck.Target>
@@ -504,7 +534,7 @@
                                   <ActivityAction.Argument>
                                     <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                   </ActivityAction.Argument>
-                                  <Sequence sap:VirtualizedContainerService.HintSize="450,398" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,398" sap2010:WorkflowViewState.IdRef="Sequence_28">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -529,6 +559,9 @@
                                 </ActivityAction>
                               </Catch>
                             </TryCatch.Catches>
+                            <TryCatch.Finally>
+                              <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_32" />
+                            </TryCatch.Finally>
                           </TryCatch>
                           <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'graphic ImageSearch'" sap:VirtualizedContainerService.HintSize="489.6,156.8" sap2010:WorkflowViewState.IdRef="NClick_24" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                             <uix:NClick.Target>
@@ -546,13 +579,13 @@
                     </Sequence>
                   </If.Then>
                   <If.Else>
-                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="499.2,880" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="451.2,1236.8" sap2010:WorkflowViewState.IdRef="Sequence_19">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'W-2G Gambling Winning'" sap:VirtualizedContainerService.HintSize="436.8,189.6" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'W-2G Gambling Winning'" sap:VirtualizedContainerService.HintSize="417.6,189.6" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable DesignTimeRectangle="115, 212, 145, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'W-2G Gambling Winning'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0} *' /&gt;&quot;, strWorkpaperName)]" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0} *' role='text' /&gt;&quot;, strWorkpaperName)]" Guid="c4c450ae-d6bf-4829-ab9d-21cc16913b00" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJUAAAATCAYAAACZS0+KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAP1SURBVGhD7Zg/KH5RGMffyWQ0ySJZZJMSWZRJBqNEGZQsiiwGshhkoQwWA8pgQSzKgGRQCiURyZ9EJJTBcvR5fvd5Hfe99/2ji/vT+dTpPc/5e9/nfs9zzrkJ43BEjBOVI3KcqByR40TliBwnKkfkOFE5IidFVJeXl2Z5edk8PT2JXVVVZRoaGiS/t7dnenp6zMvLi7m5uZH86emp1H0Xb29vpqWlxRQUFJjS0lIzPj5uqqurvdr0rK+vS5+7uzuv5IOJiQmTSCSSKS8vT+Zhvt9kcnLSFBUVmfv7e6/kg5WVFXlOfB9nUkS1uroqTt7a2hL79vZWEmgdf+r4+PhTu+9iZmZGBKVORgzY2WA/rx8VldbxwrB5qb8FCxnRzM/PeyWp1NfXm+7ubs+KJxlF1dXVlYxUYaLyRxN+aRNUDozJasQmnZ2dST0Jp9bV1Unf6elpqadM6227vb1dxgsjF1FBRUWFaWpqkvzIyIjMVVxcbAoLCyWfDiI645Fou7u7K+X8j97eXnlmrWOhBDE1NSV+0V1ic3PT1NTUSD/ts7i4KPbj46PYcSQSUa2trUn+8PBQ2il9fX3iJH85Y/ISrq6uvJIPEBhjqRP9kem7IhWoqDY2NqSO6AVjY2MZ53x4eJDf19dXU1tbm2zf398v+YODA7FnZ2dl7IWFBbFt8DO+ASJmZWWlzG37A8GF9Y8LkYhqf39f8jgApypEE3WSjT1mEAiOlwE/JaqlpSWxeZnDw8Myh56vcpkT7LGDfMBYQX6hnL7w/Pws86uf7ejGmETSuBKJqEAdT1lnZ6eUkVdx2PhFdX5+bhobG8VZJLaKnxKVJra4wcFBeZE831fnhObmZolWEOQD+/JjQ1v/1hgkKnvRxZHIRKVsb29LOeE520jV1tYmtka534hUNkQq6pRs5hwYGJD/Szv6cvME7NbWVskrYX5hMWUrKhZAXEkR1dDQkPy5i4sLsXMVFbc0yhEVfe2x9BbpFxWruqOjw7PSi0pvadkcVL8qKj0M8yIROp9O9BmOjo7kk0sYRLrR0VHpz/mQ/0H+5ORE6nWbDToT4QfOoTZ+UTE+9tzcnNhxJCkqXiQPm5+f/2m/zkZUlNNPVypbGeIicZOjXXl5ueTp6xeV9mcLYoyysrJQUXFQ5UZEe26W6fiqqIBIwIJgHm6A+gyZ+oEtBETA7Y9xKGMcbnlBECFLSko86x9+UeFvbMrjSkqk+kukE1UuED1YdOngYA12pNLPCtmiAuI2HYYeFeKME1UA9nczohQRdmdnx6sNhgjEXCT6hEWjTPBhM0zAiJTo6T9yxI0/Lar/ESLd9fX1p08zCt/C9FwaZ5yoHBFjzDtAQpK7QUwK8wAAAABJRU5ErkJggg==" InformativeScreenshot="ae8b1ec7c8a360855d0e5005f03ad9eb.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                             <uix:TargetAnchorable.Anchors>
@@ -563,9 +596,9 @@
                           </uix:TargetAnchorable>
                         </uix:NClick.Target>
                       </uix:NClick>
-                      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="436.8,420.8" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="417.6,806.4" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                         <TryCatch.Try>
-                          <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'W-2G Gambling Winning'" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NCheck_2" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                          <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'W-2G Gambling Winning'" sap:VirtualizedContainerService.HintSize="416,157.6" sap2010:WorkflowViewState.IdRef="NCheck_2" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                             <uix:NCheck.Target>
                               <uix:TargetAnchorable DesignTimeRectangle="75, 212, 18, 14" DesignTimeScaleFactor="1" ElementType="CheckBox" FriendlyName="'Checkbox'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl idx='2' name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl idx='20' name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='Check' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='Check' role='check box' /&gt;" Guid="35aba65e-3f13-47e2-bd76-9f593eb4d068" InformativeScreenshot="024a67c63af80a102f147f28b9070747.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="FuzzySelector" Version="V1" Visibility="Interactive">
                                 <uix:TargetAnchorable.Anchors>
@@ -589,7 +622,7 @@
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                               </ActivityAction.Argument>
-                              <Sequence sap:VirtualizedContainerService.HintSize="450.4,335.2" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,363.2" sap2010:WorkflowViewState.IdRef="Sequence_29">
                                 <Sequence.Variables>
                                   <Variable x:TypeArguments="x:String" Default="Jhon" Name="strNameOfWorkpaper" />
                                 </Sequence.Variables>
@@ -598,8 +631,8 @@
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="388,122.4" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="Alternate Check" />
-                                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Jhon Pg. 45 (35)'" sap:VirtualizedContainerService.HintSize="388,180.8" sap2010:WorkflowViewState.IdRef="NClick_30" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="382.4,122.4" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="Alternate Check" />
+                                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Jhon Pg. 45 (35)'" sap:VirtualizedContainerService.HintSize="382.4,180.8" sap2010:WorkflowViewState.IdRef="NClick_30" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                                   <uix:NClick.Target>
                                     <uix:TargetAnchorable CvTextArea="114, 214, 98, 14" CvTextArgument="Jhon I Pg. 45 (35)" CvType="Text" DesignTimeRectangle="115, 212, 97, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Jhon Pg. 45 (35)'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0}*' /&gt;&quot;, strNameOfWorkpaper)]" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='Jhon  | Pg. 45 (35)' role='text' check:text='Jhon  | Pg. 45 (35)' /&gt;" Guid="ffcb6f02-afed-4b9b-b183-7ba8f53448ae" ImageBase64="" InformativeScreenshot="ed3b13887776c18f928d7f7d30f2e6c8.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive">
                                       <uix:TargetAnchorable.PointOffset>
@@ -612,8 +645,17 @@
                             </ActivityAction>
                           </Catch>
                         </TryCatch.Catches>
+                        <TryCatch.Finally>
+                          <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </TryCatch.Finally>
                       </TryCatch>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'graphic ImageSearch'" sap:VirtualizedContainerService.HintSize="436.8,180.8" sap2010:WorkflowViewState.IdRef="NClick_9" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'graphic ImageSearch'" sap:VirtualizedContainerService.HintSize="417.6,180.8" sap2010:WorkflowViewState.IdRef="NClick_9" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d9076b16-dd8b-47d1-b94f-964d9a227e61" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable DesignTimeRectangle="267, 133, 20, 20" DesignTimeScaleFactor="1" ElementType="Icon" FriendlyName="'graphic ImageSearch'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='ImageSearch' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='ImageSearch' role='graphic' /&gt;" Guid="2334d29e-69a2-44c3-808e-03511aef939f" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEMSURBVDhP7ZMxS8NgGITzYxwcHDr0b7h1c+7g4uhSRAoiUgfp1EVwKRREKBQcrLNj0ElIOgRCCFkCSSAJJCHX3gtWIt/XwWbsA+G4OzhIXmIkSYg2H8O2bbT5GGiZw+AvdV2jP/3CaLlCVVWSUemZs1ehHcyyDHev3+gO30SLomh49iq0g2EYwvd93M4/0bl8aShz9iq0g3mew3EcuK6Lm9kHTs4fRemZs1ex8yh8zeHTO47P7hvKXId2kAe4nixwdDoQtSyr4X8O9RftYFmW6F084Gr8LK9pmqYoPXP2KrSDURRtfvYEnufJN4vjWJSeOXsV2sE0TeWaQRBsD0ClZ85exc6j/IfD4L4Aa+C1+ijsDYyAAAAAAElFTkSuQmCC" InformativeScreenshot="52f24551ddff44efde44cb043e0dd87b.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (1040ScanOrganiseClassic) | 1040 | 202*' /&gt;" SearchSteps="Image" Version="V1" Visibility="Interactive">
                             <uix:TargetAnchorable.Anchors>
@@ -775,31 +817,49 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uta:VerifyExpressionWithOperator>
-                <If Condition="[isShortcutVisibility = True]" DisplayName="If - isShortcutVisibility = True" sap:VirtualizedContainerService.HintSize="478.4,49.6" sap2010:WorkflowViewState.IdRef="If_1">
+                <If Condition="[isShortcutVisibility = True]" DisplayName="If - isShortcutVisibility = True" sap:VirtualizedContainerService.HintSize="478.4,998.4" sap2010:WorkflowViewState.IdRef="If_1">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,256" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,433.6" sap2010:WorkflowViewState.IdRef="Sequence_16">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="353.6,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;TC_05:&quot; + &quot;Verify page shortcut functionality in index tree.&quot; +  &quot; Page shortcut is verified. Hence test case pass&quot;]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;TC_05:&quot; + &quot;Verify page shortcut functionality in index tree.&quot; +  &quot; Page shortcut is verified. Hence test case pass&quot;]" />
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="382.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                          <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                          <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_05"}]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
                     </Sequence>
                   </If.Then>
                   <If.Else>
-                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,256" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,433.6" sap2010:WorkflowViewState.IdRef="Sequence_17">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="353.6,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;TC_05:&quot; + &quot;Verify page shortcut functionality in index tree.&quot; +  &quot; Page shortcut failed. Hence test case failed&quot;]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;TC_05:&quot; + &quot;Verify page shortcut functionality in index tree.&quot; +  &quot; Page shortcut failed. Hence test case failed&quot;]" />
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="382.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Failed"]</InArgument>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" xml:space="preserve">["TC_05:" + "Verify page shortcut functionality in index tree." +  " Page shortcut failed. Hence test case failed"]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                          <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_05"}]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
                     </Sequence>
                   </If.Else>
                 </If>
@@ -829,10 +889,19 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;The process failed at Paper Shortcut with following exception: &quot;+exception.Message+&quot; at Source: &quot;+exception.Source]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="545.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;The process failed at Paper Shortcut with following exception: &quot;+exception.Message+&quot; at Source: &quot;+exception.Source]" />
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="545.6,89.6" sap2010:WorkflowViewState.IdRef="Sequence_30">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
     </TryCatch>
   </Sequence>
 </Activity>

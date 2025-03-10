@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Associate" this:Associate.in_strSPBinderWorkPaperName="Jhon" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Associate" this:Associate.in_strSPBinderWorkPaperName="Jhon" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_SplitWorkPaperName" Type="InArgument(x:String)" />
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
@@ -6,6 +6,7 @@
     <x:Property Name="in_StrServiceType" Type="InArgument(x:String)" />
     <x:Property Name="in_strSPBinderWorkPaperName" Type="InArgument(x:String)" />
     <x:Property Name="in_strBinderType" Type="InArgument(x:String)" />
+    <x:Property Name="inDictTestSummaryReport" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <this:Associate.in_StrServiceType>
     <InArgument x:TypeArguments="x:String" />
@@ -60,6 +61,8 @@
       <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>UiPath.Activities.Contracts</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -124,9 +127,13 @@
       <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
       <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Associate" sap:VirtualizedContainerService.HintSize="1091.2,3888.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Associate" sap:VirtualizedContainerService.HintSize="840.8000000000001,2348.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strFolderToAssociate" />
     </Sequence.Variables>
@@ -135,13 +142,13 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="1028.8,3800" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="545.6,2325.6" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="995.2,3485.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="512,2011.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="isAssocaitedWorkpaper" />
               <Variable x:TypeArguments="x:String" Default="Jhon" Name="strNameForWorkPaper" />
@@ -151,7 +158,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:MultipleAssign sap2010:Annotation.AnnotationText="1. Folder to Assocaite&#xA;2. WorkpaperName splitning by coma." DisplayName="Multiple Assign - Folder To Associate" sap:VirtualizedContainerService.HintSize="932.8,224" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign sap2010:Annotation.AnnotationText="1. Folder to Assocaite&#xA;2. WorkpaperName splitning by coma." DisplayName="Multiple Assign - Folder To Associate" sap:VirtualizedContainerService.HintSize="478.4,224" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
               <ui:MultipleAssign.AssignOperations>
                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -178,9 +185,9 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:MultipleAssign>
-            <If Condition="[in_StrServiceType = &quot;SPbinder&quot;]" DisplayName="If ServiceType =&quot;SPbinder&quot; OrElse All Other" sap:VirtualizedContainerService.HintSize="932.8,2040" sap2010:WorkflowViewState.IdRef="If_2">
+            <If Condition="[in_StrServiceType = &quot;SPbinder&quot;]" DisplayName="If ServiceType =&quot;SPbinder&quot; OrElse All Other" sap:VirtualizedContainerService.HintSize="478.4,271.2" sap2010:WorkflowViewState.IdRef="If_2">
               <If.Then>
-                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="559.2,322.4" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Sequence_15">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" Default="0.2 " Name="strIntialsOfWorkPaper" />
                   </Sequence.Variables>
@@ -189,8 +196,23 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Switch x:TypeArguments="x:String" DisplayName="Switch - Engagement Type" Expression="[in_strBinderType]" sap:VirtualizedContainerService.HintSize="496.8,233.6" sap2010:WorkflowViewState.IdRef="Switch`1_1">
-                    <Sequence x:Key="1065" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                  <Switch x:TypeArguments="x:String" DisplayName="Switch - Engagement Type" Expression="[in_strBinderType]" sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                    <Switch.Default>
+                      <Sequence DisplayName="Default" sap:VirtualizedContainerService.HintSize="985.6,89.6" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </Switch.Default>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Sequence x:Key="1065" DisplayName="Body" sap:VirtualizedContainerService.HintSize="985.6,24.8" sap2010:WorkflowViewState.IdRef="Sequence_21">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -281,7 +303,7 @@
                         </uix:NCheckState.Target>
                       </uix:NCheckState>
                     </Sequence>
-                    <Sequence x:Key="1041" DisplayName="1041 - SpBinder" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                    <Sequence x:Key="1041" DisplayName="1041 - SpBinder" sap:VirtualizedContainerService.HintSize="985.6,24.8" sap2010:WorkflowViewState.IdRef="Sequence_22">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Default="  | Pg. 1 (1)" Name="strSuffix" />
                         <Variable x:TypeArguments="x:String" Name="strPgNo" />
@@ -421,7 +443,7 @@
                         </uix:NCheckState.Target>
                       </uix:NCheckState>
                     </Sequence>
-                    <Sequence x:Key="1120" DisplayName="1120" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                    <Sequence x:Key="1120" DisplayName="1120" sap:VirtualizedContainerService.HintSize="985.6,24.8" sap2010:WorkflowViewState.IdRef="Sequence_37">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -512,23 +534,23 @@
                         </uix:NCheckState.Target>
                       </uix:NCheckState>
                     </Sequence>
-                    <Sequence x:Key="1120S" DisplayName="1120s" sap:VirtualizedContainerService.HintSize="1016,1488" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                    <Sequence x:Key="1120S" DisplayName="1120s" sap:VirtualizedContainerService.HintSize="985.6,1546.4" sap2010:WorkflowViewState.IdRef="Sequence_40">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NCheckState DisplayName="Check App- Edit Window " sap:VirtualizedContainerService.HintSize="953.6,949.6" sap2010:WorkflowViewState.IdRef="NCheckState_12" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="3" Version="V3">
+                      <uix:NCheckState DisplayName="Check App- Edit Window " sap:VirtualizedContainerService.HintSize="952,920.8" sap2010:WorkflowViewState.IdRef="NCheckState_12" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="3" Version="V3">
                         <uix:NCheckState.IfExists>
-                          <Sequence DisplayName="Edit Window appears" sap:VirtualizedContainerService.HintSize="449.6,699.2" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                          <Sequence DisplayName="Edit Window appears" sap:VirtualizedContainerService.HintSize="449.6,670.4" sap2010:WorkflowViewState.IdRef="Sequence_38">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="387.2,176" sap2010:WorkflowViewState.IdRef="LogMessage_19" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper is verified. Hence test case pass&quot;]" />
-                            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="387.2,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_16" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[in_strSPBinderWorkPaperName]" Version="V3">
+                            <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_19" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper is verified. Hence test case pass&quot;]" />
+                            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="416,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_16" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[in_strSPBinderWorkPaperName]" Version="V3">
                               <uix:NTypeInto.Target>
                                 <uix:TargetAnchorable DesignTimeRectangle="260, 79, 230, 22" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' role='editable text' /&gt;" Guid="f42db705-0e73-4693-ab29-e31951830d67" InformativeScreenshot="63c27256d7c094653b4512c64cc18b8f.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="Selector" Version="V1" WaitForReadyArgument="Complete">
                                   <uix:TargetAnchorable.Anchors>
@@ -539,7 +561,7 @@
                                 </uix:TargetAnchorable>
                               </uix:NTypeInto.Target>
                             </uix:NTypeInto>
-                            <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="387.2,182.4" sap2010:WorkflowViewState.IdRef="NClick_17" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
+                            <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="416,182.4" sap2010:WorkflowViewState.IdRef="NClick_17" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
                               <uix:NClick.Target>
                                 <uix:TargetAnchorable DesignTimeRectangle="339, 407, 75, 25" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Save'" FullSelectorArgument="&lt;ctrl name='Save' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Save' role='push button' automationid='' check:text='Save' /&gt;" Guid="8a262cdf-99b8-448e-87d9-af800d53d5d0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAdCAYAAADrcjF6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJdSURBVGhD7ZbNS1RhFIf7M1oFErUTXEvboEVBC4ncSxsXUgYF0sJaKJGJYauSXBRYBIGLCkc0FXNKKxWncgrNLwYZnXHG+bzemdM9B35DzszC3mZeE84z/OBy3487PJxz33uMFGNU3j9QkHf8bbPmgAEqzyBA5RkEqDyDAJVnEKDyDAJUnkGAyjMIUHkGAVbl1U+003o6QnnvBya3g2Xn/s8BVuV92lkmJ+dS68KzsuNHJcCqvLXUNsX2UlT3rq1k7NGvUUq4GUq5WdrL5yiYCNGp4VbazMQolI4W5vUu+cj1xrt+vqaO4KCsSbuO3JuK/Ni3Z7UCrMob2/ouz5qNrdC5qbtl53CerIzJvPueoJFwQKq14WOPjC3E1yniJOiCv4t2nCQt7oboxFALPd/wy+ug6cvjkv0qHWBVXo3vKg2GPkt1MVyFV2b7Suad99+TanqzOUfN8/1SVS88ObUjN2XNTHSJbgQGZA+uRF5z8UM3ZXKOiC/er9IBVuX9GbTcVnaXTg9flzbka76X9ORyFbE8ripu3eVkmO4svpKW5rlP1yblf7Ow4jXlnlfJgEOTx+EDhGU0zjyUFgx4LXnSd21f5fE8bl2u1vnYqrTsmYnbUnEMKs9mgFV5/KmC67PvOynqCeOqujzdK7Lw2VIsD62by+elZfnepekH8i78Gt+Q6sSeLJ+vqxlgVR6ftoBbLJyN061vL2Vs3DtMWA5XGFchi4E8tC5OWezXvzouLctz8QrAftUMONS2PaoBKs8gQOUZBKg8gwCVZxCg8gwCVJ5BQEGe8veoPGOIfgPUH4JDIy8kzQAAAABJRU5ErkJggg==" InformativeScreenshot="2a813d01cad13a22c2c8487ff2939210.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive" WaitForReadyArgument="Complete">
                                   <uix:TargetAnchorable.Anchors>
@@ -553,13 +575,13 @@
                           </Sequence>
                         </uix:NCheckState.IfExists>
                         <uix:NCheckState.IfNotExists>
-                          <Sequence DisplayName="Edit Window does not appear" sap:VirtualizedContainerService.HintSize="449.6,259.2" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                          <Sequence DisplayName="Edit Window does not appear" sap:VirtualizedContainerService.HintSize="449.6,230.4" sap2010:WorkflowViewState.IdRef="Sequence_39">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="387.2,168.8" sap2010:WorkflowViewState.IdRef="LogMessage_20" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper window is not visible Hence test case failed&quot;]" />
+                            <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="416,168.8" sap2010:WorkflowViewState.IdRef="LogMessage_20" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper window is not visible Hence test case failed&quot;]" />
                           </Sequence>
                         </uix:NCheckState.IfNotExists>
                         <uix:NCheckState.Target>
@@ -578,7 +600,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NCheckState>
-                      <Assign sap:VirtualizedContainerService.HintSize="953.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+                      <Assign sap:VirtualizedContainerService.HintSize="952,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:String">[strIntialsOfWorkPaper]</OutArgument>
                         </Assign.To>
@@ -586,7 +608,7 @@
                           <InArgument x:TypeArguments="x:String" xml:space="preserve">0.2 </InArgument>
                         </Assign.Value>
                       </Assign>
-                      <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="953.6,217.6" sap2010:WorkflowViewState.IdRef="NTypeInto_17" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[&quot;0.2 &quot;+in_strSPBinderWorkPaperName]" Version="V3">
+                      <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="952,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_17" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[&quot;0.2 &quot;+in_strSPBinderWorkPaperName]" Version="V3">
                         <uix:NTypeInto.Target>
                           <uix:TargetAnchorable DesignTimeRectangle="16, 135, 396, 16" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' role='editable text' /&gt;" Guid="fb858789-5968-4afa-af15-3d01a3639d7a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAZAAAAAUCAYAAACj6Wu2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABvSURBVHhe7dUxDcAwEMDA8ocYDl1CIJU6ZH/Pd5Ix+Nn7PZIkTfsHstaSJGnUHQgATBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAwTkfysKNY6BgW80AAAAASUVORK5CYII=" InformativeScreenshot="5259a4eace8f6009e49e162fdca7f651.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder *' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Visible" WaitForReadyArgument="Complete">
                             <uix:TargetAnchorable.Anchors>
@@ -597,7 +619,7 @@
                           </uix:TargetAnchorable>
                         </uix:NTypeInto.Target>
                       </uix:NTypeInto>
-                      <uix:NCheckState DisplayName="Check App-Assocaited pg" EnableIfExists="False" EnableIfNotExists="False" Exists="[isAssocaitedWorkpaper]" sap:VirtualizedContainerService.HintSize="953.6,176.8" sap2010:WorkflowViewState.IdRef="NCheckState_13" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="5" Version="V3">
+                      <uix:NCheckState DisplayName="Check App-Assocaited pg" EnableIfExists="False" EnableIfNotExists="False" Exists="[isAssocaitedWorkpaper]" sap:VirtualizedContainerService.HintSize="952,201.6" sap2010:WorkflowViewState.IdRef="NCheckState_13" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="5" Version="V3">
                         <uix:NCheckState.Target>
                           <uix:TargetAnchorable CvTextArea="115, 214, 96, 14" CvTextArgument="Raju I Pg. 49 (52)" CvType="Text" DesignTimeRectangle="135, 284, 104, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Raju Pg. 49 (52)'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl idx='6' name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl idx='5' name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0}| Pg. 49 (52)' /&gt;&quot;, strNameForWorkPaper)]" FuzzyAccuracy="0.56" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl name='SPbinderLibrary.IndexTreeClass' role='outline item' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='0.2 {0}*' role='text' /&gt;&quot;, strNameForWorkPaper)]" Guid="57b02cc2-9086-4ffd-a2b5-a87d09b38fa1" ImageBase64="" InformativeScreenshot="282745dc7fc7fd5e4fe2f6e95716af3d.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (AJ_1203_09) | 1040 | 2022 | Binder ID*' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                         </uix:NCheckState.Target>
@@ -607,22 +629,32 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="899.2,1547.2" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_16">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NCheckState DisplayName="Check App- Edit Window " sap:VirtualizedContainerService.HintSize="836.8,1256.8" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="3" Version="V3">
+                  <uix:NCheckState DisplayName="Check App- Edit Window " sap:VirtualizedContainerService.HintSize="1374.4,3520" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="3" Version="V3">
                     <uix:NCheckState.IfExists>
-                      <Sequence DisplayName="Edit Window appears" sap:VirtualizedContainerService.HintSize="449.6,1006.4" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                      <Sequence DisplayName="Edit Window appears" sap:VirtualizedContainerService.HintSize="872,3269.6" sap2010:WorkflowViewState.IdRef="Sequence_10">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="387.2,176" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper is verified. Hence test case pass&quot;]" />
-                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="387.2,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[strNameForWorkPaper]" Version="V3">
+                        <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="838.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper is verified. Hence test case pass&quot;]" />
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="838.4,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                            <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_08"}]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="838.4,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[strNameForWorkPaper]" Version="V3">
                           <uix:NTypeInto.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="10, 79, 230, 22" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' role='editable text' /&gt;" Guid="f42db705-0e73-4693-ab29-e31951830d67" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOoAAAAaCAYAAAC5BsBXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACrSURBVHhe7dOxDYNAEERRCqMYqqSKywlogR7ODgCZwMFZ8sFI70kj7Rbwhwo8nlAhwBnqsixm9rAdLqHW4f0eA24lVAjQFOq6rvsF9NQU6vBxA/0IFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQI0hTqO434BPTWFCtxDqBDga6hm9qwdzlBLKWb2w6Zp2iv6n0uo27aZWcPmee4Qaq0vkH15WLOhIgQAAAAASUVORK5CYII=" InformativeScreenshot="c256cd92082b2b6a3b802f94d3f2439f.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="FuzzySelector" Version="V1" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
@@ -633,7 +665,7 @@
                             </uix:TargetAnchorable>
                           </uix:NTypeInto.Target>
                         </uix:NTypeInto>
-                        <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="387.2,189.6" sap2010:WorkflowViewState.IdRef="NClick_10" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="838.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_10" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="339, 407, 75, 25" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Save'" FullSelectorArgument="&lt;ctrl name='Save' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Save' role='push button' automationid='' check:text='Save' /&gt;" Guid="8a262cdf-99b8-448e-87d9-af800d53d5d0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAdCAYAAADrcjF6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJdSURBVGhD7ZbNS1RhFIf7M1oFErUTXEvboEVBC4ncSxsXUgYF0sJaKJGJYauSXBRYBIGLCkc0FXNKKxWncgrNLwYZnXHG+bzemdM9B35DzszC3mZeE84z/OBy3487PJxz33uMFGNU3j9QkHf8bbPmgAEqzyBA5RkEqDyDAJVnEKDyDAJUnkGAyjMIUHkGAVbl1U+003o6QnnvBya3g2Xn/s8BVuV92lkmJ+dS68KzsuNHJcCqvLXUNsX2UlT3rq1k7NGvUUq4GUq5WdrL5yiYCNGp4VbazMQolI4W5vUu+cj1xrt+vqaO4KCsSbuO3JuK/Ni3Z7UCrMob2/ouz5qNrdC5qbtl53CerIzJvPueoJFwQKq14WOPjC3E1yniJOiCv4t2nCQt7oboxFALPd/wy+ug6cvjkv0qHWBVXo3vKg2GPkt1MVyFV2b7Suad99+TanqzOUfN8/1SVS88ObUjN2XNTHSJbgQGZA+uRF5z8UM3ZXKOiC/er9IBVuX9GbTcVnaXTg9flzbka76X9ORyFbE8ripu3eVkmO4svpKW5rlP1yblf7Ow4jXlnlfJgEOTx+EDhGU0zjyUFgx4LXnSd21f5fE8bl2u1vnYqrTsmYnbUnEMKs9mgFV5/KmC67PvOynqCeOqujzdK7Lw2VIsD62by+elZfnepekH8i78Gt+Q6sSeLJ+vqxlgVR6ftoBbLJyN061vL2Vs3DtMWA5XGFchi4E8tC5OWezXvzouLctz8QrAftUMONS2PaoBKs8gQOUZBKg8gwCVZxCg8gwCVJ5BQEGe8veoPGOIfgPUH4JDIy8kzQAAAABJRU5ErkJggg==" InformativeScreenshot="2a813d01cad13a22c2c8487ff2939210.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
@@ -644,7 +676,7 @@
                             </uix:TargetAnchorable>
                           </uix:NClick.Target>
                         </uix:NClick>
-                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="387.2,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_3" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[In_SplitWorkPaperName]" Version="V3">
+                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="838.4,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_3" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[In_SplitWorkPaperName]" Version="V3">
                           <uix:NTypeInto.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="16, 135, 396, 16" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' role='editable text' /&gt;" Guid="fb858789-5968-4afa-af15-3d01a3639d7a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAZAAAAAUCAYAAACj6Wu2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABvSURBVHhe7dUxDcAwEMDA8ocYDl1CIJU6ZH/Pd5Ix+Nn7PZIkTfsHstaSJGnUHQgATBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAwTkfysKNY6BgW80AAAAASUVORK5CYII=" InformativeScreenshot="5259a4eace8f6009e49e162fdca7f651.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder *' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
@@ -655,24 +687,24 @@
                             </uix:TargetAnchorable>
                           </uix:NTypeInto.Target>
                         </uix:NTypeInto>
-                        <uix:NCheckState DisplayName="Check App- Edit Window " sap:VirtualizedContainerService.HintSize="387.2,49.6" sap2010:WorkflowViewState.IdRef="NCheckState_6" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="3" Version="V3">
+                        <uix:NCheckState DisplayName="Check App- Edit Window " sap:VirtualizedContainerService.HintSize="838.4,2135.2" sap2010:WorkflowViewState.IdRef="NCheckState_6" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Timeout="3" Version="V3">
                           <uix:NCheckState.IfExists>
-                            <Sequence DisplayName="Edit Window appears" sap:VirtualizedContainerService.HintSize="512,1970.4" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                            <Sequence DisplayName="Edit Window appears" sap:VirtualizedContainerService.HintSize="451.2,1852" sap2010:WorkflowViewState.IdRef="Sequence_25">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper is verified. Hence test case pass&quot;]" />
-                              <If Condition="[in_StrServiceType = &quot;SPBinder&quot; And in_strBinderType = &quot;1040&quot;  Or in_strBinderType = &quot;1041&quot;]" sap:VirtualizedContainerService.HintSize="449.6,1704" sap2010:WorkflowViewState.IdRef="If_4">
+                              <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="417.6,176" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper is verified. Hence test case pass&quot;]" />
+                              <If Condition="[in_StrServiceType = &quot;SPBinder&quot; And in_strBinderType = &quot;1040&quot;  Or in_strBinderType = &quot;1041&quot;]" sap:VirtualizedContainerService.HintSize="417.6,1614.4" sap2010:WorkflowViewState.IdRef="If_4">
                                 <If.Then>
-                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,770.4" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,741.6" sap2010:WorkflowViewState.IdRef="Sequence_23">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="353.6,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_8" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[in_strSPBinderWorkPaperName]" Version="V3">
+                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="382.4,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_8" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[in_strSPBinderWorkPaperName]" Version="V3">
                                       <uix:NTypeInto.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="10, 79, 230, 22" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' role='editable text' /&gt;" Guid="f42db705-0e73-4693-ab29-e31951830d67" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOoAAAAaCAYAAAC5BsBXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACrSURBVHhe7dOxDYNAEERRCqMYqqSKywlogR7ODgCZwMFZ8sFI70kj7Rbwhwo8nlAhwBnqsixm9rAdLqHW4f0eA24lVAjQFOq6rvsF9NQU6vBxA/0IFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQI0hTqO434BPTWFCtxDqBDga6hm9qwdzlBLKWb2w6Zp2iv6n0uo27aZWcPmee4Qaq0vkH15WLOhIgQAAAAASUVORK5CYII=" InformativeScreenshot="c256cd92082b2b6a3b802f94d3f2439f.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="FuzzySelector" Version="V1" Visibility="Interactive">
                                           <uix:TargetAnchorable.Anchors>
@@ -683,7 +715,7 @@
                                         </uix:TargetAnchorable>
                                       </uix:NTypeInto.Target>
                                     </uix:NTypeInto>
-                                    <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="353.6,189.6" sap2010:WorkflowViewState.IdRef="NClick_13" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
+                                    <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="382.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_13" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
                                       <uix:NClick.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="339, 407, 75, 25" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Save'" FullSelectorArgument="&lt;ctrl name='Save' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Save' role='push button' automationid='' check:text='Save' /&gt;" Guid="8a262cdf-99b8-448e-87d9-af800d53d5d0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAdCAYAAADrcjF6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJdSURBVGhD7ZbNS1RhFIf7M1oFErUTXEvboEVBC4ncSxsXUgYF0sJaKJGJYauSXBRYBIGLCkc0FXNKKxWncgrNLwYZnXHG+bzemdM9B35DzszC3mZeE84z/OBy3487PJxz33uMFGNU3j9QkHf8bbPmgAEqzyBA5RkEqDyDAJVnEKDyDAJUnkGAyjMIUHkGAVbl1U+003o6QnnvBya3g2Xn/s8BVuV92lkmJ+dS68KzsuNHJcCqvLXUNsX2UlT3rq1k7NGvUUq4GUq5WdrL5yiYCNGp4VbazMQolI4W5vUu+cj1xrt+vqaO4KCsSbuO3JuK/Ni3Z7UCrMob2/ouz5qNrdC5qbtl53CerIzJvPueoJFwQKq14WOPjC3E1yniJOiCv4t2nCQt7oboxFALPd/wy+ug6cvjkv0qHWBVXo3vKg2GPkt1MVyFV2b7Suad99+TanqzOUfN8/1SVS88ObUjN2XNTHSJbgQGZA+uRF5z8UM3ZXKOiC/er9IBVuX9GbTcVnaXTg9flzbka76X9ORyFbE8ripu3eVkmO4svpKW5rlP1yblf7Ow4jXlnlfJgEOTx+EDhGU0zjyUFgx4LXnSd21f5fE8bl2u1vnYqrTsmYnbUnEMKs9mgFV5/KmC67PvOynqCeOqujzdK7Lw2VIsD62by+elZfnepekH8i78Gt+Q6sSeLJ+vqxlgVR6ftoBbLJyN061vL2Vs3DtMWA5XGFchi4E8tC5OWezXvzouLctz8QrAftUMONS2PaoBKs8gQOUZBKg8gwCVZxCg8gwCVJ5BQEGe8veoPGOIfgPUH4JDIy8kzQAAAABJRU5ErkJggg==" InformativeScreenshot="2a813d01cad13a22c2c8487ff2939210.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive">
                                           <uix:TargetAnchorable.Anchors>
@@ -694,7 +726,7 @@
                                         </uix:TargetAnchorable>
                                       </uix:NClick.Target>
                                     </uix:NClick>
-                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="353.6,241.6" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[In_SplitWorkPaperName]" Version="V3">
+                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="382.4,241.6" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[In_SplitWorkPaperName]" Version="V3">
                                       <uix:NTypeInto.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="16, 135, 396, 16" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' role='editable text' /&gt;" Guid="fb858789-5968-4afa-af15-3d01a3639d7a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAZAAAAAUCAYAAACj6Wu2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABvSURBVHhe7dUxDcAwEMDA8ocYDl1CIJU6ZH/Pd5Ix+Nn7PZIkTfsHstaSJGnUHQgATBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAwTkfysKNY6BgW80AAAAASUVORK5CYII=" InformativeScreenshot="5259a4eace8f6009e49e162fdca7f651.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder *' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive">
                                           <uix:TargetAnchorable.Anchors>
@@ -708,13 +740,13 @@
                                   </Sequence>
                                 </If.Then>
                                 <If.Else>
-                                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,770.4" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,741.6" sap2010:WorkflowViewState.IdRef="Sequence_24">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="353.6,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_10" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[strNameForWorkPaper]" Version="V3">
+                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Workpaper Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="382.4,250.4" sap2010:WorkflowViewState.IdRef="NTypeInto_10" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[strNameForWorkPaper]" Version="V3">
                                       <uix:NTypeInto.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="10, 79, 230, 22" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='WorkPaper_Index_Name_Text' role='editable text' /&gt;" Guid="f42db705-0e73-4693-ab29-e31951830d67" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOoAAAAaCAYAAAC5BsBXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACrSURBVHhe7dOxDYNAEERRCqMYqqSKywlogR7ODgCZwMFZ8sFI70kj7Rbwhwo8nlAhwBnqsixm9rAdLqHW4f0eA24lVAjQFOq6rvsF9NQU6vBxA/0IFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQIIFQI0hTqO434BPTWFCtxDqBDga6hm9qwdzlBLKWb2w6Zp2iv6n0uo27aZWcPmee4Qaq0vkH15WLOhIgQAAAAASUVORK5CYII=" InformativeScreenshot="c256cd92082b2b6a3b802f94d3f2439f.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="FuzzySelector" Version="V1" Visibility="Interactive">
                                           <uix:TargetAnchorable.Anchors>
@@ -725,7 +757,7 @@
                                         </uix:TargetAnchorable>
                                       </uix:NTypeInto.Target>
                                     </uix:NTypeInto>
-                                    <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="353.6,189.6" sap2010:WorkflowViewState.IdRef="NClick_14" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
+                                    <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click 'Save'" sap:VirtualizedContainerService.HintSize="382.4,189.6" sap2010:WorkflowViewState.IdRef="NClick_14" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Version="V3">
                                       <uix:NClick.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="339, 407, 75, 25" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Save'" FullSelectorArgument="&lt;ctrl name='Save' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Save' role='push button' automationid='' check:text='Save' /&gt;" Guid="8a262cdf-99b8-448e-87d9-af800d53d5d0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAdCAYAAADrcjF6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJdSURBVGhD7ZbNS1RhFIf7M1oFErUTXEvboEVBC4ncSxsXUgYF0sJaKJGJYauSXBRYBIGLCkc0FXNKKxWncgrNLwYZnXHG+bzemdM9B35DzszC3mZeE84z/OBy3487PJxz33uMFGNU3j9QkHf8bbPmgAEqzyBA5RkEqDyDAJVnEKDyDAJUnkGAyjMIUHkGAVbl1U+003o6QnnvBya3g2Xn/s8BVuV92lkmJ+dS68KzsuNHJcCqvLXUNsX2UlT3rq1k7NGvUUq4GUq5WdrL5yiYCNGp4VbazMQolI4W5vUu+cj1xrt+vqaO4KCsSbuO3JuK/Ni3Z7UCrMob2/ouz5qNrdC5qbtl53CerIzJvPueoJFwQKq14WOPjC3E1yniJOiCv4t2nCQt7oboxFALPd/wy+ug6cvjkv0qHWBVXo3vKg2GPkt1MVyFV2b7Suad99+TanqzOUfN8/1SVS88ObUjN2XNTHSJbgQGZA+uRF5z8UM3ZXKOiC/er9IBVuX9GbTcVnaXTg9flzbka76X9ORyFbE8ripu3eVkmO4svpKW5rlP1yblf7Ow4jXlnlfJgEOTx+EDhGU0zjyUFgx4LXnSd21f5fE8bl2u1vnYqrTsmYnbUnEMKs9mgFV5/KmC67PvOynqCeOqujzdK7Lw2VIsD62by+elZfnepekH8i78Gt+Q6sSeLJ+vqxlgVR6ftoBbLJyN061vL2Vs3DtMWA5XGFchi4E8tC5OWezXvzouLctz8QrAftUMONS2PaoBKs8gQOUZBKg8gwCVZxCg8gwCVJ5BQEGe8veoPGOIfgPUH4JDIy8kzQAAAABJRU5ErkJggg==" InformativeScreenshot="2a813d01cad13a22c2c8487ff2939210.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive">
                                           <uix:TargetAnchorable.Anchors>
@@ -736,7 +768,7 @@
                                         </uix:TargetAnchorable>
                                       </uix:NClick.Target>
                                     </uix:NClick>
-                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="353.6,241.6" sap2010:WorkflowViewState.IdRef="NTypeInto_11" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[In_SplitWorkPaperName]" Version="V3">
+                                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Index/Review Tree'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="382.4,241.6" sap2010:WorkflowViewState.IdRef="NTypeInto_11" ScopeIdentifier="ad0c3d70-96fe-4a08-bd4d-4ea33d5aed57" Text="[In_SplitWorkPaperName]" Version="V3">
                                       <uix:NTypeInto.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="16, 135, 396, 16" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' role='editable text' /&gt;" Guid="fb858789-5968-4afa-af15-3d01a3639d7a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAZAAAAAUCAYAAACj6Wu2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABvSURBVHhe7dUxDcAwEMDA8ocYDl1CIJU6ZH/Pd5Ix+Nn7PZIkTfsHstaSJGnUHQgATBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAwTkfysKNY6BgW80AAAAASUVORK5CYII=" InformativeScreenshot="5259a4eace8f6009e49e162fdca7f651.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder *' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive">
                                           <uix:TargetAnchorable.Anchors>
@@ -766,7 +798,7 @@
                           </uix:NCheckState.Target>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
@@ -774,7 +806,23 @@
                       </Sequence>
                     </uix:NCheckState.IfExists>
                     <uix:NCheckState.IfNotExists>
-                      <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_21" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper window is not visible Hence test case failed&quot;]" />
+                      <Sequence DisplayName="Edit Window failed to appear" sap:VirtualizedContainerService.HintSize="449.6,436.8" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message - Edit WorkPaper" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="LogMessage_21" Message="[&quot;TC_08:&quot; + &quot;Verify Edit Workpaper functionality in Index tree. &quot; + strNameForWorkPaper+  &quot; Edit Workpaper window is not visible Hence test case failed&quot;]" />
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+                            <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" xml:space="preserve">["TC_08:" + "Verify Edit Workpaper functionality in Index tree. " + strNameForWorkPaper+  " Edit Workpaper window is not visible Hence test case failed"]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_01"}]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
                     </uix:NCheckState.IfNotExists>
                     <uix:NCheckState.Target>
                       <uix:TargetAnchorable DesignTimeRectangle="3, 3, 513, 32" DesignTimeScaleFactor="1" FriendlyName="'indicator titleThumb'" FullSelectorArgument="&lt;ctrl automationid='titleThumb' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='titleThumb' role='indicator' /&gt;" Guid="aaefd4ab-a29a-4878-b113-15a1d9191291" ImageBase64="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" InformativeScreenshot="78c473790313382433e7ee04b4e17911.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='Add Workpaper' /&gt;" SearchSteps="Image" Version="V1" Visibility="Interactive">
@@ -800,7 +848,7 @@
                 </Sequence>
               </If.Else>
             </If>
-            <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" ScreenshotsPath="{x:Null}" ContinueOnFailure="True" DisplayName="Verify Expression Edit Operation" sap:VirtualizedContainerService.HintSize="932.8,228" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_1" Operator="Equality" OutputMessageFormat="Edited Workpaper visible" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
+            <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" ScreenshotsPath="{x:Null}" ContinueOnFailure="True" DisplayName="Verify Expression Edit Operation" sap:VirtualizedContainerService.HintSize="478.4,228" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_1" Operator="Equality" OutputMessageFormat="Edited Workpaper visible" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
               <uta:VerifyExpressionWithOperator.AlternativeVerificationTitle>
                 <InArgument x:TypeArguments="x:String" />
               </uta:VerifyExpressionWithOperator.AlternativeVerificationTitle>
@@ -814,7 +862,7 @@
                 <InArgument x:TypeArguments="x:Object">[True]</InArgument>
               </uta:VerifyExpressionWithOperator.SecondExpression>
             </uta:VerifyExpressionWithOperator>
-            <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" ContinueOnFailure="True" DisplayName="Verify Expression Association" sap:VirtualizedContainerService.HintSize="932.8,228" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_2" Operator="Equality" OutputMessageFormat="[&quot;Association is Successful to &quot;  + StrFolderToAssociate]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
+            <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" ContinueOnFailure="True" DisplayName="Verify Expression Association" sap:VirtualizedContainerService.HintSize="478.4,228" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_2" Operator="Equality" OutputMessageFormat="[&quot;Association is Successful to &quot;  + StrFolderToAssociate]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
               <uta:VerifyExpressionWithOperator.AlternativeVerificationTitle>
                 <InArgument x:TypeArguments="x:String" />
               </uta:VerifyExpressionWithOperator.AlternativeVerificationTitle>
@@ -825,25 +873,43 @@
                 <InArgument x:TypeArguments="x:Boolean">[True]</InArgument>
               </uta:VerifyExpressionWithOperator.SecondExpression>
             </uta:VerifyExpressionWithOperator>
-            <If Condition="[isAssocaitedWorkpaper = True]" DisplayName="If Assocaited Workpaper = True" sap:VirtualizedContainerService.HintSize="932.8,675.2" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[isAssocaitedWorkpaper = True]" DisplayName="If Assocaited Workpaper = True" sap:VirtualizedContainerService.HintSize="478.4,998.4" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,256" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,433.6" sap2010:WorkflowViewState.IdRef="Sequence_12">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="353.6,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;TC_04:&quot; + &quot;Verify page association in index tree.&quot; + strNameForWorkPaper + &quot;  Association is verified. Hence test case pass&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;TC_04:&quot; + &quot;Verify page association in index tree.&quot; + strNameForWorkPaper + &quot;  Association is verified. Hence test case pass&quot;]" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="382.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                      <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                      <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                      <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_04","TC_21"}]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,256" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,433.6" sap2010:WorkflowViewState.IdRef="Sequence_13">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="353.6,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_8" Message="[&quot;TC_04:&quot; + &quot;Verify page association in index tree.&quot; + strNameForWorkPaper + &quot;  Association is failed. Hence test case failed&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,176" sap2010:WorkflowViewState.IdRef="LogMessage_8" Message="[&quot;TC_04:&quot; + &quot;Verify page association in index tree.&quot; + strNameForWorkPaper + &quot;  Association is failed. Hence test case failed&quot;]" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="382.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+                      <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" xml:space="preserve">["  Association is failed. Hence test case failed"]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                      <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_04","TC_21"}]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
                 </Sequence>
               </If.Else>
             </If>

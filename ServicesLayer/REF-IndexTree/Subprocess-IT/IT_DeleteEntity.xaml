@@ -1,8 +1,9 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Delete_Entity" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Delete_Entity" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_ServiceType" Type="InArgument(x:String)" />
+    <x:Property Name="inDictTestSummaryReport" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -55,6 +56,7 @@
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -120,23 +122,26 @@
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Delete_Entity" sap:VirtualizedContainerService.HintSize="653.6,1558.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Delete_Entity" sap:VirtualizedContainerService.HintSize="840.8000000000001,1559.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="591.2,1469.6" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="533.6,1536" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="554.4,1215.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Version="V2">
+        <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: SPbinder " sap:VirtualizedContainerService.HintSize="532,1186.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Version="V2">
           <uix:NApplicationCard.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
               </ActivityAction.Argument>
-              <Sequence sap2010:Annotation.AnnotationText="1. Performs Delete Entity Test Case, By the Entity Name given in the test Data." DisplayName="Do - Performs Delete Entity Test Case, By the Entity Name given in the test Data." sap:VirtualizedContainerService.HintSize="520.8,924" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence sap2010:Annotation.AnnotationText="1. Performs Delete Entity Test Case, By the Entity Name given in the test Data." DisplayName="Do - Performs Delete Entity Test Case, By the Entity Name given in the test Data." sap:VirtualizedContainerService.HintSize="498.4,895.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:String" Default="Sanjay" Name="strEntityName" />
                   <Variable x:TypeArguments="x:Boolean" Name="isCheckEntityVisibility" />
@@ -147,7 +152,7 @@
                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Assign DisplayName="Assign - Enitiy Name" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign DisplayName="Assign - Enitiy Name" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="Assign_1">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[strEntityName]</OutArgument>
                   </Assign.To>
@@ -161,7 +166,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </Assign>
-                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - WorkPaper Name" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Text="[strEntityName]" Version="V3">
+                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into - WorkPaper Name" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Text="[strEntityName]" Version="V3">
                   <uix:NTypeInto.Target>
                     <uix:TargetAnchorable DesignTimeRectangle="20, 139, 396, 16" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' role='editable text' /&gt;" Guid="1cb2c67d-127d-49a4-b6bf-1fbc0828a231" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAZAAAAAUCAYAAACj6Wu2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABvSURBVHhe7dUxDcAwEMDA8ocYDl1CIJU6ZH/Pd5Ix+Nn7PZIkTfsHstaSJGnUHQgATBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAwTkfysKNY6BgW80AAAAASUVORK5CYII=" InformativeScreenshot="5b40f76a53f1f0c237e3c1fe08e974d7.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive" />
                   </uix:NTypeInto.Target>
@@ -172,7 +177,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NTypeInto>
-                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On Entity" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NClick_8" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Version="V3">
+                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - On Entity" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NClick_8" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Version="V3">
                   <uix:NClick.Target>
                     <uix:TargetAnchorable CvTextArea="134, 238, 54, 14" CvTextArgument="Exxon (T)" CvType="Text" DesignTimeRectangle="135, 236, 41, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Exxon (T)'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='{0}* ' /&gt;&quot;, strEntityName)]" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='NodeDisplay' helpText='Exxon (T) ' role='text' check:text='Exxon (T)' /&gt;" Guid="c3d6ca42-9a44-4d2d-9d7e-2bda2686cecb" ImageBase64="" InformativeScreenshot="de9cbfe4258e8ff80c483a94ac12efba.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (SCCCH02 (V1)) | 1040 | 2022 | Binder *' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                   </uix:NClick.Target>
@@ -190,7 +195,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NClick>
-                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Graphic Icon_DeletePage" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NClick_9" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Version="V3">
+                <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Graphic Icon_DeletePage" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NClick_9" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Version="V3">
                   <uix:NClick.Target>
                     <uix:TargetAnchorable CvElementArea="96, 103, 20, 21" CvType="Icon" DesignTimeRectangle="99, 106, 16, 16" DesignTimeScaleFactor="1" ElementType="Icon" FriendlyName="'graphic Icon_DeletePage'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='BtnDeletePage' /&gt;&lt;ctrl helpText='Delete Workpaper' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='BtnDeletePage' /&gt;&lt;ctrl helpText='Delete Workpaper' role='graphic' automationid='Icon_DeletePage' /&gt;" Guid="8e71d3d7-39a5-4c46-9142-1142fb2e9c05" InformativeScreenshot="342bc97412528e11ded76da17286bb00.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (SCCCH02 (V1)) | 1040 | 2022 | Binder *' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                   </uix:NClick.Target>
@@ -208,7 +213,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NClick>
-                <uix:NCheckState DisplayName="Check APp State - Delete Dailouge Box Popup" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_2" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="7" Version="V3">
+                <uix:NCheckState DisplayName="Check APp State - Delete Dailouge Box Popup" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_2" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="7" Version="V3">
                   <uix:NCheckState.IfExists>
                     <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Yes'" sap:VirtualizedContainerService.HintSize="333.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_10" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Version="V3">
                       <uix:NClick.Target>
@@ -229,7 +234,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NCheckState>
-                <uix:NCheckState DisplayName="Check App State - All Changes Saved" EnableIfExists="False" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_4" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="20">
+                <uix:NCheckState DisplayName="Check App State - All Changes Saved" EnableIfExists="False" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_4" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="20">
                   <uix:NCheckState.Target>
                     <uix:TargetAnchorable CvTextArea="845, 1017, 105, 12" CvTextArgument="All changes saved." CvType="Text" DesignTimeRectangle="847, 1015, 103, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'All changes saved.'" FullSelectorArgument="&lt;ctrl name='All changes saved.' /&gt;" FuzzySelectorArgument="&lt;ctrl name='All changes saved.' role='text' automationid='txtRTSChangesSaved' check:text='All changes saved.' /&gt;" Guid="d40f061f-b96c-48aa-9306-3d6a7ca06bc3" InformativeScreenshot="2222b9a041b1b20b33e731316109adb7.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson Jack (SCGO10016 (V1)) | 1040 | 2022 | Binder*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                   </uix:NCheckState.Target>
@@ -240,7 +245,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NCheckState>
-                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBefore="3" DisplayName="Type Into 'editable text'" EmptyFieldMode="MultiLine" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Text="[strEntityName]" Version="V3">
+                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBefore="3" DisplayName="Type Into 'editable text'" EmptyFieldMode="MultiLine" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Text="[strEntityName]" Version="V3">
                   <uix:NTypeInto.Target>
                     <uix:TargetAnchorable DesignTimeRectangle="20, 139, 396, 16" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='rpgTree' /&gt;&lt;ctrl automationid='rpTree' /&gt;&lt;ctrl name='INDEX TREE' role='page tab' /&gt;&lt;ctrl automationid='TextBoxSearch' role='editable text' /&gt;" Guid="1cb2c67d-127d-49a4-b6bf-1fbc0828a231" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAZAAAAAUCAYAAACj6Wu2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABvSURBVHhe7dUxDcAwEMDA8ocYDl1CIJU6ZH/Pd5Ix+Nn7PZIkTfsHstaSJGnUHQgATBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAiYEAkBgIAImBAJAYCACJgQCQGAgAwTkfysKNY6BgW80AAAAASUVORK5CYII=" InformativeScreenshot="5b40f76a53f1f0c237e3c1fe08e974d7.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive" />
                   </uix:NTypeInto.Target>
@@ -251,7 +256,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NTypeInto>
-                <uix:NCheckState DisplayName="Check App State 'spbinder.exe SPbinder'" EnableIfExists="False" EnableIfNotExists="False" Exists="[isCheckEntityVisibility]" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_3" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="3" Version="V3">
+                <uix:NCheckState DisplayName="Check App State 'spbinder.exe SPbinder'" EnableIfExists="False" EnableIfNotExists="False" Exists="[isCheckEntityVisibility]" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_3" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="3" Version="V3">
                   <uix:NCheckState.Target>
                     <uix:TargetAnchorable Accuracy="0.9" DesignTimeRectangle="116, 235, 21, 23" DesignTimeScaleFactor="1" FriendlyName="'spbinder.exe SPbinder'" Guid="b53c9a32-f7fd-41a9-910e-9cf7a1ccdd75" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABUAAAAXCAYAAADk3wSdAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABkSURBVEhLY/hPAzBqKCqo3/T0P0PaGTgG8fGJYwNYDcWlAVkOROMynGxDQQDExmYwRYaCADYxkg1FDlcYJmgoqQCbI0hyKTYwwg3FBkbDFBUMLUNxZUV8csgAw1BqgKFi6P//AJEAIBNeogiWAAAAAElFTkSuQmCC" InformativeScreenshot="4ca8a8520c57bd3757085e8cbd04c0e5.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson, Jack (NP_GO_0664VA_01) | 1040 | 2022 | Bind*' /&gt;" SearchSteps="Image" TargetType="ImageBased" Version="V1" Visibility="Interactive" />
                   </uix:NCheckState.Target>
@@ -262,7 +267,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NCheckState>
-                <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;Entity failed to Delete&quot; + strEntityName]" sap2010:Annotation.AnnotationText="Delete validation." ContinueOnFailure="True" DisplayName="Verify Expression Entity Visiblity" sap:VirtualizedContainerService.HintSize="458.4,88" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_1" Operator="Equality" OutputMessageFormat="[&quot;Entity Deleted Sucessfully &quot;  + strEntityName]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
+                <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;Entity failed to Delete&quot; + strEntityName]" sap2010:Annotation.AnnotationText="Delete validation." ContinueOnFailure="True" DisplayName="Verify Expression Entity Visiblity" sap:VirtualizedContainerService.HintSize="464.8,88" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_1" Operator="Equality" OutputMessageFormat="[&quot;Entity Deleted Sucessfully &quot;  + strEntityName]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
                   <uta:VerifyExpressionWithOperator.FirstExpression>
                     <InArgument x:TypeArguments="x:Object">[isCheckEntityVisibility]</InArgument>
                   </uta:VerifyExpressionWithOperator.FirstExpression>
@@ -277,7 +282,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uta:VerifyExpressionWithOperator>
-                <If Condition="[isCheckEntityVisibility= False]" DisplayName="If - isCheckEntityVisibility= False" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="If_1">
+                <If Condition="[isCheckEntityVisibility= False]" DisplayName="If - isCheckEntityVisibility= False" sap:VirtualizedContainerService.HintSize="417.6,970.4" sap2010:WorkflowViewState.IdRef="If_1">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -285,27 +290,45 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,256" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,432" sap2010:WorkflowViewState.IdRef="Sequence_13">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="353.6,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;TC_07:&quot; + &quot;Verify Delete functionality in Index tree.&quot; +  &quot; Delete Entity is verified. Hence test case pass&quot;]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;TC_07:&quot; + &quot;Verify Delete functionality in Index tree.&quot; +  &quot; Delete Entity is verified. Hence test case pass&quot;]" />
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="382.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                          <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                          <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_07"}]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
                     </Sequence>
                   </If.Then>
                   <If.Else>
-                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,256" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,432" sap2010:WorkflowViewState.IdRef="Sequence_14">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="353.6,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;TC_07:&quot; + &quot;Verify Delete functionality in Index tree.&quot; +  &quot; Delete Entity failed. Hence test case failed&quot;]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;TC_07:&quot; + &quot;Verify Delete functionality in Index tree.&quot; +  &quot; Delete Entity failed. Hence test case failed&quot;]" />
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="382.4,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Fail"]</InArgument>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" xml:space="preserve">["TC_07:" + "Verify Delete functionality in Index tree." +  " Delete Entity failed. Hence test case failed"]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Index Tree</InArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[inDictTestSummaryReport("Index Tree")]</InOutArgument>
+                          <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_07"}]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
                     </Sequence>
                   </If.Else>
                 </If>
-                <uix:NCheckState DisplayName="Check App State 'All changes saved.'" EnableIfExists="False" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="458.4,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_5" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="20">
+                <uix:NCheckState DisplayName="Check App State 'All changes saved.'" EnableIfExists="False" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="464.8,56.8" sap2010:WorkflowViewState.IdRef="NCheckState_5" ScopeIdentifier="e6bbeab8-b5d9-43fc-a4cd-923a65a7b588" Timeout="20">
                   <uix:NCheckState.Target>
                     <uix:TargetAnchorable CvTextArea="845, 1017, 105, 12" CvTextArgument="All changes saved." CvType="Text" DesignTimeRectangle="847, 1015, 103, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'All changes saved.'" FullSelectorArgument="&lt;ctrl name='All changes saved.' /&gt;" FuzzySelectorArgument="&lt;ctrl name='All changes saved.' role='text' automationid='txtRTSChangesSaved' check:text='All changes saved.' /&gt;" Guid="d40f061f-b96c-48aa-9306-3d6a7ca06bc3" InformativeScreenshot="2222b9a041b1b20b33e731316109adb7.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' title='SPbinder - Anderson Jack (SCGO10016 (V1)) | 1040 | 2022 | Binder*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                   </uix:NCheckState.Target>
@@ -316,7 +339,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NCheckState>
-                <Delay sap2010:Annotation.AnnotationText="Added this delay to skip recover binder popup." Duration="00:00:10" sap:VirtualizedContainerService.HintSize="458.4,146.4" sap2010:WorkflowViewState.IdRef="Delay_2">
+                <Delay sap2010:Annotation.AnnotationText="Added this delay to skip recover binder popup." Duration="00:00:10" sap:VirtualizedContainerService.HintSize="464.8,146.4" sap2010:WorkflowViewState.IdRef="Delay_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -353,6 +376,9 @@
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_15" />
+      </TryCatch.Finally>
     </TryCatch>
   </Sequence>
 </Activity>
