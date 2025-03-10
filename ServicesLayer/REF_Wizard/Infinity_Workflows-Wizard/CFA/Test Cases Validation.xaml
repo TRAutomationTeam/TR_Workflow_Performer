@@ -1,11 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Test_Cases_Validation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Test_Cases_Validation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uta="clr-namespace:UiPath.Testing.Activities;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="inDictTestSummaryReport" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>3258.0000000000005,1894</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>3819.2,2157.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Test_Cases_Validation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -47,6 +48,8 @@
       <x:String>UiPath.Testing.Activities</x:String>
       <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
       <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -100,6 +103,11 @@
       <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -108,7 +116,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Test_Cases_Validation" sap:VirtualizedContainerService.HintSize="3268,1829" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Test_Cases_Validation" sap:VirtualizedContainerService.HintSize="3829.6,2092.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" sap2010:Annotation.AnnotationText="List of Ui elements containing the child form elments of CFA wizard." Name="ListChildForm" />
       <Variable x:TypeArguments="ui:UiElement" sap2010:Annotation.AnnotationText="Ui element containing the CFA wizard window as Ui element" Name="CFAWIZARD" />
@@ -117,6 +125,8 @@
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Integer variable containing the visibility number ( 0 or 1) for the Will need to Link." Name="intValidateWillINeedTo" />
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Integer variable containing the visibility number ( 0 or 1) for the Next button." Name="intValidateNext" />
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Integer variable containing the visibility number ( 0 or 1) for the ShortcutKeys link." Name="intShortcutKeys" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTestSummaryReport" />
+      <Variable x:TypeArguments="x:String" Default="Child Form Association" Name="strComponentName" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -124,37 +134,60 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" ContinueOnError="True" DisplayName="UseApplication_TC_CFAWizard" sap:VirtualizedContainerService.HintSize="3206,1718" sap2010:WorkflowViewState.IdRef="NApplicationCard_11" OpenMode="Never" ScopeGuid="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V2">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="3767.2,149.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[dtTestSummaryReport]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[inDictTestSummaryReport(strComponentName)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:MultipleAssign>
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" ContinueOnError="True" DisplayName="UseApplication_TC_CFAWizard" sap:VirtualizedContainerService.HintSize="3767.2,1854.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_11" OpenMode="Never" ScopeGuid="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="CFA_TCValidation_Process" sap:VirtualizedContainerService.HintSize="3172,1425" sap2010:WorkflowViewState.IdRef="Sequence_51">
+          <Sequence DisplayName="CFA_TCValidation_Process" sap:VirtualizedContainerService.HintSize="3733.6,1540" sap2010:WorkflowViewState.IdRef="Sequence_51">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NCheckState DisplayName="CheckAppState_CFA_TC_Validation" sap:VirtualizedContainerService.HintSize="3110,1310" sap2010:WorkflowViewState.IdRef="NCheckState_5" OutUiElement="[CFAWIZARD]" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Timeout="300" Version="V3">
+            <uix:NCheckState DisplayName="CheckAppState_CFA_TC_Validation" sap:VirtualizedContainerService.HintSize="3671.2,1449.6" sap2010:WorkflowViewState.IdRef="NCheckState_5" OutUiElement="[CFAWIZARD]" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Timeout="300" Version="V3">
               <uix:NCheckState.IfExists>
-                <Sequence DisplayName="CFA_TC_Validation_Appears" sap:VirtualizedContainerService.HintSize="2606,1091" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                <Sequence DisplayName="CFA_TC_Validation_Appears" sap:VirtualizedContainerService.HintSize="3168.8,1206.4" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="strShortcutDelay" />
+                  </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts_CFA_TCValidation_Visible" sap:VirtualizedContainerService.HintSize="2544,181" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_1" InUiElement="[CFAWIZARD]" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Shortcuts="[d(hk)][d(lwin)][k(pgup)][u(lwin)][u(hk)]" Version="V3">
+                  <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts_CFA_TCValidation_Visible" sap:VirtualizedContainerService.HintSize="3106.4,56.8" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_1" InUiElement="[CFAWIZARD]" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Shortcuts="[d(hk)][d(lwin)][k(pgup)][u(lwin)][u(hk)]" Version="V3">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </uix:NKeyboardShortcuts>
-                  <ui:FindChildren Children="[ListChildForm]" DisplayName="Find Children_CFA_Child Form'" Filter="&lt;ctrl  role='list item' /&gt;" sap:VirtualizedContainerService.HintSize="2544,107" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_DESCENDANTS">
+                  <ui:FindChildren Children="[ListChildForm]" DisplayName="Find Children_CFA_Child Form'" Filter="&lt;ctrl  role='list item' /&gt;" sap:VirtualizedContainerService.HintSize="3106.4,139.2" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_DESCENDANTS">
                     <ui:FindChildren.Target>
                       <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6b3176cb-5ff9-47c9-ba37-993ad57e5145" InformativeScreenshot="1d31308eb6f3023355ade4c0a75f59ca" Selector="&lt;wnd ctrlname='LstVwHgFrm' /&gt;&lt;ctrl role='list' /&gt;" WaitForReady="COMPLETE">
                         <ui:Target.TimeoutMS>
@@ -164,38 +197,48 @@
                     </ui:FindChildren.Target>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:FindChildren>
-                  <Parallel DisplayName="CFA_TC 01 &amp; TC 18  Validation" sap:VirtualizedContainerService.HintSize="2544,608" sap2010:WorkflowViewState.IdRef="Parallel_1">
+                  <Parallel DisplayName="CFA_TC 01 &amp; TC 18  Validation" sap:VirtualizedContainerService.HintSize="3106.4,920" sap2010:WorkflowViewState.IdRef="Parallel_1">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence DisplayName="CFA_TC_Tips on using shortcut keys " sap:VirtualizedContainerService.HintSize="450,561" sap2010:WorkflowViewState.IdRef="Sequence_55">
-                      <Sequence.Variables>
-                        <Variable x:TypeArguments="x:String" Name="strShortcutDelay" />
-                      </Sequence.Variables>
+                    <Sequence DisplayName="CFA_TC_Tips on using shortcut keys " sap:VirtualizedContainerService.HintSize="1054.4,848.8" sap2010:WorkflowViewState.IdRef="Sequence_55">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <Assign DisplayName="Assign_CFA_TCDelay" sap:VirtualizedContainerService.HintSize="954,83" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign DisplayName="Assign_CFA_TCDelay" sap:VirtualizedContainerService.HintSize="952,56.8" sap2010:WorkflowViewState.IdRef="Assign_1">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:String">[strShortcutDelay]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
                           <InArgument x:TypeArguments="x:String">00:00:15</InArgument>
                         </Assign.Value>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
                       </Assign>
-                      <Delay DisplayName="Delay_CFA_TipsShortCut" Duration="[Timespan.Parse(strShortcutDelay)]" sap:VirtualizedContainerService.HintSize="954,91" sap2010:WorkflowViewState.IdRef="Delay_1" />
-                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute 'Tips on'_CFA" sap:VirtualizedContainerService.HintSize="954,209" sap2010:WorkflowViewState.IdRef="NGetAttribute_7" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                      <Delay DisplayName="Delay_CFA_TipsShortCut" Duration="[Timespan.Parse(strShortcutDelay)]" sap:VirtualizedContainerService.HintSize="952,56.8" sap2010:WorkflowViewState.IdRef="Delay_1">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Delay>
+                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute 'Tips on'_CFA" sap:VirtualizedContainerService.HintSize="952,56.8" sap2010:WorkflowViewState.IdRef="NGetAttribute_7" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                         <uix:NGetAttribute.Result>
                           <OutArgument x:TypeArguments="x:String">[intValidateWillINeedTo]</OutArgument>
                         </uix:NGetAttribute.Result>
@@ -211,11 +254,11 @@
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NGetAttribute>
-                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;'Tips on using shortcut keys'  link is not  visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify'Tips on'_CFA" sap:VirtualizedContainerService.HintSize="954,197" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_7" Operator="Equality" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;'Tips on using shortcut keys'  link is  visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
+                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;'Tips on using shortcut keys'  link is not  visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify'Tips on'_CFA" sap:VirtualizedContainerService.HintSize="952,56.8" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_7" Operator="Equality" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;'Tips on using shortcut keys'  link is  visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
                         <uta:VerifyExpressionWithOperator.FirstExpression>
                           <InArgument x:TypeArguments="x:String">[intValidateWillINeedTo]</InArgument>
                         </uta:VerifyExpressionWithOperator.FirstExpression>
@@ -225,31 +268,31 @@
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uta:VerifyExpressionWithOperator>
-                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Tips on'_CFA" sap:VirtualizedContainerService.HintSize="954,158" sap2010:WorkflowViewState.IdRef="NClick_32" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Tips on'_CFA" sap:VirtualizedContainerService.HintSize="952,56.8" sap2010:WorkflowViewState.IdRef="NClick_32" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                         <uix:NClick.Target>
                           <uix:TargetAnchorable DesignTimeRectangle="989, 69, 141, 13" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Tips on'" FullSelectorArgument="&lt;wnd ctrlname='LinkLabel2' /&gt;&lt;ctrl name='Tips on Using Shortcut Keys' role='text' /&gt;&lt;ctrl name='Tips on Using Shortcut Keys' role='link' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='LinkLabel2' /&gt;&lt;ctrl name='Tips on Using Shortcut Keys' role='text' /&gt;&lt;ctrl name='Tips on Using Shortcut Keys' role='link' automationid='' check:text='Tips on Using Shortcut Keys' /&gt;" Guid="687a2518-4711-4a51-ab39-58df3996f94c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJEAAAARCAYAAADdaE77AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKVSURBVGhD7VaBkcIwDOt4DNRx2IVV2IS30tgoxg4t4Q/uP7rLNbixpSgmsNwmJgYxm2hiGNZEy7JN53M+jzwBm51PePE4Tmd5eZG5vL9uSz+GVfSIlAZRrME7tUuRE3mzrDX+Jf54eG+ucpbQvXYNOw4pucE6C0Z9oSHAS030RoDrTMZcpIlKI4020YjnndzGm1GNDuFNZBjZ0C/jo03U8+Xbmwj6ftEna6LuTcQm1bld67QWoktMRnZl6pVahvs5WGX4moxnTRTy19qsPeIpt0qUTyj1I22dur39Fg8lZn8lal6ao3MB9EKjz2UUbyQIHr5BgYaj5qIW7xsc5e+MwHt7/Caqmy6xUuAuSokgSgnDGgDXwUcVGdTMDtGHNZbyM2fGw2sE3kwGclCjjIN1/X6NQhaEevGRc2SuMA7OdeCDN28AV8u8c/Gn3lbIsg1HbyJ7r8R4VsG9Awg342qaQQ69Jkr5EU+0K09jkiDj98C6nn489+wXE/X8IUehuRWmkXI94I2tkTk3uXplo9ZmP00HuOs69WX8JuL3+EybA/SKrXyGvaaaQQ6o24QjrYKGn2snPJ4v43+A8nfqfrqJsATAF0U5Uw4B1ql2bTpGdLbWRK/eRCrIC4tujSw3ikeH6OPFGIkBKT/Xznhc3L7BBD4ExVP9QTxaj4l5nuXwGoFpdHGGPwP7mQYHvWMfSz3ojzRUoO5b/hPZUHLBVnwbTMoogn0u18dHbEJ36KDfhDKczpDfa094MNfcNeFvtGPs0L9nv4BqR1qYI+C9s0bOZSDexMCLXHk2HE4LePz59c5WQhu4s7qAEEf61wATo6v8v+Ch+QKEN5F22Rxz7B0Km2pnzed8HnkC99nExIuYTTQxiNvtB+MEGyssSBP3AAAAAElFTkSuQmCC" InformativeScreenshot="12e4a0b637306491039a3efe80d4600a.png" ScopeSelectorArgument="&lt;wnd app='spreviewwizard.exe' ctrlname='FrmParentAssociation_2011' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                         </uix:NClick.Target>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
                             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NClick>
-                      <uix:NCheckState DisplayName="Check App State_CFA_ShortCutKeyWindow" sap:VirtualizedContainerService.HintSize="954,978" sap2010:WorkflowViewState.IdRef="NCheckState_6" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                      <uix:NCheckState DisplayName="Check App State_CFA_ShortCutKeyWindow" sap:VirtualizedContainerService.HintSize="952,275.2" sap2010:WorkflowViewState.IdRef="NCheckState_6" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                         <uix:NCheckState.IfExists>
-                          <Sequence DisplayName="CFA_ShortCutWindowAppears" sap:VirtualizedContainerService.HintSize="450,759" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                          <Sequence DisplayName="CFA_ShortCutWindowAppears" sap:VirtualizedContainerService.HintSize="449.6,24.8" sap2010:WorkflowViewState.IdRef="Sequence_57">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute 'Shortcut Keys'_CFA" sap:VirtualizedContainerService.HintSize="388,209" sap2010:WorkflowViewState.IdRef="NGetAttribute_9" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                            <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute 'Shortcut Keys'_CFA" sap:VirtualizedContainerService.HintSize="387.2,240" sap2010:WorkflowViewState.IdRef="NGetAttribute_9" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                               <uix:NGetAttribute.Result>
                                 <OutArgument x:TypeArguments="x:String">[intShortcutKeys]</OutArgument>
                               </uix:NGetAttribute.Result>
@@ -262,8 +305,14 @@
                                   </uix:TargetAnchorable.Anchors>
                                 </uix:TargetAnchorable>
                               </uix:NGetAttribute.Target>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
                             </uix:NGetAttribute>
-                            <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_18: Verify 'Tips on using Shortcut Keys' link on CFA wizard&quot; + &quot;Shortcut keys are not displayed&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify_CFA_ShortCut_Window" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_11" Operator="Contains" OutputMessageFormat="[&quot;TC_18: Verify 'Tips on using Shortcut Keys' link on CFA wizard&quot; + &quot;Shortcut keys are displayed&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
+                            <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_18: Verify 'Tips on using Shortcut Keys' link on CFA wizard&quot; + &quot;Shortcut keys are not displayed&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify_CFA_ShortCut_Window" sap:VirtualizedContainerService.HintSize="387.2,228" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_11" Operator="Contains" OutputMessageFormat="[&quot;TC_18: Verify 'Tips on using Shortcut Keys' link on CFA wizard&quot; + &quot;Shortcut keys are displayed&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
                               <uta:VerifyExpressionWithOperator.FirstExpression>
                                 <InArgument x:TypeArguments="x:String">[intShortcutKeys]</InArgument>
                               </uta:VerifyExpressionWithOperator.FirstExpression>
@@ -277,7 +326,7 @@
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
                             </uta:VerifyExpressionWithOperator>
-                            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Close'_CFA_ShortCut_Window" sap:VirtualizedContainerService.HintSize="388,158" sap2010:WorkflowViewState.IdRef="NClick_33" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Close'_CFA_ShortCut_Window" sap:VirtualizedContainerService.HintSize="387.2,182.4" sap2010:WorkflowViewState.IdRef="NClick_33" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                               <uix:NClick.Target>
                                 <uix:TargetAnchorable DesignTimeRectangle="591, 1, 34, 30" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;ctrl name='Close' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Close' role='push button' automationid='' check:text='Close' /&gt;" Guid="638f3eb7-1857-419a-a411-91e80b0a4d98" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACYAAAAhCAYAAAC1ONkWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADdSURBVFhH7dTBDYIwFMbxdzG6QtfoBtw4dYDeuffgOOziAgzBJk8+pbEqIq+pSYPvnzQWKfiLNFAInhtj2XWBQ8BIjzt21rAxz6PxcW06Xu+Dcb/+tr5zbE3D/ss1Y98y0ZmJKwr4dkL1wM3fVRH+3bYfp9mlLpixjsFCdT3KaY/FFLYlhUnbP4yIeBiG+eg9nMOarRWD4YcPx9Mibu3cp4o+yiVADgoV32MpJBeFfrL5IygXhf4HFlH4TOfS9r/51wA5uGKwal+wpVOYNIVJU5g0hUlTmDSFSXvAmK+9Ea/n1kFdAAAAAABJRU5ErkJggg==" InformativeScreenshot="f33e58a3f74d9a477dc9150ce62b20dc.png" ScopeSelectorArgument="&lt;wnd app='spreviewwizard.exe' ctrlname='frmHelpParentDocumentAssociation' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                                   <uix:TargetAnchorable.Anchors>
@@ -287,18 +336,31 @@
                                   </uix:TargetAnchorable.Anchors>
                                 </uix:TargetAnchorable>
                               </uix:NClick.Target>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
                             </uix:NClick>
                           </Sequence>
                         </uix:NCheckState.IfExists>
                         <uix:NCheckState.IfNotExists>
-                          <Sequence DisplayName="CFA_ShortCutWindowDoesNotAppear" sap:VirtualizedContainerService.HintSize="450,83" sap2010:WorkflowViewState.IdRef="Sequence_58">
+                          <Sequence DisplayName="CFA_ShortCutWindowDoesNotAppear" sap:VirtualizedContainerService.HintSize="449.6,24.8" sap2010:WorkflowViewState.IdRef="Sequence_58">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                 <x:Boolean x:Key="IsPinned">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Log_CFA_ShortCutWindowDoesNotAppear" sap:VirtualizedContainerService.HintSize="387.2,144" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;The shortcut window did not appear.&quot;]" />
+                            <ui:LogMessage DisplayName="Log_CFA_ShortCutWindowDoesNotAppear" sap:VirtualizedContainerService.HintSize="387.2,168.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;The shortcut window did not appear.&quot;]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
                           </Sequence>
                         </uix:NCheckState.IfNotExists>
                         <uix:NCheckState.Target>
@@ -311,15 +373,30 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NCheckState>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Filtering.xaml)" sap:VirtualizedContainerService.HintSize="952,199.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+                          <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+                          <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">Child Form Validation</InArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[dtTestSummaryReport]</InOutArgument>
+                          <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_01","TC_18","TC_17","VC_25"}]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:InvokeWorkflowFile>
                     </Sequence>
-                    <Sequence DisplayName="CFA_TC_Will I need to assign this form every year?" sap:VirtualizedContainerService.HintSize="450,561" sap2010:WorkflowViewState.IdRef="Sequence_56">
+                    <Sequence DisplayName="CFA_TC_Will I need to assign this form every year?" sap:VirtualizedContainerService.HintSize="489.6,848.8" sap2010:WorkflowViewState.IdRef="Sequence_56">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute 'Will I'_CFA" sap:VirtualizedContainerService.HintSize="388,209" sap2010:WorkflowViewState.IdRef="NGetAttribute_8" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute 'Will I'_CFA" sap:VirtualizedContainerService.HintSize="387.2,56.8" sap2010:WorkflowViewState.IdRef="NGetAttribute_8" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                         <uix:NGetAttribute.Result>
                           <OutArgument x:TypeArguments="x:String">[intValidateWillINeedTo]</OutArgument>
                         </uix:NGetAttribute.Result>
@@ -334,28 +411,34 @@
                         </uix:NGetAttribute.Target>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NGetAttribute>
-                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Will I need to assign this form every year?'  link is not visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify_CFA_Will_I" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_9" Operator="Equality" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Will I need to assign this form every year?'  link is visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
+                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Will I need to assign this form every year?'  link is not visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify_CFA_Will_I" sap:VirtualizedContainerService.HintSize="387.2,220.8" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_9" Operator="Equality" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Will I need to assign this form every year?'  link is visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="False" TakeScreenshotInCaseOfSucceedingAssertion="False">
                         <uta:VerifyExpressionWithOperator.FirstExpression>
                           <InArgument x:TypeArguments="x:String">[intValidateWillINeedTo]</InArgument>
                         </uta:VerifyExpressionWithOperator.FirstExpression>
                         <uta:VerifyExpressionWithOperator.SecondExpression>
                           <InArgument x:TypeArguments="x:String">["Will I need to assign these forms every year?"]</InArgument>
                         </uta:VerifyExpressionWithOperator.SecondExpression>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
                       </uta:VerifyExpressionWithOperator>
                     </Sequence>
-                    <Sequence DisplayName="CFA_TC_Next" sap:VirtualizedContainerService.HintSize="450,561" sap2010:WorkflowViewState.IdRef="Sequence_52">
+                    <Sequence DisplayName="CFA_TC_Next" sap:VirtualizedContainerService.HintSize="489.6,848.8" sap2010:WorkflowViewState.IdRef="Sequence_52">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute '&amp;Next &gt;'_CFA" sap:VirtualizedContainerService.HintSize="388,209" sap2010:WorkflowViewState.IdRef="NGetAttribute_4" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute '&amp;Next &gt;'_CFA" sap:VirtualizedContainerService.HintSize="387.2,240" sap2010:WorkflowViewState.IdRef="NGetAttribute_4" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                         <uix:NGetAttribute.Result>
                           <OutArgument x:TypeArguments="x:String">[intValidateNext]</OutArgument>
                         </uix:NGetAttribute.Result>
@@ -375,7 +458,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NGetAttribute>
-                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Next button is not visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify  '&amp;Next &gt;'_CFA" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_1" Operator="Contains" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Next button is  visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
+                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Next button is not visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify  '&amp;Next &gt;'_CFA" sap:VirtualizedContainerService.HintSize="387.2,220.8" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_1" Operator="Contains" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Next button is  visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
                         <uta:VerifyExpressionWithOperator.FirstExpression>
                           <InArgument x:TypeArguments="x:String">[intValidateNext]</InArgument>
                         </uta:VerifyExpressionWithOperator.FirstExpression>
@@ -384,14 +467,14 @@
                         </uta:VerifyExpressionWithOperator.SecondExpression>
                       </uta:VerifyExpressionWithOperator>
                     </Sequence>
-                    <Sequence DisplayName="CFA_TC_Cancel" sap:VirtualizedContainerService.HintSize="450,561" sap2010:WorkflowViewState.IdRef="Sequence_53">
+                    <Sequence DisplayName="CFA_TC_Cancel" sap:VirtualizedContainerService.HintSize="489.6,848.8" sap2010:WorkflowViewState.IdRef="Sequence_53">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute '&amp;Cancel'_CFA" sap:VirtualizedContainerService.HintSize="388,209" sap2010:WorkflowViewState.IdRef="NGetAttribute_5" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute '&amp;Cancel'_CFA" sap:VirtualizedContainerService.HintSize="387.2,240" sap2010:WorkflowViewState.IdRef="NGetAttribute_5" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                         <uix:NGetAttribute.Result>
                           <OutArgument x:TypeArguments="x:String">[intValidateCancel]</OutArgument>
                         </uix:NGetAttribute.Result>
@@ -411,7 +494,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NGetAttribute>
-                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="TC 01: Failed. Cancel button is not visible" ContinueOnFailure="True" DisplayName="Verify '&amp;Cancel'_CFA" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_3" Operator="Contains" OutputMessageFormat="TC 01: Passed. Cancel button is visible" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
+                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="TC 01: Failed. Cancel button is not visible" ContinueOnFailure="True" DisplayName="Verify '&amp;Cancel'_CFA" sap:VirtualizedContainerService.HintSize="387.2,220.8" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_3" Operator="Contains" OutputMessageFormat="TC 01: Passed. Cancel button is visible" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
                         <uta:VerifyExpressionWithOperator.FirstExpression>
                           <InArgument x:TypeArguments="x:String">[intValidateCancel]</InArgument>
                         </uta:VerifyExpressionWithOperator.FirstExpression>
@@ -420,14 +503,14 @@
                         </uta:VerifyExpressionWithOperator.SecondExpression>
                       </uta:VerifyExpressionWithOperator>
                     </Sequence>
-                    <Sequence DisplayName="CFA_TC_Finish Later" sap:VirtualizedContainerService.HintSize="450,561" sap2010:WorkflowViewState.IdRef="Sequence_54">
+                    <Sequence DisplayName="CFA_TC_Finish Later" sap:VirtualizedContainerService.HintSize="489.6,848.8" sap2010:WorkflowViewState.IdRef="Sequence_54">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute '&amp;Finish Later'_CFA" sap:VirtualizedContainerService.HintSize="388,209" sap2010:WorkflowViewState.IdRef="NGetAttribute_6" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
+                      <uix:NGetAttribute Attribute="text" DisplayName="Get Attribute '&amp;Finish Later'_CFA" sap:VirtualizedContainerService.HintSize="387.2,240" sap2010:WorkflowViewState.IdRef="NGetAttribute_6" ScopeIdentifier="d7f62c3e-a552-4329-bd03-66e5fdd7f96a" Version="V3">
                         <uix:NGetAttribute.Result>
                           <OutArgument x:TypeArguments="x:String">[intValidateFinishLater]</OutArgument>
                         </uix:NGetAttribute.Result>
@@ -447,7 +530,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </uix:NGetAttribute>
-                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Finish Later button is not visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify '&amp;Finish Later'_CFA" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_5" Operator="Contains" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Finish Later button is  visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
+                      <uta:VerifyExpressionWithOperator KeepScreenshots="{x:Null}" Result="{x:Null}" ScreenshotsPath="{x:Null}" AlternativeVerificationTitle="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Finish Later button is not visible&quot; +&quot;Hence test case is fail&quot;]" ContinueOnFailure="True" DisplayName="Verify '&amp;Finish Later'_CFA" sap:VirtualizedContainerService.HintSize="387.2,220.8" sap2010:WorkflowViewState.IdRef="VerifyExpressionWithOperator_5" Operator="Contains" OutputMessageFormat="[&quot;TC_01: Verify Child Form Association Wizard screen&quot; + &quot;Finish Later button is  visible&quot; +&quot;Hence test case is pass&quot;]" TakeScreenshotInCaseOfFailingAssertion="True" TakeScreenshotInCaseOfSucceedingAssertion="True">
                         <uta:VerifyExpressionWithOperator.FirstExpression>
                           <InArgument x:TypeArguments="x:String">[intValidateFinishLater]</InArgument>
                         </uta:VerifyExpressionWithOperator.FirstExpression>
@@ -460,7 +543,7 @@
                 </Sequence>
               </uix:NCheckState.IfExists>
               <uix:NCheckState.IfNotExists>
-                <Sequence DisplayName="CFA_TC_Validation_DoesNotAppears" sap:VirtualizedContainerService.HintSize="450,83" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                <Sequence DisplayName="CFA_TC_Validation_DoesNotAppears" sap:VirtualizedContainerService.HintSize="449.6,83.2" sap2010:WorkflowViewState.IdRef="Sequence_50">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
