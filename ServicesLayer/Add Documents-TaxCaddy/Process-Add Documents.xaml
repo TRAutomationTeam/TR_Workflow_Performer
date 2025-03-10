@@ -52,6 +52,7 @@
       <x:String>UiPath.DataTableUtilities</x:String>
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -120,6 +121,7 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
       <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -127,7 +129,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Add Doc Sequence" sap:VirtualizedContainerService.HintSize="888,7248.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Add Doc Sequence" sap:VirtualizedContainerService.HintSize="1452.0000000000002,7264.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_FinalizeSelector" />
       <Variable x:TypeArguments="x:String" Name="str_Taxsoftware" />
@@ -159,13 +161,13 @@
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="825.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_42" Message="[&quot;Executing Add Docs&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TaxCaddy-Add Documents.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="825.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="ServicesLayer\Add Documents-TaxCaddy\TaxCaddy-Add Documents.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TaxCaddy-Add Documents.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="825.6,248" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="ServicesLayer\Add Documents-TaxCaddy\TaxCaddy-Add Documents.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: John Flint - TaxCaddy CPA" sap:VirtualizedContainerService.HintSize="825.6,3884" sap2010:WorkflowViewState.IdRef="NApplicationCard_26" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="153708ee-e190-4420-b23d-c3cfd857e088" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: John Flint - TaxCaddy CPA" sap:VirtualizedContainerService.HintSize="825.6,3924" sap2010:WorkflowViewState.IdRef="NApplicationCard_26" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="153708ee-e190-4420-b23d-c3cfd857e088" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -492,7 +494,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:IfElseIf>
-    <Flowchart DisplayName="Infinity Wizards" sap:VirtualizedContainerService.HintSize="825.6,648" sap2010:WorkflowViewState.IdRef="Flowchart_2">
+    <Flowchart DisplayName="Infinity Wizards" sap:VirtualizedContainerService.HintSize="1468.8000000000002,377.6" sap2010:WorkflowViewState.IdRef="Flowchart_2">
       <Flowchart.Variables>
         <Variable x:TypeArguments="ui:UiElement" Name="uie_infinity_wizard" />
         <Variable x:TypeArguments="x:String" Name="str_wizard" />
@@ -1592,6 +1594,8 @@
                   <InArgument x:TypeArguments="x:String" x:Key="in_str_Submitoption">Next</InArgument>
                   <OutArgument x:TypeArguments="x:String" x:Key="out_str_Formtype" />
                   <InArgument x:TypeArguments="x:String" x:Key="in_str_SPwizardapppath">C:\SurePrepLocalFiles\SPReviewWizard\spreviewwizard.exe</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_TestSummaryReport">[inDictTestSummaryReport("Pre-Verification Wizard")]</InOutArgument>
                 </ui:InvokeWorkflowFile.Arguments>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -1637,15 +1641,17 @@
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Test Cases Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\CFA\Test Cases Validation.xaml">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Test Cases Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="416,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\CFA\Test Cases Validation.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                    <InOutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InOutArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Child_Form_Association.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\CFA\Child_Form_Association.xaml">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Child_Form_Association.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="416,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\CFA\Child_Form_Association.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+                    <InOutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InOutArgument>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
               </Sequence>
@@ -1664,6 +1670,8 @@
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Duplicate Wizard.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="110.4,70.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\Duplicate Wizard.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InOutArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[in_Config]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
               <FlowStep.Next>
@@ -1682,7 +1690,7 @@
                 <ui:InvokeWorkflowFile.Arguments>
                   <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
                   <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -1744,10 +1752,11 @@
                   <av:PointCollection x:Key="ConnectorLocation">125.2,584 125.2,554 165.2,554 165.2,94.4</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Finalize.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="110.4,70.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\Finalize.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Finalize.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334.4,174.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="ServicesLayer\REF_Wizard\Infinity_Workflows-Wizard\Finalize.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
                   <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
