@@ -1,6 +1,6 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="MouseHover_Verify" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="inDictTestSummaryReport" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="inDictTestSummaryReport" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <VisualBasic.Settings>
@@ -47,6 +47,7 @@
       <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
       <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -107,9 +108,10 @@
       <AssemblyReference>UiPath.Python</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="MouseHover_Verify" sap:VirtualizedContainerService.HintSize="1136.8000000000002,8909.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="MouseHover_Verify" sap:VirtualizedContainerService.HintSize="1124,8829.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="LogMessageSuccess" />
       <Variable x:TypeArguments="x:String" Name="LogMessageFail" />
@@ -120,20 +122,20 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap2010:Annotation.AnnotationText="Verify Index Tree,Review Tree,Document Viewer,Annotations and Forms,Leads,Notes" DisplayName="TC-01" sap:VirtualizedContainerService.HintSize="625.6,8886.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap2010:Annotation.AnnotationText="Verify Index Tree,Review Tree,Document Viewer,Annotations and Forms,Leads,Notes" DisplayName="TC-01" sap:VirtualizedContainerService.HintSize="625.6,8806.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <uix:NApplicationCard AttachMode="ByInstance" ContinueOnError="True" DisplayName="TC-01" sap:VirtualizedContainerService.HintSize="592,8019.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="436e7be7-ee29-45f6-af13-3bf462be01ac" Version="V2">
+      <uix:NApplicationCard AttachMode="ByInstance" ContinueOnError="True" DisplayName="TC-01" sap:VirtualizedContainerService.HintSize="592,7939.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="436e7be7-ee29-45f6-af13-3bf462be01ac" Version="V2">
         <uix:NApplicationCard.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="558.4,7696" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="558.4,7616" sap2010:WorkflowViewState.IdRef="Sequence_3">
               <Sequence.Variables>
                 <Variable x:TypeArguments="x:Boolean" Name="bElementExists" />
               </Sequence.Variables>
@@ -143,14 +145,14 @@
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence DisplayName="Index Tree Button Exists" sap:VirtualizedContainerService.HintSize="524.8,1148" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <Sequence DisplayName="Index Tree Button Exists" sap:VirtualizedContainerService.HintSize="524.8,1068" sap2010:WorkflowViewState.IdRef="Sequence_10">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:RetryScope ContinueOnError="True" DisplayName="Index Tree" sap:VirtualizedContainerService.HintSize="491.2,593.6" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="2" RetryInterval="00:00:03">
+                <ui:RetryScope ContinueOnError="True" DisplayName="Index Tree" sap:VirtualizedContainerService.HintSize="491.2,513.6" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="2" RetryInterval="00:00:03">
                   <ui:RetryScope.ActivityBody>
                     <ActivityAction>
                       <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="449.6,190.4" sap2010:WorkflowViewState.IdRef="Sequence_7">
