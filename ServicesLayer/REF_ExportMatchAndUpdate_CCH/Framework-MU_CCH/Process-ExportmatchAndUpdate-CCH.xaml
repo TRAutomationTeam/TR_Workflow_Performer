@@ -186,7 +186,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1007.2,1812" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1452.0000000000002,2133.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtFormSelection" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtEditInput" />
@@ -224,7 +224,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="600,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]">
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="732.8,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -232,24 +232,40 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Worflow include following set of operations&#xA;1. Search_TaxYear&#xA;2. Search_BinderId&#xA;3. Verify_BinderStatus&#xA;4.Open_SPBinder" DisplayName="FileRoom_SearchBinder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="600,164.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_165" UnSafe="False" WorkflowFileName="ServicesLayer\Common\FileRoom_SearchBinder.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_BinderStatus">
-          <Literal x:TypeArguments="x:String" Value="" />
-        </InArgument>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[in_DictTestSummaryReport]</InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
+    <uix:NCheckState DisplayName="Check App State - Verify SPbinder isOpen Or Not" sap:VirtualizedContainerService.HintSize="732.8,486.4" sap2010:WorkflowViewState.IdRef="NCheckState_165" Version="V3">
+      <uix:NCheckState.IfExists>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_308" Message="[&quot;Binder is already open&quot;]" />
+      </uix:NCheckState.IfExists>
+      <uix:NCheckState.IfNotExists>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Worflow include following set of operations&#xA;1. Search_TaxYear&#xA;2. Search_BinderId&#xA;3. Verify_BinderStatus&#xA;4.Open_SPBinder" DisplayName="FileRoom_SearchBinder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="345.6,236" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_165" UnSafe="False" WorkflowFileName="ServicesLayer\Common\FileRoom_SearchBinder.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_BinderStatus">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[in_DictTestSummaryReport]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeWorkflowFile>
+      </uix:NCheckState.IfNotExists>
+      <uix:NCheckState.Target>
+        <uix:TargetAnchorable DesignTimeRectangle="0, 0, 1920, 1040" DesignTimeScaleFactor="1" FriendlyName="'SPbinder -'" Guid="8acb808e-eed8-436b-ba26-0cee3dd24e43" InformativeScreenshot="54cea3a0ed59acf01e1e2d6f485c9d13.png" ScopeSelectorArgument="&lt;wnd app='spbinder.exe' cls='HwndWrapper*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
+      </uix:NCheckState.Target>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ui:InvokeWorkflowFile>
-    <Assign sap:VirtualizedContainerService.HintSize="600,113.6" sap2010:WorkflowViewState.IdRef="Assign_29">
+    </uix:NCheckState>
+    <Assign sap:VirtualizedContainerService.HintSize="732.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_29">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtTestSummaryReport]</OutArgument>
       </Assign.To>
@@ -257,7 +273,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[in_DictTestSummaryReport(strComponentName)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:LogMessage DisplayName="Log Message - TC_01" sap:VirtualizedContainerService.HintSize="600,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_292" Level="Info" Message="[&quot;TC_01&quot;+&quot; Verify that all jobs are completed successfully &quot;+&quot;Passed.&quot;]" />
+    <ui:LogMessage DisplayName="Log Message - TC_01" sap:VirtualizedContainerService.HintSize="732.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_292" Level="Info" Message="[&quot;TC_01&quot;+&quot; Verify that all jobs are completed successfully &quot;+&quot;Passed.&quot;]" />
     <ui:LogMessage DisplayName="Log Message - TC_03" sap:VirtualizedContainerService.HintSize="600,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_293" Level="Info" Message="[&quot;TC_03&quot;+&quot; Verfiy that review wizard completed successfully &quot;+&quot;Passed.&quot;]" />
     <ui:LogMessage DisplayName="Log Message - TC_05" sap:VirtualizedContainerService.HintSize="600,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_294" Level="Info" Message="[&quot;TC_05&quot;+&quot; Verfiy that Verification wizard completed successfully &quot;+&quot;Passed.&quot;]" />
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke - TestSummary_Filtering" sap:VirtualizedContainerService.HintSize="600,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_167" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
