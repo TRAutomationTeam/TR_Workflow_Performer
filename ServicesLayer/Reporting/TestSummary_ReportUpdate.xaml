@@ -4,6 +4,7 @@
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_dt_ReporterEntry" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_LogExecStartTime" Type="InArgument(x:String)" />
+    <x:Property Name="in_ParentBinderID" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -131,7 +132,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="TestSummary_ReportUpdate" sap:VirtualizedContainerService.HintSize="1140.8000000000002,5053.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TestSummary_ReportUpdate" sap:VirtualizedContainerService.HintSize="781.6000000000001,7081.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_UniqueReference" />
       <Variable x:TypeArguments="x:String" Name="str_BinderID" />
@@ -174,19 +175,19 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Test Summary Output data update" sap:VirtualizedContainerService.HintSize="590.4,5030.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Test Summary Output data update" sap:VirtualizedContainerService.HintSize="638.4,7058.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="553.6,4481.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
+        <Sequence sap:VirtualizedContainerService.HintSize="601.6,6509.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log - Test Summary Report Update Started" sap:VirtualizedContainerService.HintSize="520,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Test Summary Report Update Started&quot;]" />
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="520,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;**************************************************************************************&quot;]" />
-          <ui:GetCurrentJobInfo DisplayName="Get Current Job Info" sap:VirtualizedContainerService.HintSize="520,56.8" sap2010:WorkflowViewState.IdRef="GetCurrentJobInfo_3" Result="[currentJobInfo]" />
-          <ui:MultipleAssign DisplayName="Transaction report data fetch execution/component level" sap:VirtualizedContainerService.HintSize="520,1023.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+          <ui:LogMessage DisplayName="Log - Test Summary Report Update Started" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Test Summary Report Update Started&quot;]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;**************************************************************************************&quot;]" />
+          <ui:GetCurrentJobInfo DisplayName="Get Current Job Info" sap:VirtualizedContainerService.HintSize="568,56.8" sap2010:WorkflowViewState.IdRef="GetCurrentJobInfo_3" Result="[currentJobInfo]" />
+          <ui:MultipleAssign DisplayName="Transaction report data fetch execution/component level" sap:VirtualizedContainerService.HintSize="568,1023.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -202,7 +203,7 @@
                     <OutArgument x:TypeArguments="x:String">[str_BinderID]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("ExpectedBinderID").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[in_ParentBinderID]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -430,8 +431,8 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:MultipleAssign>
-          <ui:LogMessage DisplayName="Log Machine/User name" sap:VirtualizedContainerService.HintSize="520,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Machine name- &quot;+Environment.MachineName+&quot;_User name- &quot;+Environment.UserName]" />
-          <Assign DisplayName="list &lt;Binder Info&gt;" sap:VirtualizedContainerService.HintSize="520,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <ui:LogMessage DisplayName="Log Machine/User name" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Machine name- &quot;+Environment.MachineName+&quot;_User name- &quot;+Environment.UserName]" />
+          <Assign DisplayName="list &lt;Binder Info&gt;" sap:VirtualizedContainerService.HintSize="568,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="scg:List(x:String)">[list_BinderInfo]</OutArgument>
             </Assign.To>
@@ -439,7 +440,7 @@
               <InArgument x:TypeArguments="scg:List(x:String)">[new list(Of String) from {str_UniqueReference,str_BinderID,str_Engagement,str_Service,str_TaxSoftware,str_Leadsheet,str_Submission,str_TaxYear}]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="list &lt;Exec Status&gt;" sap:VirtualizedContainerService.HintSize="520,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign DisplayName="list &lt;Exec Status&gt;" sap:VirtualizedContainerService.HintSize="568,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
             <Assign.To>
               <OutArgument x:TypeArguments="scg:List(x:String)">[list_ExecStatus]</OutArgument>
             </Assign.To>
@@ -447,18 +448,18 @@
               <InArgument x:TypeArguments="scg:List(x:String)">[new list(Of String) from {str_StatusClientCreation,str_StatusSubmissionWizard,str_StatusSCD,str_StatusWizard,str_StatusBinderMenu,str_StatusIndexTree,str_StatusReviewTree,str_StatusAnnotation,str_StatusExport1,str_StatusExport2,str_StatusImportTR,str_StatusNotes,str_StatusDragDrop,str_StatusAdddocSPBinder,str_StatusAdddocFileRoom,str_StatusAdddocTaxCaddy,str_StatusPrint1,str_StatusPrint2,str_StatusPrint3}]</InArgument>
             </Assign.Value>
           </Assign>
-          <TryCatch DisplayName="Submission type from Job details" sap:VirtualizedContainerService.HintSize="520,1247.2" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <TryCatch DisplayName="Submission type from Job details" sap:VirtualizedContainerService.HintSize="568,1216.8" sap2010:WorkflowViewState.IdRef="TryCatch_2">
             <TryCatch.Try>
-              <Sequence sap:VirtualizedContainerService.HintSize="483.2,750.4" sap2010:WorkflowViewState.IdRef="Sequence_19">
+              <Sequence sap:VirtualizedContainerService.HintSize="483.2,720" sap2010:WorkflowViewState.IdRef="Sequence_19">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Launch Binder Status link.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="449.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Binder Status\Launch Binder Status link.xaml">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Launch Binder Status link.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\Binder Status\Launch Binder Status link.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <InArgument x:TypeArguments="x:String" x:Key="in_str_Jobstatusurl">[in_Config("in_str_JobDetails").ToString]</InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="in_str_BinderID">[in_TransactionItem.SpecificContent("ExpectedBinderID").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_BinderID">[in_ParentBinderID]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
                 <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="fetch Submission Type" sap:VirtualizedContainerService.HintSize="449.6,484" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="91f2ac16-f3d7-45fb-825c-5bb5efc06c98" Version="V2">
@@ -523,9 +524,9 @@
               </Catch>
             </TryCatch.Catches>
           </TryCatch>
-          <ui:BuildDataTable DataTable="[dt_BinderInfo]" DisplayName="Binder Info DT" sap:VirtualizedContainerService.HintSize="520,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;BinderInfo&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-          <ui:BuildDataTable DataTable="[dt_ExecStatusInfo]" DisplayName="Component Execution Status DT" sap:VirtualizedContainerService.HintSize="520,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ExecStatus&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Unique reference number&#xA;Binder ID&#xA;Engagement Type&#xA;Service Type&#xA;Tax Software&#xA;Leadsheet Type&#xA;Submission Type&#xA;Tax Year" DisplayName="add data row for Binder Collection" sap:VirtualizedContainerService.HintSize="520,196.8" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[list_BinderInfo]">
+          <ui:BuildDataTable DataTable="[dt_BinderInfo]" DisplayName="Binder Info DT" sap:VirtualizedContainerService.HintSize="568,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;BinderInfo&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+          <ui:BuildDataTable DataTable="[dt_ExecStatusInfo]" DisplayName="Component Execution Status DT" sap:VirtualizedContainerService.HintSize="568,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ExecStatus&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Unique reference number&#xA;Binder ID&#xA;Engagement Type&#xA;Service Type&#xA;Tax Software&#xA;Leadsheet Type&#xA;Submission Type&#xA;Tax Year" DisplayName="add data row for Binder Collection" sap:VirtualizedContainerService.HintSize="568,196.8" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[list_BinderInfo]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:String">
                 <ActivityAction.Argument>
@@ -550,7 +551,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ForEach>
-          <ui:LogMessage DisplayName="Log - data rows for Binder Collection" sap:VirtualizedContainerService.HintSize="520,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Added data rows for Binder Collection&quot;]">
+          <ui:LogMessage DisplayName="Log - data rows for Binder Collection" sap:VirtualizedContainerService.HintSize="568,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Added data rows for Binder Collection&quot;]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -558,7 +559,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:LogMessage>
-          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Status Client Creation&#xA;Status Submission Wizard&#xA;Status SCD&#xA;Status Wizard&#xA;Status BinderMenu&#xA;Status Index Tree&#xA;Status Review Tree&#xA;Status Annotation&#xA;Status Export_Match &amp; Update-1st Run&#xA;Status Export_Match &amp; Update-2nd Run&#xA;Status ImportTR&#xA;Status Notes&#xA;Status Drag&amp;Drop&#xA;Status AddDocument-SPBinder&#xA;Status AddDocument-Fileroom&#xA;Status AddDocument-Taxcaddy&#xA;Status Print-1st Run&#xA;Status Print-2nd Run&#xA;Status Print-3rd Run" DisplayName="add data row for Exec Status Collection" sap:VirtualizedContainerService.HintSize="520,452.8" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[list_ExecStatus]">
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Status Client Creation&#xA;Status Submission Wizard&#xA;Status SCD&#xA;Status Wizard&#xA;Status BinderMenu&#xA;Status Index Tree&#xA;Status Review Tree&#xA;Status Annotation&#xA;Status Export_Match &amp; Update-1st Run&#xA;Status Export_Match &amp; Update-2nd Run&#xA;Status ImportTR&#xA;Status Notes&#xA;Status Drag&amp;Drop&#xA;Status AddDocument-SPBinder&#xA;Status AddDocument-Fileroom&#xA;Status AddDocument-Taxcaddy&#xA;Status Print-1st Run&#xA;Status Print-2nd Run&#xA;Status Print-3rd Run" DisplayName="add data row for Exec Status Collection" sap:VirtualizedContainerService.HintSize="568,452.8" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[list_ExecStatus]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:String">
                 <ActivityAction.Argument>
@@ -603,7 +604,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ForEach>
-          <ui:LogMessage DisplayName="Log - data rows for ExecStatus Collection" sap:VirtualizedContainerService.HintSize="520,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Added data rows for ExecStatus Collection&quot;]">
+          <ui:LogMessage DisplayName="Log - data rows for ExecStatus Collection" sap:VirtualizedContainerService.HintSize="568,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Added data rows for ExecStatus Collection&quot;]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -611,7 +612,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:LogMessage>
-          <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Write TC data to TestSummary Report Excel" sap:VirtualizedContainerService.HintSize="520,56.8" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
+          <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Write TC data to TestSummary Report Excel" sap:VirtualizedContainerService.HintSize="568,2115.2" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
             <ueab:ExcelProcessScopeX.Body>
               <ActivityAction x:TypeArguments="ui:IExcelProcess">
                 <ActivityAction.Argument>
@@ -623,7 +624,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="500.8,1936.8" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="[in_Config(&quot;TestSummary_ReportPath&quot;).ToString.Split(&quot;.xlsx&quot;)(0)+&quot;_&quot;+in_TransactionItem.SpecificContent(&quot;ExpectedBinderID&quot;).ToString+&quot;.xlsx&quot;]">
+                  <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" CreateNewFile="False" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="500.8,1936.8" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="[in_Config(&quot;TestSummary_ReportPath&quot;).ToString.Split(&quot;.xlsx&quot;)(0)+&quot;_&quot;+in_ParentBinderID+&quot;.xlsx&quot;]">
                     <ueab:ExcelApplicationCard.Body>
                       <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
                         <ActivityAction.Argument>
@@ -682,17 +683,17 @@
             </ueab:ExcelProcessScopeX.Body>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ueab:ExcelProcessScopeX>
-          <ui:LogMessage DisplayName="Log - Test Summary Report Updated" sap:VirtualizedContainerService.HintSize="520,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Test Summary Report Updated Succesfully&quot;]" />
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="520,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;**************************************************************************************&quot;]" />
+          <ui:LogMessage DisplayName="Log - Test Summary Report Updated" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Test Summary Report Updated Succesfully&quot;]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="568,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;**************************************************************************************&quot;]" />
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="515.2,213.6" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="604.8,213.6" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>

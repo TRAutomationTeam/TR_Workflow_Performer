@@ -9,6 +9,7 @@
     <x:Property Name="io_dtReporterData" Type="InOutArgument(sd:DataTable)" />
     <x:Property Name="in_str_ReporterRowIndex" Type="InArgument(x:String)" />
     <x:Property Name="inDictTestSummaryReport" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="in_ParentBinderID" Type="InArgument(x:String)" />
   </x:Members>
   <this:Process.in_str_ReporterRowIndex>
     <InArgument x:TypeArguments="x:String" />
@@ -126,14 +127,14 @@
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoking major steps of the Marvel SCD business process, for processing binders created in fileroom through SCD by implementing the following subworkflows.&#xA;1.Marvel_Read Input Data&#xA;2.Marvel_Read Login Data&#xA;3.Marvel_Seq_LoginToMarvelApplication.xaml - Invoke Workflow File&#xA;4.Marvel_OutsourceWorkflow\Seq_OutsourceOffshorMain.xaml - Invoke Workflow File&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process_Marvel" sap:VirtualizedContainerService.HintSize="1836,751" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoking major steps of the Marvel SCD business process, for processing binders created in fileroom through SCD by implementing the following subworkflows.&#xA;1.Marvel_Read Input Data&#xA;2.Marvel_Read Login Data&#xA;3.Marvel_Seq_LoginToMarvelApplication.xaml - Invoke Workflow File&#xA;4.Marvel_OutsourceWorkflow\Seq_OutsourceOffshorMain.xaml - Invoke Workflow File&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process_Marvel" sap:VirtualizedContainerService.HintSize="728.0000000000001,704.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Marvel_Log Message Process Start" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]">
+    <ui:LogMessage DisplayName="Marvel_Log Message Process Start" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -141,7 +142,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to login to the SCD applicaiton with the provided credentials" DisplayName="Seq_LoginToMarvelApplication.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="416,246" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_LoginToMarvelApplication.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to login to the SCD applicaiton with the provided credentials" DisplayName="Seq_LoginToMarvelApplication.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="416,220" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_LoginToMarvelApplication.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_str_UserId">[in_Config("SCD_UserID").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_str_URL">[in_Config("SCD_URL").ToString]</InArgument>
@@ -156,7 +157,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to perform functions to process the binders from SCD" DisplayName="Seq_OutsourceOffshorMain.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="416,237" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\OutsourceWorkflow-SCD\Seq_OutsourceOffshorMain.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoking the workflow to perform functions to process the binders from SCD" DisplayName="Seq_OutsourceOffshorMain.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="416,211.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\OutsourceWorkflow-SCD\Seq_OutsourceOffshorMain.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_ServiceType">[in_TransactionItem.SpecificContent("ServiceType").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_BinderID">[in_TransactionItem.SpecificContent("ExpectedBinderID").ToString]</InArgument>
@@ -175,6 +176,7 @@
         <OutArgument x:TypeArguments="x:Boolean" x:Key="out_isSystemException">[out_isSystemException]</OutArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_FlowName">[out_FlowName]</OutArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ParentBinderID">[in_ParentBinderID]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
