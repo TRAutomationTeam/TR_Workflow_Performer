@@ -9,6 +9,7 @@
     <x:Property Name="out_isSystemException" Type="OutArgument(x:Boolean)" />
     <x:Property Name="out_str_ExceptionMessage" Type="OutArgument(x:String)" />
     <x:Property Name="inDictTestSummaryReport" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="in_ParentBinderID" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -131,7 +132,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Seq_PreparerTransferBinder" sap:VirtualizedContainerService.HintSize="984,16144" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Seq_PreparerTransferBinder" sap:VirtualizedContainerService.HintSize="984,16064" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Default="1" Name="counter" />
       <Variable x:TypeArguments="x:String" Name="strCounter" />
@@ -141,7 +142,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[in_TransactionItem.Progress.Contains(&quot;Binder transfered by preparer.&quot;)]" DisplayName="If_PreparerTransferedBinder" sap:VirtualizedContainerService.HintSize="984,16120.8" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[in_TransactionItem.Progress.Contains(&quot;Binder transfered by preparer.&quot;)]" DisplayName="If_PreparerTransferedBinder" sap:VirtualizedContainerService.HintSize="984,16040.8" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -159,14 +160,14 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="950.4,15733.6" sap2010:WorkflowViewState.IdRef="Sequence_45">
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="950.4,15653.6" sap2010:WorkflowViewState.IdRef="Sequence_45">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence sap2010:Annotation.AnnotationText="Workflow sequence to transfer binder from Preparer." DisplayName="Seq_PreparerBinderTransfer_Process" sap:VirtualizedContainerService.HintSize="916.8,15673.6" sap2010:WorkflowViewState.IdRef="Sequence_97">
+          <Sequence sap2010:Annotation.AnnotationText="Workflow sequence to transfer binder from Preparer." DisplayName="Seq_PreparerBinderTransfer_Process" sap:VirtualizedContainerService.HintSize="916.8,15593.6" sap2010:WorkflowViewState.IdRef="Sequence_97">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="str_TransactionProgress" />
             </Sequence.Variables>
@@ -212,6 +213,7 @@
                       <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dtReporterData">[io_dtReporterData]</InOutArgument>
                       <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
                       <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ParentBinderID">[in_ParentBinderID]</InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -224,7 +226,7 @@
                 </Sequence>
               </If.Else>
             </If>
-            <ui:RetryScope DisplayName="Associate Rating Complexity_TryCatch" sap:VirtualizedContainerService.HintSize="883.2,10188" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="2">
+            <ui:RetryScope DisplayName="Associate Rating Complexity_TryCatch" sap:VirtualizedContainerService.HintSize="883.2,10108" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="2">
               <ui:RetryScope.ActivityBody>
                 <ActivityAction>
                   <TryCatch DisplayName="Associate Rating Complexity_TryCatch" sap:VirtualizedContainerService.HintSize="841.6,9900" sap2010:WorkflowViewState.IdRef="TryCatch_2">

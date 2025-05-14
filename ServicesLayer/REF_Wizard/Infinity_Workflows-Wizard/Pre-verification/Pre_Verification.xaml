@@ -6,6 +6,7 @@
     <x:Property Name="out_str_Formtype" Type="OutArgument(x:String)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="io_dt_TestSummaryReport" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_ParentBinderID" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -152,7 +153,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow sequence to read the extracted document image in the source document column.Verify and validate the OCR auto read values and implement rectification if required in pre-verification wizard." DisplayName="Pre-verification_wizard" sap:VirtualizedContainerService.HintSize="1452.0000000000002,7343.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow sequence to read the extracted document image in the source document column.Verify and validate the OCR auto read values and implement rectification if required in pre-verification wizard." DisplayName="Pre-verification_wizard" sap:VirtualizedContainerService.HintSize="744.8000000000001,562.84" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Text visible on the demo document." Name="str_OCRValue" />
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Text extracted from the autoread feild." Name="str_AutoReadValue" />
@@ -165,7 +166,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch_Pre-VerificationWizard" sap:VirtualizedContainerService.HintSize="1020.8,7288.8" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try Catch_Pre-VerificationWizard" sap:VirtualizedContainerService.HintSize="452.8,481.6" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1622,7 +1623,7 @@
         </uix:NApplicationCard>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1676.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="419.2,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1633,7 +1634,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <uix:NApplicationCard sap2010:Annotation.AnnotationText="Activity to attach to the pre-verification wizard application and perform the required operation" AttachMode="ByInstance" CloseMode="Never" DisplayName="LaunchApp_Pre-verifcation_wizard" sap:VirtualizedContainerService.HintSize="1019.2,1015.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" OpenMode="Never" ScopeGuid="fcc1b9ee-9b3e-47ab-b907-8e86b7e1eda3" Timeout="[cint(in_Config(&quot;LaunchWizard_Timeout&quot;))]" Version="V2">
+            <uix:NApplicationCard sap2010:Annotation.AnnotationText="Activity to attach to the pre-verification wizard application and perform the required operation" AttachMode="ByInstance" CloseMode="Never" DisplayName="LaunchApp_Pre-verifcation_wizard" sap:VirtualizedContainerService.HintSize="484.8,1042.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" OpenMode="Never" ScopeGuid="fcc1b9ee-9b3e-47ab-b907-8e86b7e1eda3" Timeout="[cint(in_Config(&quot;LaunchWizard_Timeout&quot;))]" Version="V2">
               <uix:NApplicationCard.Body>
                 <ActivityAction x:TypeArguments="x:Object">
                   <ActivityAction.Argument>
@@ -1771,20 +1772,26 @@
         </Catch>
       </TryCatch.Catches>
       <TryCatch.Finally>
-        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="1019.2,108" sap2010:WorkflowViewState.IdRef="Sequence_77">
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,227.2" sap2010:WorkflowViewState.IdRef="Sequence_77">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Output - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Output.xaml)" sap:VirtualizedContainerService.HintSize="985.6,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Output.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Output - Invoke Workflow File (ServicesLayer\Reporting\TestSummary_Output.xaml)" sap:VirtualizedContainerService.HintSize="382.4,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Output.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TestSummaryReport">[io_dt_TestSummaryReport]</InArgument>
               <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
               <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_Component">Pre-Verification Wizard</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ParentBinderID">[in_ParentBinderID]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
         </Sequence>
       </TryCatch.Finally>
