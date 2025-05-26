@@ -3,6 +3,7 @@
     <x:Property Name="inDictTestSummaryReport" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="in_ParentBinderID" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -117,7 +118,7 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Check_Visiblity" sap:VirtualizedContainerService.HintSize="1452.0000000000002,1926.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Check_Visiblity" sap:VirtualizedContainerService.HintSize="1156,1958.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="lstElements" />
       <Variable x:TypeArguments="x:Boolean" Name="bElementExists" />
@@ -131,20 +132,20 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" ContinueOnError="True" DisplayName="Use Application: 1040SCAN : Verification (EngagementID : 28318128, Domain : Automation-01, SP Client" sap:VirtualizedContainerService.HintSize="650.4,1903.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="94e25d87-e1b0-4530-b475-c4592328d840" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" ContinueOnError="True" DisplayName="Use Application: 1040SCAN : Verification (EngagementID : 28318128, Domain : Automation-01, SP Client" sap:VirtualizedContainerService.HintSize="650.4,1935.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="94e25d87-e1b0-4530-b475-c4592328d840" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="616.8,1588.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="599.2,1620.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString= &quot;1040SCANverify Offshore&quot; Or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString= &quot;Outsource Offshore&quot;]" DisplayName="If Service Type - ScanVerifyOfsshore/OutsourceOffshore" sap:VirtualizedContainerService.HintSize="565.6,455.2" sap2010:WorkflowViewState.IdRef="If_14">
+            <If Condition="[in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString= &quot;1040SCANverify Offshore&quot; Or in_TransactionItem.SpecificContent(&quot;ServiceType&quot;).ToString= &quot;Outsource Offshore&quot;]" DisplayName="If Service Type - ScanVerifyOfsshore/OutsourceOffshore" sap:VirtualizedContainerService.HintSize="565.6,487.2" sap2010:WorkflowViewState.IdRef="If_14">
               <If.Then>
                 <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.2" sap2010:WorkflowViewState.IdRef="Sequence_69">
                   <sap:WorkflowViewStateService.ViewState>
@@ -157,6 +158,7 @@
                       <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
                       <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
                       <InOutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[inDictTestSummaryReport]</InOutArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ParentBinderID">[in_ParentBinderID]</InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                 </Sequence>

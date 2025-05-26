@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Activity mc:Ignorable="sap sap2010" x:Class="Seq_BinderOpeningByPreparerRole" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Seq_BinderOpeningByPreparerRole" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the service type of the binder to be processed." Name="in_ServiceType" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the binder ID of the binder to be processed." Name="in_BinderID" Type="InArgument(x:String)" />
+    <x:Property Name="io_dt_TestSummaryReport" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -37,10 +37,13 @@
       <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="46">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="92">
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>System</AssemblyReference>
@@ -76,9 +79,20 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Seq_BinderOpeningByPreparerRole" sap:VirtualizedContainerService.HintSize="472,1346" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Seq_BinderOpeningByPreparerRole" sap:VirtualizedContainerService.HintSize="1097.6000000000001,7728.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="String variable containing the service type of the binder to be processed." Name="strServiceType" />
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="String variable containing the binder ID of the binder to be processed." Name="strBinderID" />
@@ -88,7 +102,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign_BinderOpeningByPreparerRole" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign_BinderOpeningByPreparerRole" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -116,7 +130,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToWorkSpace.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="410,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToWorkSpace.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToWorkSpace.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToWorkSpace.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
@@ -127,15 +141,15 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <If Condition="[strServiceType.Equals(&quot;Business Outsource Offshore&quot;)]" DisplayName="If_BinderOpeningByPreparerRole_BusinessOutsourceOffshore" sap:VirtualizedContainerService.HintSize="410,552" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[strServiceType.Equals(&quot;Business Outsource Offshore&quot;)]" DisplayName="If_BinderOpeningByPreparerRole_BusinessOutsourceOffshore" sap:VirtualizedContainerService.HintSize="449.6,624.8" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiBusinessBusiness.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiBusinessBusiness.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiBusinessBusiness.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382.4,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiBusinessBusiness.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:InvokeWorkflowFile.Arguments>
@@ -143,13 +157,13 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,227.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiPreparation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiPreparation.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiPreparation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382.4,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiPreparation.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:InvokeWorkflowFile.Arguments>
@@ -157,7 +171,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NaviagateToQueue.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="410,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NaviagateToQueue.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NaviagateToQueue.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NaviagateToQueue.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_QueueNames">Preparation Queue</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
@@ -168,7 +182,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_OpenBinderByPreparer.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="410,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_OpenBinderByPreparer.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_OpenBinderByPreparer.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_OpenBinderByPreparer.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_BinderID">[strBinderID]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
@@ -179,6 +193,267 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log End_BinderOpeningByPreparerRole" sap:VirtualizedContainerService.HintSize="410,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Binder Opened by preparer role.&quot;]" />
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_09_Pass" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;TC_09&quot;+&quot; To verify that folder structure get created at the defined location (Auto download ).  &quot;+&quot; Passed.&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_09_Pass" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_09"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_10_Pass" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;TC_10&quot;+&quot;Verify that for OS Simplified leadsheet Binder, when user opens binder in preparation queue, finalization wizard get tripped &quot;+&quot; Passed.&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_10_Pass" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_10"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_11_Pass" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;TC_11&quot;+&quot;Verify that for OS Simplified leadsheet binder, when user clicks on Proceed button on popup window of export, export job is created and binder data got exported &quot;+&quot; Passed.&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_11_Pass" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_11"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_12_Pass" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;TC_12&quot;+&quot;To verify user is able to open the binder through preparer user role  &quot;+&quot; Passed.&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_12_Pass" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_12"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_24_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;TC_24&quot;+&quot;if folder structure is not getting  created with auto process then verify that user will be able to create folder structure and drop the file at the defined location (Manual download ) &quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_24_NA" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["NA"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_24"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_25_Pass" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;TC_25&quot;+&quot;Verify that an option of 'Open Tax Software' is available when binder is in Preparer's and Reviewers dashboard &quot;+&quot; Passed.&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_25,33_Pass" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_25","TC_33"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_26_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Message="[&quot;TC_26&quot;+&quot;Verify that for CCH Axcess Binder, when user clicks on 'Open Tax Software', system should open the CCH Tax Software.&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_27_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_10" Message="[&quot;TC_27&quot;+&quot;Verify that system should log user into the CCH Axcess tax software with the credentials that client configures in Admin =&gt; Tax File Activation =&gt; CCH Axcess Tax User logins (For Outsource only).&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_28_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;TC_28&quot;+&quot;A column to indicate whether the login is for Onshore/Offshore should be added in the backend to differentiate user as per the attached decision table.&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_29_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_12" Message="[&quot;TC_29&quot;+&quot;The system should take service center specific login details when doing ‘’Open Tax Software’’, if it is mentioned in the configuration.&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_30_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_13" Message="[&quot;TC_30&quot;+&quot;When doing ‘’Open Tax Software’’, if the Specific configuration is not set for the  user, then the system should continue with default login details&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_31_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_14" Message="[&quot;TC_31&quot;+&quot;System shoud display the message  when doing ‘’Open Tax Software’’ fpr offshore and  configuration is not mentioned for offshore&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_32_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_15" Message="[&quot;TC_32&quot;+&quot;System shoud display the message  when doing ‘’Open Tax Software’’ for onshore service and  configuration is not mentioned for onshore.&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_26,27,28,29,30,31,32_NA" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["NA"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_26","TC_27","TC_28","TC_29","TC_30","TC_31","TC_32"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_33_Pass" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Message="[&quot;TC_33&quot;+&quot;Verify that an option of 'Open Tax Software' is available when binder is in Preparer's and Reviewers dashboard&quot;+&quot; Passed.&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_34_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_16" Message="[&quot;TC_34&quot;+&quot;Verify that for GoSystem Tax RS Binder, when user clicks on 'Open Tax Software', system should launch Internet Explorer (IE) in ‘Run as administrator’ mode and open https://gosystemrs.fasttax.com’&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_35_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_17" Message="[&quot;TC_35&quot;+&quot;Verify that system should log user into GoSystem tax software with the credentials that client configures in Admin =&gt; Tax File Activation =&gt; GoSystem User Logins (For Outsource only)&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_36_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_18" Message="[&quot;TC_36&quot;+&quot;If client configures 3 logins and given that first login is already in use, then when the user tries to do ‘Open Tax Software’, system should use the second login or the available login&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_37_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_19" Message="[&quot;TC_37&quot;+&quot;If all provided logins are in use, then system should show a message ‘All GoSystem User Logins are in use. Please have your colleagues to ‘Release GoSystem Login&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_38_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_20" Message="[&quot;TC_38&quot;+&quot;Verify that when user does Open Tax software for binder wherein the tax software is blank or other, then system should display message Invalid tax software or tax software not found. Please contact your Manager.&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_39_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_21" Message="[&quot;TC_39&quot;+&quot;Verify that when a user tries to open Tax Software which is already open then system should display message Tax Software is already opened.&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_40_NA" sap:VirtualizedContainerService.HintSize="449.6,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_22" Message="[&quot;TC_40&quot;+&quot;Verify that when the client Login credentials are not available then system should display message Tax Software login information is not available. Please contact your Manager.&quot;+&quot;NA&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_34,35,36,37,38,39,40_NA" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["NA"]</InArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_34","TC_35","TC_36","TC_37","TC_38","TC_39","TC_40"}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log End_BinderOpeningByPreparerRole" sap:VirtualizedContainerService.HintSize="449.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Binder Opened by preparer role.&quot;]" />
   </Sequence>
 </Activity>

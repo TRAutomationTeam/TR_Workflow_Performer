@@ -1,10 +1,11 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Seq_AssignBinderFromReviewerToPreparer" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Seq_AssignBinderFromReviewerToPreparer" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the service type of the binder." Name="in_ServiceType" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the binder id of the binder to be processed." Name="in_BinderID" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Argument cotaining the user id for the SCD application." Name="in_UserID" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the transaction item." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary containing the input settings to be passed to the workflow." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_dt_TestSummaryReport" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -40,6 +41,9 @@
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -82,27 +86,37 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Seq_AssignBinderFromReviewerToPreparer" sap:VirtualizedContainerService.HintSize="1508,2565" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Seq_AssignBinderFromReviewerToPreparer" sap:VirtualizedContainerService.HintSize="1097.6000000000001,3192.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[in_TransactionItem.Progress.Contains(&quot;Binder assigned from reviewer to preparer.&quot;)]" DisplayName="If_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="878,2542" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[in_TransactionItem.Progress.Contains(&quot;Binder assigned from reviewer to preparer.&quot;)]" DisplayName="If_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="535.2,3169.6" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
-        <Sequence DisplayName="BinderAssignedToPreparer_Yes" sap:VirtualizedContainerService.HintSize="876,224" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence DisplayName="BinderAssignedToPreparer_Yes" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Retry_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="842,164" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Binder already assigned to preparer.&quot;]" />
+          <ui:LogMessage DisplayName="Log Retry_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Binder already assigned to preparer.&quot;]" />
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence DisplayName="Seq_AssignBinderFromReviewerToPreparer" sap:VirtualizedContainerService.HintSize="876,2189" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Seq_AssignBinderFromReviewerToPreparer" sap:VirtualizedContainerService.HintSize="501.6,2782.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="String variable containing the service type of the binder." Name="strServiceType" />
             <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="String variable containing the binder id of the binder." Name="strBinderID" />
@@ -115,7 +129,7 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:MultipleAssign DisplayName="Multiple Assign_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="842,57" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+          <ui:MultipleAssign DisplayName="Multiple Assign_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="468,56.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -151,7 +165,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:MultipleAssign>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToWorkSpace.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="842,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToWorkSpace.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToWorkSpace.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="468,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToWorkSpace.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:InvokeWorkflowFile.Arguments>
@@ -162,7 +176,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <If Condition="[strServiceType.Equals(&quot;Business Outsource Offshore&quot;)]" DisplayName="If_BusinessOutsourceOffshore_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="842,648" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[strServiceType.Equals(&quot;Business Outsource Offshore&quot;)]" DisplayName="If_BusinessOutsourceOffshore_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="468,624.8" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -170,13 +184,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,255" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiBusinessBusiness.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiBusinessBusiness.xaml">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiBusinessBusiness.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382.4,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiBusinessBusiness.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <scg:Dictionary x:TypeArguments="x:String, Argument" />
                   </ui:InvokeWorkflowFile.Arguments>
@@ -184,13 +198,13 @@
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,255" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,227.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiPreparation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiPreparation.xaml">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NavigateToMumbaiPreparation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="382.4,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NavigateToMumbaiPreparation.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <scg:Dictionary x:TypeArguments="x:String, Argument" />
                   </ui:InvokeWorkflowFile.Arguments>
@@ -204,7 +218,7 @@
               </Sequence>
             </If.Else>
           </If>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NaviagateToQueue.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="842,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NaviagateToQueue.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_NaviagateToQueue.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="468,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_NaviagateToQueue.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_QueueNames">Preparer Assignment Queue</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
@@ -215,7 +229,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <Delay DisplayName="BinderAssignedToPreparer_DelayAfterNavigateToQueue" Duration="[TimeSpan.Parse(in_Config(&quot;BinderAssignedToPreparer_DelayAfterNavigateToQueue&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="842,122" sap2010:WorkflowViewState.IdRef="Delay_1">
+          <Delay DisplayName="BinderAssignedToPreparer_DelayAfterNavigateToQueue" Duration="[TimeSpan.Parse(in_Config(&quot;BinderAssignedToPreparer_DelayAfterNavigateToQueue&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="468,122.4" sap2010:WorkflowViewState.IdRef="Delay_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -223,20 +237,18 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </Delay>
-          <Parallel DisplayName="ParallelBinderAssignedToPreparer_Search&amp;AddMember" sap:VirtualizedContainerService.HintSize="842,160" sap2010:WorkflowViewState.IdRef="Parallel_1">
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_SearchBinder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_SearchBinder.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:String" x:Key="in_BinderID">[strBinderID]</InArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:InvokeWorkflowFile>
-          </Parallel>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_AddMember.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="842,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_AddMember.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_SearchBinder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="468,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_SearchBinder.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_BinderID">[strBinderID]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_AddMember.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="468,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_AddMember.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_MemberName">[strUserID]</InArgument>
               <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
@@ -248,7 +260,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <Delay DisplayName="BinderAssignedToPreparer_DelayAfterAddMember" Duration="[TimeSpan.Parse(in_Config(&quot;BinderAssignedToPreparer_DelayAfterAddMember&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="842,90" sap2010:WorkflowViewState.IdRef="Delay_2">
+          <Delay DisplayName="BinderAssignedToPreparer_DelayAfterAddMember" Duration="[TimeSpan.Parse(in_Config(&quot;BinderAssignedToPreparer_DelayAfterAddMember&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="468,122.4" sap2010:WorkflowViewState.IdRef="Delay_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -256,7 +268,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </Delay>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_SearchBinderInLowerPanel.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="842,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_SearchBinderInLowerPanel.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_SearchBinderInLowerPanel.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="468,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_SearchBinderInLowerPanel.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_BinderID">[strBinderID]</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_UserRole">Preparer</InArgument>
@@ -268,7 +280,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <Assign DisplayName="Assign_BinderAssignedToPreparer_TransactionProgress" sap:VirtualizedContainerService.HintSize="842,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign DisplayName="Assign_BinderAssignedToPreparer_TransactionProgress" sap:VirtualizedContainerService.HintSize="468,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[strTransactionProgress]</OutArgument>
             </Assign.To>
@@ -276,8 +288,26 @@
               <InArgument x:TypeArguments="x:String">Binder assigned from reviewer to preparer.</InArgument>
             </Assign.Value>
           </Assign>
-          <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress_BinderAssignedToPreparer" FolderPath="[in_Config(&quot;OrchestratorQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="841.6,194.4" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_1" Progress="[in_TransactionItem.Progress+&quot;,&quot;+strTransactionProgress]" TransactionItem="[in_TransactionItem]" />
-          <ui:LogMessage DisplayName="Log End_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="841.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Binder assigned to preparer.&quot;]" />
+          <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress_BinderAssignedToPreparer" FolderPath="[in_Config(&quot;OrchestratorQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="468,226.4" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_1" Progress="[in_TransactionItem.Progress+&quot;,&quot;+strTransactionProgress]" TransactionItem="[in_TransactionItem]" />
+          <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_08_Pass" sap:VirtualizedContainerService.HintSize="468,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;TC_08&quot;+&quot; To verify user is able to assign the binder from reviewer to preparer.  &quot;+&quot; Passed.&quot;]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_08_Pass" sap:VirtualizedContainerService.HintSize="468,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+              <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_08"}]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:LogMessage DisplayName="Log End_BinderAssignedToPreparer" sap:VirtualizedContainerService.HintSize="468,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Binder assigned to preparer.&quot;]" />
         </Sequence>
       </If.Else>
     </If>

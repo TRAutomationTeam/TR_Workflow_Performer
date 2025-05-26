@@ -1,10 +1,11 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="TC01And02" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="TC01And02" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the service type of the binder to be processed." Name="in_ServiceType" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the Binder ID of the binder to be processed." Name="in_BinderID" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the user ID for the SCD application." Name="in_UserID" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Argument containing the transaction to be processed" Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary containing the input settings to be passed to the workflow." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_dt_TestSummaryReport" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -40,6 +41,9 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -82,28 +86,38 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow sequence to check if the binder is assigned to team lead and perform required steps based on the transaction progress." DisplayName="TransferBinderToTeamLead" sap:VirtualizedContainerService.HintSize="1048.8000000000002,2290.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow sequence to check if the binder is assigned to team lead and perform required steps based on the transaction progress." DisplayName="TransferBinderToTeamLead" sap:VirtualizedContainerService.HintSize="1452.0000000000002,3134.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[in_TransactionItem.Progress.Contains(&quot;Binder assigned to team lead&quot;)]" DisplayName="If_BinderAssignedToTeamLead" sap:VirtualizedContainerService.HintSize="545.6,2236" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[in_TransactionItem.Progress.Contains(&quot;Binder assigned to team lead&quot;)]" DisplayName="If_BinderAssignedToTeamLead" sap:VirtualizedContainerService.HintSize="513.6,3080" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="512,225.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log_BinderAssignedToTeamLeadYes" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Binder has been assigned to team lead.&quot;]" />
+          <ui:LogMessage DisplayName="Log_BinderAssignedToTeamLeadYes" sap:VirtualizedContainerService.HintSize="478.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Binder has been assigned to team lead.&quot;]" />
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="512,1848.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="512,2724.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="String variable containing the service type of the binder to be processed." Name="strServiceType" />
             <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="String variable containing the binder ID of the binder to be processed." Name="strBinderID" />
@@ -203,6 +217,24 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
+          <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_01_Pass" sap:VirtualizedContainerService.HintSize="478.4,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;TC_01&quot;+&quot; To verify the binder is visible in SCD for verification. &quot;+&quot; Passed.&quot;]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_01_Pass" sap:VirtualizedContainerService.HintSize="478.4,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+              <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_01"}]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Seq_AddMember.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="478.4,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ServicesLayer\REF_SP_MarvelScrum\CommonFunctions-SCD\Seq_AddMember.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_MemberName">[strUserID]</InArgument>
@@ -235,7 +267,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <Assign DisplayName="Assign_TransProgBinderToTeamLead" sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign DisplayName="Assign_TransProgBinderToTeamLead" sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[strTransactionprogress]</OutArgument>
             </Assign.To>
@@ -243,7 +275,25 @@
               <InArgument x:TypeArguments="x:String">Binder assigned to team lead</InArgument>
             </Assign.Value>
           </Assign>
-          <ui:SetTransactionProgress DisplayName="Set Transaction Progress_BinderToTeamLead" FolderPath="[in_Config(&quot;OrchestratorQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="478.4,194.4" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_1" Progress="[in_TransactionItem.Progress+&quot;,&quot;+strTransactionprogress]" TransactionItem="[in_TransactionItem]">
+          <ui:LogMessage sap2010:Annotation.AnnotationText="Log message with the information in regards to the Test Case ID, Test Case Description and Test Case Status." DisplayName="TC_02_Pass" sap:VirtualizedContainerService.HintSize="478.4,234.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;TC_02&quot;+&quot; To verify that user is able to assign the binder from manager to team Lead user role &quot;+&quot; Passed.&quot;]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="TestSummary_Filtering_TC_02_Pass" sap:VirtualizedContainerService.HintSize="478.4,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ServicesLayer\Reporting\TestSummary_Filtering.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Status">["Pass"]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="in_str_Comments" />
+              <InArgument x:TypeArguments="x:String" x:Key="in_str_SubComponent">SCD</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_dtTestSummaryReport">[io_dt_TestSummaryReport]</InOutArgument>
+              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_listTestCaseID">[New List(Of String) From {"TC_02"}]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:SetTransactionProgress DisplayName="Set Transaction Progress_BinderToTeamLead" FolderPath="[in_Config(&quot;OrchestratorQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="478.4,217.6" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_1" Progress="[in_TransactionItem.Progress+&quot;,&quot;+strTransactionprogress]" TransactionItem="[in_TransactionItem]">
             <ui:SetTransactionProgress.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:SetTransactionProgress.TimeoutMS>
