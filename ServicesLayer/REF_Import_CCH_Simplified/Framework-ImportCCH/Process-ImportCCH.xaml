@@ -183,7 +183,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="2148,9233.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="2112.8,8915.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Name="list_entity_name_add" />
       <Variable x:TypeArguments="scg:List(x:Int32)" Name="list_boxfield_count" />
@@ -219,16 +219,16 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Import CCH Component" sap:VirtualizedContainerService.HintSize="2148,9134.4" sap2010:WorkflowViewState.IdRef="TryCatch_18">
+    <TryCatch DisplayName="Import CCH Component" sap:VirtualizedContainerService.HintSize="2112.8,8816" sap2010:WorkflowViewState.IdRef="TryCatch_18">
       <TryCatch.Try>
-        <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="2111.2,6688" sap2010:WorkflowViewState.IdRef="Sequence_559">
+        <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="2111.2,6528.8" sap2010:WorkflowViewState.IdRef="Sequence_559">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="2077.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
-          <TryCatch DisplayName="Try Catch - FileRoom_SearchBinder" sap:VirtualizedContainerService.HintSize="2077.6,949.6" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+          <TryCatch DisplayName="Try Catch - FileRoom_SearchBinder" sap:VirtualizedContainerService.HintSize="2077.6,790.4" sap2010:WorkflowViewState.IdRef="TryCatch_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -236,12 +236,12 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <TryCatch.Try>
-              <uix:NCheckState DisplayName="Check App State - Verify SPbinder isOpen Or Not" sap:VirtualizedContainerService.HintSize="722.4,362.4" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V3">
+              <uix:NCheckState DisplayName="Check App State - Verify SPbinder isOpen Or Not" sap:VirtualizedContainerService.HintSize="724,362.4" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V3">
                 <uix:NCheckState.IfExists>
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334.4,144" sap2010:WorkflowViewState.IdRef="LogMessage_40" Message="[&quot;Binder is already open&quot;]" />
                 </uix:NCheckState.IfExists>
                 <uix:NCheckState.IfNotExists>
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ServicesLayer\Common\FileRoom_SearchBinder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="335.2,144" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_145" UnSafe="False" WorkflowFileName="ServicesLayer\Common\FileRoom_SearchBinder.xaml">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ServicesLayer\Common\FileRoom_SearchBinder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="336.8,144" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_145" UnSafe="False" WorkflowFileName="ServicesLayer\Common\FileRoom_SearchBinder.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
                       <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
@@ -249,6 +249,7 @@
                         <Literal x:TypeArguments="x:String" Value="" />
                       </InArgument>
                       <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="inDictTestSummaryReport">[dict_TCSummaryReport]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ParentBinderID" />
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                 </uix:NCheckState.IfNotExists>
@@ -275,7 +276,7 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                   </ActivityAction.Argument>
-                  <ui:LogMessage DisplayName="Log message (Failed to search Binder)" sap:VirtualizedContainerService.HintSize="334.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Fatal" Message="[&quot;FileRoom_SearchBinder.xaml failed: &quot;+exception.Message+&quot; at Source: &quot;+exception.Source]">
+                  <ui:LogMessage DisplayName="Log message (Failed to search Binder)" sap:VirtualizedContainerService.HintSize="724,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Fatal" Message="[&quot;FileRoom_SearchBinder.xaml failed: &quot;+exception.Message+&quot; at Source: &quot;+exception.Source]">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
