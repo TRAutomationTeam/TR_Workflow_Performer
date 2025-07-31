@@ -45,6 +45,9 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.ComponentModel</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -91,15 +94,21 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="GetConfigFilePath" sap:VirtualizedContainerService.HintSize="812,4585.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="GetConfigFilePath" sap:VirtualizedContainerService.HintSize="1452.0000000000002,4331.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Config file Path" sap:VirtualizedContainerService.HintSize="749.6,4496.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Config file Path" sap:VirtualizedContainerService.HintSize="720.8,4308" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Boolean" Name="bPDFFileExists" />
       </Sequence.Variables>
@@ -115,12 +124,12 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:FileExistsX>
-      <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="687.2,4174.4" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+      <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="687.2,4014.4" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
         <ui:IfElseIf.ConditionBlocks>
           <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
             <ui:IfElseIfBlock BlockType="If" Condition="[bPDFFileExists= True]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_7">
               <ui:IfElseIfBlock.Then>
-                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="636.8,3580.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="636.8,3420.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:Boolean" Name="bConfigFileExists" />
                   </Sequence.Variables>
@@ -129,18 +138,18 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:IfElseIf DisplayName="Assigning selector folder based on env type (QAT,STG and LIVE)" sap:VirtualizedContainerService.HintSize="574.4,740.8" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+                  <ui:IfElseIf DisplayName="Assigning selector folder based on env type (QAT,STG and LIVE)" sap:VirtualizedContainerService.HintSize="603.2,683.2" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
                     <ui:IfElseIf.ConditionBlocks>
                       <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                         <ui:IfElseIfBlock BlockType="If" Condition="[in_Config(&quot;in_str_Fileroomurl&quot;).ToString.ToLower.Contains(&quot;qa&quot;)]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_1">
                           <ui:IfElseIfBlock.Then>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,193.6" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,164.8" sap2010:WorkflowViewState.IdRef="Sequence_13">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_16">
+                              <Assign sap:VirtualizedContainerService.HintSize="462.4,104.8" sap2010:WorkflowViewState.IdRef="Assign_16">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Object">[in_Config("selectorRootFolder")]</OutArgument>
                                 </Assign.To>
@@ -153,13 +162,13 @@
                         </ui:IfElseIfBlock>
                         <ui:IfElseIfBlock BlockType="ElseIf" Condition="[in_Config(&quot;in_str_Fileroomurl&quot;).ToString.ToLower.Contains(&quot;stage&quot;) OR in_Config(&quot;in_str_Fileroomurl&quot;).ToString.ToLower.Contains(&quot;stg&quot;)]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_2">
                           <ui:IfElseIfBlock.Then>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,193.6" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,164.8" sap2010:WorkflowViewState.IdRef="Sequence_14">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_17">
+                              <Assign sap:VirtualizedContainerService.HintSize="462.4,104.8" sap2010:WorkflowViewState.IdRef="Assign_17">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Object">[in_Config("selectorRootFolder")]</OutArgument>
                                 </Assign.To>
@@ -179,7 +188,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:IfElseIf>
-                  <ui:MultipleAssign sap2010:Annotation.AnnotationText="1. Sets PDF Demo doc file path&#xA;2. Sets Selector config file path based on Login Firm Id&#xA;3. Appends tax year to Selector Filepath based on number of pages in the binder. (49/50=2022, 45=2021)" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="574.4,288" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                  <ui:MultipleAssign sap2010:Annotation.AnnotationText="1. Sets PDF Demo doc file path&#xA;2. Sets Selector config file path based on Login Firm Id&#xA;3. If PreviousYearDemoDocument is Yes in config, then selector will take from previuos folder, that is 2023. Or selector file will be From current tax year given In transaction (2024)" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="603.2,304" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                     <ui:MultipleAssign.AssignOperations>
                       <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
                         <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -203,7 +212,9 @@
                             <OutArgument x:TypeArguments="x:String">[sSelectroFilePath]</OutArgument>
                           </ui:AssignOperation.To>
                           <ui:AssignOperation.Value>
-                            <InArgument x:TypeArguments="x:String">[if(intBInderPageCount=49 or intBInderPageCount=50,sSelectroFilePath+"\2022",sSelectroFilePath+"\2023")]</InArgument>
+                            <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(in_Config("PreviousYearDemoDocument").ToString().ToUpper() = "YES", 
+sSelectroFilePath + "\\" + (Convert.ToInt32(in_TransactionItem.SpecificContent("TaxYear").ToString()) - 1).ToString(), 
+sSelectroFilePath + "\\" + in_TransactionItem.SpecificContent("TaxYear").ToString())]</InArgument>
                           </ui:AssignOperation.Value>
                         </ui:AssignOperation>
                       </scg:List>
@@ -216,12 +227,12 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:MultipleAssign>
-                  <ui:IfElseIf sap2010:Annotation.AnnotationText="Updates Selector Config file with tax System&#xA;&#xA;1. Gosystem&#xA;2. CCH&#xA;3. Lacerte&#xA;4. Ultra" DisplayName="Else If" sap:VirtualizedContainerService.HintSize="574.4,1012" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+                  <ui:IfElseIf sap2010:Annotation.AnnotationText="Updates Selector Config file with tax System&#xA;&#xA;1. Gosystem&#xA;2. CCH&#xA;3. Lacerte&#xA;4. Ultra" DisplayName="Else If" sap:VirtualizedContainerService.HintSize="603.2,983.2" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
                     <ui:IfElseIf.ConditionBlocks>
                       <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                         <ui:IfElseIfBlock BlockType="If" Condition="[Convert.ToString(in_TransactionItem.SpecificContent.GetValueOrDefault(&quot;TaxSoftware&quot;)).ToUpper.Contains(&quot;GOSYSTEM&quot;)]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_3">
                           <ui:IfElseIfBlock.Then>
-                            <Sequence sap2010:Annotation.AnnotationText="Updates Selector Config file with tax System" DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,224.8" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                            <Sequence sap2010:Annotation.AnnotationText="Updates Selector Config file with tax System" DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,196" sap2010:WorkflowViewState.IdRef="Sequence_9">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -229,7 +240,7 @@
                                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_12">
+                              <Assign sap:VirtualizedContainerService.HintSize="462.4,104.8" sap2010:WorkflowViewState.IdRef="Assign_12">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:String">[sSelectroFilePath]</OutArgument>
                                 </Assign.To>
@@ -242,7 +253,7 @@
                         </ui:IfElseIfBlock>
                         <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Convert.ToString(in_TransactionItem.SpecificContent.GetValueOrDefault(&quot;TaxSoftware&quot;)).ToUpper.Contains(&quot;CCH&quot;)]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_4">
                           <ui:IfElseIfBlock.Then>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,24.8" sap2010:WorkflowViewState.IdRef="Sequence_10">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -262,7 +273,7 @@
                         </ui:IfElseIfBlock>
                         <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Convert.ToString(in_TransactionItem.SpecificContent.GetValueOrDefault(&quot;TaxSoftware&quot;)).ToUpper.Contains(&quot;LACERTE&quot;)]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_5">
                           <ui:IfElseIfBlock.Then>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,24.8" sap2010:WorkflowViewState.IdRef="Sequence_11">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -282,7 +293,7 @@
                         </ui:IfElseIfBlock>
                         <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Convert.ToString(in_TransactionItem.SpecificContent.GetValueOrDefault(&quot;TaxSoftware&quot;)).ToUpper.Contains(&quot;ULTRA&quot;)]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_6">
                           <ui:IfElseIfBlock.Then>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,24.8" sap2010:WorkflowViewState.IdRef="Sequence_12">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -310,7 +321,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:IfElseIf>
-                  <ui:FileExistsX sap2010:Annotation.AnnotationText="Checks if Selector Config file exits or not" DisplayName="File Exists" Exists="[bConfigFileExists]" sap:VirtualizedContainerService.HintSize="574.4,197.6" sap2010:WorkflowViewState.IdRef="FileExistsX_2" Path="[sSelectroFilePath]">
+                  <ui:FileExistsX sap2010:Annotation.AnnotationText="Checks if Selector Config file exits or not" DisplayName="File Exists" Exists="[bConfigFileExists]" sap:VirtualizedContainerService.HintSize="603.2,197.6" sap2010:WorkflowViewState.IdRef="FileExistsX_2" Path="[sSelectroFilePath]">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -319,14 +330,14 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:FileExistsX>
-                  <If sap2010:Annotation.AnnotationText="1. Creates output folder &#xA;2. Assigns output folder path to a variable.&#xA;3. Assigns Lower Panel and Upper panle excel file path to a variable&#xA;4. If config file not exists, validation flag will be set to false and error message will be assigend to comments variable" Condition="[bConfigFileExists]" sap:VirtualizedContainerService.HintSize="574.4,1253.6" sap2010:WorkflowViewState.IdRef="If_1">
+                  <If sap2010:Annotation.AnnotationText="1. Creates output folder &#xA;2. Assigns output folder path to a variable.&#xA;3. Assigns Lower Panel and Upper panle excel file path to a variable&#xA;4. If config file not exists, validation flag will be set to false and error message will be assigend to comments variable" Condition="[bConfigFileExists]" sap:VirtualizedContainerService.HintSize="603.2,1192.8" sap2010:WorkflowViewState.IdRef="If_1">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="540.8,692.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="512,664" sap2010:WorkflowViewState.IdRef="Sequence_5">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
